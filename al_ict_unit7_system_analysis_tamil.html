@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>க.பொ.த (உயர்தரம்) ICT — அலகு 7: முறைமை பகுப்பாய்வும் வடிவமைப்பும் குறிப்புகள்</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Catamaran:wght@600;800&family=Hind+Madurai:wght@400;500;600&family=Noto+Sans+Tamil:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F6F4EE; --card:#FFFFFF; --ink:#22303A;
+    --maroon:#8B1E3F; --teal:#1F4E5F; --gold:#C9912B;
+    --line:#E2DDD2;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--paper);color:var(--ink);
+    font-family:'Hind Madurai','Noto Sans Tamil',sans-serif;
+    line-height:1.8;font-size:17px;}
+  header{background:linear-gradient(135deg,var(--teal) 0%,#143946 100%);
+    color:#F2EFE6;padding:42px 20px 36px;text-align:center;
+    border-bottom:5px solid var(--gold);}
+  header .eyebrow{letter-spacing:.18em;font-size:.8rem;text-transform:uppercase;
+    color:#D8C58A;margin-bottom:10px;}
+  header h1{font-family:'Catamaran','Noto Sans Tamil',sans-serif;font-weight:800;
+    font-size:clamp(1.4rem,4vw,2.05rem);line-height:1.5;}
+  header p{margin-top:10px;font-size:.95rem;color:#BFD4DA}
+  main{max-width:920px;margin:0 auto;padding:36px 18px 70px}
+
+  .toc{background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:16px 24px;margin-bottom:34px;font-size:.9rem;}
+  .toc b{color:var(--teal);font-family:'Catamaran','Noto Sans Tamil',sans-serif}
+  .toc a{color:var(--maroon);text-decoration:none}
+  .toc a:hover{text-decoration:underline}
+  .toc .links{display:flex;flex-wrap:wrap;gap:6px 16px;margin-top:6px}
+
+  .ncard{background:var(--card);border:1px solid var(--line);border-radius:16px;
+    margin-bottom:30px;overflow:hidden;box-shadow:0 2px 10px rgba(34,48,58,.05);}
+  .nhead{display:flex;align-items:center;gap:14px;padding:16px 24px;
+    border-bottom:1px solid var(--line);
+    background:linear-gradient(to right,#FBFAF6,#fff);}
+  .nnum{font-family:'Catamaran',sans-serif;font-weight:800;font-size:.92rem;
+    color:#fff;background:var(--teal);border-radius:10px;padding:5px 12px;
+    white-space:nowrap;}
+  .ntitle{font-family:'Catamaran','Noto Sans Tamil',sans-serif;font-weight:600;
+    font-size:1.02rem;color:var(--teal);}
+  .nbody{padding:22px 26px 26px}
+  .nbody p{margin-bottom:12px}
+  .nbody ul,.nbody ol{margin:6px 26px 14px}
+  .nbody li{margin-bottom:6px}
+  h4.sub{font-family:'Catamaran','Noto Sans Tamil',sans-serif;color:var(--maroon);
+    font-size:1.0rem;margin:18px 0 8px;}
+
+  .key{background:#FBF7EC;border-right:4px solid var(--gold);
+    border-radius:10px;padding:14px 20px;margin:14px 0;}
+  .key .tag{font-size:.78rem;font-weight:700;color:var(--gold);
+    letter-spacing:.1em;display:block;margin-bottom:4px;}
+  .warn{background:#FAEFF1;border-right:4px solid var(--maroon);
+    border-radius:10px;padding:14px 20px;margin:14px 0;}
+  .warn .tag{font-size:.78rem;font-weight:700;color:var(--maroon);
+    letter-spacing:.1em;display:block;margin-bottom:4px;}
+
+  code.inline{background:#EDF2F1;color:var(--teal);border-radius:6px;
+    padding:1px 8px;font-family:'JetBrains Mono',monospace;font-size:.85em;}
+
+  table.dt{border-collapse:collapse;margin:12px auto;font-size:.86rem;width:100%}
+  table.dt th{background:var(--teal);color:#fff;padding:8px 11px;
+    font-weight:600;border:1px solid #16404f;text-align:left;}
+  table.dt td{border:1px solid var(--line);padding:7px 11px;
+    background:#FDFCF9;vertical-align:top;}
+  table.dt caption{caption-side:top;font-weight:600;color:var(--teal);
+    margin-bottom:6px;font-size:.95rem;}
+
+  .diagram{background:#FBFAF6;border:1px solid var(--line);border-radius:12px;
+    padding:16px;margin:14px 0;overflow-x:auto;text-align:center;}
+  .diagram svg{max-width:100%;height:auto}
+  .diagram .cap{font-size:.85rem;color:#5A6B74;margin-top:8px}
+  svg text{font-family:'Noto Sans Tamil','Hind Madurai',sans-serif;}
+
+  .btn{display:inline-flex;align-items:center;gap:9px;
+    font-family:'Hind Madurai','Noto Sans Tamil',sans-serif;font-weight:600;
+    font-size:1rem;color:#fff;background:var(--teal);border:none;
+    border-radius:999px;padding:11px 26px;margin-top:14px;cursor:pointer;
+    transition:background .2s,transform .15s;}
+  .btn:hover{background:#16404f;transform:translateY(-1px)}
+  .btn:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+  .btn.open{background:var(--maroon)}
+  .answer{display:none;margin-top:20px;border-top:2px dashed var(--line);
+    padding-top:18px;animation:fade .35s ease;}
+  .answer.show{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  .ans-label{display:inline-block;font-weight:700;color:#fff;background:var(--gold);
+    border-radius:8px;padding:3px 14px;font-size:.85rem;margin-bottom:12px;}
+  .qnum{font-family:'Catamaran',sans-serif;font-weight:800;font-size:1rem;
+    color:#fff;background:var(--maroon);border-radius:10px;padding:5px 14px;
+    white-space:nowrap;}
+  .task{font-weight:600;color:var(--maroon)}
+  .pq{border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin-bottom:18px}
+  .note{margin-top:12px;font-size:.9rem;color:#5A6B74;background:#EFF4F2;
+    border-radius:10px;padding:10px 16px;}
+
+  footer{text-align:center;padding:26px 16px 40px;font-size:.85rem;color:#7A8790;}
+  @media (max-width:560px){
+    .nhead{flex-direction:column;align-items:flex-start;gap:8px}
+    body{font-size:16px}
+  }
+  @media (prefers-reduced-motion:reduce){.answer{animation:none}.btn{transition:none}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">G.C.E. Advanced Level &middot; Sri Lanka &middot; ICT (20) &middot; Unit 7</div>
+  <h1>முறைமை பகுப்பாய்வும் வடிவமைப்பும்<br>(System Analysis &amp; Design)</h1>
+  <p>முறைமைக் கருத்துகள் &middot; தகவல் முறைமைகள் &middot; SDLC &amp; SSADM &middot; DFD &middot; வடிவமைப்பு &middot; சோதனை &middot; நிறுவல்</p>
+</header>
+
+<main>
+
+<div class="toc"><b>உள்ளடக்கம்</b>
+  <div class="links">
+    <a href="#s1">7.1 முறைமைக் கருத்துகள் & வகைப்பாடு</a>
+    <a href="#s2">7.2 தகவல் முறைமை வகைகள்</a>
+    <a href="#s3">7.3 SDLC மாதிரிகள் & முறையியல்கள்</a>
+    <a href="#s4">7.4 SSADM</a>
+    <a href="#s5">7.5 முதனிலை ஆய்வு & சாத்தியக்கூறு</a>
+    <a href="#s6">7.6 தேவைப் பகுப்பாய்வு & DFD</a>
+    <a href="#s7">7.7 முறைமை வடிவமைப்பு</a>
+    <a href="#s8">7.8 அபிவிருத்தி & சோதனை</a>
+    <a href="#s9">7.9 நிறுவல் முறைகள் & பராமரிப்பு</a>
+    <a href="#s10">7.10 தயார்நிலைப் பொதிகள்</a>
+    <a href="#sp">பயிற்சி வினாக்கள்</a>
+  </div>
+</div>
+
+<!-- ===================== 7.1 ===================== -->
+<section class="ncard" id="s1">
+  <div class="nhead"><span class="nnum">7.1</span><span class="ntitle">முறைமைக் கருத்துகளும் வகைப்பாடும்</span></div>
+  <div class="nbody">
+    <p><b>முறைமை (System)</b> = ஒரு பொதுவான இலக்கை அடைய ஒன்றிணைந்து செயற்படும் <b>தொடர்புடைய கூறுகளின் தொகுப்பு</b>. ஒவ்வொரு முறைமைக்கும் உள்ளீடு, செயலாக்கம், வெளியீடு, பின்னூட்டம் (feedback), எல்லை (boundary), சூழல் (environment) உண்டு.</p>
+    <h4 class="sub">முறைமைகளின் வகைப்பாடு (Classification)</h4>
+    <table class="dt">
+      <tr><th>அடிப்படை</th><th>வகைகள்</th><th>விளக்கம் / எடுத்துக்காட்டு</th></tr>
+      <tr><td><b>சூழலுடன் தொடர்பு</b></td><td>திறந்த (Open) / மூடிய (Closed)</td><td>திறந்த — சூழலுடன் தரவு/ஆற்றல் பரிமாறும் (வணிக நிறுவனம்); மூடிய — பரிமாறாது (தனிமைப்படுத்தப்பட்ட இரசாயனச் சோதனை)</td></tr>
+      <tr><td><b>உருவாக்கம்</b></td><td>இயற்கை (Natural) / மனிதனால் ஆனது (Man-made)</td><td>இயற்கை — சூரிய மண்டலம், மனித உடல்; மனிதனால் — கணினி, போக்குவரத்து முறைமை</td></tr>
+      <tr><td><b>தன்மை</b></td><td>உயிருள்ள (Living) / பௌதிக (Physical)</td><td>உயிருள்ள — தாவரம், விலங்கு; பௌதிக — இயந்திரம், கட்டிடம்</td></tr>
+      <tr><td><b>உறுதிப்பாடு</b></td><td>நிர்ணய (Deterministic) / நிகழ்தகவு (Probabilistic)</td><td>நிர்ணய — விளைவு முன்கூட்டியே அறியக்கூடியது (கணினி நிரல்); நிகழ்தகவு — விளைவில் நிச்சயமின்மை (வானிலை)</td></tr>
+    </table>
+    <div class="key"><span class="tag">திறந்த vs மூடிய — பரீட்சை</span>
+      <b>திறந்த முறைமை</b> சூழலுடன் தொடர்புகொண்டு தரவு/ஆற்றலைப் பரிமாறுகிறது; <b>மூடிய முறைமை</b> தனித்து, வெளிச் சூழலுடன் பரிமாறாது. பெரும்பாலான நிஜ முறைமைகள் திறந்தவையே.
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 7.2 ===================== -->
+<section class="ncard" id="s2">
+  <div class="nhead"><span class="nnum">7.2</span><span class="ntitle">தகவல் முறைமைகளின் வகைகள் (Types of Information Systems)</span></div>
+  <div class="nbody">
+    <p>நிறுவனத்தின் வெவ்வேறு நிலைகளுக்கும் தேவைகளுக்கும் ஏற்ப பல்வேறு தகவல் முறைமைகள் உள்ளன:</p>
+    <table class="dt">
+      <tr><th>முறைமை</th><th>முழுப் பெயர்</th><th>பயன்பாடு</th></tr>
+      <tr><td><b>OAS</b></td><td>Office Automation System</td><td>அலுவலக வேலைகளைத் தானியக்கம் (வேர்ட், மின்னஞ்சல், காலண்டர்)</td></tr>
+      <tr><td><b>TPS</b></td><td>Transaction Processing System</td><td>தினசரிப் பரிவர்த்தனைகளைப் பதிவுசெய்தல் (விற்பனை, சம்பளம், ATM) — செயற்பாட்டு மட்டம்</td></tr>
+      <tr><td><b>MIS</b></td><td>Management Information System</td><td>நடுத்தர முகாமைக்குச் சுருக்க அறிக்கைகள் (TPS தரவிலிருந்து)</td></tr>
+      <tr><td><b>DSS</b></td><td>Decision Support System</td><td>சிக்கலான தீர்மானங்களுக்கு பகுப்பாய்வு, "what-if" மாதிரிகள்</td></tr>
+      <tr><td><b>ESS</b></td><td>Executive Support System</td><td>உயர் நிர்வாகத்துக்கு மூலோபாயத் தகவல், போக்குகள்</td></tr>
+      <tr><td><b>GIS</b></td><td>Geographic Information System</td><td>புவியியல்/வரைபடத் தரவு பகுப்பாய்வு</td></tr>
+      <tr><td><b>KMS</b></td><td>Knowledge Management System</td><td>அறிவைச் சேகரித்து, பகிர்ந்து, நிர்வகித்தல்</td></tr>
+      <tr><td><b>CMS</b></td><td>Content Management System</td><td>உள்ளடக்கம் (இணையதளம், ஆவணம்) உருவாக்கல்/நிர்வாகம் (WordPress)</td></tr>
+      <tr><td><b>ERP</b></td><td>Enterprise Resource Planning</td><td>நிறுவனத்தின் அனைத்துத் துறைகளையும் (நிதி, HR, உற்பத்தி) ஒருங்கிணைத்தல்</td></tr>
+      <tr><td><b>Smart Systems</b></td><td>—</td><td>AI/IoT அடிப்படையில் தானாகச் சிந்தித்து செயற்படும் முறைமைகள்</td></tr>
+    </table>
+    <div class="key"><span class="tag">மட்டங்களின்படி</span>
+      <b>செயற்பாட்டு மட்டம்</b> → TPS, OAS. <b>நடுத்தர முகாமை</b> → MIS, DSS. <b>உயர் நிர்வாகம்</b> → ESS. (TPS தரவே MIS/DSS/ESS க்கு அடிப்படை.)
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 7.3 ===================== -->
+<section class="ncard" id="s3">
+  <div class="nhead"><span class="nnum">7.3</span><span class="ntitle">SDLC மாதிரிகளும் முறையியல்களும்</span></div>
+  <div class="nbody">
+    <p><b>SDLC (System/Software Development Life Cycle)</b> = ஒரு முறைமையை உருவாக்கும் கட்டங்களின் தொகுப்பு: <b>திட்டமிடல் → பகுப்பாய்வு → வடிவமைப்பு → அபிவிருத்தி → சோதனை → நிறுவல் → பராமரிப்பு</b>.</p>
+    <h4 class="sub">நீர்வீழ்ச்சி மாதிரி (Waterfall Model)</h4>
+    <p>கட்டங்கள் ஒன்றன்பின் ஒன்றாக, <b>வரிசையாகக் கீழ்நோக்கி</b> நகரும் — ஒரு கட்டம் முடிந்த பின்னரே அடுத்தது. எளிது, ஒழுங்கானது; ஆனால் <b>பின்னோக்கிச் செல்வது கடினம்</b>; தேவைகள் தெளிவாக அறியப்பட்ட சிறு திட்டங்களுக்கு ஏற்றது.</p>
+    <div class="diagram">
+      <svg viewBox="0 0 500 220" width="480" xmlns="http://www.w3.org/2000/svg">
+        <defs><marker id="w1" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#22303A"/></marker></defs>
+        <g font-size="11.5">
+          <rect x="20" y="14" width="130" height="30" rx="6" fill="#FDF3E0" stroke="#C9912B"/><text x="85" y="34" text-anchor="middle">தேவைகள்</text>
+          <rect x="110" y="54" width="130" height="30" rx="6" fill="#EAF3F5" stroke="#1F4E5F"/><text x="175" y="74" text-anchor="middle">வடிவமைப்பு</text>
+          <rect x="200" y="94" width="130" height="30" rx="6" fill="#F3E8EC" stroke="#8B1E3F"/><text x="265" y="114" text-anchor="middle">அபிவிருத்தி</text>
+          <rect x="290" y="134" width="130" height="30" rx="6" fill="#FDF3E0" stroke="#C9912B"/><text x="355" y="154" text-anchor="middle">சோதனை</text>
+          <rect x="350" y="174" width="130" height="30" rx="6" fill="#EAF3F5" stroke="#1F4E5F"/><text x="415" y="194" text-anchor="middle">நிறுவல்</text>
+        </g>
+        <line x1="85" y1="44" x2="135" y2="54" stroke="#22303A" stroke-width="1.4" marker-end="url(#w1)"/>
+        <line x1="175" y1="84" x2="225" y2="94" stroke="#22303A" stroke-width="1.4" marker-end="url(#w1)"/>
+        <line x1="265" y1="124" x2="315" y2="134" stroke="#22303A" stroke-width="1.4" marker-end="url(#w1)"/>
+        <line x1="355" y1="164" x2="375" y2="174" stroke="#22303A" stroke-width="1.4" marker-end="url(#w1)"/>
+      </svg>
+      <div class="cap">நீர்வீழ்ச்சி மாதிரி — வரிசையான கட்டங்கள்</div>
+    </div>
+    <h4 class="sub">பிற SDLC மாதிரிகள்</h4>
+    <table class="dt">
+      <tr><th>மாதிரி</th><th>பண்பு</th></tr>
+      <tr><td><b>சுருள் (Spiral)</b></td><td>மீள்சுழற்சி + இடர் பகுப்பாய்வு (risk analysis); பெரிய, இடர் கூடிய திட்டங்களுக்கு</td></tr>
+      <tr><td><b>சுறுசுறுப்பு (Agile)</b></td><td>சிறு மீள்சுழற்சிகளில் (iterations/sprints) தொடர்ச்சியான வழங்கல்; நெகிழ்வானது, மாறும் தேவைகளுக்கு ஏற்றது; வாடிக்கையாளர் ஈடுபாடு அதிகம்</td></tr>
+      <tr><td><b>முன்மாதிரி (Prototyping)</b></td><td>முதலில் ஒரு மாதிரி (prototype) உருவாக்கி, பயனர் கருத்துடன் செம்மைப்படுத்துதல்; தேவைகள் தெளிவில்லாதபோது</td></tr>
+      <tr><td><b>RAD (Rapid Application Development)</b></td><td>விரைவான அபிவிருத்தி; மீள்பயன்படுத்தக்கூடிய கூறுகள், முன்மாதிரிகள்</td></tr>
+    </table>
+    <h4 class="sub">முறையியல்கள் (Methodologies)</h4>
+    <ul>
+      <li><b>கட்டமைப்பு (Structured):</b> செயற்பாடுகளை (functions/processes) மையமாகக் கொண்டது; DFD போன்ற கருவிகள்; மேல்-கீழ் (top-down) அணுகுமுறை.</li>
+      <li><b>பொருள் சார் (Object-Oriented):</b> பொருள்களை (objects = தரவு + செயல்கள்) மையமாகக் கொண்டது; வகுப்புகள் (classes), மீள்பயன்பாடு, encapsulation.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ===================== 7.4 ===================== -->
+<section class="ncard" id="s4">
+  <div class="nhead"><span class="nnum">7.4</span><span class="ntitle">SSADM — கட்டங்களின் கண்ணோட்டம்</span></div>
+  <div class="nbody">
+    <p><b>SSADM (Structured Systems Analysis and Design Method)</b> — பிரிட்டனில் உருவான, கட்டமைப்பு முறையியலை அடிப்படையாகக் கொண்ட ஒரு முறையான முறைமை அபிவிருத்தி அணுகுமுறை. முக்கிய நிலைகள்:</p>
+    <ol>
+      <li><b>சாத்தியக்கூறு ஆய்வு (Feasibility Study):</b> திட்டம் சாத்தியமா எனப் பரிசீலித்தல்.</li>
+      <li><b>தேவைப் பகுப்பாய்வு (Requirements Analysis):</b> தற்போதைய முறைமையை ஆராய்ந்து தேவைகளைச் சேகரித்தல்.</li>
+      <li><b>தேவை விவரக்குறிப்பு (Requirements Specification):</b> புதிய முறைமைக்கான விரிவான தேவைகள்.</li>
+      <li><b>தர்க்க முறைமை விவரக்குறிப்பு (Logical System Specification):</b> தர்க்க வடிவமைப்பு (logical design).</li>
+      <li><b>பௌதிக வடிவமைப்பு (Physical Design):</b> உண்மையான நடைமுறை வடிவமைப்பு.</li>
+    </ol>
+    <p>SSADM மூன்று முக்கிய நுட்பங்களைப் பயன்படுத்துகிறது: <b>தரவுப் பாய்வு மாதிரியாக்கம் (DFD), தர்க்கத் தரவுக் கட்டமைப்பு (LDS), நிகழ்வுப் பகுப்பாய்வு (Entity behaviour).</b></p>
+  </div>
+</section>
+
+<!-- ===================== 7.5 ===================== -->
+<section class="ncard" id="s5">
+  <div class="nhead"><span class="nnum">7.5</span><span class="ntitle">முதனிலை ஆய்வும் சாத்தியக்கூறு ஆய்வும்</span></div>
+  <div class="nbody">
+    <p><b>முதனிலை ஆய்வு (Preliminary Investigation):</b> சிக்கலை அடையாளம் கண்டு, திட்டத்தின் நோக்கத்தையும் தேவையையும் ஆரம்பநிலையில் பரிசீலித்தல்.</p>
+    <p><b>சாத்தியக்கூறு ஆய்வு (Feasibility Study):</b> முன்மொழியப்பட்ட முறைமை <b>நடைமுறைச் சாத்தியமா</b> என நான்கு கோணங்களில் ஆராய்தல்:</p>
+    <table class="dt">
+      <tr><th>சாத்தியக்கூறு</th><th>எந்தக் கேள்விக்குப் பதில்?</th></tr>
+      <tr><td><b>தொழில்நுட்ப</b><br>(Technical)</td><td>தேவையான தொழில்நுட்பம் (வன்/மென்பொருள், திறன்) உள்ளதா? முறைமையை உருவாக்க முடியுமா?</td></tr>
+      <tr><td><b>பொருளாதார</b><br>(Economic)</td><td>செலவு-பயன் பகுப்பாய்வு (cost-benefit) — செலவு நியாயமானதா? முதலீட்டுக்கு வருவாய் (ROI) கிடைக்குமா?</td></tr>
+      <tr><td><b>செயற்பாட்டு</b><br>(Operational)</td><td>நிறுவனத்தின் தற்போதைய செயற்பாடுகளுக்குள் இது இயங்குமா? பயனர்கள் ஏற்பார்களா?</td></tr>
+      <tr><td><b>நிறுவன / சட்ட</b><br>(Organizational/Legal)</td><td>நிறுவனத்தின் இலக்குகள், கொள்கைகள், சட்டங்களுக்கு ஏற்புடையதா?</td></tr>
+    </table>
+    <div class="note">சில நேரம் <b>நேர (Schedule) சாத்தியக்கூறும்</b> சேர்க்கப்படும் — குறிப்பிட்ட காலத்துக்குள் முடிக்க முடியுமா?</div>
+  </div>
+</section>
+
+<!-- ===================== 7.6 ===================== -->
+<section class="ncard" id="s6">
+  <div class="nhead"><span class="nnum">7.6</span><span class="ntitle">தேவைப் பகுப்பாய்வு & DFD</span></div>
+  <div class="nbody">
+    <h4 class="sub">செயற்பாட்டு vs செயற்பாடற்ற தேவைகள்</h4>
+    <table class="dt">
+      <tr><th>செயற்பாட்டுத் தேவைகள் (Functional)</th><th>செயற்பாடற்ற தேவைகள் (Non-functional)</th></tr>
+      <tr><td>முறைமை <b>என்ன செய்ய வேண்டும்</b> (செயல்கள்/அம்சங்கள்)</td><td>முறைமை <b>எவ்வாறு செயற்பட வேண்டும்</b> (தரப் பண்புகள்)</td></tr>
+      <tr><td>எ.கா: "பயனர் உள்நுழைய வேண்டும்", "அறிக்கை உருவாக்க வேண்டும்"</td><td>எ.கா: செயல்திறன், பாதுகாப்பு, நம்பகத்தன்மை, பயன்பாட்டெளிமை, அளவிடுதிறன்</td></tr>
+    </table>
+    <h4 class="sub">தரவுப் பாய்வு வரைபடம் (DFD — Data Flow Diagram)</h4>
+    <p>முறைமைக்குள் தரவு எவ்வாறு பாய்கிறது என்பதைக் காட்டும் வரைபடம். நான்கு குறியீடுகள்:</p>
+    <div class="diagram">
+      <svg viewBox="0 0 560 110" width="540" xmlns="http://www.w3.org/2000/svg">
+        <rect x="14" y="36" width="100" height="44" fill="#FDF3E0" stroke="#C9912B" stroke-width="1.7"/><text x="64" y="56" text-anchor="middle" font-size="11" fill="#8a6313" font-weight="600">வெளி நிறுவி</text><text x="64" y="72" text-anchor="middle" font-size="9.5" fill="#5A6B74">External entity</text>
+        <circle cx="195" cy="58" r="30" fill="#EAF3F5" stroke="#1F4E5F" stroke-width="1.7"/><text x="195" y="56" text-anchor="middle" font-size="11" fill="#1F4E5F" font-weight="600">செயல்</text><text x="195" y="70" text-anchor="middle" font-size="9" fill="#5A6B74">Process</text>
+        <path d="M290 40 H400 V76 H290" fill="#F3E8EC" stroke="#8B1E3F" stroke-width="1.7"/><line x1="290" y1="40" x2="290" y2="76" stroke="#8B1E3F" stroke-width="1.7"/><text x="348" y="56" text-anchor="middle" font-size="11" fill="#8B1E3F" font-weight="600">தரவுச் சேமம்</text><text x="348" y="71" text-anchor="middle" font-size="9" fill="#5A6B74">Data store</text>
+        <line x1="430" y1="58" x2="540" y2="58" stroke="#22303A" stroke-width="2" marker-end="url(#dfa)"/><defs><marker id="dfa" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="#22303A"/></marker></defs><text x="485" y="48" text-anchor="middle" font-size="9.5" fill="#5A6B74">தரவுப் பாய்வு</text>
+      </svg>
+      <div class="cap">DFD குறியீடுகள்: வெளி நிறுவி · செயல் · தரவுச் சேமம் · தரவுப் பாய்வு</div>
+    </div>
+    <h4 class="sub">சூழல் வரைபடம் (Context Diagram — Level 0)</h4>
+    <p>முழு முறைமையையும் <b>ஒரே செயலாக</b> (single process) காட்டி, அதைச் சுற்றியுள்ள வெளி நிறுவிகளுடனான தரவுப் பாய்வைக் காட்டும் மிக உயர்மட்ட DFD.</p>
+    <div class="diagram">
+      <svg viewBox="0 0 480 180" width="460" xmlns="http://www.w3.org/2000/svg">
+        <defs><marker id="ca" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#22303A"/></marker></defs>
+        <circle cx="240" cy="90" r="46" fill="#EAF3F5" stroke="#1F4E5F" stroke-width="2"/><text x="240" y="86" text-anchor="middle" font-size="12" fill="#1F4E5F" font-weight="700">நூலக</text><text x="240" y="102" text-anchor="middle" font-size="11" fill="#1F4E5F" font-weight="700">முறைமை</text>
+        <rect x="20" y="66" width="90" height="44" fill="#FDF3E0" stroke="#C9912B" stroke-width="1.6"/><text x="65" y="92" text-anchor="middle" font-size="11" fill="#8a6313" font-weight="600">உறுப்பினர்</text>
+        <rect x="370" y="66" width="90" height="44" fill="#FDF3E0" stroke="#C9912B" stroke-width="1.6"/><text x="415" y="92" text-anchor="middle" font-size="11" fill="#8a6313" font-weight="600">நூலகர்</text>
+        <line x1="110" y1="80" x2="196" y2="80" stroke="#22303A" stroke-width="1.5" marker-end="url(#ca)"/><text x="153" y="72" text-anchor="middle" font-size="9" fill="#5A6B74">கடன் கோரிக்கை</text>
+        <line x1="194" y1="104" x2="110" y2="104" stroke="#22303A" stroke-width="1.5" marker-end="url(#ca)"/>
+        <line x1="370" y1="80" x2="284" y2="80" stroke="#22303A" stroke-width="1.5" marker-end="url(#ca)"/>
+        <line x1="286" y1="104" x2="370" y2="104" stroke="#22303A" stroke-width="1.5" marker-end="url(#ca)"/><text x="328" y="120" text-anchor="middle" font-size="9" fill="#5A6B74">அறிக்கைகள்</text>
+      </svg>
+      <div class="cap">சூழல் வரைபடம் உதாரணம் — நூலக முறைமை</div>
+    </div>
+    <p><b>நிலை-1, நிலை-2 DFD கள்:</b> சூழல் வரைபடத்தின் ஒற்றைச் செயல் <b>உடைக்கப்பட்டு (decomposed)</b> மேலும் விரிவான செயல்களாகக் காட்டப்படும்.</p>
+    <h4 class="sub">பிற பகுப்பாய்வுக் கருவிகள்</h4>
+    <ul>
+      <li><b>EPD (Elementary Process Description):</b> மேலும் உடைக்க முடியாத அடிப்படைச் செயலின் விளக்கம்.</li>
+      <li><b>வணிகச் செயற்பாட்டு மாதிரி (Business Activity Model):</b> நிறுவனத்தின் செயற்பாடுகளை மாதிரியாக்கம்.</li>
+      <li><b>ஆவணப் பாய்வு வரைபடம் (Document Flow Diagram):</b> ஆவணங்கள் நிறுவனத்தில் எங்கு செல்கின்றன என்பதைக் காட்டும்.</li>
+      <li><b>தர்க்கத் தரவுக் கட்டமைப்பு (LDS — Logical Data Structure):</b> நிறுவிகளுக்கிடையேயான (entities) தொடர்புகளைக் காட்டும் (ER வரைபடம் போல்).</li>
+      <li><b>வணிக முறைமைத் தெரிவுகள் (Business System Options — BSO):</b> முறைமையை நிறைவேற்ற பல்வேறு தெரிவுகளை மதிப்பீடு செய்தல்.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ===================== 7.7 ===================== -->
+<section class="ncard" id="s7">
+  <div class="nhead"><span class="nnum">7.7</span><span class="ntitle">முறைமை வடிவமைப்பு (System Design)</span></div>
+  <div class="nbody">
+    <p>பகுப்பாய்வில் சேகரித்த தேவைகளை <b>நடைமுறை வடிவமைப்பாக</b> மாற்றும் கட்டம். உள்ளடக்கம்:</p>
+    <ul>
+      <li><b>முன்மொழியப்பட்ட முறைமைக்கான தர்க்க DFD கள்:</b> புதிய முறைமை எவ்வாறு செயற்படும் என்பதை மாதிரியாக்கம்.</li>
+      <li><b>பயனர் இடைமுக வடிவமைப்பு (UI Design):</b> திரைகள், படிவங்கள், menus, அறிக்கைகள் — பயன்பாட்டெளிமை (usability) கருத்தில்.</li>
+      <li><b>தர்க்கத் தரவுக் கட்டமைப்பு (LDS):</b> தரவின் தொடர்புகள்.</li>
+      <li><b>அட்டவணை/பதிவு விவரக்குறிப்புகள் (Table/Record Specifications):</b> ஒவ்வொரு அட்டவணையின் புலங்கள், வகைகள், அளவுகள்.</li>
+      <li><b>தரவு அகராதி (Data Dictionary):</b> அனைத்துத் தரவு உறுப்புகளின் விரிவான விளக்கம் (பெயர், வகை, அளவு, விளக்கம்) — மைய ஆவணம்.</li>
+      <li><b>தரவுத்தள வடிவமைப்பு (Database Design):</b> அட்டவணைகள், சாவிகள், தொடர்புகள், இயல்நிலையாக்கம் (normalization).</li>
+    </ul>
+    <div class="key"><span class="tag">தரவு அகராதி</span>
+      தரவு அகராதி = "தரவைப் பற்றிய தரவு" (metadata) சேமிக்கும் மைய ஆவணம். ஒவ்வொரு புலத்தின் பெயர், தரவு வகை, நீளம், செல்லுபடியாக்க விதிகள், விளக்கம் ஆகியவற்றை வைத்திருக்கும்.
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 7.8 ===================== -->
+<section class="ncard" id="s8">
+  <div class="nhead"><span class="nnum">7.8</span><span class="ntitle">அபிவிருத்தியும் சோதனையும் (Development &amp; Testing)</span></div>
+  <div class="nbody">
+    <p>வடிவமைப்பு <b>நிரல்களாக</b> மாற்றப்பட்ட பின், முறைமை விரிவாகச் சோதிக்கப்படுகிறது. <b>சோதனை வழக்கு (Test Case)</b> = ஒரு உள்ளீடு + எதிர்பார்க்கப்படும் வெளியீடு; உண்மை வெளியீட்டுடன் ஒப்பிட்டுச் சரிபார்க்கப்படும்.</p>
+    <h4 class="sub">சோதனை அணுகுமுறைகள்</h4>
+    <table class="dt">
+      <tr><th>வெள்ளைப் பெட்டி (White Box)</th><th>கருப்புப் பெட்டி (Black Box)</th></tr>
+      <tr><td>உள் தர்க்கம்/நிரல் கட்டமைப்பு அறிந்து சோதித்தல்</td><td>உள் கட்டமைப்பு அறியாமல், உள்ளீடு-வெளியீட்டை மட்டும் சோதித்தல்</td></tr>
+      <tr><td>நிரலாளரால்; எல்லாப் பாதைகளையும் சோதிக்கும்</td><td>சோதனையாளர்/பயனரால்; செயற்பாட்டை மட்டும் சோதிக்கும்</td></tr>
+    </table>
+    <h4 class="sub">சோதனை மட்டங்கள் (Levels of Testing)</h4>
+    <table class="dt">
+      <tr><th>மட்டம்</th><th>விளக்கம்</th></tr>
+      <tr><td><b>அலகுச் சோதனை</b><br>(Unit Testing)</td><td>தனிப்பட்ட கூறுகளை/தொகுதிகளை (modules) தனித்தனியே சோதித்தல்</td></tr>
+      <tr><td><b>ஒருங்கிணைப்புச் சோதனை</b><br>(Integration Testing)</td><td>தொகுதிகளை இணைத்து, அவற்றுக்கிடையேயான இடைமுகங்களைச் சோதித்தல்</td></tr>
+      <tr><td><b>முறைமைச் சோதனை</b><br>(System Testing)</td><td>முழு முறைமையையும் ஒன்றாக, தேவைகளுக்கு எதிராகச் சோதித்தல்</td></tr>
+      <tr><td><b>ஏற்புச் சோதனை</b><br>(Acceptance Testing)</td><td>வாடிக்கையாளர்/பயனர் முறைமை ஏற்புடையதா எனச் சோதித்தல் (UAT) — ஒப்படைப்பதற்கு முன்</td></tr>
+    </table>
+    <div class="key"><span class="tag">வரிசை</span>
+      சோதனை வரிசை: <b>Unit → Integration → System → Acceptance</b> (சிறிய கூறுகளிலிருந்து முழு முறைமை, பின் பயனர் ஏற்பு).
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 7.9 ===================== -->
+<section class="ncard" id="s9">
+  <div class="nhead"><span class="nnum">7.9</span><span class="ntitle">நிறுவல் முறைகளும் பராமரிப்பும் (Deployment &amp; Maintenance)</span></div>
+  <div class="nbody">
+    <h4 class="sub">மாற்றல் / நிறுவல் முறைகள் (Changeover/Deployment Methods)</h4>
+    <table class="dt">
+      <tr><th>முறை</th><th>விளக்கம்</th><th>நன்மை / இடர்</th></tr>
+      <tr><td><b>இணை (Parallel)</b></td><td>பழைய & புதிய முறைமை இரண்டும் ஒரு காலம் ஒன்றாக இயங்கும்</td><td>பாதுகாப்பானது (புதியது தோல்வியடைந்தால் பழையது உள்ளது); ஆனால் செலவு கூடியது (இரட்டை வேலை)</td></tr>
+      <tr><td><b>நேரடி (Direct/Big-bang)</b></td><td>பழையதை உடனே நிறுத்தி, புதியதைத் தொடங்கல்</td><td>செலவு குறைவு, வேகம்; ஆனால் மிக இடர் கூடியது (தோல்வியடைந்தால் பின்னடைவு இல்லை)</td></tr>
+      <tr><td><b>முன்னோடி (Pilot)</b></td><td>புதிய முறைமையை முதலில் ஒரு பகுதியில்/கிளையில் மட்டும் சோதித்து, பின் முழுமையாக</td><td>இடரைக் குறைக்கும்; உண்மைச் சூழலில் சோதனை</td></tr>
+      <tr><td><b>படிநிலை (Phased)</b></td><td>புதிய முறைமையைப் பகுதி பகுதியாக (modules) படிப்படியாக அறிமுகப்படுத்தல்</td><td>சீரான மாற்றம்; ஆனால் நீண்ட காலம்</td></tr>
+    </table>
+    <h4 class="sub">பிற நிறுவல் நடவடிக்கைகள்</h4>
+    <ul>
+      <li><b>வன்/மென்பொருள் நிறுவல் (Installation):</b> தேவையான கணினிகள், வலையமைப்பு, மென்பொருளை அமைத்தல்.</li>
+      <li><b>தரவு இடப்பெயர்ப்பு (Data Migration):</b> பழைய முறைமையின் தரவைப் புதிய முறைமைக்கு மாற்றுதல் (சுத்திகரித்து, மாற்றியமைத்து).</li>
+      <li><b>பயனர் பயிற்சி (User Training):</b> பயனர்களுக்குப் புதிய முறைமையைப் பயன்படுத்தப் பயிற்சி.</li>
+    </ul>
+    <h4 class="sub">பராமரிப்பு (Maintenance) — வகைகள்</h4>
+    <ul>
+      <li><b>திருத்தப் பராமரிப்பு (Corrective):</b> பிழைகளைச் சரிசெய்தல்.</li>
+      <li><b>தகவமைப்புப் பராமரிப்பு (Adaptive):</b> மாறும் சூழலுக்கு (புதிய OS, சட்டம்) ஏற்ப மாற்றுதல்.</li>
+      <li><b>முழுமைப்படுத்தும் பராமரிப்பு (Perfective):</b> செயல்திறன்/அம்சங்களை மேம்படுத்துதல்.</li>
+      <li><b>முன்னெச்சரிக்கைப் பராமரிப்பு (Preventive):</b> எதிர்கால சிக்கல்களைத் தவிர்க்க முன்கூட்டியே செயற்படுதல்.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ===================== 7.10 ===================== -->
+<section class="ncard" id="s10">
+  <div class="nhead"><span class="nnum">7.10</span><span class="ntitle">தயார்நிலைப் பொதிகள் (Off-the-Shelf Packages)</span></div>
+  <div class="nbody">
+    <p><b>தயார்நிலைப் பொதி</b> = ஏற்கனவே உருவாக்கப்பட்டு, பொதுவாக விற்கப்படும் தயார் மென்பொருள் (எ.கா: MS Office, QuickBooks, Tally). <b>தனிப்பயன் (Bespoke/Custom)</b> மென்பொருளுக்கு எதிரானது.</p>
+    <table class="dt">
+      <tr><th>நன்மைகள்</th><th>குறைபாடுகள்</th></tr>
+      <tr><td>மலிவானது (செலவு பலரிடையே பகிரப்படுகிறது)</td><td>நிறுவனத்தின் குறிப்பிட்ட தேவைகளுக்கு முழுமையாகப் பொருந்தாமல் போகலாம்</td></tr>
+      <tr><td>உடனே கிடைக்கும் (அபிவிருத்திக் காத்திருப்பு இல்லை)</td><td>தனிப்பயனாக்கம் (customization) வரம்புக்குட்பட்டது</td></tr>
+      <tr><td>நன்கு சோதிக்கப்பட்டது, நம்பகமானது</td><td>தேவையற்ற அம்சங்கள் இருக்கலாம்</td></tr>
+      <tr><td>ஆதரவு & புதுப்பித்தல்கள் கிடைக்கும்</td><td>போட்டியாளரும் அதே மென்பொருளைப் பயன்படுத்துவர் (போட்டி நன்மை இல்லை)</td></tr>
+    </table>
+    <h4 class="sub">வணிகச் செயன்முறை — gap, mapping, reengineering</h4>
+    <ul>
+      <li><b>இடைவெளிப் பகுப்பாய்வு (Business Process Gap Analysis):</b> தயார் பொதி வழங்கும் அம்சங்களுக்கும் நிறுவனத்தின் உண்மைத் தேவைகளுக்கும் இடையேயான <b>இடைவெளியைக்</b> கண்டறிதல்.</li>
+      <li><b>செயன்முறை வரைபடமாக்கல் (Business Process Mapping):</b> நிறுவனத்தின் தற்போதைய செயன்முறைகளை விரிவாக ஆவணப்படுத்தி/வரைபடமாக்குதல்.</li>
+      <li><b>செயன்முறை மறுபொறியியல் (Business Process Reengineering — BPR):</b> செயல்திறனை வியத்தகு முறையில் மேம்படுத்த, தற்போதைய செயன்முறைகளை <b>அடிப்படையிலிருந்து மீள வடிவமைத்தல்</b> (புதிய பொதிக்கு ஏற்ப அல்லது மேம்பாட்டுக்காக).</li>
+    </ul>
+    <div class="key"><span class="tag">தயார் vs தனிப்பயன்</span>
+      <b>தயார் பொதி</b> = மலிவு, வேகம், பொதுத் தேவைகளுக்கு. <b>தனிப்பயன் மென்பொருள்</b> = விலை கூடியது, மெதுவானது, ஆனால் குறிப்பிட்ட தேவைகளுக்கு முழுமையாகப் பொருந்தும். தயார் பொதியில் இடைவெளி இருந்தால் — பொதியை மாற்றலாம் அல்லது செயன்முறையை மாற்றலாம் (BPR).
+    </div>
+  </div>
+</section>
+
+<!-- ===================== Practice ===================== -->
+<section class="ncard" id="sp">
+  <div class="nhead"><span class="nnum">?</span><span class="ntitle">பயிற்சி வினாக்கள் (விடைகளுடன்)</span></div>
+  <div class="nbody">
+
+    <!-- P1 -->
+    <div class="pq">
+      <span class="qnum">வினா 01</span>
+      <p class="task" style="margin-top:10px">திறந்த முறைமைக்கும் (Open) மூடிய முறைமைக்கும் (Closed) இடையேயான வேறுபாட்டை உதாரணத்துடன் தருக.</p>
+      <button class="btn" onclick="toggleAns(this,'p1')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p1"><span class="ans-label">விடை</span>
+        <p><b>திறந்த முறைமை:</b> சூழலுடன் தரவு/ஆற்றலைப் பரிமாறும். உ-ம்: வணிக நிறுவனம், மனித உடல்.</p>
+        <p><b>மூடிய முறைமை:</b> வெளிச் சூழலுடன் பரிமாறாது, தனித்து இயங்கும். உ-ம்: தனிமைப்படுத்தப்பட்ட இரசாயனச் சோதனை.</p>
+      </div>
+    </div>
+
+    <!-- P2 -->
+    <div class="pq">
+      <span class="qnum">வினா 02</span>
+      <p class="task" style="margin-top:10px">TPS, MIS, DSS ஆகியவற்றின் முழுப் பெயர்களையும் ஒவ்வொன்றும் எந்த நிர்வாக மட்டத்துக்கானது என்பதையும் எழுதுக.</p>
+      <button class="btn" onclick="toggleAns(this,'p2')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p2"><span class="ans-label">விடை</span>
+        <ul>
+          <li><b>TPS</b> — Transaction Processing System; செயற்பாட்டு மட்டம் (தினசரிப் பரிவர்த்தனைகள்).</li>
+          <li><b>MIS</b> — Management Information System; நடுத்தர முகாமை (சுருக்க அறிக்கைகள்).</li>
+          <li><b>DSS</b> — Decision Support System; நடுத்தர/உயர் முகாமை (தீர்மானப் பகுப்பாய்வு).</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- P3 -->
+    <div class="pq">
+      <span class="qnum">வினா 03</span>
+      <p class="task" style="margin-top:10px">நீர்வீழ்ச்சி மாதிரிக்கும் (Waterfall) Agile மாதிரிக்கும் இடையேயான முக்கிய வேறுபாடு என்ன? மாறும் தேவைகளுக்கு எது பொருத்தம்?</p>
+      <button class="btn" onclick="toggleAns(this,'p3')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p3"><span class="ans-label">விடை</span>
+        <p><b>Waterfall:</b> கட்டங்கள் வரிசையாக, ஒன்றன்பின் ஒன்று; பின்னோக்கிச் செல்வது கடினம்.</p>
+        <p><b>Agile:</b> சிறு மீள்சுழற்சிகளில் தொடர்ச்சியான வழங்கல்; நெகிழ்வானது.</p>
+        <p>மாறும் தேவைகளுக்கு <b>Agile</b> பொருத்தம் — ஒவ்வொரு சுழற்சியிலும் தேவை மாற்றங்களை இணைக்கலாம்.</p>
+      </div>
+    </div>
+
+    <!-- P4 -->
+    <div class="pq">
+      <span class="qnum">வினா 04</span>
+      <p class="task" style="margin-top:10px">சாத்தியக்கூறு ஆய்வின் நான்கு வகைகளையும் ஒவ்வொன்றும் எந்தக் கேள்விக்குப் பதிலளிக்கிறது என்பதையும் எழுதுக.</p>
+      <button class="btn" onclick="toggleAns(this,'p4')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p4"><span class="ans-label">விடை</span>
+        <ul>
+          <li><b>தொழில்நுட்ப:</b> தேவையான தொழில்நுட்பம்/திறன் உள்ளதா?</li>
+          <li><b>பொருளாதார:</b> செலவு நியாயமானதா? பயன் கிடைக்குமா? (cost-benefit)</li>
+          <li><b>செயற்பாட்டு:</b> தற்போதைய செயற்பாடுகளுக்குள் இயங்குமா? பயனர்கள் ஏற்பார்களா?</li>
+          <li><b>நிறுவன/சட்ட:</b> நிறுவனக் கொள்கைகள்/சட்டங்களுக்கு ஏற்புடையதா?</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- P5 -->
+    <div class="pq">
+      <span class="qnum">வினா 05</span>
+      <p class="task" style="margin-top:10px">செயற்பாட்டுத் தேவைக்கும் (Functional) செயற்பாடற்ற தேவைக்கும் (Non-functional) இடையேயான வேறுபாட்டை, ஒவ்வொன்றுக்கும் ஓர் உதாரணத்துடன் தருக.</p>
+      <button class="btn" onclick="toggleAns(this,'p5')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p5"><span class="ans-label">விடை</span>
+        <p><b>செயற்பாட்டு:</b> முறைமை என்ன செய்ய வேண்டும். உ-ம்: "பயனர் கடவுச்சொல்லால் உள்நுழைய வேண்டும்."</p>
+        <p><b>செயற்பாடற்ற:</b> முறைமை எவ்வாறு செயற்பட வேண்டும் (தரம்). உ-ம்: "முறைமை 2 செக்கனுக்குள் பதிலளிக்க வேண்டும்" (செயல்திறன்).</p>
+      </div>
+    </div>
+
+    <!-- P6 -->
+    <div class="pq">
+      <span class="qnum">வினா 06</span>
+      <p class="task" style="margin-top:10px">DFD இல் பயன்படும் நான்கு குறியீடுகளையும் (symbols) குறிப்பிடுக. சூழல் வரைபடம் (context diagram) என்றால் என்ன?</p>
+      <button class="btn" onclick="toggleAns(this,'p6')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p6"><span class="ans-label">விடை</span>
+        <p>DFD குறியீடுகள்: <b>வெளி நிறுவி (external entity), செயல் (process), தரவுச் சேமம் (data store), தரவுப் பாய்வு (data flow).</b></p>
+        <p><b>சூழல் வரைபடம்:</b> முழு முறைமையையும் ஒரே செயலாகக் காட்டி, அதைச் சுற்றியுள்ள வெளி நிறுவிகளுடனான தரவுப் பாய்வைக் காட்டும் மிக உயர்மட்ட (Level 0) DFD.</p>
+      </div>
+    </div>
+
+    <!-- P7 -->
+    <div class="pq">
+      <span class="qnum">வினா 07</span>
+      <p class="task" style="margin-top:10px">வெள்ளைப் பெட்டிச் சோதனைக்கும் (White box) கருப்புப் பெட்டிச் சோதனைக்கும் (Black box) இடையேயான வேறுபாடு என்ன? சோதனை மட்டங்களை வரிசையாக எழுதுக.</p>
+      <button class="btn" onclick="toggleAns(this,'p7')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p7"><span class="ans-label">விடை</span>
+        <p><b>White box:</b> உள் தர்க்கம்/நிரல் கட்டமைப்பை அறிந்து சோதித்தல் (நிரலாளரால்).</p>
+        <p><b>Black box:</b> உள் கட்டமைப்பு அறியாமல், உள்ளீடு-வெளியீட்டை மட்டும் சோதித்தல்.</p>
+        <p>சோதனை மட்டங்கள்: <b>அலகு → ஒருங்கிணைப்பு → முறைமை → ஏற்பு</b> (Unit → Integration → System → Acceptance).</p>
+      </div>
+    </div>
+
+    <!-- P8 -->
+    <div class="pq">
+      <span class="qnum">வினா 08</span>
+      <p class="task" style="margin-top:10px">இணை (Parallel) நிறுவல் முறைக்கும் நேரடி (Direct) நிறுவல் முறைக்கும் இடையேயான வேறுபாட்டையும், ஒவ்வொன்றினதும் இடரையும் எழுதுக.</p>
+      <button class="btn" onclick="toggleAns(this,'p8')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p8"><span class="ans-label">விடை</span>
+        <p><b>இணை:</b> பழைய & புதிய முறைமை ஒரு காலம் ஒன்றாக இயங்கும். பாதுகாப்பானது, ஆனால் இரட்டை வேலை/செலவு கூடியது.</p>
+        <p><b>நேரடி:</b> பழையதை உடனே நிறுத்தி புதியதைத் தொடங்கல். செலவு குறைவு/வேகம், ஆனால் மிக இடர் கூடியது — தோல்வியடைந்தால் பின்னடைவு இல்லை.</p>
+      </div>
+    </div>
+
+    <!-- P9 -->
+    <div class="pq">
+      <span class="qnum">வினா 09</span>
+      <p class="task" style="margin-top:10px">தயார்நிலைப் பொதியின் (off-the-shelf) இரண்டு நன்மைகளையும் இரண்டு குறைபாடுகளையும் எழுதுக.</p>
+      <button class="btn" onclick="toggleAns(this,'p9')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p9"><span class="ans-label">விடை</span>
+        <p><b>நன்மைகள்:</b> மலிவானது; உடனே கிடைக்கும்; நன்கு சோதிக்கப்பட்டது; ஆதரவு கிடைக்கும். (ஏதேனும் இரண்டு.)</p>
+        <p><b>குறைபாடுகள்:</b> குறிப்பிட்ட தேவைகளுக்கு முழுமையாகப் பொருந்தாமல் போகலாம்; தனிப்பயனாக்கம் வரம்புக்குட்பட்டது; தேவையற்ற அம்சங்கள்; போட்டி நன்மை இல்லை. (ஏதேனும் இரண்டு.)</p>
+      </div>
+    </div>
+
+    <!-- P10 -->
+    <div class="pq">
+      <span class="qnum">வினா 10</span>
+      <p class="task" style="margin-top:10px">தரவு அகராதி (Data Dictionary) என்றால் என்ன? அதில் என்ன சேமிக்கப்படுகிறது?</p>
+      <button class="btn" onclick="toggleAns(this,'p10')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p10"><span class="ans-label">விடை</span>
+        <p>தரவு அகராதி — அனைத்துத் தரவு உறுப்புகள் பற்றிய விரிவான தகவல்களை (metadata) வைத்திருக்கும் மைய ஆவணம்.</p>
+        <p>உள்ளடக்கம்: ஒவ்வொரு புலத்தின் பெயர், தரவு வகை, நீளம்/அளவு, செல்லுபடியாக்க விதிகள், விளக்கம்.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+</main>
+
+<footer>
+  க.பொ.த (உயர்தர) தகவல் மற்றும் தொடர்பாடல் தொழினுட்பம் — அலகு 7: முறைமை பகுப்பாய்வும் வடிவமைப்பும் குறிப்புகள்
+</footer>
+
+<script>
+function toggleAns(btn,id){
+  var ans=document.getElementById(id);
+  var open=ans.classList.toggle('show');
+  btn.classList.toggle('open',open);
+  btn.textContent=open?'விடையை மறை ▴':'விடையைக் காட்டு ▾';
+}
+</script>
+
+</body>
+</html>

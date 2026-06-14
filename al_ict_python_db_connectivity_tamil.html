@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>க.பொ.த (உயர்தரம்) ICT — Python தரவுத்தள இணைப்பு (Embedded SQL) குறிப்புகள்</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Catamaran:wght@600;800&family=Hind+Madurai:wght@400;500;600&family=Noto+Sans+Tamil:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F6F4EE; --card:#FFFFFF; --ink:#22303A;
+    --maroon:#8B1E3F; --teal:#1F4E5F; --gold:#C9912B;
+    --line:#E2DDD2; --code-bg:#102A33; --code-ink:#D9EEF2;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--paper);color:var(--ink);
+    font-family:'Hind Madurai','Noto Sans Tamil',sans-serif;
+    line-height:1.8;font-size:17px;}
+  header{background:linear-gradient(135deg,var(--teal) 0%,#143946 100%);
+    color:#F2EFE6;padding:42px 20px 36px;text-align:center;
+    border-bottom:5px solid var(--gold);}
+  header .eyebrow{letter-spacing:.18em;font-size:.8rem;text-transform:uppercase;
+    color:#D8C58A;margin-bottom:10px;}
+  header h1{font-family:'Catamaran','Noto Sans Tamil',sans-serif;font-weight:800;
+    font-size:clamp(1.4rem,4vw,2.15rem);line-height:1.5;}
+  header p{margin-top:10px;font-size:.95rem;color:#BFD4DA}
+  main{max-width:900px;margin:0 auto;padding:36px 18px 70px}
+
+  .toc{background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:16px 24px;margin-bottom:34px;font-size:.92rem;}
+  .toc b{color:var(--teal);font-family:'Catamaran','Noto Sans Tamil',sans-serif}
+  .toc a{color:var(--maroon);text-decoration:none;white-space:nowrap}
+  .toc a:hover{text-decoration:underline}
+  .toc .links{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:6px}
+
+  .ncard{background:var(--card);border:1px solid var(--line);border-radius:16px;
+    margin-bottom:32px;overflow:hidden;box-shadow:0 2px 10px rgba(34,48,58,.05);}
+  .nhead{display:flex;align-items:center;gap:14px;padding:16px 24px;
+    border-bottom:1px solid var(--line);
+    background:linear-gradient(to right,#FBFAF6,#fff);}
+  .nnum{font-family:'Catamaran',sans-serif;font-weight:800;font-size:1rem;
+    color:#fff;background:var(--teal);border-radius:10px;padding:5px 14px;
+    white-space:nowrap;}
+  .ntitle{font-family:'Catamaran','Noto Sans Tamil',sans-serif;font-weight:600;
+    font-size:1.12rem;color:var(--teal);}
+  .nbody{padding:22px 26px 26px}
+  .nbody p{margin-bottom:12px}
+  .nbody ul,.nbody ol{margin:6px 26px 14px}
+  .nbody li{margin-bottom:6px}
+
+  .key{background:#FBF7EC;border-right:4px solid var(--gold);
+    border-radius:10px;padding:14px 20px;margin:14px 0;}
+  .key .tag{font-size:.78rem;font-weight:700;color:var(--gold);
+    letter-spacing:.1em;display:block;margin-bottom:4px;}
+  .warn{background:#FAEFF1;border-right:4px solid var(--maroon);
+    border-radius:10px;padding:14px 20px;margin:14px 0;}
+  .warn .tag{font-size:.78rem;font-weight:700;color:var(--maroon);
+    letter-spacing:.1em;display:block;margin-bottom:4px;}
+
+  pre{background:var(--code-bg);color:var(--code-ink);border-radius:12px;
+    padding:18px 20px;margin:12px 0;overflow-x:auto;
+    font-family:'JetBrains Mono',monospace;font-size:.88rem;line-height:1.7;
+    direction:ltr;text-align:left;}
+  pre .cm{color:#7FB6A4} pre .kw{color:#F2B36B} pre .st{color:#A8D8B9}
+  code.inline{background:#EDF2F1;color:var(--teal);border-radius:6px;
+    padding:1px 8px;font-family:'JetBrains Mono',monospace;font-size:.85em;
+    direction:ltr;display:inline-block;}
+
+  table.dt{border-collapse:collapse;margin:12px auto;font-size:.92rem;}
+  table.dt th{background:var(--teal);color:#fff;padding:7px 18px;
+    font-weight:600;border:1px solid #16404f;}
+  table.dt td{border:1px solid var(--line);padding:6px 18px;text-align:center;
+    background:#FDFCF9;}
+  table.dt caption{caption-side:top;font-weight:600;color:var(--teal);
+    margin-bottom:6px;font-size:.95rem;}
+
+  .diagram{background:#FBFAF6;border:1px solid var(--line);border-radius:12px;
+    padding:16px;margin:14px 0;overflow-x:auto;text-align:center;}
+  .diagram svg{max-width:100%;height:auto}
+  svg text{font-family:'Noto Sans Tamil','Hind Madurai',sans-serif;}
+
+  .btn{display:inline-flex;align-items:center;gap:9px;
+    font-family:'Hind Madurai','Noto Sans Tamil',sans-serif;font-weight:600;
+    font-size:1rem;color:#fff;background:var(--teal);border:none;
+    border-radius:999px;padding:11px 26px;margin-top:14px;cursor:pointer;
+    transition:background .2s,transform .15s;}
+  .btn:hover{background:#16404f;transform:translateY(-1px)}
+  .btn:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+  .btn.open{background:var(--maroon)}
+  .answer{display:none;margin-top:20px;border-top:2px dashed var(--line);
+    padding-top:18px;animation:fade .35s ease;}
+  .answer.show{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  .ans-label{display:inline-block;font-weight:700;color:#fff;background:var(--gold);
+    border-radius:8px;padding:3px 14px;font-size:.85rem;margin-bottom:12px;}
+  .qnum{font-family:'Catamaran',sans-serif;font-weight:800;font-size:1rem;
+    color:#fff;background:var(--maroon);border-radius:10px;padding:5px 14px;
+    white-space:nowrap;}
+  .task{font-weight:600;color:var(--maroon)}
+
+  footer{text-align:center;padding:26px 16px 40px;font-size:.85rem;color:#7A8790;}
+  @media (max-width:560px){
+    .nhead{flex-direction:column;align-items:flex-start;gap:8px}
+    body{font-size:16px}
+  }
+  @media (prefers-reduced-motion:reduce){.answer{animation:none}.btn{transition:none}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">G.C.E. Advanced Level &middot; Sri Lanka &middot; ICT (20)</div>
+  <h1>Python இல் தரவுத்தள இணைப்பு<br>(Database Connectivity — Embedded SQL) குறிப்புகள்</h1>
+  <p>இணைத்தல் &middot; மீட்டெடுத்தல் (SELECT) &middot; சேர்த்தல் (INSERT) &middot; திருத்துதல் (UPDATE) &middot; நீக்குதல் (DELETE)</p>
+</header>
+
+<main>
+
+<div class="toc"><b>உள்ளடக்கம்</b>
+  <div class="links">
+    <a href="#s1">01. அறிமுகம்</a>
+    <a href="#s2">02. தேவையானவை &amp; நிறுவல்</a>
+    <a href="#s3">03. ஐந்து அடிப்படைப் படிகள்</a>
+    <a href="#s4">04. தரவுத்தளத்துடன் இணைத்தல்</a>
+    <a href="#s5">05. மாதிரி அட்டவணை</a>
+    <a href="#s6">06. தரவு மீட்டெடுத்தல் (SELECT)</a>
+    <a href="#s7">07. தரவு சேர்த்தல் (INSERT)</a>
+    <a href="#s8">08. தரவு திருத்துதல் (UPDATE)</a>
+    <a href="#s9">09. தரவு நீக்குதல் (DELETE)</a>
+    <a href="#s10">10. முழுமையான நிரல்</a>
+    <a href="#s11">11. பரீட்சைக் குறிப்புகள்</a>
+    <a href="#s12">12. பயிற்சி வினாக்கள்</a>
+  </div>
+</div>
+
+<!-- ===================== 01 ===================== -->
+<section class="ncard" id="s1">
+  <div class="nhead"><span class="nnum">01</span><span class="ntitle">அறிமுகம் — உட்பொதிந்த SQL என்றால் என்ன?</span></div>
+  <div class="nbody">
+    <p>தரவுத்தள முகாமைத்துவ முறைமைகளில் (DBMS) தரவுகளைக் கையாள <b>SQL</b> (Structured Query Language) பயன்படுகிறது. ஆனால் SQL ஆனது தானாக ஒரு முழுமையான பயன்பாட்டு மென்பொருளை உருவாக்கப் போதுமானது அல்ல — பயனர் இடைமுகம், கணக்கீடுகள், மடக்குகள், தீர்மானங்கள் போன்றவற்றுக்கு ஒரு <b>நிரலாக்க மொழி</b> தேவை.</p>
+    <p>எனவே, Python போன்ற ஒரு நிரலாக்க மொழியினுள் (host language) SQL கட்டளைகளை <b>உட்பொதித்து</b> (embed) எழுதும் முறையே <b>உட்பொதிந்த SQL (Embedded SQL)</b> எனப்படும். இங்கு SQL கட்டளைகள் Python சரங்களாக (strings) எழுதப்பட்டு, இணைப்பி (connector) ஊடாக DBMS க்கு அனுப்பப்பட்டு நிறைவேற்றப்படுகின்றன.</p>
+    <div class="key"><span class="tag">முக்கியம்</span>
+      Python நிரல் = <b>முன்முனை</b> (front-end / host language) &nbsp;|&nbsp; MySQL தரவுத்தளம் = <b>பின்முனை</b> (back-end). இவை இரண்டையும் இணைப்பது <code class="inline">mysql.connector</code> எனும் இணைப்பித் தொகுதி (connector module).
+    </div>
+    <div class="diagram">
+      <svg viewBox="0 0 760 130" width="720" xmlns="http://www.w3.org/2000/svg">
+        <defs><marker id="m1" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#22303A"/></marker></defs>
+        <rect x="10" y="30" width="170" height="70" rx="12" fill="#EAF3F5" stroke="#1F4E5F" stroke-width="1.8"/>
+        <text x="95" y="60" text-anchor="middle" font-size="15" fill="#1F4E5F" font-weight="600">Python நிரல்</text>
+        <text x="95" y="84" text-anchor="middle" font-size="12.5" fill="#5A6B74">(host language)</text>
+        <line x1="180" y1="55" x2="290" y2="55" stroke="#22303A" stroke-width="1.8" marker-end="url(#m1)"/>
+        <line x1="290" y1="78" x2="180" y2="78" stroke="#22303A" stroke-width="1.8" marker-end="url(#m1)"/>
+        <text x="235" y="44" text-anchor="middle" font-size="12" fill="#8B1E3F">SQL கட்டளை</text>
+        <text x="235" y="98" text-anchor="middle" font-size="12" fill="#1F4E5F">பெறுபேறு</text>
+        <rect x="292" y="30" width="190" height="70" rx="12" fill="#FDF3E0" stroke="#C9912B" stroke-width="1.8"/>
+        <text x="387" y="60" text-anchor="middle" font-size="15" fill="#8a6313" font-weight="600">mysql.connector</text>
+        <text x="387" y="84" text-anchor="middle" font-size="12.5" fill="#5A6B74">(இணைப்பி / driver)</text>
+        <line x1="482" y1="55" x2="580" y2="55" stroke="#22303A" stroke-width="1.8" marker-end="url(#m1)"/>
+        <line x1="580" y1="78" x2="482" y2="78" stroke="#22303A" stroke-width="1.8" marker-end="url(#m1)"/>
+        <rect x="582" y="30" width="168" height="70" rx="12" fill="#F3E8EC" stroke="#8B1E3F" stroke-width="1.8"/>
+        <text x="666" y="60" text-anchor="middle" font-size="15" fill="#8B1E3F" font-weight="600">MySQL சேவையகம்</text>
+        <text x="666" y="84" text-anchor="middle" font-size="12.5" fill="#5A6B74">(தரவுத்தளம்)</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 02 ===================== -->
+<section class="ncard" id="s2">
+  <div class="nhead"><span class="nnum">02</span><span class="ntitle">தேவையானவை &amp; நிறுவல்</span></div>
+  <div class="nbody">
+    <ol>
+      <li><b>MySQL சேவையகம்</b> — கணினியில் நிறுவப்பட்டு இயங்க வேண்டும் (XAMPP / MySQL Server).</li>
+      <li><b>Python</b> — பதிப்பு 3.x</li>
+      <li><b>mysql-connector-python தொகுதி</b> — Python ஐயும் MySQL ஐயும் இணைக்கும் இணைப்பி. கட்டளை வரியில் (Command Prompt) நிறுவுதல்:</li>
+    </ol>
+<pre>pip install mysql-connector-python</pre>
+    <p>நிறுவியபின், ஒவ்வொரு நிரலின் தொடக்கத்திலும் தொகுதியை இறக்குமதி செய்ய வேண்டும்:</p>
+<pre>import mysql.connector</pre>
+    <div class="key"><span class="tag">குறிப்பு</span>
+      sqlite3 போன்ற வேறு தரவுத்தளங்களுக்கும் இதே அடிப்படை முறையே (connect → cursor → execute → commit → close) பொருந்தும்; பாடத்திட்டத்தில் MySQL பயன்படுத்தப்படுகிறது.
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 03 ===================== -->
+<section class="ncard" id="s3">
+  <div class="nhead"><span class="nnum">03</span><span class="ntitle">ஐந்து அடிப்படைப் படிகள்</span></div>
+  <div class="nbody">
+    <p>எந்தவொரு தரவுத்தளச் செயற்பாட்டுக்கும் (retrieve / add / modify / delete) பின்வரும் ஐந்து படிகளே அடிப்படை:</p>
+    <div class="diagram">
+      <svg viewBox="0 0 740 150" width="710" xmlns="http://www.w3.org/2000/svg">
+        <defs><marker id="m2" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#22303A"/></marker></defs>
+        <g font-size="13">
+          <rect x="6"   y="34" width="128" height="56" rx="10" fill="#EAF3F5" stroke="#1F4E5F" stroke-width="1.7"/>
+          <text x="70"  y="57" text-anchor="middle" font-weight="600" fill="#1F4E5F">1. connect()</text>
+          <text x="70"  y="78" text-anchor="middle" font-size="11.5" fill="#5A6B74">இணைப்பு உருவாக்கு</text>
+
+          <line x1="134" y1="62" x2="156" y2="62" stroke="#22303A" stroke-width="1.7" marker-end="url(#m2)"/>
+
+          <rect x="158" y="34" width="128" height="56" rx="10" fill="#FDF3E0" stroke="#C9912B" stroke-width="1.7"/>
+          <text x="222" y="57" text-anchor="middle" font-weight="600" fill="#8a6313">2. cursor()</text>
+          <text x="222" y="78" text-anchor="middle" font-size="11.5" fill="#5A6B74">இடங்காட்டி உருவாக்கு</text>
+
+          <line x1="286" y1="62" x2="308" y2="62" stroke="#22303A" stroke-width="1.7" marker-end="url(#m2)"/>
+
+          <rect x="310" y="34" width="128" height="56" rx="10" fill="#F3E8EC" stroke="#8B1E3F" stroke-width="1.7"/>
+          <text x="374" y="57" text-anchor="middle" font-weight="600" fill="#8B1E3F">3. execute()</text>
+          <text x="374" y="78" text-anchor="middle" font-size="11.5" fill="#5A6B74">SQL ஐ இயக்கு</text>
+
+          <line x1="438" y1="62" x2="460" y2="62" stroke="#22303A" stroke-width="1.7" marker-end="url(#m2)"/>
+
+          <rect x="462" y="34" width="146" height="56" rx="10" fill="#EAF3F5" stroke="#1F4E5F" stroke-width="1.7"/>
+          <text x="535" y="57" text-anchor="middle" font-weight="600" fill="#1F4E5F">4. commit() / fetch</text>
+          <text x="535" y="78" text-anchor="middle" font-size="11.5" fill="#5A6B74">உறுதி செய் / பெறு</text>
+
+          <line x1="608" y1="62" x2="630" y2="62" stroke="#22303A" stroke-width="1.7" marker-end="url(#m2)"/>
+
+          <rect x="632" y="34" width="104" height="56" rx="10" fill="#FDF3E0" stroke="#C9912B" stroke-width="1.7"/>
+          <text x="684" y="57" text-anchor="middle" font-weight="600" fill="#8a6313">5. close()</text>
+          <text x="684" y="78" text-anchor="middle" font-size="11.5" fill="#5A6B74">இணைப்பை மூடு</text>
+        </g>
+      </svg>
+    </div>
+    <ul>
+      <li><code class="inline">connect()</code> — host, user, password, database விபரங்களுடன் MySQL சேவையகத்துடன் இணைப்பை (connection object) உருவாக்கும்.</li>
+      <li><code class="inline">cursor()</code> — SQL கட்டளைகளை அனுப்பவும் பெறுபேறுகளைப் பெறவும் பயன்படும் <b>இடங்காட்டிப் பொருளை</b> (cursor object) உருவாக்கும்.</li>
+      <li><code class="inline">execute()</code> — சரமாக (string) எழுதப்பட்ட SQL கட்டளையை DBMS இல் இயக்கும்.</li>
+      <li><code class="inline">commit()</code> — INSERT / UPDATE / DELETE மாற்றங்களை தரவுத்தளத்தில் <b>நிரந்தரமாக்கும்</b>. SELECT க்கு commit தேவையில்லை; பதிலாக <code class="inline">fetchall()</code> / <code class="inline">fetchone()</code> மூலம் பெறுபேறுகள் பெறப்படும்.</li>
+      <li><code class="inline">close()</code> — வளங்களை விடுவிக்க இணைப்பை மூடும்.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ===================== 04 ===================== -->
+<section class="ncard" id="s4">
+  <div class="nhead"><span class="nnum">04</span><span class="ntitle">தரவுத்தளத்துடன் இணைத்தல் (Connecting)</span></div>
+  <div class="nbody">
+<pre># தரவுத்தளத்துடன் இணைத்தல்
+import mysql.connector
+
+con = mysql.connector.connect(
+    host="localhost",      # சேவையகத்தின் பெயர் / முகவரி
+    user="root",           # MySQL பயனர் பெயர்
+    password="1234",       # கடவுச்சொல்
+    database="school"      # தரவுத்தளத்தின் பெயர்
+)
+
+cur = con.cursor()         # இடங்காட்டியை உருவாக்கல்
+print("இணைப்பு வெற்றிகரம்!")</pre>
+    <ul>
+      <li><code class="inline">con</code> — இணைப்புப் பொருள் (connection object)</li>
+      <li><code class="inline">cur</code> — இடங்காட்டிப் பொருள் (cursor object); இனிவரும் எல்லா SQL கட்டளைகளும் <code class="inline">cur.execute(...)</code> மூலமே இயக்கப்படும்.</li>
+    </ul>
+    <div class="key"><span class="tag">தரவுத்தளமே இல்லாவிடின்</span>
+      <code class="inline">database</code> பண்பை விடுத்து இணைத்து, பின் <code class="inline">cur.execute("CREATE DATABASE school")</code> மூலம் புதிய தரவுத்தளத்தை உருவாக்கலாம்.
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 05 ===================== -->
+<section class="ncard" id="s5">
+  <div class="nhead"><span class="nnum">05</span><span class="ntitle">மாதிரி அட்டவணை — student</span></div>
+  <div class="nbody">
+    <p>இக்குறிப்புகள் முழுவதும் <b>school</b> தரவுத்தளத்தில் உள்ள <b>student</b> அட்டவணை உதாரணமாகப் பயன்படுத்தப்படுகிறது:</p>
+<pre># அட்டவணையை உருவாக்கல் (ஒரு முறை மட்டும்)
+cur.execute("""CREATE TABLE student (
+    index_no INT PRIMARY KEY,
+    name VARCHAR(50),
+    marks INT
+)""")</pre>
+    <table class="dt">
+      <caption>student அட்டவணை — மாதிரித் தரவு</caption>
+      <tr><th>index_no</th><th>name</th><th>marks</th></tr>
+      <tr><td>1001</td><td>Amuthan</td><td>78</td></tr>
+      <tr><td>1002</td><td>Keerthana</td><td>85</td></tr>
+      <tr><td>1003</td><td>Nilavan</td><td>62</td></tr>
+    </table>
+    <div class="key"><span class="tag">நினைவில்</span>
+      <code class="inline">index_no</code> — முதன்மைச் சாவி (Primary Key); ஒவ்வொரு பதிவையும் தனித்துவமாக அடையாளம் காணும்.
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 06 ===================== -->
+<section class="ncard" id="s6">
+  <div class="nhead"><span class="nnum">06</span><span class="ntitle">தரவு மீட்டெடுத்தல் (Retrieve — SELECT)</span></div>
+  <div class="nbody">
+    <p>SELECT கட்டளையை இயக்கிய பின், பெறுபேறுகள் இடங்காட்டியில் இருக்கும்; அவற்றைப் பெற இரு முறைகள்:</p>
+    <ul>
+      <li><code class="inline">fetchall()</code> — எல்லாப் பதிவுகளையும் <b>tuple களின் பட்டியலாக</b> (list of tuples) தரும்.</li>
+      <li><code class="inline">fetchone()</code> — <b>ஒரு பதிவை</b> மட்டும் (tuple ஆக) தரும்.</li>
+    </ul>
+<pre># எல்லா மாணவர்களையும் மீட்டெடுத்தல்
+cur.execute("SELECT * FROM student")
+rows = cur.fetchall()          # tuple களின் பட்டியல்
+
+for row in rows:
+    print(row[0], row[1], row[2])   # index_no, name, marks</pre>
+    <p><b>வெளியீடு:</b></p>
+<pre>1001 Amuthan 78
+1002 Keerthana 85
+1003 Nilavan 62</pre>
+<pre># நிபந்தனையுடன் மீட்டெடுத்தல் — 75 க்கு மேல் புள்ளி பெற்றவர்கள்
+cur.execute("SELECT name, marks FROM student WHERE marks > 75")
+for row in cur.fetchall():
+    print(row[0], "-", row[1])
+
+# ஒரு குறிப்பிட்ட மாணவர் — fetchone()
+cur.execute("SELECT * FROM student WHERE index_no = 1002")
+record = cur.fetchone()
+print(record)        # (1002, 'Keerthana', 85)</pre>
+    <div class="key"><span class="tag">முக்கியம்</span>
+      ஒவ்வொரு பதிவும் (row) ஒரு <b>tuple</b>; புலங்களை <code class="inline">row[0]</code>, <code class="inline">row[1]</code> … என அட்டவணைப்படுத்தி அணுகலாம். SELECT க்கு <code class="inline">commit()</code> <b>தேவையில்லை</b>.
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 07 ===================== -->
+<section class="ncard" id="s7">
+  <div class="nhead"><span class="nnum">07</span><span class="ntitle">தரவு சேர்த்தல் (Add — INSERT)</span></div>
+  <div class="nbody">
+<pre># முறை 1: நேரடியாக INSERT
+cur.execute("INSERT INTO student VALUES (1004, 'Tharushi', 91)")
+con.commit()
+print("பதிவு சேர்க்கப்பட்டது")</pre>
+    <p>பயனரிடம் இருந்து பெறும் பெறுமானங்களைச் சேர்க்க <b>%s இடப்பிடிப்பான்கள்</b> (placeholders) பயன்படுத்துவதே சரியான முறை:</p>
+<pre># முறை 2: பயனர் உள்ளீட்டுடன் — placeholders (%s)
+no = int(input("சுட்டெண்: "))
+name = input("பெயர்: ")
+marks = int(input("புள்ளி: "))
+
+sql = "INSERT INTO student (index_no, name, marks) VALUES (%s, %s, %s)"
+values = (no, name, marks)
+
+cur.execute(sql, values)
+con.commit()
+print(cur.rowcount, "பதிவு சேர்க்கப்பட்டது")</pre>
+    <div class="warn"><span class="tag">எச்சரிக்கை</span>
+      <code class="inline">con.commit()</code> அழைக்காவிடின் சேர்க்கப்பட்ட தரவு தரவுத்தளத்தில் <b>சேமிக்கப்படாது</b>! INSERT, UPDATE, DELETE மூன்றுக்கும் commit கட்டாயம்.
+    </div>
+    <div class="key"><span class="tag">ஏன் %s ?</span>
+      பெறுமானங்களை நேரடியாகச் சரத்தில் ஒட்டுவதைவிட, %s இடப்பிடிப்பான்கள் பாதுகாப்பானவை — <b>SQL உட்செலுத்தல் தாக்குதலை</b> (SQL Injection) தடுக்கின்றன. எண் / சரம் எதுவாயினும் இடப்பிடிப்பான் <b>%s</b> மட்டுமே. <code class="inline">cur.rowcount</code> — பாதிக்கப்பட்ட பதிவுகளின் எண்ணிக்கையைத் தரும்.
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 08 ===================== -->
+<section class="ncard" id="s8">
+  <div class="nhead"><span class="nnum">08</span><span class="ntitle">தரவு திருத்துதல் (Modify — UPDATE)</span></div>
+  <div class="nbody">
+<pre># சுட்டெண் 1003 மாணவரின் புள்ளியைத் திருத்துதல்
+sql = "UPDATE student SET marks = %s WHERE index_no = %s"
+values = (70, 1003)
+
+cur.execute(sql, values)
+con.commit()
+print(cur.rowcount, "பதிவு திருத்தப்பட்டது")</pre>
+    <div class="warn"><span class="tag">மிக முக்கியம்</span>
+      <b>WHERE நிபந்தனையை மறந்துவிட்டால்</b>, அட்டவணையின் <b>எல்லாப் பதிவுகளும்</b> திருத்தப்பட்டுவிடும்!<br>
+      <code class="inline">UPDATE student SET marks = 70</code> → எல்லோருடைய புள்ளியும் 70 ஆகிவிடும்.
+    </div>
+    <p>பயனர் உள்ளீட்டுடன்:</p>
+<pre>no = int(input("திருத்த வேண்டிய சுட்டெண்: "))
+new_marks = int(input("புதிய புள்ளி: "))
+
+cur.execute("UPDATE student SET marks = %s WHERE index_no = %s",
+            (new_marks, no))
+con.commit()</pre>
+  </div>
+</section>
+
+<!-- ===================== 09 ===================== -->
+<section class="ncard" id="s9">
+  <div class="nhead"><span class="nnum">09</span><span class="ntitle">தரவு நீக்குதல் (Delete — DELETE)</span></div>
+  <div class="nbody">
+<pre># சுட்டெண் 1004 மாணவரின் பதிவை நீக்குதல்
+sql = "DELETE FROM student WHERE index_no = %s"
+value = (1004,)        # ஒரு உறுப்பு tuple — காற்புள்ளி கட்டாயம்!
+
+cur.execute(sql, value)
+con.commit()
+print(cur.rowcount, "பதிவு நீக்கப்பட்டது")</pre>
+    <div class="warn"><span class="tag">எச்சரிக்கை</span>
+      WHERE இல்லாத <code class="inline">DELETE FROM student</code> அட்டவணையின் <b>எல்லாப் பதிவுகளையும்</b> நீக்கிவிடும் (அட்டவணை அமைப்பு மட்டும் எஞ்சும்).
+    </div>
+    <div class="key"><span class="tag">நுணுக்கம்</span>
+      ஒரே ஒரு பெறுமானம் உள்ள tuple எழுதும்போது <code class="inline">(1004,)</code> என <b>காற்புள்ளியுடன்</b> எழுத வேண்டும்; <code class="inline">(1004)</code> என்பது tuple அல்ல — வெறும் எண்ணே.
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 10 ===================== -->
+<section class="ncard" id="s10">
+  <div class="nhead"><span class="nnum">10</span><span class="ntitle">முழுமையான நிரல் — நான்கு செயற்பாடுகளும் ஒன்றாக</span></div>
+  <div class="nbody">
+    <p>பட்டியல் (menu) அடிப்படையில் நான்கு செயற்பாடுகளையும் வழங்கும் முழுமையான நிரல்:</p>
+<pre># student அட்டவணை முகாமைத்துவ நிரல்
+import mysql.connector
+
+con = mysql.connector.connect(host="localhost", user="root",
+                              password="1234", database="school")
+cur = con.cursor()
+
+print("1 - காண்பி  2 - சேர்  3 - திருத்து  4 - நீக்கு")
+choice = int(input("தெரிவு: "))
+
+if choice == 1:                                   # SELECT
+    cur.execute("SELECT * FROM student")
+    for row in cur.fetchall():
+        print(row[0], row[1], row[2])
+
+elif choice == 2:                                 # INSERT
+    no = int(input("சுட்டெண்: "))
+    name = input("பெயர்: ")
+    marks = int(input("புள்ளி: "))
+    cur.execute("INSERT INTO student VALUES (%s, %s, %s)",
+                (no, name, marks))
+    con.commit()
+    print("சேர்க்கப்பட்டது")
+
+elif choice == 3:                                 # UPDATE
+    no = int(input("சுட்டெண்: "))
+    marks = int(input("புதிய புள்ளி: "))
+    cur.execute("UPDATE student SET marks = %s WHERE index_no = %s",
+                (marks, no))
+    con.commit()
+    print("திருத்தப்பட்டது")
+
+elif choice == 4:                                 # DELETE
+    no = int(input("நீக்க வேண்டிய சுட்டெண்: "))
+    cur.execute("DELETE FROM student WHERE index_no = %s", (no,))
+    con.commit()
+    print("நீக்கப்பட்டது")
+
+con.close()                                       # இணைப்பை மூடு</pre>
+  </div>
+</section>
+
+<!-- ===================== 11 ===================== -->
+<section class="ncard" id="s11">
+  <div class="nhead"><span class="nnum">11</span><span class="ntitle">பரீட்சைக் குறிப்புகள் — ஒப்பீட்டு அட்டவணை</span></div>
+  <div class="nbody">
+    <table class="dt">
+      <tr><th>செயற்பாடு</th><th>SQL கட்டளை</th><th>commit() ?</th><th>பெறுபேறு பெறல்</th></tr>
+      <tr><td>மீட்டெடுத்தல்</td><td>SELECT</td><td>தேவையில்லை</td><td>fetchall() / fetchone()</td></tr>
+      <tr><td>சேர்த்தல்</td><td>INSERT</td><td><b>கட்டாயம்</b></td><td>rowcount</td></tr>
+      <tr><td>திருத்துதல்</td><td>UPDATE</td><td><b>கட்டாயம்</b></td><td>rowcount</td></tr>
+      <tr><td>நீக்குதல்</td><td>DELETE</td><td><b>கட்டாயம்</b></td><td>rowcount</td></tr>
+    </table>
+    <ul>
+      <li>நிரலின் ஒழுங்கு எப்போதும்: <b>import → connect → cursor → execute → commit / fetch → close</b>.</li>
+      <li>UPDATE / DELETE இல் <b>WHERE</b> நிபந்தனை இல்லாவிடின் எல்லாப் பதிவுகளும் பாதிக்கப்படும்.</li>
+      <li>%s இடப்பிடிப்பான்கள் தரவு வகை எதுவாயினும் ஒரே மாதிரி; பெறுமானங்கள் <b>tuple</b> ஆக வழங்கப்பட வேண்டும்.</li>
+      <li>fetchall() → tuple களின் பட்டியல்; fetchone() → ஒற்றை tuple (பதிவு இல்லாவிடின் None).</li>
+      <li>commit() மறந்தால் — நிரல் பிழையின்றி ஓடும், ஆனால் மாற்றங்கள் தரவுத்தளத்தில் <b>சேமிக்கப்படா</b> — பரீட்சையில் அடிக்கடி கேட்கப்படும் நுட்பம்!</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ===================== 12 ===================== -->
+<section class="ncard" id="s12">
+  <div class="nhead"><span class="nnum">12</span><span class="ntitle">பயிற்சி வினாக்கள் (விடைகளுடன்)</span></div>
+  <div class="nbody">
+
+    <p style="margin-bottom:18px">பின்வரும் வினாக்கள் <b>library</b> தரவுத்தளத்தில் உள்ள <b>book(book_id, title, price)</b> அட்டவணையை அடிப்படையாகக் கொண்டவை. முதலில் நீங்களே எழுதிப் பார்த்துவிட்டு விடையைச் சரிபார்க்கவும்.</p>
+
+    <!-- P1 -->
+    <div style="border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin-bottom:18px">
+      <span class="qnum">வினா 01</span>
+      <p class="task" style="margin-top:10px">library தரவுத்தளத்துடன் இணைத்து cursor ஐ உருவாக்கும் Python நிரல் பகுதியை எழுதுக. (user: root, password: abc)</p>
+      <button class="btn" onclick="toggleAns(this,'p1')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p1"><span class="ans-label">விடை</span>
+<pre>import mysql.connector
+
+con = mysql.connector.connect(
+    host="localhost",
+    user="root",
+    password="abc",
+    database="library"
+)
+cur = con.cursor()</pre>
+      </div>
+    </div>
+
+    <!-- P2 -->
+    <div style="border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin-bottom:18px">
+      <span class="qnum">வினா 02</span>
+      <p class="task" style="margin-top:10px">book அட்டவணையில் உள்ள எல்லா நூல்களின் தலைப்புகளையும் (title) அச்சிடும் நிரல் பகுதியை எழுதுக.</p>
+      <button class="btn" onclick="toggleAns(this,'p2')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p2"><span class="ans-label">விடை</span>
+<pre>cur.execute("SELECT title FROM book")
+rows = cur.fetchall()
+
+for row in rows:
+    print(row[0])</pre>
+      <div class="note">குறிப்பு: SELECT செயற்பாடு என்பதால் commit() தேவையில்லை; fetchall() மூலம் பெறுபேறுகள் பெறப்படுகின்றன.</div>
+      </div>
+    </div>
+
+    <!-- P3 -->
+    <div style="border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin-bottom:18px">
+      <span class="qnum">வினா 03</span>
+      <p class="task" style="margin-top:10px">பயனரிடம் இருந்து book_id, title, price பெற்று, book அட்டவணையில் புதிய பதிவைச் சேர்க்கும் நிரல் பகுதியை எழுதுக.</p>
+      <button class="btn" onclick="toggleAns(this,'p3')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p3"><span class="ans-label">விடை</span>
+<pre>bid = int(input("நூல் இலக்கம்: "))
+title = input("தலைப்பு: ")
+price = float(input("விலை: "))
+
+cur.execute("INSERT INTO book VALUES (%s, %s, %s)",
+            (bid, title, price))
+con.commit()
+print("நூல் சேர்க்கப்பட்டது")</pre>
+      <div class="note">குறிப்பு: con.commit() இல்லாவிடின் பதிவு தரவுத்தளத்தில் சேமிக்கப்படாது.</div>
+      </div>
+    </div>
+
+    <!-- P4 -->
+    <div style="border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin-bottom:18px">
+      <span class="qnum">வினா 04</span>
+      <p class="task" style="margin-top:10px">book_id 205 ஆக உள்ள நூலின் விலையை ரூ. 1500 ஆகத் திருத்தும் நிரல் பகுதியை எழுதுக.</p>
+      <button class="btn" onclick="toggleAns(this,'p4')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p4"><span class="ans-label">விடை</span>
+<pre>cur.execute("UPDATE book SET price = %s WHERE book_id = %s",
+            (1500, 205))
+con.commit()
+print(cur.rowcount, "பதிவு திருத்தப்பட்டது")</pre>
+      <div class="note">குறிப்பு: WHERE book_id = 205 இல்லாவிடின் எல்லா நூல்களின் விலையும் 1500 ஆக மாறிவிடும்!</div>
+      </div>
+    </div>
+
+    <!-- P5 -->
+    <div style="border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin-bottom:18px">
+      <span class="qnum">வினா 05</span>
+      <p class="task" style="margin-top:10px">பின்வரும் நிரலில் உள்ள <b>இரண்டு பிழைகளைக்</b> கண்டறிந்து திருத்துக:</p>
+<pre>cur.execute("DELETE FROM book WHERE book_id = %s", (110))
+con.close()</pre>
+      <button class="btn" onclick="toggleAns(this,'p5')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p5"><span class="ans-label">விடை</span>
+        <ol>
+          <li><b>(110)</b> என்பது tuple அல்ல — ஒற்றை உறுப்பு tuple ஆக <b>(110,)</b> எனக் காற்புள்ளியுடன் எழுத வேண்டும்.</li>
+          <li>DELETE செயற்பாட்டின் பின் <b>con.commit()</b> அழைக்கப்படவில்லை — எனவே நீக்கம் தரவுத்தளத்தில் சேமிக்கப்படாது.</li>
+        </ol>
+<pre>cur.execute("DELETE FROM book WHERE book_id = %s", (110,))
+con.commit()
+con.close()</pre>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+</main>
+
+<footer>
+  க.பொ.த (உயர்தர) தகவல் மற்றும் தொடர்பாடல் தொழினுட்பம் — Python தரவுத்தள இணைப்பு (Embedded SQL) குறிப்புகள்
+</footer>
+
+<script>
+/* Python/SQL highlighter applied to every <pre> */
+function hl(code){
+  return code.split('\n').map(function(line){
+    line=line.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    var ci=line.indexOf('#'), cp=line, cm='';
+    if(ci>-1){ cp=line.slice(0,ci); cm='<span class="cm">'+line.slice(ci)+'</span>'; }
+    cp=cp.replace(/("""|"[^"]*"|'[^']*')/g,'<span class="st">$1</span>');
+    cp=cp.replace(/\b(import|if|elif|else|while|for|in|and|or|not|break|def|return)\b/g,'<span class="kw">$1</span>');
+    cp=cp.replace(/\b(input|int|float|print|range|str)\b/g,'<span class="kw">$1</span>');
+    return cp+cm;
+  }).join('\n');
+}
+document.querySelectorAll('pre').forEach(function(p){
+  p.innerHTML = hl(p.textContent);
+});
+
+function toggleAns(btn,id){
+  var ans=document.getElementById(id);
+  var open=ans.classList.toggle('show');
+  btn.classList.toggle('open',open);
+  btn.textContent=open?'விடையை மறை ▴':'விடையைக் காட்டு ▾';
+}
+</script>
+
+</body>
+</html>

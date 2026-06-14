@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>க.பொ.த (உயர்தரம்) ICT — நுண்செயலி அபிவிருத்தி முறைமைகள் & IoT குறிப்புகள்</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Catamaran:wght@600;800&family=Hind+Madurai:wght@400;500;600&family=Noto+Sans+Tamil:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F6F4EE; --card:#FFFFFF; --ink:#22303A;
+    --maroon:#8B1E3F; --teal:#1F4E5F; --gold:#C9912B;
+    --line:#E2DDD2; --code-bg:#102A33; --code-ink:#D9EEF2;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--paper);color:var(--ink);
+    font-family:'Hind Madurai','Noto Sans Tamil',sans-serif;
+    line-height:1.8;font-size:17px;}
+  header{background:linear-gradient(135deg,var(--teal) 0%,#143946 100%);
+    color:#F2EFE6;padding:42px 20px 36px;text-align:center;
+    border-bottom:5px solid var(--gold);}
+  header .eyebrow{letter-spacing:.18em;font-size:.8rem;text-transform:uppercase;
+    color:#D8C58A;margin-bottom:10px;}
+  header h1{font-family:'Catamaran','Noto Sans Tamil',sans-serif;font-weight:800;
+    font-size:clamp(1.4rem,4vw,2.1rem);line-height:1.5;}
+  header p{margin-top:10px;font-size:.95rem;color:#BFD4DA}
+  main{max-width:900px;margin:0 auto;padding:36px 18px 70px}
+
+  .toc{background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:16px 24px;margin-bottom:34px;font-size:.92rem;}
+  .toc b{color:var(--teal);font-family:'Catamaran','Noto Sans Tamil',sans-serif}
+  .toc a{color:var(--maroon);text-decoration:none;white-space:nowrap}
+  .toc a:hover{text-decoration:underline}
+  .toc .links{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:6px}
+  .toc .grp{font-weight:700;color:var(--teal);margin-top:8px;display:block;font-size:.86rem}
+
+  .ncard{background:var(--card);border:1px solid var(--line);border-radius:16px;
+    margin-bottom:32px;overflow:hidden;box-shadow:0 2px 10px rgba(34,48,58,.05);}
+  .nhead{display:flex;align-items:center;gap:14px;padding:16px 24px;
+    border-bottom:1px solid var(--line);
+    background:linear-gradient(to right,#FBFAF6,#fff);}
+  .nnum{font-family:'Catamaran',sans-serif;font-weight:800;font-size:.95rem;
+    color:#fff;background:var(--teal);border-radius:10px;padding:5px 13px;
+    white-space:nowrap;}
+  .ntitle{font-family:'Catamaran','Noto Sans Tamil',sans-serif;font-weight:600;
+    font-size:1.1rem;color:var(--teal);}
+  .nbody{padding:22px 26px 26px}
+  .nbody p{margin-bottom:12px}
+  .nbody ul,.nbody ol{margin:6px 26px 14px}
+  .nbody li{margin-bottom:6px}
+  h4.sub{font-family:'Catamaran','Noto Sans Tamil',sans-serif;color:var(--maroon);
+    font-size:1.0rem;margin:18px 0 8px;}
+
+  .key{background:#FBF7EC;border-right:4px solid var(--gold);
+    border-radius:10px;padding:14px 20px;margin:14px 0;}
+  .key .tag{font-size:.78rem;font-weight:700;color:var(--gold);
+    letter-spacing:.1em;display:block;margin-bottom:4px;}
+  .warn{background:#FAEFF1;border-right:4px solid var(--maroon);
+    border-radius:10px;padding:14px 20px;margin:14px 0;}
+  .warn .tag{font-size:.78rem;font-weight:700;color:var(--maroon);
+    letter-spacing:.1em;display:block;margin-bottom:4px;}
+
+  pre{background:var(--code-bg);color:var(--code-ink);border-radius:12px;
+    padding:18px 20px;margin:12px 0;overflow-x:auto;
+    font-family:'JetBrains Mono',monospace;font-size:.86rem;line-height:1.7;
+    direction:ltr;text-align:left;}
+  pre .cm{color:#7FB6A4} pre .kw{color:#F2B36B} pre .st{color:#A8D8B9} pre .nu{color:#E5C07B}
+  code.inline{background:#EDF2F1;color:var(--teal);border-radius:6px;
+    padding:1px 8px;font-family:'JetBrains Mono',monospace;font-size:.85em;
+    direction:ltr;display:inline-block;}
+
+  table.dt{border-collapse:collapse;margin:12px auto;font-size:.9rem;}
+  table.dt th{background:var(--teal);color:#fff;padding:7px 14px;
+    font-weight:600;border:1px solid #16404f;}
+  table.dt td{border:1px solid var(--line);padding:7px 14px;text-align:center;
+    background:#FDFCF9;vertical-align:top;}
+  table.dt td.l{text-align:left}
+  table.dt caption{caption-side:top;font-weight:600;color:var(--teal);
+    margin-bottom:6px;font-size:.95rem;}
+  table.dt code{font-family:'JetBrains Mono',monospace;font-size:.85em;color:var(--maroon)}
+
+  .diagram{background:#FBFAF6;border:1px solid var(--line);border-radius:12px;
+    padding:16px;margin:14px 0;overflow-x:auto;text-align:center;}
+  .diagram svg{max-width:100%;height:auto}
+  .diagram .cap{font-size:.85rem;color:#5A6B74;margin-top:8px}
+  svg text{font-family:'Noto Sans Tamil','Hind Madurai',sans-serif;}
+
+  .btn{display:inline-flex;align-items:center;gap:9px;
+    font-family:'Hind Madurai','Noto Sans Tamil',sans-serif;font-weight:600;
+    font-size:1rem;color:#fff;background:var(--teal);border:none;
+    border-radius:999px;padding:11px 26px;margin-top:14px;cursor:pointer;
+    transition:background .2s,transform .15s;}
+  .btn:hover{background:#16404f;transform:translateY(-1px)}
+  .btn:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+  .btn.open{background:var(--maroon)}
+  .answer{display:none;margin-top:20px;border-top:2px dashed var(--line);
+    padding-top:18px;animation:fade .35s ease;}
+  .answer.show{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  .ans-label{display:inline-block;font-weight:700;color:#fff;background:var(--gold);
+    border-radius:8px;padding:3px 14px;font-size:.85rem;margin-bottom:12px;}
+  .qnum{font-family:'Catamaran',sans-serif;font-weight:800;font-size:1rem;
+    color:#fff;background:var(--maroon);border-radius:10px;padding:5px 14px;
+    white-space:nowrap;}
+  .task{font-weight:600;color:var(--maroon)}
+  .pq{border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin-bottom:18px}
+  .note{margin-top:12px;font-size:.9rem;color:#5A6B74;background:#EFF4F2;
+    border-radius:10px;padding:10px 16px;}
+  .secband{background:var(--maroon);color:#fff;border-radius:12px;padding:10px 22px;
+    font-family:'Catamaran','Noto Sans Tamil',sans-serif;font-weight:700;
+    font-size:1.15rem;margin:6px 0 24px;letter-spacing:.02em;}
+
+  footer{text-align:center;padding:26px 16px 40px;font-size:.85rem;color:#7A8790;}
+  @media (max-width:560px){
+    .nhead{flex-direction:column;align-items:flex-start;gap:8px}
+    body{font-size:16px}
+  }
+  @media (prefers-reduced-motion:reduce){.answer{animation:none}.btn{transition:none}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">G.C.E. Advanced Level &middot; Sri Lanka &middot; ICT (20) &middot; Unit 11</div>
+  <h1>நுண்செயலி அபிவிருத்தி முறைமைகள் &amp;<br>பொருட்களின் இணையம் (IoT) குறிப்புகள்</h1>
+  <p>Arduino / Raspberry Pi &middot; அம்சங்கள் &middot; எளிய பயன்பாடுகள் &middot; IoT அறிமுகமும் பயன்பாடும்</p>
+</header>
+
+<main>
+
+<div class="toc"><b>உள்ளடக்கம்</b>
+  <div class="links">
+    <span class="grp">11.1 நுண்செயலி அபிவிருத்தி முறைமைகள்</span>
+    <a href="#s1">01. அறிமுகம்</a>
+    <a href="#s2">02. Arduino vs Raspberry Pi</a>
+    <a href="#s3">03. பலகையின் அம்சங்கள்</a>
+    <a href="#s4">04. LED கட்டுப்பாடு</a>
+    <a href="#s5">05. LDR ஒளி உணரல்</a>
+    <a href="#s6">06. வெப்பநிலை + மின்விசிறி</a>
+    <a href="#s7">07. காந்தக் கதவு சுவிட்ச்</a>
+    <span class="grp">11.2 பொருட்களின் இணையம் (IoT)</span>
+    <a href="#s8">08. IoT — வரைவிலக்கணம் & தேவைகள்</a>
+    <a href="#s9">09. செயற்படு தொழில்நுட்பங்கள்</a>
+    <a href="#s10">10. பயன்பாடுகள் & எளிய IoT</a>
+    <a href="#s11">11. பயிற்சி வினாக்கள்</a>
+  </div>
+</div>
+
+<div class="secband">11.1 நுண்செயலி அபிவிருத்தி முறைமைகள் (Microprocessor Development Systems)</div>
+
+<!-- ===================== 01 ===================== -->
+<section class="ncard" id="s1">
+  <div class="nhead"><span class="nnum">01</span><span class="ntitle">அறிமுகம்</span></div>
+  <div class="nbody">
+    <p>நுண்செயலி அபிவிருத்தி முறைமை என்பது, ஒரு நுண்கட்டுப்படுத்தி (microcontroller) அல்லது நுண்செயலியை (microprocessor) அடிப்படையாகக் கொண்ட <b>சிறிய, விலை குறைந்த, நிரல்படுத்தக்கூடிய பலகை</b> (programmable board). இதை மாணவர்களும் பொறியியலாளர்களும் <b>எலெக்ட்ரோனிக் கருவிகளைக் கட்டுப்படுத்தவும் சோதனை மாதிரிகளை (prototypes) உருவாக்கவும்</b> பயன்படுத்துகின்றனர்.</p>
+    <p>இவ்வாறான பலகைகள் <b>உணரிகளை (sensors)</b> உள்ளீடாகப் பெற்று, நிரலின்படி தீர்மானம் எடுத்து, <b>இயக்கிகளை (actuators — LED, மோட்டார், மின்விசிறி)</b> கட்டுப்படுத்துகின்றன. A/L பாடத்திட்டத்தில் <b>Arduino</b> மற்றும் <b>Raspberry Pi</b> ஆகிய இரு பிரபல்யமான பலகைகள் கற்பிக்கப்படுகின்றன.</p>
+    <div class="key"><span class="tag">அடிப்படை மாதிரி</span>
+      <b>உள்ளீடு (Sensor) → செயலாக்கம் (Board + Program) → வெளியீடு (Actuator)</b> — இதுவே ஒவ்வொரு பயன்பாட்டினதும் அடிப்படைக் கட்டமைப்பு.
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 02 ===================== -->
+<section class="ncard" id="s2">
+  <div class="nhead"><span class="nnum">02</span><span class="ntitle">Arduino vs Raspberry Pi</span></div>
+  <div class="nbody">
+    <p><b>Arduino</b> — ஒரு <b>நுண்கட்டுப்படுத்தி (microcontroller)</b> பலகை. இயக்க முறைமை (OS) இல்லை; ஒரே ஒரு நிரலை (sketch) மட்டும் இயக்கும். எலெக்ட்ரோனிக் சமிக்ஞைகளைக் கட்டுப்படுத்த எளிது.</p>
+    <p><b>Raspberry Pi</b> — ஒரு <b>நுண்செயலி (microprocessor)</b> அடிப்படையிலான முழுமையான <b>சிறு கணினி (single-board computer)</b>. Linux போன்ற இயக்க முறைமையை இயக்கும்; திரை, விசைப்பலகை இணைக்கலாம்; பல வேலைகளைச் செய்யும்.</p>
+    <table class="dt">
+      <caption>முக்கிய வேறுபாடுகள்</caption>
+      <tr><th>அம்சம்</th><th>Arduino</th><th>Raspberry Pi</th></tr>
+      <tr><td class="l">வகை</td><td>நுண்கட்டுப்படுத்தி</td><td>சிறு கணினி (நுண்செயலி)</td></tr>
+      <tr><td class="l">இயக்க முறைமை (OS)</td><td>இல்லை</td><td>உண்டு (Linux)</td></tr>
+      <tr><td class="l">Analog உள்ளீடு</td><td><b>உண்டு</b> (நேரடியாக)</td><td>இல்லை (ADC தேவை)</td></tr>
+      <tr><td class="l">நிரலாக்க மொழி</td><td>C/C++ (Arduino IDE)</td><td>Python, பல மொழிகள்</td></tr>
+      <tr><td class="l">மின் நுகர்வு</td><td>குறைவு</td><td>கூடியது</td></tr>
+      <tr><td class="l">ஏற்றது</td><td>எளிய சமிக்ஞைக் கட்டுப்பாடு</td><td>சிக்கலான, இணைய சார் வேலைகள்</td></tr>
+    </table>
+    <div class="key"><span class="tag">எளிதில் நினைவில்</span>
+      <b>Arduino = கட்டுப்படுத்தி</b> (ஒரு வேலை, OS இல்லை). <b>Raspberry Pi = கணினி</b> (பல வேலை, OS உண்டு). Analog உணரிகளுக்கு Arduino நேரடியானது; இணைய இணைப்பு / சிக்கல் வேலைகளுக்கு Raspberry Pi.
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 03 ===================== -->
+<section class="ncard" id="s3">
+  <div class="nhead"><span class="nnum">03</span><span class="ntitle">பலகையின் அம்சங்கள் (Features)</span></div>
+  <div class="nbody">
+    <div class="diagram">
+      <svg viewBox="0 0 620 320" width="600" xmlns="http://www.w3.org/2000/svg">
+        <rect x="120" y="60" width="380" height="200" rx="14" fill="#1F4E5F" stroke="#143946" stroke-width="2"/>
+        <text x="310" y="168" text-anchor="middle" font-size="17" fill="#D8C58A" font-weight="600">Arduino UNO</text>
+        <text x="310" y="190" text-anchor="middle" font-size="12" fill="#BFD4DA">(நுண்கட்டுப்படுத்தி பலகை)</text>
+        <!-- USB -->
+        <rect x="60" y="92" width="62" height="38" rx="4" fill="#9AA7AE" stroke="#5A6B74"/>
+        <text x="50" y="84" text-anchor="middle" font-size="12" fill="#1F4E5F" font-weight="600">USB</text>
+        <line x1="120" y1="111" x2="122" y2="111" stroke="#22303A"/>
+        <!-- Power jack -->
+        <rect x="60" y="180" width="62" height="40" rx="6" fill="#3A3A3A" stroke="#000"/>
+        <text x="56" y="240" text-anchor="middle" font-size="12" fill="#8B1E3F" font-weight="600">Power</text>
+        <!-- Reset -->
+        <circle cx="160" cy="48" r="11" fill="#8B1E3F" stroke="#5e132b"/>
+        <text x="160" y="30" text-anchor="middle" font-size="12" fill="#8B1E3F" font-weight="600">Reset</text>
+        <!-- digital pins top -->
+        <g fill="#C9912B"><rect x="180" y="64" width="10" height="16"/><rect x="200" y="64" width="10" height="16"/><rect x="220" y="64" width="10" height="16"/><rect x="240" y="64" width="10" height="16"/><rect x="260" y="64" width="10" height="16"/><rect x="280" y="64" width="10" height="16"/><rect x="300" y="64" width="10" height="16"/><rect x="320" y="64" width="10" height="16"/></g>
+        <text x="255" y="100" text-anchor="middle" font-size="12.5" fill="#FBF7EC" font-weight="600">Digital I/O Pins</text>
+        <text x="255" y="50" text-anchor="middle" font-size="11.5" fill="#C9912B" font-weight="600">(டிஜிட்டல் — உள்/வெளி)</text>
+        <!-- analog pins bottom -->
+        <g fill="#7FB6A4"><rect x="300" y="240" width="10" height="16"/><rect x="320" y="240" width="10" height="16"/><rect x="340" y="240" width="10" height="16"/><rect x="360" y="240" width="10" height="16"/><rect x="380" y="240" width="10" height="16"/><rect x="400" y="240" width="10" height="16"/></g>
+        <text x="355" y="290" text-anchor="middle" font-size="12.5" fill="#1F4E5F" font-weight="600">Analog Input Pins (A0–A5)</text>
+        <text x="355" y="232" text-anchor="middle" font-size="11.5" fill="#7FB6A4">(அனலொக் உள்ளீடு)</text>
+      </svg>
+      <div class="cap">பலகையின் முக்கிய இணைப்புகள் (Arduino உதாரணமாக)</div>
+    </div>
+    <table class="dt">
+      <caption>அம்சங்களும் அவற்றின் செயற்பாடும்</caption>
+      <tr><th>அம்சம்</th><th>செயற்பாடு</th><th>எடுத்துக்காட்டுச் சாதனம்</th></tr>
+      <tr><td class="l"><b>Analog Input</b><br>(அனலொக் உள்ளீடு)</td><td class="l">தொடர்ச்சியாக மாறும் பெறுமானங்களை (மின்னழுத்த அளவு) எண்ணாக்கிப் (0–1023) படிக்கும். ADC பயன்படுத்தும்.</td><td class="l">LDR, வெப்பநிலை உணரி (LM35), potentiometer</td></tr>
+      <tr><td class="l"><b>Digital Input</b><br>(டிஜிட்டல் உள்ளீடு)</td><td class="l">ON/OFF (HIGH/LOW, 1/0) இரு நிலைகளை மட்டும் படிக்கும்.</td><td class="l">பொத்தான் (push button), காந்தக் கதவு சுவிட்ச்</td></tr>
+      <tr><td class="l"><b>Digital Output</b><br>(டிஜிட்டல் வெளியீடு)</td><td class="l">ஒரு சாதனத்தை ON (HIGH) அல்லது OFF (LOW) ஆகக் கட்டுப்படுத்தும்.</td><td class="l">LED, மின்விசிறி, அலாரம், ரிலே</td></tr>
+      <tr><td class="l"><b>USB Port</b></td><td class="l">நிரலைக் கணினியிலிருந்து பலகைக்கு ஏற்றவும் (upload), மின்சாரம் வழங்கவும், தரவுப் பரிமாற்றத்துக்கும்.</td><td class="l">கணினி இணைப்பு</td></tr>
+      <tr><td class="l"><b>Power</b><br>(மின்வழங்கல்)</td><td class="l">பலகைக்கு மின்சாரம் வழங்கல் (USB வழியாக அல்லது வெளி அடாப்டர் / கல மூலம்).</td><td class="l">5V/9V அடாப்டர், கலம்</td></tr>
+      <tr><td class="l"><b>Reset</b><br>(மீளமைப்பு)</td><td class="l">இயங்கும் நிரலை ஆரம்பத்திலிருந்து மீண்டும் தொடங்கச் செய்யும்.</td><td class="l">Reset பொத்தான்</td></tr>
+    </table>
+    <div class="warn"><span class="tag">Analog vs Digital — பரீட்சை நுணுக்கம்</span>
+      <b>Digital</b> = இரு நிலைகள் மட்டும் (0 அல்லது 1; ON/OFF). <b>Analog</b> = தொடர்ச்சியான பல பெறுமானங்கள் (எ.கா: ஒளியின் / வெப்பத்தின் அளவு). LDR, வெப்ப உணரி போன்றவை analog; பொத்தான், கதவு சுவிட்ச் digital.
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 04 ===================== -->
+<section class="ncard" id="s4">
+  <div class="nhead"><span class="nnum">04</span><span class="ntitle">பயன்பாடு 1 — LED கட்டுப்பாடு (Digital Output)</span></div>
+  <div class="nbody">
+    <p><b>நோக்கம்:</b> ஒரு LED ஐ ஒரு வினாடி எரியவைத்து, ஒரு வினாடி அணைத்து, தொடர்ந்து மின்மினுக்கச் (blink) செய்தல்.</p>
+    <div class="diagram">
+      <svg viewBox="0 0 480 170" width="460" xmlns="http://www.w3.org/2000/svg">
+        <rect x="20" y="55" width="120" height="70" rx="10" fill="#1F4E5F"/>
+        <text x="80" y="86" text-anchor="middle" font-size="13" fill="#D8C58A" font-weight="600">Arduino</text>
+        <text x="80" y="105" text-anchor="middle" font-size="11" fill="#BFD4DA">Pin 13</text>
+        <line x1="140" y1="78" x2="250" y2="78" stroke="#8B1E3F" stroke-width="2.4"/>
+        <text x="195" y="68" text-anchor="middle" font-size="11" fill="#8B1E3F">Digital Output</text>
+        <!-- resistor -->
+        <rect x="250" y="70" width="46" height="16" fill="#E5C07B" stroke="#8a6313"/>
+        <text x="273" y="105" text-anchor="middle" font-size="10.5" fill="#5A6B74">220Ω</text>
+        <line x1="296" y1="78" x2="340" y2="78" stroke="#22303A" stroke-width="2.4"/>
+        <!-- LED -->
+        <circle cx="360" cy="78" r="18" fill="#FCE26B" stroke="#C9912B" stroke-width="2"/>
+        <text x="360" y="83" text-anchor="middle" font-size="13" fill="#8a6313" font-weight="700">LED</text>
+        <line x1="378" y1="78" x2="430" y2="78" stroke="#22303A" stroke-width="2.4"/>
+        <line x1="430" y1="60" x2="430" y2="125" stroke="#22303A" stroke-width="2.4"/>
+        <line x1="140" y1="110" x2="430" y2="110" stroke="#22303A" stroke-width="2.4"/>
+        <text x="285" y="128" text-anchor="middle" font-size="11" fill="#5A6B74">GND (மின்சுற்று நிறைவு)</text>
+      </svg>
+      <div class="cap">LED ஐ Pin 13 உடன் (மின்தடையம் வழியாக) இணைத்தல்</div>
+    </div>
+    <h4 class="sub">Arduino நிரல் (Sketch)</h4>
+<pre>int led = 13;          // LED இணைக்கப்பட்ட பின்
+
+void setup() {
+  pinMode(led, OUTPUT);   // pin ஐ வெளியீடாக அமைத்தல்
+}
+
+void loop() {
+  digitalWrite(led, HIGH);  // LED ON
+  delay(1000);              // 1000 ms = 1 வினாடி காத்திரு
+  digitalWrite(led, LOW);   // LED OFF
+  delay(1000);
+}</pre>
+    <div class="key"><span class="tag">இரு முக்கியச் சார்புகள்</span>
+      <code class="inline">setup()</code> — ஒரே முறை இயங்கும் (ஆரம்ப அமைப்பு). <code class="inline">loop()</code> — தொடர்ந்து மீண்டும் மீண்டும் இயங்கும். <code class="inline">pinMode()</code> pin இன் பாத்திரத்தை (INPUT/OUTPUT) தீர்மானிக்கும்; <code class="inline">digitalWrite()</code> வெளியீட்டை HIGH/LOW ஆக அமைக்கும்.
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 05 ===================== -->
+<section class="ncard" id="s5">
+  <div class="nhead"><span class="nnum">05</span><span class="ntitle">பயன்பாடு 2 — LDR ஒளி உணரல் (Analog Input)</span></div>
+  <div class="nbody">
+    <p><b>LDR (Light Dependent Resistor)</b> — ஒளியின் அளவுக்கு ஏற்ப மின்தடையம் மாறும் உணரி. ஒளி கூடினால் தடையம் குறையும்; இருள் கூடினால் தடையம் கூடும். எனவே சுற்றுப்புற ஒளியை அளக்க analog உள்ளீடாகப் பயன்படும்.</p>
+    <p><b>நோக்கம்:</b> இருட்டானால் (ஒளி ஒரு குறிப்பிட்ட அளவுக்குக் கீழ் சென்றால்) <b>தெருவிளக்கு / LED தானாக எரிய</b> வேண்டும்.</p>
+    <div class="diagram">
+      <svg viewBox="0 0 480 160" width="460" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="60" cy="78" r="26" fill="#FDF3E0" stroke="#C9912B" stroke-width="2"/>
+        <text x="60" y="82" text-anchor="middle" font-size="13" fill="#8a6313" font-weight="700">LDR</text>
+        <line x1="86" y1="78" x2="160" y2="78" stroke="#1F4E5F" stroke-width="2.4"/>
+        <text x="123" y="68" text-anchor="middle" font-size="10.5" fill="#1F4E5F">Analog (A0)</text>
+        <rect x="160" y="48" width="130" height="60" rx="10" fill="#1F4E5F"/>
+        <text x="225" y="74" text-anchor="middle" font-size="12.5" fill="#D8C58A" font-weight="600">Arduino</text>
+        <text x="225" y="92" text-anchor="middle" font-size="10.5" fill="#BFD4DA">ஒப்பிடல்: ஒளி < நிலை?</text>
+        <line x1="290" y1="78" x2="360" y2="78" stroke="#8B1E3F" stroke-width="2.4"/>
+        <text x="325" y="68" text-anchor="middle" font-size="10.5" fill="#8B1E3F">Digital out</text>
+        <circle cx="392" cy="78" r="20" fill="#FCE26B" stroke="#C9912B" stroke-width="2"/>
+        <text x="392" y="82" text-anchor="middle" font-size="12" fill="#8a6313" font-weight="700">LED</text>
+        <text x="240" y="140" text-anchor="middle" font-size="11" fill="#5A6B74">LDR உணரி → Arduino முடிவெடுக்கும் → LED கட்டுப்பாடு</text>
+      </svg>
+    </div>
+    <h4 class="sub">Arduino நிரல்</h4>
+<pre>int ldr = A0;          // LDR — analog pin A0
+int led = 8;
+int value;
+
+void setup() {
+  pinMode(led, OUTPUT);
+}
+
+void loop() {
+  value = analogRead(ldr);   // 0–1023 இடையே ஒளி அளவு
+
+  if (value < 400) {         // இருட்டு (ஒளி குறைவு)
+    digitalWrite(led, HIGH); // விளக்கு ON
+  } else {                   // வெளிச்சம்
+    digitalWrite(led, LOW);  // விளக்கு OFF
+  }
+}</pre>
+    <div class="key"><span class="tag">analogRead()</span>
+      <code class="inline">analogRead()</code> 0 முதல் 1023 வரையான எண்ணைத் தரும் (10-bit ADC). 400 என்பது ஒரு <b>நிலை மதிப்பு (threshold)</b> — சூழலுக்கேற்ப சரிசெய்யப்படும். digitalRead() போல் ON/OFF அல்ல; analogRead() ஒளியின் <b>அளவை</b> தருகிறது.
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 06 ===================== -->
+<section class="ncard" id="s6">
+  <div class="nhead"><span class="nnum">06</span><span class="ntitle">பயன்பாடு 3 — வெப்பநிலை உணரி + மின்விசிறி கட்டுப்பாடு</span></div>
+  <div class="nbody">
+    <p><b>நோக்கம்:</b> வெப்பநிலை உணரி (LM35) சுற்றுப்புற வெப்பநிலையை அளக்கும். வெப்பம் ஒரு குறிப்பிட்ட அளவைத் (எ.கா: 30°C) தாண்டினால் <b>மின்விசிறி தானாக இயங்க</b> வேண்டும்; குறைந்தால் நிற்க வேண்டும். (கோழிப் பண்ணை, கணினி அறை, பசுமை இல்லம் போன்றவற்றில் பயன்பாடு.)</p>
+    <div class="diagram">
+      <svg viewBox="0 0 500 160" width="480" xmlns="http://www.w3.org/2000/svg">
+        <rect x="14" y="56" width="78" height="48" rx="8" fill="#F3E8EC" stroke="#8B1E3F" stroke-width="1.8"/>
+        <text x="53" y="76" text-anchor="middle" font-size="12" fill="#8B1E3F" font-weight="700">LM35</text>
+        <text x="53" y="93" text-anchor="middle" font-size="10" fill="#5A6B74">வெப்ப உணரி</text>
+        <line x1="92" y1="80" x2="170" y2="80" stroke="#1F4E5F" stroke-width="2.4"/>
+        <text x="131" y="70" text-anchor="middle" font-size="10" fill="#1F4E5F">Analog (A0)</text>
+        <rect x="170" y="50" width="130" height="60" rx="10" fill="#1F4E5F"/>
+        <text x="235" y="76" text-anchor="middle" font-size="12.5" fill="#D8C58A" font-weight="600">Arduino</text>
+        <text x="235" y="94" text-anchor="middle" font-size="10" fill="#BFD4DA">temp > 30 ?</text>
+        <line x1="300" y1="80" x2="368" y2="80" stroke="#8B1E3F" stroke-width="2.4"/>
+        <text x="334" y="70" text-anchor="middle" font-size="10" fill="#8B1E3F">Digital out</text>
+        <rect x="368" y="54" width="60" height="52" rx="8" fill="#EAF3F5" stroke="#1F4E5F" stroke-width="1.8"/>
+        <text x="398" y="78" text-anchor="middle" font-size="11" fill="#1F4E5F" font-weight="700">Relay</text>
+        <text x="398" y="94" text-anchor="middle" font-size="9.5" fill="#5A6B74">→ Fan</text>
+        <text x="250" y="140" text-anchor="middle" font-size="11" fill="#5A6B74">உணரி → முடிவு → ரிலே ஊடாக மின்விசிறி</text>
+      </svg>
+    </div>
+    <h4 class="sub">Arduino நிரல்</h4>
+<pre>int sensor = A0;       // LM35 வெப்ப உணரி
+int fan = 7;           // ரிலே ஊடாக மின்விசிறி
+int reading;
+float temp;
+
+void setup() {
+  pinMode(fan, OUTPUT);
+}
+
+void loop() {
+  reading = analogRead(sensor);
+  temp = reading * 0.488;       // எண் → செல்சியஸ் (தோராயம்)
+
+  if (temp > 30) {              // சூடு அதிகம்
+    digitalWrite(fan, HIGH);    // மின்விசிறி ON
+  } else {
+    digitalWrite(fan, LOW);     // மின்விசிறி OFF
+  }
+}</pre>
+    <div class="key"><span class="tag">ஏன் ரிலே (Relay)?</span>
+      மின்விசிறி போன்ற கூடிய மின்சாரம் தேவைப்படும் சாதனங்களை Arduino நேரடியாக இயக்க முடியாது. <b>ரிலே</b> ஒரு மின்காந்தச் சுவிட்ச் — Arduino இன் சிறிய சமிக்ஞையால் பெரிய மின்சுற்றை ON/OFF செய்யும்.
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 07 ===================== -->
+<section class="ncard" id="s7">
+  <div class="nhead"><span class="nnum">07</span><span class="ntitle">பயன்பாடு 4 — காந்தக் கதவு சுவிட்ச் (Digital Input)</span></div>
+  <div class="nbody">
+    <p><b>காந்தக் கதவு சுவிட்ச் (Magnetic Door / Reed Switch)</b> — கதவில் ஒரு பகுதியும், சட்டத்தில் ஒரு காந்தமும் பொருத்தப்படும். கதவு <b>மூடியிருக்கும்போது</b> காந்தம் அருகில் இருந்து சுவிட்ச் <b>மூடும் (closed)</b>; கதவு <b>திறந்தால்</b> காந்தம் விலகிச் சுவிட்ச் <b>திறக்கும் (open)</b>. இது ஒரு <b>digital உள்ளீடு</b> (ON/OFF).</p>
+    <p><b>நோக்கம்:</b> கதவு திறக்கப்பட்டால் <b>அலாரம் / LED எரிய</b> வேண்டும் (திருட்டு எச்சரிக்கை முறைமை — burglar alarm).</p>
+    <div class="diagram">
+      <svg viewBox="0 0 500 150" width="480" xmlns="http://www.w3.org/2000/svg">
+        <rect x="14" y="50" width="92" height="52" rx="8" fill="#FDF3E0" stroke="#C9912B" stroke-width="1.8"/>
+        <text x="60" y="72" text-anchor="middle" font-size="11.5" fill="#8a6313" font-weight="700">Reed Switch</text>
+        <text x="60" y="90" text-anchor="middle" font-size="10" fill="#5A6B74">கதவு உணரி</text>
+        <line x1="106" y1="76" x2="180" y2="76" stroke="#1F4E5F" stroke-width="2.4"/>
+        <text x="143" y="66" text-anchor="middle" font-size="10" fill="#1F4E5F">Digital In (2)</text>
+        <rect x="180" y="48" width="120" height="58" rx="10" fill="#1F4E5F"/>
+        <text x="240" y="72" text-anchor="middle" font-size="12.5" fill="#D8C58A" font-weight="600">Arduino</text>
+        <text x="240" y="90" text-anchor="middle" font-size="10" fill="#BFD4DA">கதவு திறந்ததா?</text>
+        <line x1="300" y1="76" x2="370" y2="76" stroke="#8B1E3F" stroke-width="2.4"/>
+        <rect x="370" y="52" width="74" height="48" rx="8" fill="#F3E8EC" stroke="#8B1E3F" stroke-width="1.8"/>
+        <text x="407" y="80" text-anchor="middle" font-size="11.5" fill="#8B1E3F" font-weight="700">Alarm/LED</text>
+        <text x="250" y="132" text-anchor="middle" font-size="11" fill="#5A6B74">கதவு திறந்தால் → அலாரம் ON</text>
+      </svg>
+    </div>
+    <h4 class="sub">Arduino நிரல்</h4>
+<pre>int doorSwitch = 2;    // காந்தக் கதவு சுவிட்ச் — digital input
+int alarm = 9;
+int state;
+
+void setup() {
+  pinMode(doorSwitch, INPUT);
+  pinMode(alarm, OUTPUT);
+}
+
+void loop() {
+  state = digitalRead(doorSwitch);   // HIGH அல்லது LOW
+
+  if (state == HIGH) {       // கதவு திறந்துள்ளது
+    digitalWrite(alarm, HIGH);   // அலாரம் ON
+  } else {                   // கதவு மூடியுள்ளது
+    digitalWrite(alarm, LOW);    // அலாரம் OFF
+  }
+}</pre>
+    <div class="key"><span class="tag">digitalRead() vs analogRead()</span>
+      கதவு சுவிட்ச், பொத்தான் போன்ற <b>இரு நிலை</b> உணரிகளுக்கு <code class="inline">digitalRead()</code> (HIGH/LOW தரும்). LDR, வெப்ப உணரி போன்ற <b>தொடர்ச்சியான</b> உணரிகளுக்கு <code class="inline">analogRead()</code> (0–1023 தரும்).
+    </div>
+  </div>
+</section>
+
+<div class="secband">11.2 பொருட்களின் இணையம் (Internet of Things — IoT)</div>
+
+<!-- ===================== 08 ===================== -->
+<section class="ncard" id="s8">
+  <div class="nhead"><span class="nnum">08</span><span class="ntitle">IoT — வரைவிலக்கணம் &amp; தேவைகள்</span></div>
+  <div class="nbody">
+    <h4 class="sub">வரைவிலக்கணம் (Definition)</h4>
+    <p><b>பொருட்களின் இணையம் (IoT)</b> என்பது — உணரிகள், மென்பொருள், இணைப்புத் தொழில்நுட்பம் ஆகியவற்றுடன் பொருத்தப்பட்ட <b>இயற்பியல் பொருட்கள்</b> (சாதனங்கள், வாகனங்கள், வீட்டு உபகரணங்கள்) <b>இணையம் ஊடாக ஒன்றோடொன்று தரவைப் பரிமாறிக்கொள்ளும்</b> ஒரு வலையமைப்பாகும். மனித தலையீடின்றியே சாதனங்கள் தகவல்களைச் சேகரித்து, பகிர்ந்து, செயற்படுகின்றன.</p>
+    <div class="key"><span class="tag">எளிய விளக்கம்</span>
+      சாதாரணப் பொருட்களை (விளக்கு, குளிர்சாதனப்பெட்டி, கடிகாரம், வாகனம்) <b>இணையத்துடன் இணைத்து “புத்திசாலியாக்குதல்” (smart devices)</b> — அவை தொலைவிலிருந்தே கட்டுப்படுத்தப்படவும், தானாகத் தீர்மானம் எடுக்கவும் முடியும்.
+    </div>
+    <h4 class="sub">தேவைகள் / நன்மைகள் (Needs)</h4>
+    <ul>
+      <li><b>தானியக்கம் (Automation):</b> மனித தலையீடின்றிச் சாதனங்கள் தாமாகவே இயங்குதல்.</li>
+      <li><b>தொலைக் கட்டுப்பாடு (Remote control):</b> எங்கிருந்தும் இணையம் ஊடாகச் சாதனங்களைக் கட்டுப்படுத்தல்.</li>
+      <li><b>நேரம் &amp; செலவு சேமிப்பு:</b> திறன்மிக்க வள முகாமைத்துவம் (மின்சாரம், நீர்).</li>
+      <li><b>நிகழ்நேரக் கண்காணிப்பு (Real-time monitoring):</b> சுகாதாரம், விவசாயம், பாதுகாப்பு.</li>
+      <li><b>சிறந்த தீர்மானம்:</b> சேகரிக்கப்பட்ட தரவுப் பகுப்பாய்வின் மூலம்.</li>
+      <li><b>துல்லியமும் குறைந்த பிழையும்:</b> மனிதப் பிழைகள் தவிர்க்கப்படுதல்.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ===================== 09 ===================== -->
+<section class="ncard" id="s9">
+  <div class="nhead"><span class="nnum">09</span><span class="ntitle">செயற்படுத்தும் தொழில்நுட்பங்கள் (Enabling Technologies)</span></div>
+  <div class="nbody">
+    <p>IoT செயற்பட பின்வரும் தொழில்நுட்பங்கள் ஒன்றிணைகின்றன:</p>
+    <table class="dt">
+      <tr><th>தொழில்நுட்பம்</th><th>பங்கு</th></tr>
+      <tr><td class="l"><b>உணரிகள் &amp; இயக்கிகள்</b><br>(Sensors &amp; Actuators)</td><td class="l">பௌதிக உலகிலிருந்து தரவைச் சேகரித்தல் (உணரி) மற்றும் செயற்பாடுகளை நிறைவேற்றல் (இயக்கி).</td></tr>
+      <tr><td class="l"><b>இணைப்புத் தொழில்நுட்பம்</b><br>(Connectivity)</td><td class="l">Wi-Fi, Bluetooth, மொபைல் தரவு (4G/5G), Zigbee — சாதனங்களை இணைக்கும் வழிகள்.</td></tr>
+      <tr><td class="l"><b>இணையம் &amp; நெறிமுறைகள்</b></td><td class="l">தரவை அனுப்ப/பெற IP, HTTP, MQTT போன்ற நெறிமுறைகள்.</td></tr>
+      <tr><td class="l"><b>முகில் கணினியியல்</b><br>(Cloud Computing)</td><td class="l">பெருந்தரவைச் சேமித்து, செயலாக்கி, அணுகுவதற்கான தளம்.</td></tr>
+      <tr><td class="l"><b>தரவுப் பகுப்பாய்வு / AI</b></td><td class="l">சேகரிக்கப்பட்ட தரவிலிருந்து பயனுள்ள முடிவுகளை எடுத்தல்.</td></tr>
+      <tr><td class="l"><b>நுண்கட்டுப்படுத்திகள்</b></td><td class="l">Arduino, Raspberry Pi, ESP32 — சாதனத்தின் “மூளை”.</td></tr>
+    </table>
+    <div class="diagram">
+      <svg viewBox="0 0 660 130" width="640" xmlns="http://www.w3.org/2000/svg">
+        <defs><marker id="i1" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#22303A"/></marker></defs>
+        <rect x="8" y="44" width="120" height="56" rx="10" fill="#F3E8EC" stroke="#8B1E3F" stroke-width="1.7"/><text x="68" y="68" text-anchor="middle" font-size="12.5" fill="#8B1E3F" font-weight="600">உணரிகள்</text><text x="68" y="86" text-anchor="middle" font-size="10.5" fill="#5A6B74">(Sensors)</text>
+        <line x1="128" y1="72" x2="156" y2="72" stroke="#22303A" stroke-width="1.7" marker-end="url(#i1)"/>
+        <rect x="158" y="44" width="130" height="56" rx="10" fill="#EAF3F5" stroke="#1F4E5F" stroke-width="1.7"/><text x="223" y="68" text-anchor="middle" font-size="12.5" fill="#1F4E5F" font-weight="600">நுண்கட்டுப்படுத்தி</text><text x="223" y="86" text-anchor="middle" font-size="10.5" fill="#5A6B74">+ Connectivity</text>
+        <line x1="288" y1="72" x2="316" y2="72" stroke="#22303A" stroke-width="1.7" marker-end="url(#i1)"/>
+        <rect x="318" y="44" width="120" height="56" rx="10" fill="#FDF3E0" stroke="#C9912B" stroke-width="1.7"/><text x="378" y="68" text-anchor="middle" font-size="12.5" fill="#8a6313" font-weight="600">முகில் / இணையம்</text><text x="378" y="86" text-anchor="middle" font-size="10.5" fill="#5A6B74">(Cloud)</text>
+        <line x1="438" y1="72" x2="466" y2="72" stroke="#22303A" stroke-width="1.7" marker-end="url(#i1)"/>
+        <rect x="468" y="44" width="120" height="56" rx="10" fill="#EAF3F5" stroke="#1F4E5F" stroke-width="1.7"/><text x="528" y="68" text-anchor="middle" font-size="12.5" fill="#1F4E5F" font-weight="600">பயனர் செயலி</text><text x="528" y="86" text-anchor="middle" font-size="10.5" fill="#5A6B74">(Mobile App)</text>
+      </svg>
+      <div class="cap">IoT இன் பொதுவான தரவுப் பாதை</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 10 ===================== -->
+<section class="ncard" id="s10">
+  <div class="nhead"><span class="nnum">10</span><span class="ntitle">பயன்பாடுகள் &amp; எளிய IoT பயன்பாடு</span></div>
+  <div class="nbody">
+    <h4 class="sub">நடைமுறைப் பயன்பாடுகள் (Applications)</h4>
+    <ul>
+      <li><b>புத்திசாலி வீடு (Smart Home):</b> தொலைவிலிருந்து விளக்கு, கதவுப் பூட்டு, குளிரூட்டி, CCTV கட்டுப்பாடு.</li>
+      <li><b>சுகாதாரம் (Healthcare):</b> அணியக்கூடிய சாதனங்கள் (இதயத் துடிப்பு, இரத்த அழுத்தம் கண்காணிப்பு).</li>
+      <li><b>புத்திசாலி விவசாயம்:</b> மண் ஈரப்பதம் உணர்ந்து தானியங்கி நீர்ப்பாசனம்.</li>
+      <li><b>புத்திசாலி நகரம்:</b> போக்குவரத்துக் கட்டுப்பாடு, தானியங்கித் தெருவிளக்கு, கழிவு முகாமை.</li>
+      <li><b>தொழிற்துறை (IIoT):</b> இயந்திரக் கண்காணிப்பு, தானியங்கி உற்பத்திக் கோடுகள்.</li>
+      <li><b>வாகனங்கள்:</b> GPS கண்காணிப்பு, தானியங்கு வாகனங்கள்.</li>
+    </ul>
+    <h4 class="sub">எளிய IoT பயன்பாடு — இணையம் ஊடாகத் தொலைச் சாதனக் கட்டுப்பாடு</h4>
+    <p><b>நோக்கம்:</b> வீட்டிலுள்ள ஒரு விளக்கை (LED/பல்பு), உலகின் எந்த இடத்திலிருந்தும் <b>மொபைல் செயலி (app)</b> மூலம் இணையம் ஊடாக ON/OFF செய்தல்.</p>
+    <div class="diagram">
+      <svg viewBox="0 0 660 180" width="640" xmlns="http://www.w3.org/2000/svg">
+        <defs><marker id="i2" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#22303A"/></marker></defs>
+        <!-- phone -->
+        <rect x="14" y="56" width="78" height="76" rx="10" fill="#1F4E5F"/>
+        <rect x="24" y="68" width="58" height="44" rx="3" fill="#BFD4DA"/>
+        <text x="53" y="94" text-anchor="middle" font-size="11" fill="#1F4E5F" font-weight="700">App</text>
+        <circle cx="53" cy="123" r="4" fill="#BFD4DA"/>
+        <text x="53" y="150" text-anchor="middle" font-size="11" fill="#5A6B74">பயனர்</text>
+        <line x1="92" y1="94" x2="138" y2="94" stroke="#22303A" stroke-width="1.7" marker-end="url(#i2)"/>
+        <!-- cloud -->
+        <ellipse cx="220" cy="94" rx="76" ry="40" fill="#FDF3E0" stroke="#C9912B" stroke-width="1.8"/>
+        <text x="220" y="90" text-anchor="middle" font-size="13" fill="#8a6313" font-weight="700">இணையம் / முகில்</text>
+        <text x="220" y="108" text-anchor="middle" font-size="10.5" fill="#5A6B74">(Cloud Server)</text>
+        <line x1="296" y1="94" x2="344" y2="94" stroke="#22303A" stroke-width="1.7" marker-end="url(#i2)"/>
+        <!-- board -->
+        <rect x="346" y="62" width="128" height="64" rx="10" fill="#EAF3F5" stroke="#1F4E5F" stroke-width="1.8"/>
+        <text x="410" y="86" text-anchor="middle" font-size="12.5" fill="#1F4E5F" font-weight="600">Wi-Fi பலகை</text>
+        <text x="410" y="104" text-anchor="middle" font-size="10.5" fill="#5A6B74">(ESP32 / RPi)</text>
+        <line x1="474" y1="94" x2="518" y2="94" stroke="#8B1E3F" stroke-width="2.2" marker-end="url(#i2)"/>
+        <!-- relay+bulb -->
+        <rect x="520" y="64" width="56" height="44" rx="6" fill="#F3E8EC" stroke="#8B1E3F" stroke-width="1.6"/>
+        <text x="548" y="90" text-anchor="middle" font-size="10.5" fill="#8B1E3F" font-weight="700">Relay</text>
+        <circle cx="618" cy="90" r="20" fill="#FCE26B" stroke="#C9912B" stroke-width="2"/>
+        <text x="618" y="94" text-anchor="middle" font-size="11" fill="#8a6313" font-weight="700">பல்பு</text>
+        <line x1="576" y1="90" x2="598" y2="90" stroke="#22303A" stroke-width="2.2"/>
+      </svg>
+      <div class="cap">மொபைல் → இணையம்/முகில் → Wi-Fi பலகை → ரிலே → விளக்கு</div>
+    </div>
+    <h4 class="sub">செயற்பாட்டுப் படிகள்</h4>
+    <ol>
+      <li>பயனர் மொபைல் <b>செயலியில் (app) "ON" பொத்தானை</b> அழுத்துகிறார்.</li>
+      <li>இக்கட்டளை <b>இணையம் ஊடாக முகில் சேவையகத்தை</b> அடைகிறது.</li>
+      <li>வீட்டிலுள்ள <b>Wi-Fi பலகை (ESP32/RPi)</b> முகிலிலிருந்து கட்டளையைப் பெறுகிறது.</li>
+      <li>பலகை <b>ரிலேவை</b> இயக்கி, விளக்கை <b>ON</b> செய்கிறது.</li>
+      <li>விளக்கின் நிலை மீண்டும் முகில் ஊடாக மொபைலுக்குக் காட்டப்படுகிறது (feedback).</li>
+    </ol>
+    <div class="key"><span class="tag">Arduino UNO ஏன் போதாது?</span>
+      சாதாரண Arduino UNO இல் இணைய இணைப்பு (Wi-Fi) இல்லை. IoT க்கு <b>Wi-Fi உள்ளமைந்த ESP32 / ESP8266</b> அல்லது இணையம் இணைக்கக்கூடிய <b>Raspberry Pi</b> தேவை. இதுவே வழக்கமான நுண்செயலி முறைமைக்கும் IoT க்கும் உள்ள இணைப்புப் பாலம்.
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 11 ===================== -->
+<section class="ncard" id="s11">
+  <div class="nhead"><span class="nnum">11</span><span class="ntitle">பயிற்சி வினாக்கள் (விடைகளுடன்)</span></div>
+  <div class="nbody">
+
+    <!-- P1 -->
+    <div class="pq">
+      <span class="qnum">வினா 01</span>
+      <p class="task" style="margin-top:10px">Arduino இற்கும் Raspberry Pi இற்கும் இடையேயான <b>மூன்று</b> முக்கிய வேறுபாடுகளை எழுதுக.</p>
+      <button class="btn" onclick="toggleAns(this,'p1')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p1"><span class="ans-label">விடை</span>
+        <ol>
+          <li>Arduino ஒரு நுண்கட்டுப்படுத்தி; Raspberry Pi ஒரு நுண்செயலி அடிப்படையிலான சிறு கணினி.</li>
+          <li>Arduino இல் இயக்க முறைமை (OS) இல்லை; Raspberry Pi இல் OS (Linux) உண்டு.</li>
+          <li>Arduino இல் analog உள்ளீடு நேரடியாக உண்டு; Raspberry Pi இல் இல்லை (ADC தேவை). (மேலும்: நிரலாக்க மொழி, மின் நுகர்வு வேறுபாடுகள்.)</li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- P2 -->
+    <div class="pq">
+      <span class="qnum">வினா 02</span>
+      <p class="task" style="margin-top:10px">பின்வரும் ஒவ்வொரு உணரி/சாதனத்தையும் <b>analog உள்ளீடு / digital உள்ளீடு / digital வெளியீடு</b> என வகைப்படுத்துக:<br>(அ) LDR &nbsp;(ஆ) காந்தக் கதவு சுவிட்ச் &nbsp;(இ) LED &nbsp;(ஈ) LM35 வெப்ப உணரி &nbsp;(உ) மின்விசிறி &nbsp;(ஊ) push button</p>
+      <button class="btn" onclick="toggleAns(this,'p2')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p2"><span class="ans-label">விடை</span>
+        <table class="dt">
+          <tr><th>சாதனம்</th><th>வகை</th></tr>
+          <tr><td class="l">LDR</td><td>Analog உள்ளீடு</td></tr>
+          <tr><td class="l">காந்தக் கதவு சுவிட்ச்</td><td>Digital உள்ளீடு</td></tr>
+          <tr><td class="l">LED</td><td>Digital வெளியீடு</td></tr>
+          <tr><td class="l">LM35 வெப்ப உணரி</td><td>Analog உள்ளீடு</td></tr>
+          <tr><td class="l">மின்விசிறி</td><td>Digital வெளியீடு</td></tr>
+          <tr><td class="l">push button</td><td>Digital உள்ளீடு</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- P3 -->
+    <div class="pq">
+      <span class="qnum">வினா 03</span>
+      <p class="task" style="margin-top:10px">LED ஒன்றை 2 வினாடிகள் எரியவைத்து, அரை வினாடி அணைத்துத் தொடர்ந்து மின்மினுக்கச் செய்யும் Arduino நிரலை எழுதுக. (LED — pin 10)</p>
+      <button class="btn" onclick="toggleAns(this,'p3')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p3"><span class="ans-label">விடை</span>
+<pre>int led = 10;
+
+void setup() {
+  pinMode(led, OUTPUT);
+}
+
+void loop() {
+  digitalWrite(led, HIGH);
+  delay(2000);              // 2 வினாடி
+  digitalWrite(led, LOW);
+  delay(500);               // அரை வினாடி
+}</pre>
+      <div class="note">delay() இன் அலகு மில்லி வினாடி (ms): 2 வினாடி = 2000, அரை வினாடி = 500.</div>
+      </div>
+    </div>
+
+    <!-- P4 -->
+    <div class="pq">
+      <span class="qnum">வினா 04</span>
+      <p class="task" style="margin-top:10px">IoT இன் வரைவிலக்கணத்தை எழுதி, அதன் <b>இரு தேவைகளையும் (needs)</b>, <b>இரு பயன்பாடுகளையும்</b> தருக.</p>
+      <button class="btn" onclick="toggleAns(this,'p4')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p4"><span class="ans-label">விடை</span>
+        <p><b>வரைவிலக்கணம்:</b> உணரிகள், மென்பொருள், இணைப்புத் தொழில்நுட்பத்துடன் பொருத்தப்பட்ட இயற்பியல் பொருட்கள் இணையம் ஊடாக ஒன்றோடொன்று தரவைப் பரிமாறிக்கொள்ளும் வலையமைப்பே IoT.</p>
+        <p><b>தேவைகள் (ஏதேனும் இரண்டு):</b> தானியக்கம் · தொலைக் கட்டுப்பாடு · நிகழ்நேரக் கண்காணிப்பு · நேர/செலவு சேமிப்பு.</p>
+        <p><b>பயன்பாடுகள் (ஏதேனும் இரண்டு):</b> புத்திசாலி வீடு · புத்திசாலி விவசாயம் · சுகாதாரக் கண்காணிப்பு · புத்திசாலி நகரம்.</p>
+      </div>
+    </div>
+
+    <!-- P5 -->
+    <div class="pq">
+      <span class="qnum">வினா 05</span>
+      <p class="task" style="margin-top:10px">இணையம் ஊடாக வீட்டு விளக்கை மொபைல் மூலம் கட்டுப்படுத்தும் ஓர் எளிய IoT பயன்பாட்டின் <b>செயற்பாட்டுப் படிகளை வரிசையாக</b> எழுதுக. இதற்கு Arduino UNO ஏன் ஏற்றதல்ல?</p>
+      <button class="btn" onclick="toggleAns(this,'p5')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p5"><span class="ans-label">விடை</span>
+        <ol>
+          <li>பயனர் மொபைல் செயலியில் ON/OFF பொத்தானை அழுத்துகிறார்.</li>
+          <li>கட்டளை இணையம் ஊடாக முகில் சேவையகத்தை அடைகிறது.</li>
+          <li>வீட்டிலுள்ள Wi-Fi பலகை கட்டளையை முகிலிலிருந்து பெறுகிறது.</li>
+          <li>பலகை ரிலேவை இயக்கி விளக்கை ON/OFF செய்கிறது.</li>
+          <li>விளக்கின் நிலை feedback ஆக மொபைலுக்குக் காட்டப்படுகிறது.</li>
+        </ol>
+        <p><b>Arduino UNO ஏன் இல்லை?</b> அதில் உள்ளமைந்த Wi-Fi / இணைய இணைப்பு இல்லை. எனவே ESP32/ESP8266 அல்லது Raspberry Pi போன்ற இணையம் இணைக்கக்கூடிய பலகை தேவை.</p>
+      </div>
+    </div>
+
+    <!-- P6 -->
+    <div class="pq">
+      <span class="qnum">வினா 06</span>
+      <p class="task" style="margin-top:10px">ஒரு கோழிப் பண்ணையில், வெப்பநிலை 32°C ஐத் தாண்டினால் மின்விசிறி தானாக இயங்கும் முறைமையை வடிவமைக்க வேண்டும். (அ) தேவையான உணரி எது, அதன் வகை என்ன? (ஆ) மின்விசிறியை இயக்க ஏன் ரிலே தேவை? (இ) நிபந்தனைப் பகுதியை (if) Arduino இல் எழுதுக.</p>
+      <button class="btn" onclick="toggleAns(this,'p6')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p6"><span class="ans-label">விடை</span>
+        <p><b>(அ)</b> வெப்பநிலை உணரி (LM35) — இது ஒரு <b>analog உள்ளீடு</b>.</p>
+        <p><b>(ஆ)</b> மின்விசிறிக்குக் கூடிய மின்சாரம் தேவை; Arduino இன் சிறிய வெளியீட்டால் நேரடியாக இயக்க முடியாது. ரிலே ஒரு மின்காந்தச் சுவிட்சாகச் செயற்பட்டு, சிறிய சமிக்ஞையால் பெரிய மின்சுற்றை ON/OFF செய்கிறது.</p>
+        <p><b>(இ)</b></p>
+<pre>reading = analogRead(A0);
+temp = reading * 0.488;
+
+if (temp > 32) {
+  digitalWrite(fan, HIGH);   // மின்விசிறி ON
+} else {
+  digitalWrite(fan, LOW);    // மின்விசிறி OFF
+}</pre>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+</main>
+
+<footer>
+  க.பொ.த (உயர்தர) தகவல் மற்றும் தொடர்பாடல் தொழினுட்பம் — அலகு 11: நுண்செயலி முறைமைகள் &amp; IoT குறிப்புகள்
+</footer>
+
+<script>
+function hl(code){
+  return code.split('\n').map(function(line){
+    line=line.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    var ci=line.indexOf('//'), cp=line, cm='';
+    if(ci>-1){ cp=line.slice(0,ci); cm='<span class="cm">'+line.slice(ci)+'</span>'; }
+    cp=cp.replace(/("[^"]*"|'[^']*')/g,'<span class="st">$1</span>');
+    cp=cp.replace(/\b(if|else|while|for|void|int|float|return|HIGH|LOW|INPUT|OUTPUT)\b/g,'<span class="kw">$1</span>');
+    cp=cp.replace(/\b(pinMode|digitalWrite|digitalRead|analogRead|analogWrite|delay|setup|loop|print|input)\b/g,'<span class="kw">$1</span>');
+    return cp+cm;
+  }).join('\n');
+}
+document.querySelectorAll('pre').forEach(function(p){
+  p.innerHTML = hl(p.textContent);
+});
+function toggleAns(btn,id){
+  var ans=document.getElementById(id);
+  var open=ans.classList.toggle('show');
+  btn.classList.toggle('open',open);
+  btn.textContent=open?'விடையை மறை ▴':'விடையைக் காட்டு ▾';
+}
+</script>
+
+</body>
+</html>

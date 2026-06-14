@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>க.பொ.த (உயர்தரம்) ICT — அலகு 14: செயற்திட்டம் (Project) குறிப்புகள்</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Catamaran:wght@600;800&family=Hind+Madurai:wght@400;500;600&family=Noto+Sans+Tamil:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F6F4EE; --card:#FFFFFF; --ink:#22303A;
+    --maroon:#8B1E3F; --teal:#1F4E5F; --gold:#C9912B;
+    --line:#E2DDD2;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--paper);color:var(--ink);
+    font-family:'Hind Madurai','Noto Sans Tamil',sans-serif;
+    line-height:1.8;font-size:17px;}
+  header{background:linear-gradient(135deg,var(--teal) 0%,#143946 100%);
+    color:#F2EFE6;padding:42px 20px 36px;text-align:center;
+    border-bottom:5px solid var(--gold);}
+  header .eyebrow{letter-spacing:.18em;font-size:.8rem;text-transform:uppercase;
+    color:#D8C58A;margin-bottom:10px;}
+  header h1{font-family:'Catamaran','Noto Sans Tamil',sans-serif;font-weight:800;
+    font-size:clamp(1.4rem,4vw,2.1rem);line-height:1.5;}
+  header p{margin-top:10px;font-size:.95rem;color:#BFD4DA}
+  main{max-width:900px;margin:0 auto;padding:36px 18px 70px}
+
+  .toc{background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:16px 24px;margin-bottom:34px;font-size:.92rem;}
+  .toc b{color:var(--teal);font-family:'Catamaran','Noto Sans Tamil',sans-serif}
+  .toc a{color:var(--maroon);text-decoration:none}
+  .toc a:hover{text-decoration:underline}
+  .toc .links{display:flex;flex-wrap:wrap;gap:6px 16px;margin-top:6px}
+
+  .ncard{background:var(--card);border:1px solid var(--line);border-radius:16px;
+    margin-bottom:30px;overflow:hidden;box-shadow:0 2px 10px rgba(34,48,58,.05);}
+  .nhead{display:flex;align-items:center;gap:14px;padding:16px 24px;
+    border-bottom:1px solid var(--line);
+    background:linear-gradient(to right,#FBFAF6,#fff);}
+  .nnum{font-family:'Catamaran',sans-serif;font-weight:800;font-size:.92rem;
+    color:#fff;background:var(--teal);border-radius:10px;padding:5px 12px;
+    white-space:nowrap;}
+  .ntitle{font-family:'Catamaran','Noto Sans Tamil',sans-serif;font-weight:600;
+    font-size:1.02rem;color:var(--teal);}
+  .nbody{padding:22px 26px 26px}
+  .nbody p{margin-bottom:12px}
+  .nbody ul,.nbody ol{margin:6px 26px 14px}
+  .nbody li{margin-bottom:6px}
+  h4.sub{font-family:'Catamaran','Noto Sans Tamil',sans-serif;color:var(--maroon);
+    font-size:1.0rem;margin:18px 0 8px;}
+
+  .key{background:#FBF7EC;border-right:4px solid var(--gold);
+    border-radius:10px;padding:14px 20px;margin:14px 0;}
+  .key .tag{font-size:.78rem;font-weight:700;color:var(--gold);
+    letter-spacing:.1em;display:block;margin-bottom:4px;}
+  .warn{background:#FAEFF1;border-right:4px solid var(--maroon);
+    border-radius:10px;padding:14px 20px;margin:14px 0;}
+  .warn .tag{font-size:.78rem;font-weight:700;color:var(--maroon);
+    letter-spacing:.1em;display:block;margin-bottom:4px;}
+  .good{background:#EDF6EE;border-right:4px solid #2E8B57;
+    border-radius:10px;padding:14px 20px;margin:14px 0;}
+  .good .tag{font-size:.78rem;font-weight:700;color:#2E8B57;
+    letter-spacing:.1em;display:block;margin-bottom:4px;}
+
+  code.inline{background:#EDF2F1;color:var(--teal);border-radius:6px;
+    padding:1px 8px;font-family:'JetBrains Mono',monospace;font-size:.85em;}
+
+  table.dt{border-collapse:collapse;margin:12px auto;font-size:.86rem;width:100%}
+  table.dt th{background:var(--teal);color:#fff;padding:8px 11px;
+    font-weight:600;border:1px solid #16404f;text-align:left;}
+  table.dt td{border:1px solid var(--line);padding:7px 11px;
+    background:#FDFCF9;vertical-align:top;}
+  table.dt caption{caption-side:top;font-weight:600;color:var(--teal);
+    margin-bottom:6px;font-size:.95rem;}
+
+  .diagram{background:#FBFAF6;border:1px solid var(--line);border-radius:12px;
+    padding:16px;margin:14px 0;overflow-x:auto;text-align:center;}
+  .diagram svg{max-width:100%;height:auto}
+  .diagram .cap{font-size:.85rem;color:#5A6B74;margin-top:8px}
+  svg text{font-family:'Noto Sans Tamil','Hind Madurai',sans-serif;}
+
+  .step{display:flex;gap:14px;margin-bottom:12px;align-items:flex-start}
+  .step .n{flex-shrink:0;width:30px;height:30px;border-radius:50%;
+    background:var(--maroon);color:#fff;font-weight:700;
+    display:flex;align-items:center;justify-content:center;font-size:.9rem;
+    font-family:'Catamaran',sans-serif;}
+  .step .t{padding-top:2px}
+
+  footer{text-align:center;padding:26px 16px 40px;font-size:.85rem;color:#7A8790;}
+  @media (max-width:560px){
+    .nhead{flex-direction:column;align-items:flex-start;gap:8px}
+    body{font-size:16px}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">G.C.E. Advanced Level &middot; Sri Lanka &middot; ICT (20) &middot; Unit 14</div>
+  <h1>செயற்திட்டம் (Project)<br>தகவல் முறைமை வடிவமைப்பும் அமுலாக்கமும்</h1>
+  <p>ஒரு தகவல் முறைமையின் வடிவமைப்பு &middot; அமுலாக்கம் &middot; செயல்விளக்கம் (demonstration)</p>
+</header>
+
+<main>
+
+<div class="toc"><b>உள்ளடக்கம்</b>
+  <div class="links">
+    <a href="#s0">செயற்திட்டம் பற்றி</a>
+    <a href="#s1">14.1 தகவல் முறைமை வடிவமைப்பு</a>
+    <a href="#s2">14.2 அமுலாக்கமும் செயல்விளக்கமும்</a>
+    <a href="#s3">செயற்திட்ட ஆவணக் கட்டமைப்பு</a>
+    <a href="#s4">உதாரணம் & உதவிக்குறிப்புகள்</a>
+  </div>
+</div>
+
+<!-- ===================== Intro ===================== -->
+<section class="ncard" id="s0">
+  <div class="nhead"><span class="nnum">அறிமுகம்</span><span class="ntitle">செயற்திட்டம் பற்றி</span></div>
+  <div class="nbody">
+    <p>அலகு 14 ஒரு <b>நடைமுறைச் செயற்திட்டம்</b> — மாணவர் ஒரு உண்மையான சிக்கலுக்கு (real-world problem) ஒரு <b>தகவல் முறைமையை வடிவமைத்து, உருவாக்கி, செயல்விளக்கம் (demonstrate)</b> செய்ய வேண்டும். இது அலகுகள் 7 (முறைமை பகுப்பாய்வு), 8 (தரவுத்தளம்), 9/10 (நிரலாக்கம்/இணையம்) ஆகியவற்றில் கற்றதை <b>நடைமுறையில் பயன்படுத்தும்</b> வாய்ப்பு.</p>
+    <p>பொதுவாகச் செயற்திட்டம் <b>SDLC (முறைமை அபிவிருத்தி வாழ்க்கைச் சுழற்சி)</b> கட்டங்களைப் பின்பற்றுகிறது:</p>
+    <div class="diagram">
+      <svg viewBox="0 0 620 80" width="600" xmlns="http://www.w3.org/2000/svg">
+        <defs><marker id="a1" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#22303A"/></marker></defs>
+        <g font-size="11">
+          <rect x="6" y="26" width="92" height="30" rx="6" fill="#FDF3E0" stroke="#C9912B"/><text x="52" y="46" text-anchor="middle">சிக்கல் & தேவை</text>
+          <rect x="116" y="26" width="92" height="30" rx="6" fill="#EAF3F5" stroke="#1F4E5F"/><text x="162" y="46" text-anchor="middle">பகுப்பாய்வு</text>
+          <rect x="226" y="26" width="92" height="30" rx="6" fill="#F3E8EC" stroke="#8B1E3F"/><text x="272" y="46" text-anchor="middle">வடிவமைப்பு</text>
+          <rect x="336" y="26" width="92" height="30" rx="6" fill="#EAF3F5" stroke="#1F4E5F"/><text x="382" y="46" text-anchor="middle">அமுலாக்கம்</text>
+          <rect x="446" y="26" width="80" height="30" rx="6" fill="#FDF3E0" stroke="#C9912B"/><text x="486" y="46" text-anchor="middle">சோதனை</text>
+          <rect x="540" y="26" width="74" height="30" rx="6" fill="#EAF3F5" stroke="#1F4E5F"/><text x="577" y="46" text-anchor="middle">செயல்விளக்கம்</text>
+        </g>
+        <line x1="98" y1="41" x2="114" y2="41" stroke="#22303A" stroke-width="1.3" marker-end="url(#a1)"/>
+        <line x1="208" y1="41" x2="224" y2="41" stroke="#22303A" stroke-width="1.3" marker-end="url(#a1)"/>
+        <line x1="318" y1="41" x2="334" y2="41" stroke="#22303A" stroke-width="1.3" marker-end="url(#a1)"/>
+        <line x1="428" y1="41" x2="444" y2="41" stroke="#22303A" stroke-width="1.3" marker-end="url(#a1)"/>
+        <line x1="526" y1="41" x2="538" y2="41" stroke="#22303A" stroke-width="1.3" marker-end="url(#a1)"/>
+      </svg>
+      <div class="cap">செயற்திட்டத்தின் கட்டங்கள்</div>
+    </div>
+    <div class="key"><span class="tag">நல்ல செயற்திட்டத் தலைப்புகள்</span>
+      நூலக முகாமை முறைமை · பாடசாலை மாணவர் பதிவு · மருத்துவமனை சந்திப்பு முறைமை · கடை சரக்கு/விற்பனை முறைமை · உணவகம் ஆர்டர் முறைமை · வாகனப் பதிவு · ஊழியர் சம்பள முறைமை. (தரவுத்தளம் + படிவம் + அறிக்கை இருக்கும் சிக்கலைத் தேர்வுசெய்க.)
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 14.1 ===================== -->
+<section class="ncard" id="s1">
+  <div class="nhead"><span class="nnum">14.1</span><span class="ntitle">தகவல் முறைமையின் வடிவமைப்பு (Design)</span></div>
+  <div class="nbody">
+    <p>வடிவமைப்புக் கட்டத்தில், தேர்ந்தெடுத்த சிக்கலுக்கான தீர்வை <b>முழுமையாகத் திட்டமிட்டு ஆவணப்படுத்த</b> வேண்டும். முக்கிய படிகள்:</p>
+
+    <div class="step"><div class="n">1</div><div class="t"><b>சிக்கலை அடையாளம் காணல் (Problem Identification):</b> தற்போதைய (கைமுறை) முறைமையின் குறைபாடுகளை விவரித்தல். எ.கா: "நூலகத்தில் புத்தகக் கடன் கைமுறையாகப் பதிவாவதால் தேடல் மெதுவானது, பிழைகள் அதிகம்."</div></div>
+    <div class="step"><div class="n">2</div><div class="t"><b>நோக்கங்களும் தேவைகளும் (Objectives & Requirements):</b> முறைமை அடைய வேண்டியதை வரையறுத்தல் — செயற்பாட்டுத் தேவைகள் (functional: "கடன் பதிவு", "தாமதக் கட்டணக் கணக்கீடு") மற்றும் செயற்பாடற்ற தேவைகள் (non-functional: வேகம், பாதுகாப்பு).</div></div>
+    <div class="step"><div class="n">3</div><div class="t"><b>தரவுப் பாய்வு வடிவமைப்பு (DFD):</b> சூழல் வரைபடம் (context diagram) + நிலை-1 DFD — தரவு எவ்வாறு பாய்கிறது என்பதைக் காட்டுதல்.</div></div>
+    <div class="step"><div class="n">4</div><div class="t"><b>தரவுத்தள வடிவமைப்பு (Database Design):</b> ER வரைபடம் → அட்டவணைகளாக மாற்றம் → இயல்நிலையாக்கம் (3NF) → அட்டவணை விவரக்குறிப்புகள் (புலம், வகை, சாவிகள்) → தரவு அகராதி.</div></div>
+    <div class="step"><div class="n">5</div><div class="t"><b>பயனர் இடைமுக வடிவமைப்பு (UI Design):</b> திரைகள், படிவங்கள், menus, அறிக்கைகளின் வரைவுகள் (mock-ups/wireframes) — பயன்பாட்டெளிமை கருத்தில்.</div></div>
+
+    <h4 class="sub">வடிவமைப்பில் சேர்க்க வேண்டிய ஆவணங்கள்</h4>
+    <table class="dt">
+      <tr><th>ஆவணம்</th><th>உள்ளடக்கம்</th></tr>
+      <tr><td><b>சூழல் வரைபடம் & DFD</b></td><td>முறைமையின் தரவுப் பாய்வு</td></tr>
+      <tr><td><b>ER வரைபடம்</b></td><td>நிறுவிகள், பண்புக்கூறுகள், தொடர்புகள், cardinality</td></tr>
+      <tr><td><b>தர்க்கத் திட்டம் (Schema)</b></td><td>அட்டவணைகள், primary/foreign keys (3NF)</td></tr>
+      <tr><td><b>தரவு அகராதி</b></td><td>ஒவ்வொரு புலத்தின் பெயர், வகை, அளவு, விளக்கம்</td></tr>
+      <tr><td><b>UI வரைவுகள்</b></td><td>திரை/படிவ வடிவமைப்புகள்</td></tr>
+    </table>
+    <div class="key"><span class="tag">வடிவமைப்பு = வரைபடம்</span>
+      வடிவமைப்புக் கட்டத்தில் <b>இன்னும் நிரல் எழுதவில்லை</b> — முறைமை எப்படி இருக்கும், எப்படி வேலை செய்யும் என்பதை வரைபடங்களாலும் விவரக்குறிப்புகளாலும் <b>திட்டமிடுகிறோம்</b>. நல்ல வடிவமைப்பு அமுலாக்கத்தை எளிதாக்கும்.
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 14.2 ===================== -->
+<section class="ncard" id="s2">
+  <div class="nhead"><span class="nnum">14.2</span><span class="ntitle">அமுலாக்கமும் செயல்விளக்கமும் (Implementation & Demonstration)</span></div>
+  <div class="nbody">
+    <h4 class="sub">அமுலாக்கம் (Implementation)</h4>
+    <p>வடிவமைப்பை <b>உண்மையான வேலை செய்யும் முறைமையாக</b> மாற்றும் கட்டம்:</p>
+    <div class="step"><div class="n">1</div><div class="t"><b>தரவுத்தளத்தை உருவாக்கல்:</b> SQL (<code class="inline">CREATE TABLE</code>) ஆல் வடிவமைத்த அட்டவணைகளை உருவாக்குதல் (எ.கா: MySQL). சாவிகள், கட்டுப்பாடுகள் சேர்த்தல்.</div></div>
+    <div class="step"><div class="n">2</div><div class="t"><b>பயனர் இடைமுகத்தை உருவாக்கல்:</b> படிவங்கள், திரைகள், அறிக்கைகள் — HTML/CSS/PHP (இணைய அடிப்படை) அல்லது வேறு கருவி (எ.கா: MS Access, VB).</div></div>
+    <div class="step"><div class="n">3</div><div class="t"><b>செயற்பாட்டுக் குறியீடு எழுதல்:</b> தரவைச் சேர்த்தல்/மீட்டெடுத்தல்/புதுப்பித்தல்/நீக்கல் (CRUD), கணக்கீடுகள், அறிக்கைகள் உருவாக்கல், படிவத்தையும் தரவுத்தளத்தையும் இணைத்தல்.</div></div>
+    <div class="step"><div class="n">4</div><div class="t"><b>சோதனை (Testing):</b> சோதனை வழக்குகளுடன் (test cases) ஒவ்வொரு செயற்பாட்டையும் சோதித்தல் — unit, integration, system சோதனை. பிழைகளைக் களைதல் (debugging).</div></div>
+
+    <h4 class="sub">செயல்விளக்கம் (Demonstration)</h4>
+    <p>முடிக்கப்பட்ட முறைமையை <b>செயல்பாட்டில் காட்டுதல்</b> — ஆசிரியர்/மதிப்பீட்டாளர் முன்:</p>
+    <ul>
+      <li>முறைமை எவ்வாறு சிக்கலைத் தீர்க்கிறது என்பதைக் காட்டுதல்.</li>
+      <li>ஒவ்வொரு முக்கிய அம்சத்தையும் (படிவம், தேடல், அறிக்கை) நேரடியாக இயக்கிக் காட்டுதல்.</li>
+      <li>மாதிரித் தரவைச் (sample data) சேர்த்து, மீட்டெடுத்து, அறிக்கை உருவாக்கிக் காட்டுதல்.</li>
+      <li>கேள்விகளுக்குப் பதிலளித்தல்; முறைமையின் வடிவமைப்பு முடிவுகளை விளக்குதல்.</li>
+    </ul>
+    <div class="good"><span class="tag">வெற்றிகரமான செயல்விளக்கத்துக்கு</span>
+      முன்கூட்டியே மாதிரித் தரவைச் சேர்த்து வைக்கவும்; எல்லா அம்சங்களும் வேலை செய்கின்றனவா எனச் சோதிக்கவும்; எளிய, தெளிவான வழியில் காட்டவும். எதிர்பாராத பிழைகளுக்குத் தயாராக இருக்கவும்.
+    </div>
+  </div>
+</section>
+
+<!-- ===================== Documentation ===================== -->
+<section class="ncard" id="s3">
+  <div class="nhead"><span class="nnum">ஆவணம்</span><span class="ntitle">செயற்திட்ட அறிக்கையின் கட்டமைப்பு</span></div>
+  <div class="nbody">
+    <p>செயற்திட்ட அறிக்கை (project report) பொதுவாகப் பின்வரும் பகுதிகளைக் கொண்டிருக்கும்:</p>
+    <table class="dt">
+      <tr><th>பகுதி</th><th>உள்ளடக்கம்</th></tr>
+      <tr><td><b>1. அறிமுகம்</b></td><td>சிக்கலின் பின்னணி, நோக்கங்கள், செயற்திட்டத்தின் வீச்சு (scope)</td></tr>
+      <tr><td><b>2. சாத்தியக்கூறு ஆய்வு</b></td><td>தொழில்நுட்ப/பொருளாதார/செயற்பாட்டு சாத்தியக்கூறு</td></tr>
+      <tr><td><b>3. தேவைப் பகுப்பாய்வு</b></td><td>செயற்பாட்டு & செயற்பாடற்ற தேவைகள், தற்போதைய முறைமைப் பகுப்பாய்வு</td></tr>
+      <tr><td><b>4. வடிவமைப்பு</b></td><td>DFD, ER வரைபடம், schema, தரவு அகராதி, UI வரைவுகள்</td></tr>
+      <tr><td><b>5. அமுலாக்கம்</b></td><td>பயன்படுத்திய கருவிகள், குறியீட்டுச் சுருக்கம், திரைப்பிடிப்புகள் (screenshots)</td></tr>
+      <tr><td><b>6. சோதனை</b></td><td>சோதனை வழக்குகள், முடிவுகள்</td></tr>
+      <tr><td><b>7. முடிவு</b></td><td>அடைவுகள், வரம்புகள், எதிர்கால மேம்பாடுகள்</td></tr>
+      <tr><td><b>8. பின்னிணைப்பு</b></td><td>பயனர் கையேடு (user manual), முழுக் குறியீடு</td></tr>
+    </table>
+    <div class="warn"><span class="tag">பொதுவான தவறுகள் — தவிர்க்க</span>
+      வடிவமைப்பு இல்லாமல் நேரடியாகக் குறியீடு எழுதுதல்; இயல்நிலையாக்கப்படாத அட்டவணைகள்; சோதனை இல்லாமை; ஆவணம் முழுமையின்மை; சிக்கல் தெளிவின்மை. <b>வடிவமைப்பு ஆவணங்களே மதிப்பெண்களின் பெரும் பகுதி.</b>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== Example ===================== -->
+<section class="ncard" id="s4">
+  <div class="nhead"><span class="nnum">உதாரணம்</span><span class="ntitle">முழு உதாரணம் — நூலக முகாமை முறைமை</span></div>
+  <div class="nbody">
+    <p>ஒரு எளிய <b>நூலக முகாமை முறைமையை</b> எடுத்து, கட்டங்களைச் சுருக்கமாகப் பார்ப்போம்:</p>
+    <h4 class="sub">1. சிக்கல் & நோக்கம்</h4>
+    <p>நூலகத்தில் புத்தகக் கடன்/திருப்பல் கைமுறையாகப் பதிவாவதால் — தேடல் மெதுவானது, தாமதக் கட்டணக் கணக்கீடு கடினம், அறிக்கைகள் இல்லை. <b>நோக்கம்:</b> கடன்/திருப்பலை வேகமாக்கி, தானியங்கி அறிக்கைகளை வழங்கும் முறைமை.</p>
+    <h4 class="sub">2. தரவுத்தள வடிவமைப்பு (ER → அட்டவணைகள்)</h4>
+    <p>நிறுவிகள்: <b>Member, Book, Loan.</b> Member (1) — Loan (M); Book (1) — Loan (M). 3NF அட்டவணைகள்:</p>
+    <table class="dt">
+      <tr><th>அட்டவணை</th><th>புலங்கள் (primary key கோடிட்டது)</th></tr>
+      <tr><td><b>member</b></td><td><u>member_id</u>, name, phone</td></tr>
+      <tr><td><b>book</b></td><td><u>book_id</u>, title, author, available</td></tr>
+      <tr><td><b>loan</b></td><td><u>loan_id</u>, member_id (FK), book_id (FK), loan_date, return_date</td></tr>
+    </table>
+    <h4 class="sub">3. அமுலாக்கம் (SQL உதாரணம்)</h4>
+    <table class="dt">
+      <tr><th>செயல்</th><th>SQL / செயற்பாடு</th></tr>
+      <tr><td>அட்டவணை உருவாக்கல்</td><td><code class="inline">CREATE TABLE member (...)</code></td></tr>
+      <tr><td>உறுப்பினர் சேர்த்தல்</td><td><code class="inline">INSERT INTO member ...</code></td></tr>
+      <tr><td>புத்தகம் தேடல்</td><td><code class="inline">SELECT * FROM book WHERE title=...</code></td></tr>
+      <tr><td>கடன் பதிவு</td><td><code class="inline">INSERT INTO loan ...</code></td></tr>
+      <tr><td>உறுப்பினர்-கடன் அறிக்கை</td><td><code class="inline">SELECT ... FROM loan INNER JOIN member ...</code></td></tr>
+    </table>
+    <h4 class="sub">4. செயல்விளக்கம்</h4>
+    <p>புதிய உறுப்பினர் சேர்த்தல் → புத்தகம் தேடல் → கடன் பதிவு → திருப்பல் → தாமதக் கட்டணம் → அறிக்கை உருவாக்கல் — இவற்றை நேரடியாக இயக்கிக் காட்டுதல்.</p>
+    <div class="good"><span class="tag">முக்கிய நினைவூட்டல்</span>
+      செயற்திட்டம் = முழு SDLC ஐ ஒரு சிறிய உண்மையான சிக்கலுக்குப் பயன்படுத்துதல். <b>தெளிவான சிக்கல் → முழுமையான வடிவமைப்பு ஆவணங்கள் (DFD, ER, schema, 3NF) → வேலை செய்யும் முறைமை → சோதனை → செயல்விளக்கம் → அறிக்கை.</b> முந்தைய அலகுகள் (7, 8, 10) இங்கே ஒன்றிணைகின்றன.
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  க.பொ.த (உயர்தர) தகவல் மற்றும் தொடர்பாடல் தொழினுட்பம் — அலகு 14: செயற்திட்டம் (Project) குறிப்புகள்
+</footer>
+
+</body>
+</html>

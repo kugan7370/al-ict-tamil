@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>க.பொ.த (உயர்தரம்) ICT — தேடலும் ஒழுங்குபடுத்தலும் (Sequential Search & Bubble Sort) குறிப்புகள்</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Catamaran:wght@600;800&family=Hind+Madurai:wght@400;500;600&family=Noto+Sans+Tamil:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F6F4EE; --card:#FFFFFF; --ink:#22303A;
+    --maroon:#8B1E3F; --teal:#1F4E5F; --gold:#C9912B;
+    --line:#E2DDD2; --code-bg:#102A33; --code-ink:#D9EEF2;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--paper);color:var(--ink);
+    font-family:'Hind Madurai','Noto Sans Tamil',sans-serif;
+    line-height:1.8;font-size:17px;}
+  header{background:linear-gradient(135deg,var(--teal) 0%,#143946 100%);
+    color:#F2EFE6;padding:42px 20px 36px;text-align:center;
+    border-bottom:5px solid var(--gold);}
+  header .eyebrow{letter-spacing:.18em;font-size:.8rem;text-transform:uppercase;
+    color:#D8C58A;margin-bottom:10px;}
+  header h1{font-family:'Catamaran','Noto Sans Tamil',sans-serif;font-weight:800;
+    font-size:clamp(1.4rem,4vw,2.15rem);line-height:1.5;}
+  header p{margin-top:10px;font-size:.95rem;color:#BFD4DA}
+  main{max-width:900px;margin:0 auto;padding:36px 18px 70px}
+
+  .toc{background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:16px 24px;margin-bottom:34px;font-size:.92rem;}
+  .toc b{color:var(--teal);font-family:'Catamaran','Noto Sans Tamil',sans-serif}
+  .toc a{color:var(--maroon);text-decoration:none;white-space:nowrap}
+  .toc a:hover{text-decoration:underline}
+  .toc .links{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:6px}
+
+  .ncard{background:var(--card);border:1px solid var(--line);border-radius:16px;
+    margin-bottom:32px;overflow:hidden;box-shadow:0 2px 10px rgba(34,48,58,.05);}
+  .nhead{display:flex;align-items:center;gap:14px;padding:16px 24px;
+    border-bottom:1px solid var(--line);
+    background:linear-gradient(to right,#FBFAF6,#fff);}
+  .nnum{font-family:'Catamaran',sans-serif;font-weight:800;font-size:1rem;
+    color:#fff;background:var(--teal);border-radius:10px;padding:5px 14px;
+    white-space:nowrap;}
+  .ntitle{font-family:'Catamaran','Noto Sans Tamil',sans-serif;font-weight:600;
+    font-size:1.12rem;color:var(--teal);}
+  .nbody{padding:22px 26px 26px}
+  .nbody p{margin-bottom:12px}
+  .nbody ul,.nbody ol{margin:6px 26px 14px}
+  .nbody li{margin-bottom:6px}
+  h4.sub{font-family:'Catamaran','Noto Sans Tamil',sans-serif;color:var(--maroon);
+    font-size:1.0rem;margin:18px 0 8px;}
+
+  .key{background:#FBF7EC;border-right:4px solid var(--gold);
+    border-radius:10px;padding:14px 20px;margin:14px 0;}
+  .key .tag{font-size:.78rem;font-weight:700;color:var(--gold);
+    letter-spacing:.1em;display:block;margin-bottom:4px;}
+  .warn{background:#FAEFF1;border-right:4px solid var(--maroon);
+    border-radius:10px;padding:14px 20px;margin:14px 0;}
+  .warn .tag{font-size:.78rem;font-weight:700;color:var(--maroon);
+    letter-spacing:.1em;display:block;margin-bottom:4px;}
+
+  pre{background:var(--code-bg);color:var(--code-ink);border-radius:12px;
+    padding:18px 20px;margin:12px 0;overflow-x:auto;
+    font-family:'JetBrains Mono',monospace;font-size:.88rem;line-height:1.7;
+    direction:ltr;text-align:left;}
+  pre .cm{color:#7FB6A4} pre .kw{color:#F2B36B} pre .st{color:#A8D8B9}
+  code.inline{background:#EDF2F1;color:var(--teal);border-radius:6px;
+    padding:1px 8px;font-family:'JetBrains Mono',monospace;font-size:.85em;
+    direction:ltr;display:inline-block;}
+
+  table.dt{border-collapse:collapse;margin:12px auto;font-size:.9rem;direction:ltr;}
+  table.dt th{background:var(--teal);color:#fff;padding:7px 14px;
+    font-weight:600;border:1px solid #16404f;}
+  table.dt td{border:1px solid var(--line);padding:6px 14px;text-align:center;
+    background:#FDFCF9;}
+  table.dt td.l{text-align:left}
+  table.dt caption{caption-side:top;font-weight:600;color:var(--teal);
+    margin-bottom:6px;font-size:.95rem;}
+  table.dt code{font-family:'JetBrains Mono',monospace;font-size:.85em;color:var(--maroon)}
+  table.dt .hit{background:#DDEFD9;font-weight:700}
+  table.dt .swap{background:#FBE6CB;font-weight:700}
+  table.dt .lock{background:#E6EAEC;color:#7A8790}
+
+  .diagram{background:#FBFAF6;border:1px solid var(--line);border-radius:12px;
+    padding:16px;margin:14px 0;overflow-x:auto;text-align:center;}
+  .diagram svg{max-width:100%;height:auto}
+  svg text{font-family:'JetBrains Mono','Noto Sans Tamil',monospace;}
+
+  .btn{display:inline-flex;align-items:center;gap:9px;
+    font-family:'Hind Madurai','Noto Sans Tamil',sans-serif;font-weight:600;
+    font-size:1rem;color:#fff;background:var(--teal);border:none;
+    border-radius:999px;padding:11px 26px;margin-top:14px;cursor:pointer;
+    transition:background .2s,transform .15s;}
+  .btn:hover{background:#16404f;transform:translateY(-1px)}
+  .btn:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+  .btn.open{background:var(--maroon)}
+  .answer{display:none;margin-top:20px;border-top:2px dashed var(--line);
+    padding-top:18px;animation:fade .35s ease;}
+  .answer.show{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  .ans-label{display:inline-block;font-weight:700;color:#fff;background:var(--gold);
+    border-radius:8px;padding:3px 14px;font-size:.85rem;margin-bottom:12px;}
+  .qnum{font-family:'Catamaran',sans-serif;font-weight:800;font-size:1rem;
+    color:#fff;background:var(--maroon);border-radius:10px;padding:5px 14px;
+    white-space:nowrap;}
+  .task{font-weight:600;color:var(--maroon)}
+  .pq{border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin-bottom:18px}
+  .note{margin-top:12px;font-size:.9rem;color:#5A6B74;background:#EFF4F2;
+    border-radius:10px;padding:10px 16px;}
+
+  footer{text-align:center;padding:26px 16px 40px;font-size:.85rem;color:#7A8790;}
+  @media (max-width:560px){
+    .nhead{flex-direction:column;align-items:flex-start;gap:8px}
+    body{font-size:16px}
+  }
+  @media (prefers-reduced-motion:reduce){.answer{animation:none}.btn{transition:none}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">G.C.E. Advanced Level &middot; Sri Lanka &middot; ICT (20)</div>
+  <h1>தேடலும் ஒழுங்குபடுத்தலும்<br>(Sequential Search &amp; Bubble Sort) குறிப்புகள்</h1>
+  <p>தொடர்தேடல் &middot; குமிழி ஒழுங்காக்கம் — செயற்பாடு, தடம்பார்த்தல் (trace), பாய்ச்சல் கோட்டுப்படம், Python நிரல்</p>
+</header>
+
+<main>
+
+<div class="toc"><b>உள்ளடக்கம்</b>
+  <div class="links">
+    <a href="#s1">01. அறிமுகம்</a>
+    <a href="#s2">02. தொடர்தேடல் — கருத்து</a>
+    <a href="#s3">03. தொடர்தேடல் — தடம்பார்த்தல்</a>
+    <a href="#s4">04. தொடர்தேடல் — பாய்ச்சல் & நிரல்</a>
+    <a href="#s5">05. குமிழி ஒழுங்காக்கம் — கருத்து</a>
+    <a href="#s6">06. குமிழி — படிமுறை தடம்பார்த்தல்</a>
+    <a href="#s7">07. குமிழி — பாய்ச்சல் & நிரல்</a>
+    <a href="#s8">08. ஒப்பீடு & பரீட்சைக் குறிப்புகள்</a>
+    <a href="#s9">09. பயிற்சி வினாக்கள்</a>
+  </div>
+</div>
+
+<!-- ===================== 01 ===================== -->
+<section class="ncard" id="s1">
+  <div class="nhead"><span class="nnum">01</span><span class="ntitle">அறிமுகம்</span></div>
+  <div class="nbody">
+    <p><b>தேடல் (Searching)</b> — ஒரு தரவுத் தொகுப்பில் (பட்டியல்) ஒரு குறிப்பிட்ட பெறுமானம் உள்ளதா, இருந்தால் எங்கு உள்ளது என்பதைக் கண்டறியும் செயல்.</p>
+    <p><b>ஒழுங்குபடுத்தல் (Sorting)</b> — ஒரு தரவுத் தொகுப்பின் உறுப்புகளை ஒரு குறிப்பிட்ட ஒழுங்கில் (ஏறுவரிசை அல்லது இறங்குவரிசை) அடுக்கும் செயல்.</p>
+    <p>இவை இரண்டும் கணினியியலின் அடிப்படை வழிமுறைகள் (algorithms). A/L பாடத்திட்டத்தில் தேடலுக்கு <b>தொடர்தேடல்</b> (Sequential / Linear Search), ஒழுங்காக்கத்துக்கு <b>குமிழி ஒழுங்காக்கம்</b> (Bubble Sort) ஆகியன கற்பிக்கப்படுகின்றன.</p>
+    <div class="key"><span class="tag">ஏன் இவை முக்கியம்?</span>
+      வழிமுறையின் (algorithm) படிமுறைச் சிந்தனையை — மடக்குகள், தீர்மானங்கள், மாறிகளின் மாற்றம் — விளக்க இவை சிறந்த எடுத்துக்காட்டுகள். பரீட்சையில் <b>தடம்பார்த்தல் (trace table)</b>, <b>பாய்ச்சல் கோட்டுப்படம்</b>, <b>நிரல் எழுதல்</b> என மூன்று வடிவங்களிலும் கேட்கப்படலாம்.
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 02 ===================== -->
+<section class="ncard" id="s2">
+  <div class="nhead"><span class="nnum">02</span><span class="ntitle">தொடர்தேடல் (Sequential Search) — கருத்து</span></div>
+  <div class="nbody">
+    <p>பட்டியலின் <b>முதல் உறுப்பிலிருந்து</b> தொடங்கி, ஒவ்வொரு உறுப்பாகத் தேடப்படும் பெறுமானத்துடன் ஒப்பிடப்படும். பொருத்தம் கிடைத்தவுடன் தேடல் நிறுத்தப்படும்; பட்டியல் முழுவதும் முடிந்தும் கிடைக்காவிடின் “இல்லை” எனக் கூறப்படும்.</p>
+    <div class="diagram">
+      <svg viewBox="0 0 600 130" width="580" xmlns="http://www.w3.org/2000/svg">
+        <text x="300" y="20" text-anchor="middle" font-size="14" fill="#1F4E5F" font-weight="600">தேடும் பெறுமானம் = 62</text>
+        <g font-size="13" fill="#1F4E5F">
+          <text x="55" y="48" text-anchor="middle">0</text><text x="155" y="48" text-anchor="middle">1</text>
+          <text x="255" y="48" text-anchor="middle">2</text><text x="355" y="48" text-anchor="middle">3</text>
+          <text x="455" y="48" text-anchor="middle">4</text>
+        </g>
+        <g>
+          <rect x="15"  y="56" width="80" height="46" fill="#F3E8EC" stroke="#8B1E3F" stroke-width="1.6"/>
+          <rect x="115" y="56" width="80" height="46" fill="#F3E8EC" stroke="#8B1E3F" stroke-width="1.6"/>
+          <rect x="215" y="56" width="80" height="46" fill="#DDEFD9" stroke="#1F4E5F" stroke-width="2.2"/>
+          <rect x="315" y="56" width="80" height="46" fill="#FDFCF9" stroke="#C9B79A" stroke-width="1.4"/>
+          <rect x="415" y="56" width="80" height="46" fill="#FDFCF9" stroke="#C9B79A" stroke-width="1.4"/>
+        </g>
+        <g font-size="19" font-weight="600" fill="#22303A">
+          <text x="55"  y="86" text-anchor="middle">45</text><text x="155" y="86" text-anchor="middle">78</text>
+          <text x="255" y="86" text-anchor="middle">62</text><text x="355" y="86" text-anchor="middle">91</text>
+          <text x="455" y="86" text-anchor="middle">55</text>
+        </g>
+        <text x="55"  y="122" text-anchor="middle" font-size="11.5" fill="#8B1E3F">≠</text>
+        <text x="155" y="122" text-anchor="middle" font-size="11.5" fill="#8B1E3F">≠</text>
+        <text x="255" y="122" text-anchor="middle" font-size="11.5" fill="#1F4E5F" font-weight="700">கிடைத்தது! இட எண் 2</text>
+      </svg>
+    </div>
+    <ol>
+      <li>இட எண் 0 இல் தொடங்கு.</li>
+      <li>தற்போதைய உறுப்பு = தேடும் பெறுமானமா? — ஆம் எனில் இட எண்ணைப் பதிவு செய்து நிறுத்து.</li>
+      <li>இல்லை எனில் அடுத்த உறுப்புக்கு நகர்.</li>
+      <li>பட்டியல் முடியும் வரை மீளச்செய்.</li>
+    </ol>
+    <div class="key"><span class="tag">முக்கியப் பண்பு</span>
+      தொடர்தேடல் <b>ஒழுங்குபடுத்தப்பட்ட பட்டியல் தேவையில்லை</b> — எந்தவொரு பட்டியலிலும் வேலை செய்யும். ஆனால் பெரிய பட்டியல்களுக்கு மெதுவானது (சராசரியாக N/2 ஒப்பீடுகள், மோசமான நிலையில் N ஒப்பீடுகள்).
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 03 ===================== -->
+<section class="ncard" id="s3">
+  <div class="nhead"><span class="nnum">03</span><span class="ntitle">தொடர்தேடல் — தடம்பார்த்தல் (Trace Table)</span></div>
+  <div class="nbody">
+    <p>பட்டியல்: <code class="inline">[45, 78, 62, 91, 55]</code> &nbsp;|&nbsp; தேடும் பெறுமானம்: <b>62</b></p>
+    <table class="dt">
+      <caption>ஒவ்வொரு சுற்றிலும் ஒப்பீடு</caption>
+      <tr><th>i (இட எண்)</th><th>list[i]</th><th>list[i] == 62 ?</th><th>செயல்</th></tr>
+      <tr><td>0</td><td>45</td><td>False</td><td class="l">அடுத்த உறுப்புக்கு</td></tr>
+      <tr><td>1</td><td>78</td><td>False</td><td class="l">அடுத்த உறுப்புக்கு</td></tr>
+      <tr class="hit"><td>2</td><td>62</td><td>True</td><td class="l">கிடைத்தது! நிறுத்து</td></tr>
+    </table>
+    <p><b>முடிவு:</b> 62 என்பது இட எண் <b>2</b> இல் கிடைத்தது (3 ஒப்பீடுகளில்).</p>
+    <p>தேடும் பெறுமானம் <b>100</b> எனில் (பட்டியலில் இல்லை):</p>
+    <table class="dt">
+      <tr><th>i</th><th>list[i]</th><th>list[i] == 100 ?</th></tr>
+      <tr><td>0</td><td>45</td><td>False</td></tr>
+      <tr><td>1</td><td>78</td><td>False</td></tr>
+      <tr><td>2</td><td>62</td><td>False</td></tr>
+      <tr><td>3</td><td>91</td><td>False</td></tr>
+      <tr><td>4</td><td>55</td><td>False</td></tr>
+    </table>
+    <p><b>முடிவு:</b> பட்டியல் முழுவதும் முடிந்தும் கிடைக்கவில்லை → “காணப்படவில்லை” (5 ஒப்பீடுகள் — மோசமான நிலை).</p>
+  </div>
+</section>
+
+<!-- ===================== 04 ===================== -->
+<section class="ncard" id="s4">
+  <div class="nhead"><span class="nnum">04</span><span class="ntitle">தொடர்தேடல் — பாய்ச்சல் கோட்டுப்படம் &amp; Python நிரல்</span></div>
+  <div class="nbody">
+    <h4 class="sub">பாய்ச்சல் கோட்டுப்படம்</h4>
+    <div class="diagram">
+      <svg viewBox="0 0 440 560" width="420" xmlns="http://www.w3.org/2000/svg">
+        <defs><marker id="a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#22303A"/></marker></defs>
+        <ellipse cx="220" cy="28" rx="58" ry="20" fill="#E8F0EE" stroke="#1F4E5F" stroke-width="1.6"/><text x="220" y="33" text-anchor="middle" font-size="14">ஆரம்பம்</text>
+        <line x1="220" y1="48" x2="220" y2="72" stroke="#22303A" stroke-width="1.6" marker-end="url(#a)"/>
+        <polygon points="120,72 320,72 300,112 100,112" fill="#FDF3E0" stroke="#C9912B" stroke-width="1.6"/><text x="220" y="97" text-anchor="middle" font-size="12.5">list, key ஐ உள்ளிடுக</text>
+        <line x1="220" y1="112" x2="220" y2="136" stroke="#22303A" stroke-width="1.6" marker-end="url(#a)"/>
+        <rect x="150" y="136" width="140" height="42" fill="#F3E8EC" stroke="#8B1E3F" stroke-width="1.6"/><text x="220" y="155" text-anchor="middle" font-size="13">found = -1</text><text x="220" y="172" text-anchor="middle" font-size="13">i = 0</text>
+        <line x1="220" y1="178" x2="220" y2="204" stroke="#22303A" stroke-width="1.6" marker-end="url(#a)"/>
+        <polygon points="220,204 320,246 220,288 120,246" fill="#EAF3F5" stroke="#1F4E5F" stroke-width="1.6"/><text x="220" y="250" text-anchor="middle" font-size="12.5">i < len(list) ?</text>
+        <text x="232" y="306" font-size="12" fill="#1F4E5F">ஆம்</text>
+        <line x1="220" y1="288" x2="220" y2="318" stroke="#22303A" stroke-width="1.6" marker-end="url(#a)"/>
+        <polygon points="220,318 330,360 220,402 110,360" fill="#EAF3F5" stroke="#1F4E5F" stroke-width="1.6"/><text x="220" y="364" text-anchor="middle" font-size="12">list[i] == key ?</text>
+        <!-- yes -> found=i -->
+        <text x="338" y="352" font-size="12" fill="#1F4E5F">ஆம்</text>
+        <line x1="330" y1="360" x2="372" y2="360" stroke="#22303A" stroke-width="1.6"/>
+        <line x1="372" y1="360" x2="372" y2="312" stroke="#22303A" stroke-width="1.6"/>
+        <rect x="300" y="280" width="120" height="32" fill="#F3E8EC" stroke="#8B1E3F" stroke-width="1.6"/><text x="360" y="300" text-anchor="middle" font-size="12.5">found = i</text>
+        <line x1="360" y1="280" x2="360" y2="246" stroke="#22303A" stroke-width="1.6"/>
+        <line x1="360" y1="246" x2="320" y2="246" stroke="#22303A" stroke-width="1.6" marker-end="url(#a)"/>
+        <text x="358" y="262" font-size="10.5" fill="#5A6B74">(loop exit)</text>
+        <!-- no -> i=i+1 -> back -->
+        <text x="120" y="384" font-size="12" fill="#8B1E3F">இல்லை</text>
+        <line x1="110" y1="360" x2="60" y2="360" stroke="#22303A" stroke-width="1.6"/>
+        <rect x="20" y="416" width="120" height="32" fill="#F3E8EC" stroke="#8B1E3F" stroke-width="1.6"/><text x="80" y="436" text-anchor="middle" font-size="12.5">i = i + 1</text>
+        <line x1="60" y1="360" x2="60" y2="416" stroke="#22303A" stroke-width="1.6" marker-end="url(#a)"/>
+        <line x1="80" y1="448" x2="80" y2="480" stroke="#22303A" stroke-width="1.6"/>
+        <line x1="80" y1="480" x2="36" y2="480" stroke="#22303A" stroke-width="1.6"/>
+        <line x1="36" y1="480" x2="36" y2="246" stroke="#22303A" stroke-width="1.6"/>
+        <line x1="36" y1="246" x2="120" y2="246" stroke="#22303A" stroke-width="1.6" marker-end="url(#a)"/>
+        <!-- no from while -> output -->
+        <text x="332" y="238" font-size="12" fill="#8B1E3F">இல்லை</text>
+        <line x1="320" y1="246" x2="392" y2="246" stroke="#22303A" stroke-width="1.6"/>
+        <line x1="392" y1="246" x2="392" y2="500" stroke="#22303A" stroke-width="1.6"/>
+        <line x1="392" y1="500" x2="220" y2="500" stroke="#22303A" stroke-width="1.6"/>
+        <line x1="220" y1="500" x2="220" y2="510" stroke="#22303A" stroke-width="1.6" marker-end="url(#a)"/>
+        <polygon points="130,510 310,510 290,546 110,546" fill="#FDF3E0" stroke="#C9912B" stroke-width="1.6" transform="translate(0,-8)"/><text x="220" y="525" text-anchor="middle" font-size="12.5">found ஐ வெளியிடுக</text>
+        <line x1="220" y1="538" x2="220" y2="552" stroke="#22303A" stroke-width="1.6"/>
+      </svg>
+    </div>
+    <h4 class="sub">Python நிரல்</h4>
+<pre># தொடர்தேடல் (Sequential Search)
+numbers = [45, 78, 62, 91, 55]
+key = int(input("தேடும் பெறுமானம்: "))
+
+found = -1                       # கிடைக்கவில்லை எனக் கொள்க
+for i in range(len(numbers)):
+    if numbers[i] == key:
+        found = i                # இட எண்ணைப் பதிவு செய்
+        break                    # மடக்கை நிறுத்து
+
+if found == -1:
+    print("காணப்படவில்லை")
+else:
+    print("இட எண்", found, "இல் கிடைத்தது")</pre>
+    <div class="key"><span class="tag">break இன் பயன்</span>
+      பொருத்தம் கிடைத்தவுடன் <code class="inline">break</code> மடக்கை நிறுத்துகிறது — தேவையற்ற ஒப்பீடுகளைத் தவிர்க்கிறது. <code class="inline">found = -1</code> என்பது “இன்னும் கிடைக்கவில்லை” எனக் குறிக்கும் <b>கொடியன் (flag)</b>; செல்லுபடியான இட எண் ஒருபோதும் −1 ஆகாது.
+    </div>
+    <div class="note">Python இல் சுருக்கமாக <code class="inline">if key in numbers:</code> எனவும் <code class="inline">numbers.index(key)</code> எனவும் எழுதலாம்; ஆனால் பரீட்சையில் <b>வழிமுறையை</b> (மடக்கு + ஒப்பீடு) காட்டவே மேலுள்ள முழு வடிவம் எதிர்பார்க்கப்படுகிறது.</div>
+  </div>
+</section>
+
+<!-- ===================== 05 ===================== -->
+<section class="ncard" id="s5">
+  <div class="nhead"><span class="nnum">05</span><span class="ntitle">குமிழி ஒழுங்காக்கம் (Bubble Sort) — கருத்து</span></div>
+  <div class="nbody">
+    <p>அருகருகே உள்ள <b>இரு உறுப்புகளை</b> ஒப்பிட்டு, அவை தவறான ஒழுங்கில் இருந்தால் <b>இடம் மாற்றப்படும் (swap)</b>. இவ்வாறு பட்டியல் முழுவதும் ஒருமுறை சென்றால், மிகப் பெரிய உறுப்பு “குமிழி போல் மேலெழுந்து” இறுதி இடத்தை அடையும். இது தான் <b>“குமிழி”</b> (Bubble) எனப் பெயர் வரக் காரணம்.</p>
+    <p>ஒவ்வொரு முழுச் சுற்றுக்கும் (pass) பின் ஒரு உறுப்பு அதன் சரியான இடத்தில் <b>பூட்டப்படும்</b>. N உறுப்புகளுக்கு அதிகபட்சம் <b>N − 1 சுற்றுகள்</b> தேவை.</p>
+    <div class="key"><span class="tag">இடம் மாற்றல் (Swap) — மிக முக்கியம்</span>
+      இரு மாறிகளின் பெறுமானங்களை இடம் மாற்ற Python இல்:<br>
+      <code class="inline">a, b = b, a</code> &nbsp; (அல்லது தற்காலிக மாறி: <code class="inline">temp = a; a = b; b = temp</code>)
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 06 ===================== -->
+<section class="ncard" id="s6">
+  <div class="nhead"><span class="nnum">06</span><span class="ntitle">குமிழி ஒழுங்காக்கம் — படிமுறை தடம்பார்த்தல்</span></div>
+  <div class="nbody">
+    <p>பட்டியல்: <code class="inline">[5, 1, 4, 2]</code> ஐ ஏறுவரிசையில் ஒழுங்குபடுத்துதல். <span style="background:#FBE6CB;padding:1px 8px;border-radius:5px">செம்மஞ்சள்</span> = இடம் மாற்றப்பட்டது, <span style="background:#E6EAEC;padding:1px 8px;border-radius:5px">சாம்பல்</span> = சரியான இடத்தில் பூட்டப்பட்டது.</p>
+
+    <h4 class="sub">சுற்று 1 (Pass 1)</h4>
+    <table class="dt">
+      <tr><th>ஒப்பீடு</th><th>பட்டியல்</th><th>செயல்</th></tr>
+      <tr><td>5 &amp; 1</td><td class="swap">[<b>5,1</b>,4,2]</td><td class="l">5 &gt; 1 → மாற்று → [1,5,4,2]</td></tr>
+      <tr><td>5 &amp; 4</td><td class="swap">[1,<b>5,4</b>,2]</td><td class="l">5 &gt; 4 → மாற்று → [1,4,5,2]</td></tr>
+      <tr><td>5 &amp; 2</td><td class="swap">[1,4,<b>5,2</b>]</td><td class="l">5 &gt; 2 → மாற்று → [1,4,2,5]</td></tr>
+    </table>
+    <p>சுற்று 1 முடிவு: <code class="inline">[1, 4, 2, <span style="color:#7A8790">5</span>]</code> — மிகப் பெரிய <b>5</b> இறுதியில் பூட்டப்பட்டது.</p>
+
+    <h4 class="sub">சுற்று 2 (Pass 2)</h4>
+    <table class="dt">
+      <tr><th>ஒப்பீடு</th><th>பட்டியல்</th><th>செயல்</th></tr>
+      <tr><td>1 &amp; 4</td><td>[<b>1,4</b>,2,<span class="lock">5</span>]</td><td class="l">1 &lt; 4 → மாற்றம் இல்லை</td></tr>
+      <tr><td>4 &amp; 2</td><td class="swap">[1,<b>4,2</b>,<span class="lock">5</span>]</td><td class="l">4 &gt; 2 → மாற்று → [1,2,4,5]</td></tr>
+    </table>
+    <p>சுற்று 2 முடிவு: <code class="inline">[1, 2, <span style="color:#7A8790">4, 5</span>]</code> — <b>4</b> பூட்டப்பட்டது.</p>
+
+    <h4 class="sub">சுற்று 3 (Pass 3)</h4>
+    <table class="dt">
+      <tr><th>ஒப்பீடு</th><th>பட்டியல்</th><th>செயல்</th></tr>
+      <tr><td>1 &amp; 2</td><td>[<b>1,2</b>,<span class="lock">4,5</span>]</td><td class="l">1 &lt; 2 → மாற்றம் இல்லை</td></tr>
+    </table>
+    <p><b>இறுதி முடிவு:</b> <code class="inline">[1, 2, 4, 5]</code> ✓ &nbsp; (4 உறுப்புகள் → 3 சுற்றுகள்).</p>
+    <div class="key"><span class="tag">கவனிக்க</span>
+      ஒவ்வொரு சுற்றிலும் ஒப்பீடுகளின் எண்ணிக்கை <b>ஒன்றாகக் குறைகிறது</b> (3 → 2 → 1), ஏனெனில் ஏற்கனவே பூட்டப்பட்ட உறுப்புகளை மீண்டும் ஒப்பிடத் தேவையில்லை.
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 07 ===================== -->
+<section class="ncard" id="s7">
+  <div class="nhead"><span class="nnum">07</span><span class="ntitle">குமிழி ஒழுங்காக்கம் — பாய்ச்சல் கோட்டுப்படம் &amp; Python நிரல்</span></div>
+  <div class="nbody">
+    <h4 class="sub">பாய்ச்சல் கோட்டுப்படம் (இரட்டை மடக்கு)</h4>
+    <div class="diagram">
+      <svg viewBox="0 0 500 600" width="460" xmlns="http://www.w3.org/2000/svg">
+        <defs><marker id="b" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#22303A"/></marker></defs>
+        <ellipse cx="240" cy="26" rx="56" ry="19" fill="#E8F0EE" stroke="#1F4E5F" stroke-width="1.6"/><text x="240" y="31" text-anchor="middle" font-size="13">ஆரம்பம்</text>
+        <line x1="240" y1="45" x2="240" y2="68" stroke="#22303A" stroke-width="1.6" marker-end="url(#b)"/>
+        <polygon points="150,68 330,68 312,104 132,104" fill="#FDF3E0" stroke="#C9912B" stroke-width="1.6"/><text x="240" y="90" text-anchor="middle" font-size="12.5">list ஐ உள்ளிடுக</text>
+        <line x1="240" y1="104" x2="240" y2="126" stroke="#22303A" stroke-width="1.6" marker-end="url(#b)"/>
+        <rect x="190" y="126" width="100" height="30" fill="#F3E8EC" stroke="#8B1E3F" stroke-width="1.6"/><text x="240" y="146" text-anchor="middle" font-size="13">i = 0</text>
+        <line x1="240" y1="156" x2="240" y2="178" stroke="#22303A" stroke-width="1.6" marker-end="url(#b)"/>
+        <polygon points="240,178 350,216 240,254 130,216" fill="#EAF3F5" stroke="#1F4E5F" stroke-width="1.6"/><text x="240" y="220" text-anchor="middle" font-size="11.5">i < n-1 ?</text>
+        <text x="356" y="210" font-size="11" fill="#8B1E3F">இல்லை</text>
+        <line x1="350" y1="216" x2="430" y2="216" stroke="#22303A" stroke-width="1.6"/>
+        <line x1="430" y1="216" x2="430" y2="540" stroke="#22303A" stroke-width="1.6"/>
+        <text x="248" y="272" font-size="11" fill="#1F4E5F">ஆம்</text>
+        <line x1="240" y1="254" x2="240" y2="276" stroke="#22303A" stroke-width="1.6" marker-end="url(#b)"/>
+        <rect x="190" y="276" width="100" height="30" fill="#F3E8EC" stroke="#8B1E3F" stroke-width="1.6"/><text x="240" y="296" text-anchor="middle" font-size="13">j = 0</text>
+        <line x1="240" y1="306" x2="240" y2="326" stroke="#22303A" stroke-width="1.6" marker-end="url(#b)"/>
+        <polygon points="240,326 360,366 240,406 120,366" fill="#EAF3F5" stroke="#1F4E5F" stroke-width="1.6"/><text x="240" y="370" text-anchor="middle" font-size="11">j < n-1-i ?</text>
+        <!-- inner no -> i=i+1 -->
+        <text x="366" y="360" font-size="11" fill="#8B1E3F">இல்லை</text>
+        <line x1="360" y1="366" x2="398" y2="366" stroke="#22303A" stroke-width="1.6"/>
+        <rect x="350" y="276" width="96" height="30" fill="#F3E8EC" stroke="#8B1E3F" stroke-width="1.6"/><text x="398" y="296" text-anchor="middle" font-size="12.5">i = i + 1</text>
+        <line x1="398" y1="366" x2="398" y2="306" stroke="#22303A" stroke-width="1.6" marker-end="url(#b)"/>
+        <line x1="350" y1="291" x2="240" y2="291" stroke="#22303A" stroke-width="1.6"/>
+        <line x1="240" y1="276" x2="240" y2="254" stroke="#22303A" stroke-width="1.6"/>
+        <text x="300" y="246" font-size="10" fill="#5A6B74">(outer loop)</text>
+        <!-- inner yes -> compare -->
+        <text x="248" y="424" font-size="11" fill="#1F4E5F">ஆம்</text>
+        <line x1="240" y1="406" x2="240" y2="426" stroke="#22303A" stroke-width="1.6" marker-end="url(#b)"/>
+        <polygon points="240,426 370,466 240,506 110,466" fill="#EAF3F5" stroke="#1F4E5F" stroke-width="1.6"/><text x="240" y="470" text-anchor="middle" font-size="10.5">list[j] > list[j+1] ?</text>
+        <text x="378" y="460" font-size="11" fill="#1F4E5F">ஆம்</text>
+        <line x1="370" y1="466" x2="408" y2="466" stroke="#22303A" stroke-width="1.6"/>
+        <rect x="356" y="516" width="120" height="30" fill="#F3E8EC" stroke="#8B1E3F" stroke-width="1.6"/><text x="416" y="536" text-anchor="middle" font-size="11">swap (j, j+1)</text>
+        <line x1="408" y1="466" x2="408" y2="516" stroke="#22303A" stroke-width="1.6" marker-end="url(#b)"/>
+        <!-- after swap & no -> j=j+1 -->
+        <text x="118" y="458" font-size="11" fill="#8B1E3F">இல்லை</text>
+        <line x1="110" y1="466" x2="60" y2="466" stroke="#22303A" stroke-width="1.6"/>
+        <rect x="14" y="516" width="92" height="30" fill="#F3E8EC" stroke="#8B1E3F" stroke-width="1.6"/><text x="60" y="536" text-anchor="middle" font-size="12.5">j = j + 1</text>
+        <line x1="60" y1="466" x2="60" y2="516" stroke="#22303A" stroke-width="1.6" marker-end="url(#b)"/>
+        <line x1="416" y1="546" x2="416" y2="566" stroke="#22303A" stroke-width="1.6"/>
+        <line x1="60" y1="546" x2="60" y2="566" stroke="#22303A" stroke-width="1.6"/>
+        <line x1="60" y1="566" x2="416" y2="566" stroke="#22303A" stroke-width="1.6"/>
+        <line x1="238" y1="566" x2="238" y2="406" stroke="#22303A" stroke-width="1.6" marker-end="url(#b)"/>
+        <text x="150" y="560" font-size="10" fill="#5A6B74">(inner loop திரும்பு)</text>
+        <!-- output -->
+        <polygon points="150,540 330,540 312,576 132,576" fill="#FDF3E0" stroke="#C9912B" stroke-width="1.6" transform="translate(0,8)"/><text x="240" y="564" text-anchor="middle" font-size="12">ஒழுங்கான list வெளியீடு</text>
+        <line x1="430" y1="540" x2="330" y2="556" stroke="#22303A" stroke-width="1.6" marker-end="url(#b)"/>
+      </svg>
+    </div>
+    <p style="font-size:.9rem;color:#5A6B74">(n = len(list). வெளி மடக்கு i = சுற்றுகள்; உள் மடக்கு j = ஒவ்வொரு சுற்றிலும் அண்டை ஒப்பீடுகள்.)</p>
+
+    <h4 class="sub">Python நிரல் — முழுமையானது</h4>
+<pre># குமிழி ஒழுங்காக்கம் (Bubble Sort) — ஏறுவரிசை
+numbers = [5, 1, 4, 2, 8]
+n = len(numbers)
+
+for i in range(n - 1):                  # சுற்றுகள் (passes)
+    for j in range(n - 1 - i):          # அண்டை ஒப்பீடுகள்
+        if numbers[j] > numbers[j + 1]:
+            # இடம் மாற்றல் (swap)
+            numbers[j], numbers[j + 1] = numbers[j + 1], numbers[j]
+
+print("ஒழுங்கான பட்டியல்:", numbers)
+# வெளியீடு: [1, 2, 4, 5, 8]</pre>
+    <div class="key"><span class="tag">range(n - 1 - i) — ஏன்?</span>
+      ஒவ்வொரு சுற்றுக்கும் (i) பின் ஒரு உறுப்பு இறுதியில் பூட்டப்படுவதால், அடுத்த சுற்றில் அவ்வுறுப்பை ஒப்பிடத் தேவையில்லை. <code class="inline">- i</code> இந்த ஏற்கனவே-ஒழுங்கான பகுதியைத் தவிர்த்து நிரலை வேகமாக்குகிறது.
+    </div>
+    <h4 class="sub">இறங்குவரிசைக்கு (Descending)</h4>
+<pre># ஒரே மாற்றம்: > ஐ < ஆக மாற்றுக
+if numbers[j] < numbers[j + 1]:
+    numbers[j], numbers[j + 1] = numbers[j + 1], numbers[j]
+# வெளியீடு: [8, 5, 4, 2, 1]</pre>
+  </div>
+</section>
+
+<!-- ===================== 08 ===================== -->
+<section class="ncard" id="s8">
+  <div class="nhead"><span class="nnum">08</span><span class="ntitle">ஒப்பீடு &amp; பரீட்சைக் குறிப்புகள்</span></div>
+  <div class="nbody">
+    <table class="dt">
+      <tr><th>அம்சம்</th><th>தொடர்தேடல்</th><th>குமிழி ஒழுங்காக்கம்</th></tr>
+      <tr><td class="l">நோக்கம்</td><td>ஒரு பெறுமானத்தைக் கண்டறிதல்</td><td>உறுப்புகளை அடுக்குதல்</td></tr>
+      <tr><td class="l">மடக்கு</td><td>ஒற்றை மடக்கு</td><td><b>இரட்டை</b> மடக்கு</td></tr>
+      <tr><td class="l">முன் ஒழுங்கு தேவையா?</td><td>இல்லை</td><td>இல்லை</td></tr>
+      <tr><td class="l">முக்கிய செயல்</td><td>ஒப்பீடு (compare)</td><td>ஒப்பீடு + இடம் மாற்றல் (swap)</td></tr>
+      <tr><td class="l">மோசமான நிலை ஒப்பீடுகள்</td><td>N</td><td>N(N−1)/2</td></tr>
+    </table>
+    <ul>
+      <li><b>தொடர்தேடல்:</b> <code class="inline">found = -1</code> கொடியன்; கிடைத்தவுடன் <code class="inline">break</code>.</li>
+      <li><b>குமிழி:</b> வெளி மடக்கு = சுற்றுகள் (n−1), உள் மடக்கு = ஒப்பீடுகள் (n−1−i).</li>
+      <li><b>Swap ஐ மறந்தால்</b> — பட்டியல் ஒழுங்காகாது; இது மிகப் பொதுவான பிழை.</li>
+      <li>swap இல் <code class="inline">a, b = b, a</code> எழுதாமல் <code class="inline">a = b; b = a</code> எனில் இரண்டும் ஒரே பெறுமானமாகிவிடும் (தற்காலிக மாறி தேவை).</li>
+      <li><b>N உறுப்புகள் → N−1 சுற்றுகள்</b> (4 உறுப்பு → 3 சுற்று); இது அடிக்கடி கேட்கப்படும்.</li>
+      <li>தடம்பார்க்கும் வினாக்களில் <b>ஒவ்வொரு swap இற்கும் பின்னும்</b> பட்டியலை மீண்டும் எழுதிக் காட்டுவது மதிப்பெண் பெறும்.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ===================== 09 ===================== -->
+<section class="ncard" id="s9">
+  <div class="nhead"><span class="nnum">09</span><span class="ntitle">பயிற்சி வினாக்கள் (விடைகளுடன்)</span></div>
+  <div class="nbody">
+
+    <!-- P1 -->
+    <div class="pq">
+      <span class="qnum">வினா 01</span>
+      <p class="task" style="margin-top:10px">பட்டியல் <code class="inline">[12, 7, 25, 3, 19]</code> இல் <b>25</b> ஐத் தொடர்தேடல் மூலம் தேடும்போது, அது எத்தனாவது ஒப்பீட்டில், எந்த இட எண்ணில் கிடைக்கும்?</p>
+      <button class="btn" onclick="toggleAns(this,'p1')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p1"><span class="ans-label">விடை</span>
+        <p>இட எண் 0 (12) ≠ → இட எண் 1 (7) ≠ → இட எண் 2 (25) = ✓</p>
+        <p><b>3 ஆவது ஒப்பீட்டில், இட எண் 2 இல்</b> கிடைக்கும்.</p>
+      </div>
+    </div>
+
+    <!-- P2 -->
+    <div class="pq">
+      <span class="qnum">வினா 02</span>
+      <p class="task" style="margin-top:10px">பட்டியல் <code class="inline">[8, 3, 6]</code> ஐக் குமிழி ஒழுங்காக்கத்தால் ஏறுவரிசையில் அடுக்கும்போது, <b>முதல் சுற்று (Pass 1)</b> இன் ஒவ்வொரு படியையும், அதன் முடிவையும் எழுதுக.</p>
+      <button class="btn" onclick="toggleAns(this,'p2')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p2"><span class="ans-label">விடை</span>
+        <table class="dt">
+          <tr><th>ஒப்பீடு</th><th>செயல்</th><th>பட்டியல்</th></tr>
+          <tr><td>8 &amp; 3</td><td class="l">8 &gt; 3 → மாற்று</td><td>[3, 8, 6]</td></tr>
+          <tr><td>8 &amp; 6</td><td class="l">8 &gt; 6 → மாற்று</td><td>[3, 6, 8]</td></tr>
+        </table>
+        <p>சுற்று 1 முடிவு: <code class="inline">[3, 6, 8]</code> — 8 இறுதியில் பூட்டப்பட்டது. (இங்கு பட்டியல் ஏற்கனவே ஒழுங்காகிவிட்டது.)</p>
+      </div>
+    </div>
+
+    <!-- P3 -->
+    <div class="pq">
+      <span class="qnum">வினா 03</span>
+      <p class="task" style="margin-top:10px">தொடர்தேடல் செய்யும் Python நிரலை எழுதுக: பயனரிடம் இருந்து பட்டியலையும் (ஏற்கனவே வரையறுக்கப்பட்டது) தேடும் பெயரையும் பெற்று, கிடைத்தால் இட எண்ணையும், இல்லாவிடின் "காணப்படவில்லை" எனவும் வெளியிடுக.</p>
+      <button class="btn" onclick="toggleAns(this,'p3')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p3"><span class="ans-label">விடை</span>
+<pre>names = ["Amuthan", "Keerthana", "Nilavan", "Tharushi"]
+key = input("தேடும் பெயர்: ")
+
+found = -1
+for i in range(len(names)):
+    if names[i] == key:
+        found = i
+        break
+
+if found == -1:
+    print("காணப்படவில்லை")
+else:
+    print("இட எண்", found, "இல் கிடைத்தது")</pre>
+      </div>
+    </div>
+
+    <!-- P4 -->
+    <div class="pq">
+      <span class="qnum">வினா 04</span>
+      <p class="task" style="margin-top:10px">5 உறுப்புகள் கொண்ட பட்டியலைக் குமிழி ஒழுங்காக்கத்தால் அடுக்க <b>எத்தனை சுற்றுகள்</b> (passes) தேவை? பொதுவாக N உறுப்புகளுக்கு எத்தனை சுற்றுகள்?</p>
+      <button class="btn" onclick="toggleAns(this,'p4')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p4"><span class="ans-label">விடை</span>
+        <p>5 உறுப்புகளுக்கு → <b>4 சுற்றுகள்</b>. பொதுவாக N உறுப்புகளுக்கு <b>N − 1 சுற்றுகள்</b>.</p>
+        <div class="note">ஒவ்வொரு சுற்றிலும் ஒரு உறுப்பு சரியான இடத்தில் பூட்டப்படுவதால், கடைசி ஒரு உறுப்பு தானாகவே சரியான இடத்தில் இருக்கும் — எனவே N அல்ல, N − 1.</div>
+      </div>
+    </div>
+
+    <!-- P5 -->
+    <div class="pq">
+      <span class="qnum">வினா 05</span>
+      <p class="task" style="margin-top:10px">பின்வரும் குமிழி ஒழுங்காக்க நிரலில் உள்ள <b>பிழையைக்</b> கண்டறிந்து திருத்துக:</p>
+<pre>nums = [4, 2, 7, 1]
+n = len(nums)
+for i in range(n - 1):
+    for j in range(n - 1 - i):
+        if nums[j] > nums[j + 1]:
+            nums[j] = nums[j + 1]
+            nums[j + 1] = nums[j]
+print(nums)</pre>
+      <button class="btn" onclick="toggleAns(this,'p5')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p5"><span class="ans-label">விடை</span>
+        <p><b>பிழை:</b> இடம் மாற்றல் (swap) தவறானது. <code class="inline">nums[j] = nums[j+1]</code> முதலில் <code class="inline">nums[j]</code> இன் பழைய பெறுமானத்தை அழித்துவிடுகிறது; எனவே அடுத்த வரியில் இரண்டும் ஒரே பெறுமானமாகிவிடும்.</p>
+        <p><b>திருத்தம்</b> — ஒரே வரியில் சரியான swap:</p>
+<pre>if nums[j] > nums[j + 1]:
+    nums[j], nums[j + 1] = nums[j + 1], nums[j]</pre>
+        <p>அல்லது தற்காலிக மாறியுடன்:</p>
+<pre>if nums[j] > nums[j + 1]:
+    temp = nums[j]
+    nums[j] = nums[j + 1]
+    nums[j + 1] = temp</pre>
+      </div>
+    </div>
+
+    <!-- P6 -->
+    <div class="pq">
+      <span class="qnum">வினா 06</span>
+      <p class="task" style="margin-top:10px">பட்டியல் <code class="inline">[9, 5, 1, 4, 3]</code> ஐ ஏறுவரிசையில் குமிழி ஒழுங்காக்கத்தால் அடுக்கும்போது, <b>ஒவ்வொரு சுற்றின் (pass) முடிவிலும்</b> பட்டியல் எப்படி இருக்கும் எனக் காட்டுக.</p>
+      <button class="btn" onclick="toggleAns(this,'p6')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p6"><span class="ans-label">விடை</span>
+        <table class="dt">
+          <tr><th>சுற்று</th><th>முடிவில் பட்டியல்</th><th>பூட்டப்பட்டது</th></tr>
+          <tr><td>தொடக்கம்</td><td>[9, 5, 1, 4, 3]</td><td>—</td></tr>
+          <tr><td>சுற்று 1</td><td>[5, 1, 4, 3, <span class="lock">9</span>]</td><td>9</td></tr>
+          <tr><td>சுற்று 2</td><td>[1, 4, 3, <span class="lock">5, 9</span>]</td><td>5</td></tr>
+          <tr><td>சுற்று 3</td><td>[1, 3, <span class="lock">4, 5, 9</span>]</td><td>4</td></tr>
+          <tr><td>சுற்று 4</td><td>[1, <span class="lock">3, 4, 5, 9</span>]</td><td>3</td></tr>
+        </table>
+        <p><b>இறுதி:</b> <code class="inline">[1, 3, 4, 5, 9]</code> ✓ (5 உறுப்பு → 4 சுற்று)</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+</main>
+
+<footer>
+  க.பொ.த (உயர்தர) தகவல் மற்றும் தொடர்பாடல் தொழினுட்பம் — தேடலும் ஒழுங்குபடுத்தலும் குறிப்புகள்
+</footer>
+
+<script>
+function hl(code){
+  return code.split('\n').map(function(line){
+    line=line.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    var ci=line.indexOf('#'), cp=line, cm='';
+    if(ci>-1){ cp=line.slice(0,ci); cm='<span class="cm">'+line.slice(ci)+'</span>'; }
+    cp=cp.replace(/("[^"]*"|'[^']*')/g,'<span class="st">$1</span>');
+    cp=cp.replace(/\b(import|if|elif|else|while|for|in|and|or|not|break|def|return|del|True|False|None)\b/g,'<span class="kw">$1</span>');
+    cp=cp.replace(/\b(input|int|float|print|range|str|len|max|min|sum|sorted)\b/g,'<span class="kw">$1</span>');
+    return cp+cm;
+  }).join('\n');
+}
+document.querySelectorAll('pre').forEach(function(p){
+  p.innerHTML = hl(p.textContent);
+});
+function toggleAns(btn,id){
+  var ans=document.getElementById(id);
+  var open=ans.classList.toggle('show');
+  btn.classList.toggle('open',open);
+  btn.textContent=open?'விடையை மறை ▴':'விடையைக் காட்டு ▾';
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>க.பொ.த (உயர்தரம்) ICT — Python தரவுக் கட்டமைப்புகள் (Strings, Lists, Tuples, Dictionaries) குறிப்புகள்</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Catamaran:wght@600;800&family=Hind+Madurai:wght@400;500;600&family=Noto+Sans+Tamil:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F6F4EE; --card:#FFFFFF; --ink:#22303A;
+    --maroon:#8B1E3F; --teal:#1F4E5F; --gold:#C9912B;
+    --line:#E2DDD2; --code-bg:#102A33; --code-ink:#D9EEF2;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--paper);color:var(--ink);
+    font-family:'Hind Madurai','Noto Sans Tamil',sans-serif;
+    line-height:1.8;font-size:17px;}
+  header{background:linear-gradient(135deg,var(--teal) 0%,#143946 100%);
+    color:#F2EFE6;padding:42px 20px 36px;text-align:center;
+    border-bottom:5px solid var(--gold);}
+  header .eyebrow{letter-spacing:.18em;font-size:.8rem;text-transform:uppercase;
+    color:#D8C58A;margin-bottom:10px;}
+  header h1{font-family:'Catamaran','Noto Sans Tamil',sans-serif;font-weight:800;
+    font-size:clamp(1.4rem,4vw,2.15rem);line-height:1.5;}
+  header p{margin-top:10px;font-size:.95rem;color:#BFD4DA}
+  main{max-width:900px;margin:0 auto;padding:36px 18px 70px}
+
+  .toc{background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:16px 24px;margin-bottom:34px;font-size:.92rem;}
+  .toc b{color:var(--teal);font-family:'Catamaran','Noto Sans Tamil',sans-serif}
+  .toc a{color:var(--maroon);text-decoration:none;white-space:nowrap}
+  .toc a:hover{text-decoration:underline}
+  .toc .links{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:6px}
+
+  .ncard{background:var(--card);border:1px solid var(--line);border-radius:16px;
+    margin-bottom:32px;overflow:hidden;box-shadow:0 2px 10px rgba(34,48,58,.05);}
+  .nhead{display:flex;align-items:center;gap:14px;padding:16px 24px;
+    border-bottom:1px solid var(--line);
+    background:linear-gradient(to right,#FBFAF6,#fff);}
+  .nnum{font-family:'Catamaran',sans-serif;font-weight:800;font-size:1rem;
+    color:#fff;background:var(--teal);border-radius:10px;padding:5px 14px;
+    white-space:nowrap;}
+  .ntitle{font-family:'Catamaran','Noto Sans Tamil',sans-serif;font-weight:600;
+    font-size:1.12rem;color:var(--teal);}
+  .nbody{padding:22px 26px 26px}
+  .nbody p{margin-bottom:12px}
+  .nbody ul,.nbody ol{margin:6px 26px 14px}
+  .nbody li{margin-bottom:6px}
+  h4.sub{font-family:'Catamaran','Noto Sans Tamil',sans-serif;color:var(--maroon);
+    font-size:1.0rem;margin:18px 0 8px;}
+
+  .key{background:#FBF7EC;border-right:4px solid var(--gold);
+    border-radius:10px;padding:14px 20px;margin:14px 0;}
+  .key .tag{font-size:.78rem;font-weight:700;color:var(--gold);
+    letter-spacing:.1em;display:block;margin-bottom:4px;}
+  .warn{background:#FAEFF1;border-right:4px solid var(--maroon);
+    border-radius:10px;padding:14px 20px;margin:14px 0;}
+  .warn .tag{font-size:.78rem;font-weight:700;color:var(--maroon);
+    letter-spacing:.1em;display:block;margin-bottom:4px;}
+
+  pre{background:var(--code-bg);color:var(--code-ink);border-radius:12px;
+    padding:18px 20px;margin:12px 0;overflow-x:auto;
+    font-family:'JetBrains Mono',monospace;font-size:.88rem;line-height:1.7;
+    direction:ltr;text-align:left;}
+  pre .cm{color:#7FB6A4} pre .kw{color:#F2B36B} pre .st{color:#A8D8B9}
+  code.inline{background:#EDF2F1;color:var(--teal);border-radius:6px;
+    padding:1px 8px;font-family:'JetBrains Mono',monospace;font-size:.85em;
+    direction:ltr;display:inline-block;}
+
+  table.dt{border-collapse:collapse;margin:12px auto;font-size:.9rem;direction:ltr;}
+  table.dt th{background:var(--teal);color:#fff;padding:7px 14px;
+    font-weight:600;border:1px solid #16404f;}
+  table.dt td{border:1px solid var(--line);padding:6px 14px;text-align:center;
+    background:#FDFCF9;}
+  table.dt td.l{text-align:left}
+  table.dt caption{caption-side:top;font-weight:600;color:var(--teal);
+    margin-bottom:6px;font-size:.95rem;}
+  table.dt code{font-family:'JetBrains Mono',monospace;font-size:.85em;color:var(--maroon)}
+
+  .diagram{background:#FBFAF6;border:1px solid var(--line);border-radius:12px;
+    padding:16px;margin:14px 0;overflow-x:auto;text-align:center;}
+  .diagram svg{max-width:100%;height:auto}
+  svg text{font-family:'JetBrains Mono','Noto Sans Tamil',monospace;}
+
+  .btn{display:inline-flex;align-items:center;gap:9px;
+    font-family:'Hind Madurai','Noto Sans Tamil',sans-serif;font-weight:600;
+    font-size:1rem;color:#fff;background:var(--teal);border:none;
+    border-radius:999px;padding:11px 26px;margin-top:14px;cursor:pointer;
+    transition:background .2s,transform .15s;}
+  .btn:hover{background:#16404f;transform:translateY(-1px)}
+  .btn:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+  .btn.open{background:var(--maroon)}
+  .answer{display:none;margin-top:20px;border-top:2px dashed var(--line);
+    padding-top:18px;animation:fade .35s ease;}
+  .answer.show{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  .ans-label{display:inline-block;font-weight:700;color:#fff;background:var(--gold);
+    border-radius:8px;padding:3px 14px;font-size:.85rem;margin-bottom:12px;}
+  .qnum{font-family:'Catamaran',sans-serif;font-weight:800;font-size:1rem;
+    color:#fff;background:var(--maroon);border-radius:10px;padding:5px 14px;
+    white-space:nowrap;}
+  .task{font-weight:600;color:var(--maroon)}
+  .pq{border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin-bottom:18px}
+  .note{margin-top:12px;font-size:.9rem;color:#5A6B74;background:#EFF4F2;
+    border-radius:10px;padding:10px 16px;}
+
+  footer{text-align:center;padding:26px 16px 40px;font-size:.85rem;color:#7A8790;}
+  @media (max-width:560px){
+    .nhead{flex-direction:column;align-items:flex-start;gap:8px}
+    body{font-size:16px}
+  }
+  @media (prefers-reduced-motion:reduce){.answer{animation:none}.btn{transition:none}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">G.C.E. Advanced Level &middot; Sri Lanka &middot; ICT (20)</div>
+  <h1>Python தரவுக் கட்டமைப்புகள்<br>(Strings &middot; Lists &middot; Tuples &middot; Dictionaries) குறிப்புகள்</h1>
+  <p>சரம் &middot; பட்டியல் &middot; டியூப்பிள் &middot; அகராதி — உருவாக்கம், செயற்பாடுகள், முறைகள், பரீட்சை நுணுக்கங்கள்</p>
+</header>
+
+<main>
+
+<div class="toc"><b>உள்ளடக்கம்</b>
+  <div class="links">
+    <a href="#s1">01. அறிமுகம்</a>
+    <a href="#s2">02. அட்டவணைப்படுத்தல் &amp; துண்டாக்கல்</a>
+    <a href="#s3">03. சரம் (String)</a>
+    <a href="#s4">04. பட்டியல் (List)</a>
+    <a href="#s5">05. டியூப்பிள் (Tuple)</a>
+    <a href="#s6">06. அகராதி (Dictionary)</a>
+    <a href="#s7">07. ஒப்பீட்டு அட்டவணை</a>
+    <a href="#s8">08. பரீட்சைக் குறிப்புகள்</a>
+    <a href="#s9">09. பயிற்சி வினாக்கள்</a>
+  </div>
+</div>
+
+<!-- ===================== 01 ===================== -->
+<section class="ncard" id="s1">
+  <div class="nhead"><span class="nnum">01</span><span class="ntitle">அறிமுகம் — தரவுக் கட்டமைப்பு என்றால் என்ன?</span></div>
+  <div class="nbody">
+    <p>ஒரு மாறியில் (variable) ஒரே ஒரு பெறுமானத்தையே சேமிக்க முடியும். ஆனால் நடைமுறையில் — 40 மாணவர்களின் புள்ளிகள், ஒரு வாரத்தின் வெப்பநிலைகள், பொருட்களும் விலைகளும் — <b>பல பெறுமானங்களை ஒன்றாகச்</b> சேமித்துக் கையாள வேண்டியுள்ளது. இதற்காக Python வழங்கும் கருவிகளே <b>தரவுக் கட்டமைப்புகள்</b> (Data Structures).</p>
+    <ul>
+      <li><b>சரம் (String)</b> — எழுத்துகளின் வரிசை. எ.கா: <code class="inline">"Jaffna"</code></li>
+      <li><b>பட்டியல் (List)</b> — மாற்றக்கூடிய (mutable) உறுப்புகளின் வரிசை. எ.கா: <code class="inline">[45, 78, 62]</code></li>
+      <li><b>டியூப்பிள் (Tuple)</b> — மாற்ற முடியாத (immutable) உறுப்புகளின் வரிசை. எ.கா: <code class="inline">(9.66, 80.01)</code></li>
+      <li><b>அகராதி (Dictionary)</b> — சாவி : பெறுமானம் (key : value) சோடிகளின் தொகுப்பு. எ.கா: <code class="inline">{"si": "Sinhala", "ta": "Tamil"}</code></li>
+    </ul>
+    <div class="key"><span class="tag">இரு முக்கிய பண்புகள்</span>
+      <b>வரிசைமுறை (ordered)</b> — உறுப்புகள் இட எண் (index) மூலம் அணுகப்படுமா?<br>
+      <b>மாற்றத்தக்கமை (mutable)</b> — உருவாக்கிய பின் உறுப்புகளை மாற்ற முடியுமா?<br>
+      இவ்விரு பண்புகளின் அடிப்படையிலேயே நான்கு கட்டமைப்புகளும் வேறுபடுகின்றன.
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 02 ===================== -->
+<section class="ncard" id="s2">
+  <div class="nhead"><span class="nnum">02</span><span class="ntitle">அட்டவணைப்படுத்தல் (Indexing) &amp; துண்டாக்கல் (Slicing)</span></div>
+  <div class="nbody">
+    <p>சரம், பட்டியல், டியூப்பிள் மூன்றும் <b>வரிசைகள்</b> (sequences); அவற்றின் உறுப்புகள் இட எண்களால் அணுகப்படுகின்றன. இட எண் <b>0 இலிருந்து</b> தொடங்கும்; எதிர்ம இட எண்கள் <b>இறுதியிலிருந்து</b> எண்ணப்படும்:</p>
+    <div class="diagram">
+      <svg viewBox="0 0 660 150" width="620" xmlns="http://www.w3.org/2000/svg">
+        <text x="330" y="22" text-anchor="middle" font-size="15" fill="#1F4E5F" font-weight="600">word = "COMPUTER"</text>
+        <g font-size="13">
+          <!-- positive indices -->
+          <text x="40" y="52" text-anchor="middle" fill="#1F4E5F">0</text><text x="115" y="52" text-anchor="middle" fill="#1F4E5F">1</text>
+          <text x="190" y="52" text-anchor="middle" fill="#1F4E5F">2</text><text x="265" y="52" text-anchor="middle" fill="#1F4E5F">3</text>
+          <text x="340" y="52" text-anchor="middle" fill="#1F4E5F">4</text><text x="415" y="52" text-anchor="middle" fill="#1F4E5F">5</text>
+          <text x="490" y="52" text-anchor="middle" fill="#1F4E5F">6</text><text x="565" y="52" text-anchor="middle" fill="#1F4E5F">7</text>
+        </g>
+        <g>
+          <rect x="5"   y="60" width="70" height="46" fill="#EAF3F5" stroke="#1F4E5F" stroke-width="1.6"/>
+          <rect x="80"  y="60" width="70" height="46" fill="#EAF3F5" stroke="#1F4E5F" stroke-width="1.6"/>
+          <rect x="155" y="60" width="70" height="46" fill="#EAF3F5" stroke="#1F4E5F" stroke-width="1.6"/>
+          <rect x="230" y="60" width="70" height="46" fill="#EAF3F5" stroke="#1F4E5F" stroke-width="1.6"/>
+          <rect x="305" y="60" width="70" height="46" fill="#EAF3F5" stroke="#1F4E5F" stroke-width="1.6"/>
+          <rect x="380" y="60" width="70" height="46" fill="#EAF3F5" stroke="#1F4E5F" stroke-width="1.6"/>
+          <rect x="455" y="60" width="70" height="46" fill="#EAF3F5" stroke="#1F4E5F" stroke-width="1.6"/>
+          <rect x="530" y="60" width="70" height="46" fill="#EAF3F5" stroke="#1F4E5F" stroke-width="1.6"/>
+        </g>
+        <g font-size="22" font-weight="600" fill="#22303A">
+          <text x="40" y="91" text-anchor="middle">C</text><text x="115" y="91" text-anchor="middle">O</text>
+          <text x="190" y="91" text-anchor="middle">M</text><text x="265" y="91" text-anchor="middle">P</text>
+          <text x="340" y="91" text-anchor="middle">U</text><text x="415" y="91" text-anchor="middle">T</text>
+          <text x="490" y="91" text-anchor="middle">E</text><text x="565" y="91" text-anchor="middle">R</text>
+        </g>
+        <g font-size="13" fill="#8B1E3F">
+          <text x="40" y="128" text-anchor="middle">-8</text><text x="115" y="128" text-anchor="middle">-7</text>
+          <text x="190" y="128" text-anchor="middle">-6</text><text x="265" y="128" text-anchor="middle">-5</text>
+          <text x="340" y="128" text-anchor="middle">-4</text><text x="415" y="128" text-anchor="middle">-3</text>
+          <text x="490" y="128" text-anchor="middle">-2</text><text x="565" y="128" text-anchor="middle">-1</text>
+        </g>
+      </svg>
+    </div>
+<pre>word = "COMPUTER"
+print(word[0])      # C   (முதல் எழுத்து)
+print(word[3])      # P
+print(word[-1])     # R   (கடைசி எழுத்து)
+print(word[2:5])    # MPU (இட 2 முதல் 4 வரை — 5 சேராது!)
+print(word[:4])     # COMP (தொடக்கம் முதல் இட 3 வரை)
+print(word[4:])     # UTER (இட 4 முதல் இறுதி வரை)
+print(len(word))    # 8   (எழுத்துகளின் எண்ணிக்கை)</pre>
+    <div class="warn"><span class="tag">பரீட்சை நுணுக்கம்</span>
+      துண்டாக்கலில் <code class="inline">[start : end]</code> — <b>end இட எண் சேர்க்கப்படாது</b>. <code class="inline">word[2:5]</code> என்பது இடங்கள் 2, 3, 4 ஐ மட்டுமே தரும். இதே விதி பட்டியலுக்கும் டியூப்பிளுக்கும் பொருந்தும்.
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 03 ===================== -->
+<section class="ncard" id="s3">
+  <div class="nhead"><span class="nnum">03</span><span class="ntitle">சரம் (String)</span></div>
+  <div class="nbody">
+    <p>எழுத்துகளின் வரிசை; ஒற்றை <code class="inline">' '</code> அல்லது இரட்டை <code class="inline">" "</code> மேற்கோள்களுக்குள் எழுதப்படும். சரம் <b>மாற்ற முடியாதது (immutable)</b> — உருவாக்கிய பின் எழுத்துகளை நேரடியாக மாற்ற முடியாது.</p>
+    <h4 class="sub">அடிப்படைச் செயற்பாடுகள்</h4>
+<pre>a = "Hello"
+b = "World"
+
+print(a + " " + b)    # Hello World  (இணைத்தல் — concatenation)
+print(a * 3)          # HelloHelloHello (மீள்பெருக்கம்)
+print("ell" in a)     # True  (உள்ளடக்கச் சோதனை)
+print(len(a))         # 5</pre>
+    <h4 class="sub">முக்கிய முறைகள் (String Methods)</h4>
+    <table class="dt">
+      <tr><th>முறை</th><th>செயல்</th><th>எடுத்துக்காட்டு (s = "Sri Lanka")</th></tr>
+      <tr><td><code>s.upper()</code></td><td class="l">பேரெழுத்தாக்கும்</td><td class="l"><code>"SRI LANKA"</code></td></tr>
+      <tr><td><code>s.lower()</code></td><td class="l">சிற்றெழுத்தாக்கும்</td><td class="l"><code>"sri lanka"</code></td></tr>
+      <tr><td><code>s.find("L")</code></td><td class="l">முதல் இடத்தைத் தரும் (இல்லாவிடின் -1)</td><td class="l"><code>4</code></td></tr>
+      <tr><td><code>s.replace("Sri","SRI")</code></td><td class="l">பதிலீடு செய்த புதிய சரம்</td><td class="l"><code>"SRI Lanka"</code></td></tr>
+      <tr><td><code>s.split(" ")</code></td><td class="l">பிரித்து பட்டியலாக்கும்</td><td class="l"><code>['Sri', 'Lanka']</code></td></tr>
+      <tr><td><code>s.count("a")</code></td><td class="l">எத்தனை முறை வருகிறது</td><td class="l"><code>2</code></td></tr>
+      <tr><td><code>s.strip()</code></td><td class="l">இருபுற வெற்றிடங்களை நீக்கும்</td><td class="l">—</td></tr>
+    </table>
+    <h4 class="sub">சரம் முறைகள் — விரிவான எடுத்துக்காட்டுகள்</h4>
+    <p><b>1) எழுத்து வடிவ முறைகள் (Case methods):</b></p>
+<pre>s = "sri lanka"
+
+print(len(s))            # 9  ← வெற்றிடமும் ஓர் எழுத்தே!
+print(s.upper())         # SRI LANKA   (எல்லாம் பேரெழுத்து)
+print(s.lower())         # sri lanka   (எல்லாம் சிற்றெழுத்து)
+print(s.capitalize())    # Sri lanka   (முதல் எழுத்து மட்டும் பெரிது)
+print(s.title())         # Sri Lanka   (ஒவ்வொரு சொல்லின் முதலெழுத்தும்)
+print("PyThOn".swapcase())  # pYtHoN  (பெரிது↔சிறிது மாற்றம்)</pre>
+    <p><b>2) தேடல் முறைகள் (Searching):</b></p>
+<pre>s = "programming"
+
+print(s.find("m"))       # 6   (முதல் m இன் இட எண்)
+print(s.find("z"))       # -1  (இல்லாவிடின் -1 — பிழை இல்லை)
+print(s.index("m"))      # 6   (find போன்றதே; ஆனால் இல்லாவிடின் பிழை!)
+print(s.count("m"))      # 2   (m எத்தனை முறை?)
+print(s.count("g"))      # 2
+print(s.startswith("pro"))  # True  (இதில் தொடங்குகிறதா?)
+print(s.endswith("ing"))    # True  (இதில் முடிகிறதா?)</pre>
+    <p><b>3) மாற்றும் முறைகள் (புதிய சரத்தைத் தரும் — மூலச் சரம் மாறாது):</b></p>
+<pre>s = "  A/L ICT  "
+
+print(s.strip())               # "A/L ICT"  (இருபுற வெற்றிடம் நீக்கம்)
+print(s.lstrip())              # "A/L ICT  " (இடப்புறம் மட்டும்)
+print(s.rstrip())              # "  A/L ICT" (வலப்புறம் மட்டும்)
+
+t = "good morning"
+print(t.replace("o", "0"))     # g00d m0rning
+print(t.replace("o", "0", 1))  # g0od morning (முதல் ஒன்று மட்டும்)
+
+csv = "1001,Amuthan,78"
+parts = csv.split(",")         # சரம் → பட்டியல்
+print(parts)                   # ['1001', 'Amuthan', '78']
+
+words = ["Sri", "Lanka"]
+print("-".join(words))         # Sri-Lanka  (பட்டியல் → சரம்)</pre>
+    <p><b>4) சோதனை முறைகள் (True / False தரும்):</b></p>
+<pre>print("2026".isdigit())    # True  (எல்லாம் இலக்கங்களா?)
+print("21A".isdigit())     # False
+print("Hello".isalpha())   # True  (எல்லாம் எழுத்துகளா?)
+print("AL2026".isalnum())  # True  (எழுத்து + இலக்கம் மட்டுமா?)
+print("ICT".isupper())     # True  (எல்லாம் பேரெழுத்தா?)
+print("ict".islower())     # True  (எல்லாம் சிற்றெழுத்தா?)
+print("   ".isspace())     # True  (எல்லாம் வெற்றிடமா?)</pre>
+    <div class="key"><span class="tag">பயன்பாடு</span>
+      <code class="inline">isdigit()</code> — பயனர் உள்ளீடு எண்ணா எனச் சரிபார்க்க (input validation) பயன்படும்: <code class="inline">if ans.isdigit(): n = int(ans)</code>
+    </div>
+
+    <h4 class="sub">சரத்தினூடாக மடக்கு (Traversal)</h4>
+<pre># உயிரெழுத்துகளை (vowels) எண்ணும் நிரல்
+word = input("சொல்லை உள்ளிடுக: ")
+count = 0
+for ch in word:
+    if ch in "aeiouAEIOU":
+        count = count + 1
+print("உயிரெழுத்துகள் =", count)</pre>
+    <div class="warn"><span class="tag">Immutable — பரீட்சைப் பொறி</span>
+      <code class="inline">s[0] = "X"</code> → <b>பிழை</b> (TypeError)! சரத்தை மாற்ற, புதிய சரத்தை உருவாக்க வேண்டும்:<br>
+      <code class="inline">s = "X" + s[1:]</code>. <code class="inline">s.upper()</code> போன்ற முறைகளும் s ஐ மாற்றாது — <b>புதிய சரத்தையே</b> திருப்பித் தரும்.
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 04 ===================== -->
+<section class="ncard" id="s4">
+  <div class="nhead"><span class="nnum">04</span><span class="ntitle">பட்டியல் (List)</span></div>
+  <div class="nbody">
+    <p>சதுர அடைப்புக்குறிகளுக்குள் <code class="inline">[ ]</code> எழுதப்படும், <b>மாற்றக்கூடிய (mutable)</b> வரிசை. வெவ்வேறு தரவு வகைகளையும் ஒரே பட்டியலில் வைக்கலாம்.</p>
+<pre>marks = [78, 85, 62, 91, 55]
+mixed = [1001, "Amuthan", 78.5, True]
+empty = []                  # வெற்றுப் பட்டியல்
+
+print(marks[0])     # 78
+marks[2] = 65       # மாற்றலாம்! (mutable)
+print(marks)        # [78, 85, 65, 91, 55]</pre>
+    <h4 class="sub">முக்கிய முறைகள் &amp; சார்புகள்</h4>
+    <table class="dt">
+      <tr><th>முறை / சார்பு</th><th>செயல்</th><th>எ.கா: m = [78, 85, 62]</th></tr>
+      <tr><td><code>m.append(91)</code></td><td class="l">இறுதியில் சேர்க்கும்</td><td class="l"><code>[78, 85, 62, 91]</code></td></tr>
+      <tr><td><code>m.insert(1, 50)</code></td><td class="l">இட 1 இல் நுழைக்கும்</td><td class="l"><code>[78, 50, 85, 62]</code></td></tr>
+      <tr><td><code>m.remove(85)</code></td><td class="l">பெறுமானத்தை நீக்கும்</td><td class="l"><code>[78, 62]</code></td></tr>
+      <tr><td><code>m.pop()</code></td><td class="l">கடைசி உறுப்பை நீக்கித் தரும்</td><td class="l"><code>62</code></td></tr>
+      <tr><td><code>m.sort()</code></td><td class="l">ஏறுவரிசையில் ஒழுங்குபடுத்தும்</td><td class="l"><code>[62, 78, 85]</code></td></tr>
+      <tr><td><code>m.reverse()</code></td><td class="l">தலைகீழாக்கும்</td><td class="l"><code>[62, 85, 78]</code></td></tr>
+      <tr><td><code>len(m)</code> / <code>max(m)</code> / <code>min(m)</code> / <code>sum(m)</code></td><td class="l">எண்ணிக்கை / பெரியது / சிறியது / கூட்டுத்தொகை</td><td class="l"><code>3 / 85 / 62 / 225</code></td></tr>
+    </table>
+    <h4 class="sub">பட்டியல் முறைகள் — விரிவான எடுத்துக்காட்டுகள்</h4>
+    <p><b>1) சேர்க்கும் முறைகள்:</b></p>
+<pre>m = [10, 20]
+
+m.append(30)           # இறுதியில் ஒரு உறுப்பு
+print(m)               # [10, 20, 30]
+
+m.insert(1, 15)        # இட 1 இல் நுழைத்தல்
+print(m)               # [10, 15, 20, 30]
+
+m.extend([40, 50])     # பல உறுப்புகளைச் சேர்த்தல்
+print(m)               # [10, 15, 20, 30, 40, 50]
+
+m.append([60, 70])     # கவனம்! பட்டியலையே ஓர் உறுப்பாகச் சேர்க்கும்
+print(m)               # [10, 15, 20, 30, 40, 50, [60, 70]]
+print(len(m))          # 7 (8 அல்ல!)</pre>
+    <p><b>2) நீக்கும் முறைகள்:</b></p>
+<pre>m = [10, 20, 30, 20, 40]
+
+m.remove(20)           # முதல் 20 ஐ மட்டும் நீக்கும்
+print(m)               # [10, 30, 20, 40]
+
+x = m.pop()            # கடைசி உறுப்பை நீக்கி, அதைத் தரும்
+print(x, m)            # 40 [10, 30, 20]
+
+y = m.pop(0)           # இட எண் 0 இன் உறுப்பை நீக்கித் தரும்
+print(y, m)            # 10 [30, 20]
+
+del m[0]               # இட எண் மூலம் நீக்கல்
+print(m)               # [20]
+
+m.clear()              # எல்லா உறுப்புகளையும் நீக்கல்
+print(m)               # []</pre>
+    <p><b>3) தேடல் &amp; எண்ணும் முறைகள்:</b></p>
+<pre>m = [45, 78, 62, 78, 91]
+
+print(m.index(78))     # 1   (முதல் 78 இன் இட எண்)
+print(m.count(78))     # 2   (78 எத்தனை முறை?)
+print(78 in m)         # True
+print(100 in m)        # False
+print(len(m))          # 5
+print(max(m))          # 91
+print(min(m))          # 45
+print(sum(m))          # 354
+print(sum(m)/len(m))   # 70.8  (சராசரி)</pre>
+    <p><b>4) ஒழுங்குபடுத்தும் முறைகள்:</b></p>
+<pre>m = [40, 10, 30, 20]
+
+m.sort()                    # ஏறுவரிசை — பட்டியலையே மாற்றும்
+print(m)                    # [10, 20, 30, 40]
+
+m.sort(reverse=True)        # இறங்குவரிசை
+print(m)                    # [40, 30, 20, 10]
+
+m.reverse()                 # தலைகீழாக்கல் (ஒழுங்கல்ல!)
+print(m)                    # [10, 20, 30, 40]
+
+n = [3, 1, 2]
+print(sorted(n))            # [1, 2, 3]  — புதிய பட்டியல்
+print(n)                    # [3, 1, 2]  — மூலப் பட்டியல் மாறவில்லை!</pre>
+    <p><b>5) இணைத்தல், மீள்பெருக்கம், துண்டாக்கல், படியெடுத்தல்:</b></p>
+<pre>a = [1, 2]
+b = [3, 4]
+
+print(a + b)           # [1, 2, 3, 4]  (இணைத்தல்)
+print(a * 3)           # [1, 2, 1, 2, 1, 2]  (மீள்பெருக்கம்)
+
+m = [10, 20, 30, 40, 50]
+print(m[1:4])          # [20, 30, 40]  (துண்டாக்கல்)
+print(m[::-1])         # [50, 40, 30, 20, 10]  (தலைகீழ் நகல்)
+
+c = m.copy()           # தனிப் படி (copy)
+c.append(60)
+print(m)               # [10, 20, 30, 40, 50] — மூலம் பாதிக்கப்படவில்லை
+print(c)               # [10, 20, 30, 40, 50, 60]</pre>
+    <div class="warn"><span class="tag">பரீட்சைப் பொறி</span>
+      <code class="inline">d = m</code> என எழுதினால் <b>படி உருவாகாது</b> — இரு பெயர்களும் ஒரே பட்டியலையே சுட்டும்; d ஐ மாற்றினால் m உம் மாறும்! தனிப் படிக்கு <code class="inline">m.copy()</code> அல்லது <code class="inline">m[:]</code> பயன்படுத்துக. மேலும்: <code class="inline">x = m.sort()</code> → x இல் <b>None</b> சேமிக்கப்படும் (sort() எதையும் திருப்பித் தராது).
+    </div>
+
+    <h4 class="sub">பட்டியலினூடாக மடக்கு — மாதிரி நிரல்</h4>
+<pre># வகுப்பின் சராசரிப் புள்ளியும் சித்தியடைந்தோர் எண்ணிக்கையும்
+marks = [78, 85, 62, 91, 35, 55]
+
+total = 0
+passed = 0
+for m in marks:
+    total = total + m
+    if m >= 40:
+        passed = passed + 1
+
+print("சராசரி =", total / len(marks))
+print("சித்தியடைந்தோர் =", passed)</pre>
+<pre># பயனரிடம் இருந்து N புள்ளிகளைப் பெற்று பட்டியலில் சேமித்தல்
+marks = []
+N = int(input("மாணவர் எண்ணிக்கை: "))
+for i in range(N):
+    m = int(input("புள்ளி: "))
+    marks.append(m)
+print("அதிக புள்ளி =", max(marks))</pre>
+    <div class="key"><span class="tag">append() — மிக முக்கியம்</span>
+      வெற்றுப் பட்டியலில் தொடங்கி, மடக்கினுள் <code class="inline">append()</code> மூலம் உறுப்புகளைச் சேர்ப்பது A/L நடைமுறைப் பரீட்சைகளில் அடிக்கடி வரும் அமைப்பு.
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 05 ===================== -->
+<section class="ncard" id="s5">
+  <div class="nhead"><span class="nnum">05</span><span class="ntitle">டியூப்பிள் (Tuple)</span></div>
+  <div class="nbody">
+    <p>பிறை அடைப்புக்குறிகளுக்குள் <code class="inline">( )</code> எழுதப்படும் வரிசை. பட்டியல் போன்றதே — ஆனால் <b>மாற்ற முடியாதது (immutable)</b>. மாறக்கூடாத தரவுகளுக்கு (எ.கா: ஆள்கூறுகள், மாதப் பெயர்கள், RGB நிறங்கள்) ஏற்றது.</p>
+<pre>point = (9.66, 80.01)          # யாழ்ப்பாணத்தின் ஆள்கூறுகள்
+months = ("Jan", "Feb", "Mar")
+single = (5,)                  # ஒற்றை உறுப்பு — காற்புள்ளி கட்டாயம்!
+
+print(point[0])      # 9.66
+print(len(months))   # 3
+print(months[1:3])   # ('Feb', 'Mar')
+
+point[0] = 10        # பிழை! TypeError — tuple ஐ மாற்ற முடியாது</pre>
+    <h4 class="sub">பொதி அவிழ்த்தல் (Unpacking)</h4>
+<pre>student = (1001, "Amuthan", 78)
+no, name, marks = student        # ஒவ்வொரு மாறிக்கும் பிரித்து வழங்கல்
+print(name)                      # Amuthan</pre>
+    <h4 class="sub">டியூப்பிள் முறைகள் &amp; செயற்பாடுகள் — விரிவான எடுத்துக்காட்டுகள்</h4>
+    <p><b>1) இரண்டே முறைகள் — count() &amp; index():</b></p>
+<pre>t = (5, 8, 5, 3, 5, 9)
+
+print(t.count(5))      # 3   (5 எத்தனை முறை?)
+print(t.index(3))      # 3   (முதல் 3 இன் இட எண்)
+print(t.index(5))      # 0   (முதல் 5 இன் இட எண்)</pre>
+    <p><b>2) உள்ளமைச் சார்புகளும் செயலிகளும்:</b></p>
+<pre>t = (40, 75, 20, 90)
+
+print(len(t))          # 4
+print(max(t))          # 90
+print(min(t))          # 20
+print(sum(t))          # 225
+print(75 in t)         # True
+print(t[1:3])          # (75, 20)  (துண்டாக்கல்)
+print(t[-1])           # 90</pre>
+    <p><b>3) இணைத்தலும் மீள்பெருக்கமும் (புதிய tuple உருவாகும்):</b></p>
+<pre>a = (1, 2)
+b = (3, 4)
+
+c = a + b              # இணைத்தல்
+print(c)               # (1, 2, 3, 4)
+
+print(a * 3)           # (1, 2, 1, 2, 1, 2)
+
+# t ஐ "மாற்ற" வேண்டுமெனில் — புதிய tuple உருவாக்குவதே வழி:
+t = (10, 20, 30)
+t = t + (40,)          # புதிய tuple; பழையது மாற்றப்படவில்லை
+print(t)               # (10, 20, 30, 40)</pre>
+    <p><b>4) வகை மாற்றம் — tuple ↔ list:</b></p>
+<pre>t = (40, 10, 30)
+
+m = list(t)            # tuple → list (இப்போது மாற்றலாம்)
+m.sort()
+t = tuple(m)           # list → tuple (மீண்டும் பூட்டல்)
+print(t)               # (10, 30, 40)
+
+print(sorted(t))       # [10, 30, 40] — கவனம்: sorted() எப்போதும்
+                       # list ஐயே தரும், tuple ஐ அல்ல!</pre>
+    <ul>
+      <li>டியூப்பிளில் <code class="inline">count()</code>, <code class="inline">index()</code> ஆகிய இரு முறைகளே உள்ளன — append / remove / sort போன்றவை <b>இல்லை</b>.</li>
+      <li><code class="inline">len()</code>, <code class="inline">max()</code>, <code class="inline">min()</code>, <code class="inline">sum()</code>, slicing, <code class="inline">in</code> — அனைத்தும் பயன்படுத்தலாம்.</li>
+      <li>தரவுத்தள இணைப்பில் <code class="inline">fetchall()</code> தரும் ஒவ்வொரு பதிவும் ஒரு <b>tuple</b> — இரு பாடப்பகுதிகளின் தொடர்பு!</li>
+    </ul>
+    <div class="warn"><span class="tag">பரீட்சைப் பொறி</span>
+      <code class="inline">(5)</code> என்பது tuple <b>அல்ல</b> — வெறும் எண் 5. ஒற்றை உறுப்பு tuple க்கு <code class="inline">(5,)</code> எனக் காற்புள்ளி கட்டாயம்.
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 06 ===================== -->
+<section class="ncard" id="s6">
+  <div class="nhead"><span class="nnum">06</span><span class="ntitle">அகராதி (Dictionary)</span></div>
+  <div class="nbody">
+    <p>நெளி அடைப்புக்குறிகளுக்குள் <code class="inline">{ }</code> எழுதப்படும் <b>சாவி : பெறுமானம்</b> (key : value) சோடிகளின் தொகுப்பு. உறுப்புகள் இட எண்ணால் அல்ல, <b>சாவியால்</b> அணுகப்படும். சாவிகள் <b>தனித்துவமானவை</b> (unique); பெறுமானங்களை மாற்றலாம் (mutable).</p>
+<pre>student = {"no": 1001, "name": "Amuthan", "marks": 78}
+
+print(student["name"])     # Amuthan  (சாவி மூலம் அணுகல்)
+
+student["marks"] = 85      # பெறுமானம் திருத்தல்
+student["grade"] = "A"     # புதிய சோடி சேர்த்தல்
+del student["no"]          # சோடி நீக்கல்
+
+print(student)
+# {'name': 'Amuthan', 'marks': 85, 'grade': 'A'}</pre>
+    <h4 class="sub">முக்கிய முறைகள்</h4>
+    <table class="dt">
+      <tr><th>முறை</th><th>தருவது</th></tr>
+      <tr><td><code>d.keys()</code></td><td class="l">எல்லாச் சாவிகளும்</td></tr>
+      <tr><td><code>d.values()</code></td><td class="l">எல்லாப் பெறுமானங்களும்</td></tr>
+      <tr><td><code>d.items()</code></td><td class="l">(சாவி, பெறுமானம்) சோடிகள்</td></tr>
+      <tr><td><code>d.get("name")</code></td><td class="l">பெறுமானம் (சாவி இல்லாவிடின் None — பிழை எழுப்பாது)</td></tr>
+      <tr><td><code>len(d)</code></td><td class="l">சோடிகளின் எண்ணிக்கை</td></tr>
+      <tr><td><code>"name" in d</code></td><td class="l">சாவி உள்ளதா (True / False)</td></tr>
+    </table>
+    <h4 class="sub">அகராதி முறைகள் — விரிவான எடுத்துக்காட்டுகள்</h4>
+    <p><b>1) அணுகல் முறைகள் — [ ] மற்றும் get():</b></p>
+<pre>d = {"no": 1001, "name": "Amuthan", "marks": 78}
+
+print(d["name"])           # Amuthan
+print(d.get("marks"))      # 78
+print(d.get("grade"))      # None  (சாவி இல்லை — ஆனால் பிழை இல்லை)
+print(d.get("grade", "X")) # X     (இல்லாவிடின் கொடாநிலைப் பெறுமானம்)
+# print(d["grade"])        # KeyError! — [ ] முறையில் பிழை எழும்</pre>
+    <p><b>2) keys(), values(), items():</b></p>
+<pre>d = {"ICT": 85, "Physics": 72, "Maths": 90}
+
+print(list(d.keys()))      # ['ICT', 'Physics', 'Maths']
+print(list(d.values()))    # [85, 72, 90]
+print(list(d.items()))     # [('ICT', 85), ('Physics', 72), ('Maths', 90)]
+
+print(len(d))              # 3
+print("ICT" in d)          # True   (சாவியைச் சோதிக்கும்)
+print(85 in d)             # False  (பெறுமானத்தை அல்ல!)
+print(85 in d.values())    # True   (பெறுமானச் சோதனை இவ்வாறு)
+print(max(d.values()))     # 90
+print(sum(d.values()))     # 247</pre>
+    <p><b>3) சேர்த்தல் / திருத்தல் — update():</b></p>
+<pre>d = {"a": 1, "b": 2}
+
+d["c"] = 3                     # ஒரு சோடி சேர்த்தல்
+d.update({"d": 4, "b": 20})    # பல சோடிகள் — b ஏற்கனவே இருப்பதால் திருத்தப்படும்
+print(d)                       # {'a': 1, 'b': 20, 'c': 3, 'd': 4}</pre>
+    <p><b>4) நீக்கும் முறைகள்:</b></p>
+<pre>d = {"a": 1, "b": 2, "c": 3, "d": 4}
+
+x = d.pop("b")         # சாவி b ஐ நீக்கி, பெறுமானத்தைத் தரும்
+print(x, d)            # 2 {'a': 1, 'c': 3, 'd': 4}
+
+y = d.popitem()        # கடைசிச் சோடியை நீக்கித் தரும்
+print(y, d)            # ('d', 4) {'a': 1, 'c': 3}
+
+del d["a"]             # del மூலம் நீக்கல்
+print(d)               # {'c': 3}
+
+d.clear()              # எல்லாச் சோடிகளையும் நீக்கல்
+print(d)               # {}</pre>
+    <p><b>5) படியெடுத்தல் — copy():</b></p>
+<pre>d = {"a": 1, "b": 2}
+e = d.copy()           # தனிப் படி
+e["c"] = 3
+print(d)               # {'a': 1, 'b': 2} — மூலம் மாறவில்லை
+print(e)               # {'a': 1, 'b': 2, 'c': 3}</pre>
+    <div class="warn"><span class="tag">பரீட்சைப் பொறி</span>
+      <code class="inline">"x" in d</code> — <b>சாவிகளில்</b> மட்டுமே தேடும்; பெறுமானங்களில் தேட <code class="inline">x in d.values()</code> எழுத வேண்டும். இல்லாத சாவியை <code class="inline">d["x"]</code> என அணுகினால் <b>KeyError</b>; <code class="inline">d.get("x")</code> பாதுகாப்பானது.
+    </div>
+
+    <h4 class="sub">அகராதியினூடாக மடக்கு — மாதிரி நிரல்</h4>
+<pre># பாடங்களும் புள்ளிகளும்
+results = {"ICT": 85, "Physics": 72, "Maths": 90}
+
+for subject in results:                 # சாவிகளினூடாக
+    print(subject, "→", results[subject])
+
+for sub, mark in results.items():       # சோடிகளினூடாக
+    print(sub, "=", mark)
+
+print("மொத்தம் =", sum(results.values()))</pre>
+    <div class="key"><span class="tag">எப்போது அகராதி?</span>
+      தரவுகளை <b>பெயரால் / அடையாளத்தால்</b> தேட வேண்டுமெனில் அகராதி; <b>வரிசை முக்கியம்</b> எனில் பட்டியல். எ.கா: சுட்டெண் → பெயர் தேடல் = அகராதி; வந்த வரிசையில் புள்ளிகள் = பட்டியல்.
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 07 ===================== -->
+<section class="ncard" id="s7">
+  <div class="nhead"><span class="nnum">07</span><span class="ntitle">நான்கும் ஒப்பீடு — ஒரே பார்வையில்</span></div>
+  <div class="nbody">
+    <table class="dt">
+      <tr><th>பண்பு</th><th>String</th><th>List</th><th>Tuple</th><th>Dictionary</th></tr>
+      <tr><td class="l">அடைப்புக்குறி</td><td><code>" "</code></td><td><code>[ ]</code></td><td><code>( )</code></td><td><code>{k: v}</code></td></tr>
+      <tr><td class="l">மாற்றத்தக்கதா (mutable)?</td><td>இல்லை</td><td><b>ஆம்</b></td><td>இல்லை</td><td><b>ஆம்</b></td></tr>
+      <tr><td class="l">அணுகல் முறை</td><td>இட எண்</td><td>இட எண்</td><td>இட எண்</td><td><b>சாவி</b></td></tr>
+      <tr><td class="l">மீள்பெறுமானங்கள் (duplicates)?</td><td>ஆம்</td><td>ஆம்</td><td>ஆம்</td><td>சாவிகள் — இல்லை</td></tr>
+      <tr><td class="l">துண்டாக்கல் (slicing)?</td><td>ஆம்</td><td>ஆம்</td><td>ஆம்</td><td>இல்லை</td></tr>
+      <tr><td class="l">எடுத்துக்காட்டு</td><td><code>"abc"</code></td><td><code>[1, 2, 3]</code></td><td><code>(1, 2, 3)</code></td><td><code>{"a": 1}</code></td></tr>
+    </table>
+    <div class="key"><span class="tag">நினைவுக் குறிப்பு</span>
+      <b>List = மாற்றலாம், Tuple = பூட்டியது, String = எழுத்துக்களின் Tuple போன்றது, Dictionary = சாவியால் திறப்பது.</b>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 08 ===================== -->
+<section class="ncard" id="s8">
+  <div class="nhead"><span class="nnum">08</span><span class="ntitle">பரீட்சைக் குறிப்புகள் — பொதுவான பொறிகள்</span></div>
+  <div class="nbody">
+    <ul>
+      <li>இட எண் <b>0 இல்</b> தொடங்கும்; கடைசி உறுப்பின் இட எண் <code class="inline">len - 1</code> (அல்லது <code class="inline">-1</code>).</li>
+      <li>துண்டாக்கலில் <code class="inline">[a:b]</code> — <b>b சேராது</b>; உறுப்புகளின் எண்ணிக்கை = b − a.</li>
+      <li>சரம், டியூப்பிள் — <b>immutable</b>; <code class="inline">s[0]="X"</code> அல்லது <code class="inline">t[0]=5</code> → TypeError.</li>
+      <li><code class="inline">m.sort()</code> பட்டியலையே மாற்றும் (None தரும்); <code class="inline">sorted(m)</code> புதிய பட்டியலைத் தரும்.</li>
+      <li><code class="inline">m.append([4,5])</code> ஒரு பட்டியலையே ஓர் உறுப்பாகச் சேர்க்கும்; உறுப்புகளாகச் சேர்க்க <code class="inline">m.extend([4,5])</code>.</li>
+      <li>இல்லாத சாவியை <code class="inline">d["x"]</code> என அணுகினால் KeyError; <code class="inline">d.get("x")</code> None தரும் — பிழையில்லை.</li>
+      <li>அகராதியில் ஏற்கனவே உள்ள சாவிக்கு மீண்டும் பெறுமானம் வழங்கினால் — புதிய சோடி உருவாகாது; <b>பழைய பெறுமானம் மாற்றப்படும்</b>.</li>
+      <li>“வெளியீடு என்ன?” (predict the output) வினாக்களில் ஒவ்வொரு வரியின் பின்னும் கட்டமைப்பின் நிலையை எழுதி (trace) செல்வது பிழைகளைத் தவிர்க்கும்.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ===================== 09 ===================== -->
+<section class="ncard" id="s9">
+  <div class="nhead"><span class="nnum">09</span><span class="ntitle">பயிற்சி வினாக்கள் (விடைகளுடன்)</span></div>
+  <div class="nbody">
+
+    <!-- P1 -->
+    <div class="pq">
+      <span class="qnum">வினா 01</span>
+      <p class="task" style="margin-top:10px">பின்வரும் நிரலின் வெளியீட்டை எழுதுக:</p>
+<pre>s = "PROGRAMMING"
+print(s[3])
+print(s[-2])
+print(s[2:6])
+print(len(s))</pre>
+      <button class="btn" onclick="toggleAns(this,'p1')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p1"><span class="ans-label">விடை</span>
+<pre>G
+N
+OGRA
+11</pre>
+      <div class="note">s[3] → 4 ஆவது எழுத்து G (0 இல் தொடங்குவதால்); s[-2] → இறுதியிலிருந்து 2 ஆவது N; s[2:6] → இடங்கள் 2,3,4,5 = OGRA (6 சேராது).</div>
+      </div>
+    </div>
+
+    <!-- P2 -->
+    <div class="pq">
+      <span class="qnum">வினா 02</span>
+      <p class="task" style="margin-top:10px">பின்வரும் நிரலின் வெளியீட்டை எழுதுக:</p>
+<pre>m = [40, 75, 20]
+m.append(60)
+m.insert(1, 90)
+m.remove(20)
+m.sort()
+print(m)
+print(m.pop())
+print(m)</pre>
+      <button class="btn" onclick="toggleAns(this,'p2')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p2"><span class="ans-label">விடை</span>
+<pre>[40, 60, 75, 90]
+90
+[40, 60, 75]</pre>
+      <div class="note">படிப்படியாக: [40,75,20] → append → [40,75,20,60] → insert(1,90) → [40,90,75,20,60] → remove(20) → [40,90,75,60] → sort → [40,60,75,90]; pop() கடைசி உறுப்பு 90 ஐ நீக்கித் தரும்.</div>
+      </div>
+    </div>
+
+    <!-- P3 -->
+    <div class="pq">
+      <span class="qnum">வினா 03</span>
+      <p class="task" style="margin-top:10px">பயனரிடம் இருந்து 10 புள்ளிகளைப் பெற்று பட்டியலில் சேமித்து, 40 அல்லது அதற்கு மேல் பெற்றோரின் (சித்தி) எண்ணிக்கையையும், அதிகூடிய புள்ளியையும் வெளியிடும் Python நிரலை எழுதுக.</p>
+      <button class="btn" onclick="toggleAns(this,'p3')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p3"><span class="ans-label">விடை</span>
+<pre>marks = []
+for i in range(10):
+    m = int(input("புள்ளி: "))
+    marks.append(m)
+
+passed = 0
+for m in marks:
+    if m >= 40:
+        passed = passed + 1
+
+print("சித்தியடைந்தோர் =", passed)
+print("அதிகூடிய புள்ளி =", max(marks))</pre>
+      </div>
+    </div>
+
+    <!-- P4 -->
+    <div class="pq">
+      <span class="qnum">வினா 04</span>
+      <p class="task" style="margin-top:10px">பின்வரும் நிரலில் உள்ள <b>இரண்டு பிழைகளைக்</b> கண்டறிந்து விளக்குக:</p>
+<pre>days = ("Mon", "Tue", "Wed")
+days[0] = "Sun"
+holiday = ("Poya")
+print(holiday[0])</pre>
+      <button class="btn" onclick="toggleAns(this,'p4')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p4"><span class="ans-label">விடை</span>
+        <ol>
+          <li><code class="inline">days[0] = "Sun"</code> → <b>TypeError</b>. டியூப்பிள் immutable — உறுப்புகளை மாற்ற முடியாது.</li>
+          <li><code class="inline">("Poya")</code> ஒரு tuple <b>அல்ல</b> — வெறும் சரம். எனவே <code class="inline">holiday[0]</code> முதல் உறுப்பான tuple ஐ அல்ல, சரத்தின் முதல் எழுத்து <b>P</b> ஐயே தரும். ஒற்றை உறுப்பு tuple க்கு <code class="inline">("Poya",)</code> எனக் காற்புள்ளி தேவை.</li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- P5 -->
+    <div class="pq">
+      <span class="qnum">வினா 05</span>
+      <p class="task" style="margin-top:10px">ஒரு கடையின் பொருட்களும் விலைகளும் அகராதியில் உள்ளன: <code class="inline">items = {"அரிசி": 240, "சீனி": 280, "பால்மா": 1150}</code>. பின்வருவனவற்றைச் செய்யும் நிரல் வரிகளை எழுதுக:<br>
+      (அ) "சீனி" இன் விலையை 260 ஆகத் திருத்துக &nbsp;(ஆ) "தேயிலை": 950 எனப் புதிய பொருளைச் சேர்க்குக &nbsp;(இ) "பால்மா" ஐ நீக்குக &nbsp;(ஈ) எல்லாப் பொருட்களையும் விலைகளுடன் அச்சிடுக</p>
+      <button class="btn" onclick="toggleAns(this,'p5')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p5"><span class="ans-label">விடை</span>
+<pre>items = {"அரிசி": 240, "சீனி": 280, "பால்மா": 1150}
+
+items["சீனி"] = 260          # (அ) திருத்தல்
+items["தேயிலை"] = 950        # (ஆ) சேர்த்தல்
+del items["பால்மா"]          # (இ) நீக்கல்
+
+for name, price in items.items():    # (ஈ) அச்சிடல்
+    print(name, "- ரூ.", price)</pre>
+      <div class="note">திருத்தலும் சேர்த்தலும் ஒரே தொடரியல் — சாவி ஏற்கனவே இருந்தால் திருத்தம்; இல்லாவிடின் புதிய சோடி.</div>
+      </div>
+    </div>
+
+    <!-- P6 -->
+    <div class="pq">
+      <span class="qnum">வினா 06</span>
+      <p class="task" style="margin-top:10px">பின்வரும் நிரலின் வெளியீட்டை எழுதுக:</p>
+<pre>d = {"a": 10, "b": 20}
+d["c"] = 30
+d["a"] = 50
+print(len(d))
+print(sum(d.values()))
+print("b" in d)</pre>
+      <button class="btn" onclick="toggleAns(this,'p6')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p6"><span class="ans-label">விடை</span>
+<pre>3
+100
+True</pre>
+      <div class="note">d["a"] = 50 புதிய சோடியை உருவாக்காது — a இன் பெறுமானத்தை 10 → 50 ஆக மாற்றும். எனவே சோடிகள் 3; கூட்டுத்தொகை 50 + 20 + 30 = 100.</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+</main>
+
+<footer>
+  க.பொ.த (உயர்தர) தகவல் மற்றும் தொடர்பாடல் தொழினுட்பம் — Python தரவுக் கட்டமைப்புகள் குறிப்புகள்
+</footer>
+
+<script>
+function hl(code){
+  return code.split('\n').map(function(line){
+    line=line.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    var ci=line.indexOf('#'), cp=line, cm='';
+    if(ci>-1){ cp=line.slice(0,ci); cm='<span class="cm">'+line.slice(ci)+'</span>'; }
+    cp=cp.replace(/("[^"]*"|'[^']*')/g,'<span class="st">$1</span>');
+    cp=cp.replace(/\b(import|if|elif|else|while|for|in|and|or|not|break|def|return|del|True|False|None)\b/g,'<span class="kw">$1</span>');
+    cp=cp.replace(/\b(input|int|float|print|range|str|len|max|min|sum|sorted)\b/g,'<span class="kw">$1</span>');
+    return cp+cm;
+  }).join('\n');
+}
+document.querySelectorAll('pre').forEach(function(p){
+  p.innerHTML = hl(p.textContent);
+});
+function toggleAns(btn,id){
+  var ans=document.getElementById(id);
+  var open=ans.classList.toggle('show');
+  btn.classList.toggle('open',open);
+  btn.textContent=open?'விடையை மறை ▴':'விடையைக் காட்டு ▾';
+}
+</script>
+
+</body>
+</html>

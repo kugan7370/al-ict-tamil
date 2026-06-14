@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>க.பொ.த (உயர்தரம்) ICT — அலகு 10: இணையய அபிவிருத்தி குறிப்புகள்</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Catamaran:wght@600;800&family=Hind+Madurai:wght@400;500;600&family=Noto+Sans+Tamil:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F6F4EE; --card:#FFFFFF; --ink:#22303A;
+    --maroon:#8B1E3F; --teal:#1F4E5F; --gold:#C9912B;
+    --line:#E2DDD2; --code-bg:#102A33; --code-ink:#D9EEF2;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--paper);color:var(--ink);
+    font-family:'Hind Madurai','Noto Sans Tamil',sans-serif;
+    line-height:1.8;font-size:17px;}
+  header{background:linear-gradient(135deg,var(--teal) 0%,#143946 100%);
+    color:#F2EFE6;padding:42px 20px 36px;text-align:center;
+    border-bottom:5px solid var(--gold);}
+  header .eyebrow{letter-spacing:.18em;font-size:.8rem;text-transform:uppercase;
+    color:#D8C58A;margin-bottom:10px;}
+  header h1{font-family:'Catamaran','Noto Sans Tamil',sans-serif;font-weight:800;
+    font-size:clamp(1.4rem,4vw,2.05rem);line-height:1.5;}
+  header p{margin-top:10px;font-size:.95rem;color:#BFD4DA}
+  main{max-width:920px;margin:0 auto;padding:36px 18px 70px}
+
+  .toc{background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:16px 24px;margin-bottom:34px;font-size:.9rem;}
+  .toc b{color:var(--teal);font-family:'Catamaran','Noto Sans Tamil',sans-serif}
+  .toc a{color:var(--maroon);text-decoration:none}
+  .toc a:hover{text-decoration:underline}
+  .toc .links{display:flex;flex-wrap:wrap;gap:6px 16px;margin-top:6px}
+
+  .ncard{background:var(--card);border:1px solid var(--line);border-radius:16px;
+    margin-bottom:30px;overflow:hidden;box-shadow:0 2px 10px rgba(34,48,58,.05);}
+  .nhead{display:flex;align-items:center;gap:14px;padding:16px 24px;
+    border-bottom:1px solid var(--line);
+    background:linear-gradient(to right,#FBFAF6,#fff);}
+  .nnum{font-family:'Catamaran',sans-serif;font-weight:800;font-size:.92rem;
+    color:#fff;background:var(--teal);border-radius:10px;padding:5px 12px;
+    white-space:nowrap;}
+  .ntitle{font-family:'Catamaran','Noto Sans Tamil',sans-serif;font-weight:600;
+    font-size:1.02rem;color:var(--teal);}
+  .nbody{padding:22px 26px 26px}
+  .nbody p{margin-bottom:12px}
+  .nbody ul,.nbody ol{margin:6px 26px 14px}
+  .nbody li{margin-bottom:6px}
+  h4.sub{font-family:'Catamaran','Noto Sans Tamil',sans-serif;color:var(--maroon);
+    font-size:1.0rem;margin:18px 0 8px;}
+
+  .key{background:#FBF7EC;border-right:4px solid var(--gold);
+    border-radius:10px;padding:14px 20px;margin:14px 0;}
+  .key .tag{font-size:.78rem;font-weight:700;color:var(--gold);
+    letter-spacing:.1em;display:block;margin-bottom:4px;}
+  .warn{background:#FAEFF1;border-right:4px solid var(--maroon);
+    border-radius:10px;padding:14px 20px;margin:14px 0;}
+  .warn .tag{font-size:.78rem;font-weight:700;color:var(--maroon);
+    letter-spacing:.1em;display:block;margin-bottom:4px;}
+
+  pre{background:var(--code-bg);color:var(--code-ink);border-radius:12px;
+    padding:16px 18px;margin:10px 0;overflow-x:auto;
+    font-family:'JetBrains Mono',monospace;font-size:.84rem;line-height:1.7;
+    direction:ltr;text-align:left;}
+  pre .cm{color:#7FB6A4} pre .tg{color:#6FB3D2} pre .at{color:#E5C07B}
+  pre .st{color:#A8D8B9} pre .kw{color:#F2B36B} pre .se{color:#D98FB0}
+  code.inline{background:#EDF2F1;color:var(--teal);border-radius:6px;
+    padding:1px 8px;font-family:'JetBrains Mono',monospace;font-size:.85em;}
+
+  table.dt{border-collapse:collapse;margin:12px auto;font-size:.86rem;width:100%}
+  table.dt th{background:var(--teal);color:#fff;padding:8px 11px;
+    font-weight:600;border:1px solid #16404f;text-align:left;}
+  table.dt td{border:1px solid var(--line);padding:7px 11px;
+    background:#FDFCF9;vertical-align:top;}
+  table.dt caption{caption-side:top;font-weight:600;color:var(--teal);
+    margin-bottom:6px;font-size:.95rem;}
+  table.dt code{font-family:'JetBrains Mono',monospace;font-size:.88em;color:var(--maroon)}
+
+  .btn{display:inline-flex;align-items:center;gap:9px;
+    font-family:'Hind Madurai','Noto Sans Tamil',sans-serif;font-weight:600;
+    font-size:1rem;color:#fff;background:var(--teal);border:none;
+    border-radius:999px;padding:11px 26px;margin-top:14px;cursor:pointer;
+    transition:background .2s,transform .15s;}
+  .btn:hover{background:#16404f;transform:translateY(-1px)}
+  .btn:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+  .btn.open{background:var(--maroon)}
+  .answer{display:none;margin-top:20px;border-top:2px dashed var(--line);
+    padding-top:18px;animation:fade .35s ease;}
+  .answer.show{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  .ans-label{display:inline-block;font-weight:700;color:#fff;background:var(--gold);
+    border-radius:8px;padding:3px 14px;font-size:.85rem;margin-bottom:12px;}
+  .qnum{font-family:'Catamaran',sans-serif;font-weight:800;font-size:1rem;
+    color:#fff;background:var(--maroon);border-radius:10px;padding:5px 14px;
+    white-space:nowrap;}
+  .task{font-weight:600;color:var(--maroon)}
+  .pq{border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin-bottom:18px}
+  .note{margin-top:12px;font-size:.9rem;color:#5A6B74;background:#EFF4F2;
+    border-radius:10px;padding:10px 16px;}
+
+  footer{text-align:center;padding:26px 16px 40px;font-size:.85rem;color:#7A8790;}
+  @media (max-width:560px){
+    .nhead{flex-direction:column;align-items:flex-start;gap:8px}
+    body{font-size:16px}
+  }
+  @media (prefers-reduced-motion:reduce){.answer{animation:none}.btn{transition:none}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">G.C.E. Advanced Level &middot; Sri Lanka &middot; ICT (20) &middot; Unit 10</div>
+  <h1>இணையய அபிவிருத்தி<br>(Web Development)</h1>
+  <p>WWW &middot; HTML &middot; CSS &middot; PHP & MySQL &middot; படிவங்கள் &middot; வெளியீடும் பராமரிப்பும்</p>
+</header>
+
+<main>
+
+<div class="toc"><b>உள்ளடக்கம்</b>
+  <div class="links">
+    <a href="#s1">10.1 WWW & இணையதள வகைகள்</a>
+    <a href="#s2">10.2 பயனர் தேவைகள்</a>
+    <a href="#s3">10.3 அடிப்படை HTML</a>
+    <a href="#s4">10.4 இணைப்புகள், பட்டியல், படம், அட்டவணை</a>
+    <a href="#s5">10.5 CSS</a>
+    <a href="#s6">10.6 இணைய ஆக்க கருவிகள்</a>
+    <a href="#s7">10.7 PHP & MySQL (Dynamic)</a>
+    <a href="#s8">10.8 வெளியீடும் பராமரிப்பும்</a>
+    <a href="#sp">பயிற்சி வினாக்கள்</a>
+  </div>
+</div>
+
+<!-- ===================== 10.1 ===================== -->
+<section class="ncard" id="s1">
+  <div class="nhead"><span class="nnum">10.1</span><span class="ntitle">World Wide Web & இணையதள வகைகள்</span></div>
+  <div class="nbody">
+    <p><b>WWW (World Wide Web)</b> = இணையம் ஊடாக அணுகக்கூடிய, மீஉரை இணைப்புகளால் (hyperlinks) ஒன்றோடொன்று இணைக்கப்பட்ட <b>இணையப் பக்கங்களின் தொகுப்பு</b>. (இணையம் = வன்பொருள் வலையமைப்பு; WWW = அதன்மீது இயங்கும் ஒரு சேவை.)</p>
+    <ul>
+      <li><b>இணையப் பக்கம் (Web page):</b> HTML ஆல் எழுதப்பட்ட ஒரு ஆவணம்.</li>
+      <li><b>இணையதளம் (Website):</b> தொடர்புடைய பக்கங்களின் தொகுப்பு.</li>
+      <li><b>இணைய உலாவி (Browser):</b> பக்கங்களைக் காட்டும் மென்பொருள் (Chrome, Firefox).</li>
+      <li><b>URL:</b> ஒரு பக்கத்தின் முகவரி (எ.கா: <code class="inline">https://www.nie.lk/index.html</code>).</li>
+      <li><b>HTTP/HTTPS:</b> பக்கங்களைக் கடத்தும் நெறிமுறை.</li>
+    </ul>
+    <h4 class="sub">இணையதள வகைகள் (Types of Websites)</h4>
+    <table class="dt">
+      <tr><th>வகை</th><th>நோக்கம் / எடுத்துக்காட்டு</th></tr>
+      <tr><td><b>தகவல் (Information)</b></td><td>தகவல் வழங்கல்; செய்தி, விக்கிபீடியா</td></tr>
+      <tr><td><b>தனிப்பட்ட (Personal)</b></td><td>தனிநபர் வலைப்பதிவு, சுயவிபரம் (portfolio, blog)</td></tr>
+      <tr><td><b>கல்வி (Educational)</b></td><td>கற்றல் வளங்கள்; பாடசாலை/பல்கலைக்கழக தளங்கள், Khan Academy</td></tr>
+      <tr><td><b>வணிக (Commercial)</b></td><td>பொருள்/சேவை விற்பனை; Amazon, Daraz (e-commerce)</td></tr>
+      <tr><td><b>ஆராய்ச்சி (Research)</b></td><td>அறிவியல்/கல்வி ஆராய்ச்சித் தகவல்; ஆய்வுக் கட்டுரை தளங்கள்</td></tr>
+      <tr><td><b>நுழைவாயில் (Portal)</b></td><td>பல சேவைகளை ஒரே இடத்தில் ஒருங்கிணைக்கும்; Yahoo, அரசு சேவை நுழைவாயில்</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ===================== 10.2 ===================== -->
+<section class="ncard" id="s2">
+  <div class="nhead"><span class="nnum">10.2</span><span class="ntitle">பயனர் தேவைகள் (User Requirements)</span></div>
+  <div class="nbody">
+    <p>ஓர் இணையதளம் உருவாக்கும் முன், அதன் நோக்கத்தையும் உள்ளடக்கத்தையும் தெளிவாக வரையறுக்க வேண்டும்:</p>
+    <ul>
+      <li><b>நோக்கங்களை வரையறுத்தல் (Defining objectives):</b> தளம் எதற்காக? யார் பயனர்கள் (target audience)? என்ன அடைய வேண்டும்?</li>
+      <li><b>உள்ளடக்கத்தை அடையாளம் காணல் (Identifying content):</b> என்ன தகவல்/படங்கள்/வீடியோ வேண்டும்?</li>
+      <li><b>வழிசெலுத்தல் கட்டமைப்பு (Navigation structure):</b> பக்கங்கள் எவ்வாறு ஒழுங்கமைக்கப்படும், எவ்வாறு இணைக்கப்படும் (site map) — பயனர் எளிதாக நகர வேண்டும்.</li>
+    </ul>
+    <div class="key"><span class="tag">நல்ல வடிவமைப்பின் பண்புகள்</span>
+      தெளிவான வழிசெலுத்தல், சீரான வடிவமைப்பு (consistency), வேகமான ஏற்றம், மொபைல் ஏற்புடைமை (responsive), அணுகல்தன்மை (accessibility), தெளிவான உள்ளடக்கம்.
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 10.3 ===================== -->
+<section class="ncard" id="s3">
+  <div class="nhead"><span class="nnum">10.3</span><span class="ntitle">அடிப்படை HTML</span></div>
+  <div class="nbody">
+    <p><b>HTML (HyperText Markup Language)</b> = இணையப் பக்கங்களை உருவாக்கப் பயன்படும் <b>குறியீட்டு மொழி</b>. குறிச்சொற்களால் (tags) எழுதப்படும்: <code class="inline">&lt;tagname&gt; ... &lt;/tagname&gt;</code>.</p>
+    <h4 class="sub">அடிப்படை அமைப்பு (Basic Structure)</h4>
+<pre><span class="tg">&lt;!DOCTYPE html&gt;</span>
+<span class="tg">&lt;html&gt;</span>
+<span class="tg">&lt;head&gt;</span>
+    <span class="tg">&lt;title&gt;</span>எனது பக்கம்<span class="tg">&lt;/title&gt;</span>   <span class="cm">&lt;!-- உலாவித் தலைப்புப் பட்டை --&gt;</span>
+<span class="tg">&lt;/head&gt;</span>
+<span class="tg">&lt;body&gt;</span>
+    <span class="cm">&lt;!-- காணக்கூடிய உள்ளடக்கம் இங்கே --&gt;</span>
+    <span class="tg">&lt;h1&gt;</span>வணக்கம்!<span class="tg">&lt;/h1&gt;</span>
+    <span class="tg">&lt;p&gt;</span>இது எனது முதல் பக்கம்.<span class="tg">&lt;/p&gt;</span>
+<span class="tg">&lt;/body&gt;</span>
+<span class="tg">&lt;/html&gt;</span></pre>
+    <table class="dt">
+      <tr><th>குறிச்சொல்</th><th>செயல்</th></tr>
+      <tr><td><code>&lt;html&gt;</code></td><td>முழு ஆவணத்தின் வேர் (root)</td></tr>
+      <tr><td><code>&lt;head&gt;</code></td><td>மீத்தரவு (title, links) — காட்சியில் தெரியாது</td></tr>
+      <tr><td><code>&lt;title&gt;</code></td><td>உலாவித் தத்தலில் (tab) தோன்றும் தலைப்பு</td></tr>
+      <tr><td><code>&lt;body&gt;</code></td><td>பக்கத்தில் தெரியும் உள்ளடக்கம்</td></tr>
+    </table>
+    <h4 class="sub">உரை வடிவமைப்பு (Text Formatting)</h4>
+<pre><span class="tg">&lt;h1&gt;</span>தலைப்பு 1<span class="tg">&lt;/h1&gt;</span>   <span class="cm">&lt;!-- h1 மிகப் பெரியது ... h6 மிகச் சிறியது --&gt;</span>
+<span class="tg">&lt;h6&gt;</span>தலைப்பு 6<span class="tg">&lt;/h6&gt;</span>
+<span class="tg">&lt;p&gt;</span>பந்தி (paragraph)<span class="tg">&lt;/p&gt;</span>
+வரி முறிப்பு<span class="tg">&lt;br&gt;</span>புதிய வரி   <span class="cm">&lt;!-- &lt;br&gt; ஒற்றை tag --&gt;</span>
+<span class="tg">&lt;b&gt;</span>தடிமன்<span class="tg">&lt;/b&gt;</span>  <span class="tg">&lt;i&gt;</span>சாய்வு<span class="tg">&lt;/i&gt;</span>  <span class="tg">&lt;u&gt;</span>அடிக்கோடு<span class="tg">&lt;/u&gt;</span>
+<span class="tg">&lt;font</span> <span class="at">color</span>=<span class="st">"red"</span> <span class="at">size</span>=<span class="st">"5"</span><span class="tg">&gt;</span>நிற உரை<span class="tg">&lt;/font&gt;</span></pre>
+    <table class="dt">
+      <tr><th>குறிச்சொல்</th><th>செயல்</th></tr>
+      <tr><td><code>&lt;h1&gt;–&lt;h6&gt;</code></td><td>தலைப்புகள் (h1 பெரியது → h6 சிறியது)</td></tr>
+      <tr><td><code>&lt;p&gt;</code></td><td>பந்தி</td></tr>
+      <tr><td><code>&lt;br&gt;</code></td><td>வரி முறிப்பு (ஒற்றை/empty tag)</td></tr>
+      <tr><td><code>&lt;b&gt; &lt;i&gt; &lt;u&gt;</code></td><td>தடிமன், சாய்வு, அடிக்கோடு</td></tr>
+    </table>
+    <h4 class="sub">பின்னணி நிறம் & கருத்துரைகள்</h4>
+<pre><span class="tg">&lt;body</span> <span class="at">bgcolor</span>=<span class="st">"#FBF7EC"</span><span class="tg">&gt;</span>   <span class="cm">&lt;!-- பின்னணி நிறம் --&gt;</span>
+<span class="cm">&lt;!-- இது ஒரு கருத்துரை; உலாவியில் தெரியாது --&gt;</span></pre>
+    <div class="key"><span class="tag">தனி (empty) குறிச்சொற்கள்</span>
+      <code class="inline">&lt;br&gt;</code>, <code class="inline">&lt;hr&gt;</code>, <code class="inline">&lt;img&gt;</code> போன்றவை மூடுதல் குறிச்சொல் தேவையில்லாதவை. மற்றவை <code class="inline">&lt;p&gt;...&lt;/p&gt;</code> போல் மூடப்பட வேண்டும்.
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 10.4 ===================== -->
+<section class="ncard" id="s4">
+  <div class="nhead"><span class="nnum">10.4</span><span class="ntitle">இணைப்புகள், பட்டியல்கள், படங்கள், அட்டவணைகள்</span></div>
+  <div class="nbody">
+    <h4 class="sub">மீஇணைப்புகள் (Hyperlinks)</h4>
+<pre><span class="cm">&lt;!-- வெளி இணைப்பு (external) --&gt;</span>
+<span class="tg">&lt;a</span> <span class="at">href</span>=<span class="st">"https://www.google.com"</span><span class="tg">&gt;</span>Google<span class="tg">&lt;/a&gt;</span>
+
+<span class="cm">&lt;!-- உள் இணைப்பு (local — அதே தளத்தின் பக்கம்) --&gt;</span>
+<span class="tg">&lt;a</span> <span class="at">href</span>=<span class="st">"about.html"</span><span class="tg">&gt;</span>எங்களைப் பற்றி<span class="tg">&lt;/a&gt;</span>
+
+<span class="cm">&lt;!-- புத்தகக்குறி (bookmark — அதே பக்கத்தின் ஒரு பகுதிக்கு) --&gt;</span>
+<span class="tg">&lt;a</span> <span class="at">href</span>=<span class="st">"#section2"</span><span class="tg">&gt;</span>பகுதி 2 க்குச் செல்<span class="tg">&lt;/a&gt;</span>
+<span class="tg">&lt;h2</span> <span class="at">id</span>=<span class="st">"section2"</span><span class="tg">&gt;</span>பகுதி 2<span class="tg">&lt;/h2&gt;</span></pre>
+    <h4 class="sub">பட்டியல்கள் (Lists)</h4>
+<pre><span class="cm">&lt;!-- வரிசையற்ற பட்டியல் (புள்ளிகள்) --&gt;</span>
+<span class="tg">&lt;ul&gt;</span>
+    <span class="tg">&lt;li&gt;</span>ICT<span class="tg">&lt;/li&gt;</span>
+    <span class="tg">&lt;li&gt;</span>Maths<span class="tg">&lt;/li&gt;</span>
+<span class="tg">&lt;/ul&gt;</span>
+
+<span class="cm">&lt;!-- வரிசையான பட்டியல் (எண்கள்) --&gt;</span>
+<span class="tg">&lt;ol&gt;</span>
+    <span class="tg">&lt;li&gt;</span>முதல்<span class="tg">&lt;/li&gt;</span>
+    <span class="tg">&lt;li&gt;</span>இரண்டாம்<span class="tg">&lt;/li&gt;</span>
+<span class="tg">&lt;/ol&gt;</span>
+
+<span class="cm">&lt;!-- வரையறைப் பட்டியல் --&gt;</span>
+<span class="tg">&lt;dl&gt;</span>
+    <span class="tg">&lt;dt&gt;</span>HTML<span class="tg">&lt;/dt&gt;</span> <span class="tg">&lt;dd&gt;</span>குறியீட்டு மொழி<span class="tg">&lt;/dd&gt;</span>
+<span class="tg">&lt;/dl&gt;</span></pre>
+    <h4 class="sub">படங்கள் (Images)</h4>
+<pre><span class="tg">&lt;img</span> <span class="at">src</span>=<span class="st">"logo.png"</span> <span class="at">alt</span>=<span class="st">"இலச்சினை"</span> <span class="at">width</span>=<span class="st">"200"</span> <span class="at">height</span>=<span class="st">"100"</span><span class="tg">&gt;</span>
+<span class="cm">&lt;!-- src: கோப்புப் பாதை; alt: படம் ஏற்றப்படாவிட்டால் தெரியும் உரை --&gt;</span></pre>
+    <h4 class="sub">அட்டவணைகள் (Tables)</h4>
+<pre><span class="tg">&lt;table</span> <span class="at">border</span>=<span class="st">"1"</span><span class="tg">&gt;</span>
+    <span class="tg">&lt;caption&gt;</span>மாணவர் புள்ளிகள்<span class="tg">&lt;/caption&gt;</span>  <span class="cm">&lt;!-- அட்டவணைத் தலைப்பு --&gt;</span>
+    <span class="tg">&lt;tr&gt;</span>                          <span class="cm">&lt;!-- வரிசை (table row) --&gt;</span>
+        <span class="tg">&lt;th&gt;</span>பெயர்<span class="tg">&lt;/th&gt;</span>             <span class="cm">&lt;!-- தலைப்புக் கலம் --&gt;</span>
+        <span class="tg">&lt;th&gt;</span>புள்ளி<span class="tg">&lt;/th&gt;</span>
+    <span class="tg">&lt;/tr&gt;</span>
+    <span class="tg">&lt;tr&gt;</span>
+        <span class="tg">&lt;td&gt;</span>Amuthan<span class="tg">&lt;/td&gt;</span>          <span class="cm">&lt;!-- தரவுக் கலம் (table data) --&gt;</span>
+        <span class="tg">&lt;td&gt;</span>78<span class="tg">&lt;/td&gt;</span>
+    <span class="tg">&lt;/tr&gt;</span>
+<span class="tg">&lt;/table&gt;</span>
+
+<span class="cm">&lt;!-- கலங்களை இணைத்தல் --&gt;</span>
+<span class="tg">&lt;td</span> <span class="at">colspan</span>=<span class="st">"2"</span><span class="tg">&gt;</span>இரு நிரல்களை இணை<span class="tg">&lt;/td&gt;</span>   <span class="cm">&lt;!-- நிரல்கள் --&gt;</span>
+<span class="tg">&lt;td</span> <span class="at">rowspan</span>=<span class="st">"2"</span><span class="tg">&gt;</span>இரு வரிசைகளை இணை<span class="tg">&lt;/td&gt;</span>  <span class="cm">&lt;!-- வரிசைகள் --&gt;</span></pre>
+    <table class="dt">
+      <tr><th>குறிச்சொல்</th><th>செயல்</th></tr>
+      <tr><td><code>&lt;table&gt;</code></td><td>அட்டவணை</td></tr>
+      <tr><td><code>&lt;tr&gt;</code></td><td>வரிசை (table row)</td></tr>
+      <tr><td><code>&lt;th&gt;</code></td><td>தலைப்புக் கலம் (தடிமன், மையம்)</td></tr>
+      <tr><td><code>&lt;td&gt;</code></td><td>தரவுக் கலம் (table data)</td></tr>
+      <tr><td><code>&lt;caption&gt;</code></td><td>அட்டவணைத் தலைப்பு</td></tr>
+      <tr><td><code>colspan</code> / <code>rowspan</code></td><td>நிரல்களை / வரிசைகளை இணைத்தல்</td></tr>
+    </table>
+    <h4 class="sub">ஒலி & காணொளி (Audio & Video)</h4>
+<pre><span class="tg">&lt;audio</span> <span class="at">controls</span><span class="tg">&gt;</span>
+    <span class="tg">&lt;source</span> <span class="at">src</span>=<span class="st">"song.mp3"</span> <span class="at">type</span>=<span class="st">"audio/mpeg"</span><span class="tg">&gt;</span>
+<span class="tg">&lt;/audio&gt;</span>
+
+<span class="tg">&lt;video</span> <span class="at">controls</span> <span class="at">width</span>=<span class="st">"320"</span><span class="tg">&gt;</span>
+    <span class="tg">&lt;source</span> <span class="at">src</span>=<span class="st">"clip.mp4"</span> <span class="at">type</span>=<span class="st">"video/mp4"</span><span class="tg">&gt;</span>
+<span class="tg">&lt;/video&gt;</span></pre>
+  </div>
+</section>
+
+<!-- ===================== 10.5 ===================== -->
+<section class="ncard" id="s5">
+  <div class="nhead"><span class="nnum">10.5</span><span class="ntitle">CSS (Cascading Style Sheets)</span></div>
+  <div class="nbody">
+    <p><b>CSS</b> = HTML கூறுகளின் <b>தோற்றத்தையும் வடிவமைப்பையும் (style)</b> கட்டுப்படுத்தும் மொழி. உள்ளடக்கத்தை (HTML) வடிவமைப்பிலிருந்து (CSS) பிரிக்கிறது.</p>
+    <h4 class="sub">தொடரியல் (Syntax)</h4>
+<pre><span class="se">selector</span> {
+    <span class="at">property</span>: <span class="st">value</span>;
+}
+
+<span class="cm">/* உதாரணம் */</span>
+<span class="se">p</span> {
+    <span class="at">color</span>: <span class="st">blue</span>;
+    <span class="at">font-size</span>: <span class="st">16px</span>;
+}</pre>
+    <h4 class="sub">தெரிவிகள் (Selectors)</h4>
+<pre><span class="cm">/* 1) கூறுத் தெரிவி (element) — எல்லா &lt;p&gt; க்கும் */</span>
+<span class="se">p</span> { <span class="at">color</span>: <span class="st">green</span>; }
+
+<span class="cm">/* 2) id தெரிவி (#) — id="main" உள்ள ஒரே கூறுக்கு */</span>
+<span class="se">#main</span> { <span class="at">background</span>: <span class="st">yellow</span>; }
+
+<span class="cm">/* 3) class தெரிவி (.) — class="note" உள்ள எல்லாவற்றுக்கும் */</span>
+<span class="se">.note</span> { <span class="at">color</span>: <span class="st">red</span>; }
+
+<span class="cm">/* 4) குழுத் தெரிவி (group) — பலவற்றுக்கு ஒரே style */</span>
+<span class="se">h1, h2, p</span> { <span class="at">font-family</span>: <span class="st">Arial</span>; }</pre>
+    <div class="key"><span class="tag">id vs class</span>
+      <b>id (#)</b> — ஒரு பக்கத்தில் <b>ஒரே ஒரு</b> கூறுக்கு (தனித்துவம்). <b>class (.)</b> — <b>பல</b> கூறுகளுக்குப் பகிரலாம். HTML இல்: <code class="inline">&lt;p id="main"&gt;</code>, <code class="inline">&lt;p class="note"&gt;</code>.
+    </div>
+    <h4 class="sub">CSS ஐ இணைக்கும் மூன்று வழிகள்</h4>
+    <table class="dt">
+      <tr><th>வகை</th><th>எங்கே</th><th>எடுத்துக்காட்டு</th></tr>
+      <tr><td><b>உள்வரிசை (Inline)</b></td><td>கூறினுள்ளேயே style பண்பு</td><td><code>&lt;p style="color:red"&gt;</code></td></tr>
+      <tr><td><b>உள்ளக (Internal)</b></td><td><code>&lt;head&gt;</code> இல் <code>&lt;style&gt;</code> தொகுதி</td><td><code>&lt;style&gt; p{...} &lt;/style&gt;</code></td></tr>
+      <tr><td><b>வெளியக (External)</b></td><td>தனி .css கோப்பு, link ஆல் இணைப்பு</td><td><code>&lt;link rel="stylesheet" href="style.css"&gt;</code></td></tr>
+    </table>
+    <div class="key"><span class="tag">எது சிறந்தது?</span>
+      <b>External CSS</b> சிறந்தது — ஒரே .css கோப்பால் பல பக்கங்களை வடிவமைக்கலாம் (சீர்மை, பராமரிப்பு எளிது). Inline குறைந்த முன்னுரிமை கூடியது ஆனால் மீள்பயன்பாடு இல்லை.
+    </div>
+    <h4 class="sub">பொதுவான வடிவமைப்புப் பண்புகள்</h4>
+<pre><span class="se">body</span> {
+    <span class="at">background-color</span>: <span class="st">#FBF7EC</span>;
+    <span class="at">font-family</span>: <span class="st">Arial, sans-serif</span>;
+    <span class="at">color</span>: <span class="st">#22303A</span>;
+    <span class="at">text-align</span>: <span class="st">center</span>;
+}
+<span class="se">a</span> { <span class="at">text-decoration</span>: <span class="st">none</span>; <span class="at">color</span>: <span class="st">blue</span>; }  <span class="cm">/* இணைப்பு */</span>
+<span class="se">table, th, td</span> { <span class="at">border</span>: <span class="st">1px solid black</span>; }   <span class="cm">/* அட்டவணை */</span></pre>
+  </div>
+</section>
+
+<!-- ===================== 10.6 ===================== -->
+<section class="ncard" id="s6">
+  <div class="nhead"><span class="nnum">10.6</span><span class="ntitle">இணைய ஆக்க கருவிகள் (Web Authoring Tools)</span></div>
+  <div class="nbody">
+    <p>இணையதளங்களை உருவாக்க உதவும் மென்பொருள்கள்:</p>
+    <ul>
+      <li><b>உரைப் பதிப்பான்கள் (Text editors):</b> Notepad, Notepad++, VS Code, Sublime — நேரடியாக HTML/CSS குறியீடு எழுத.</li>
+      <li><b>WYSIWYG ஆக்கிகள்:</b> (What You See Is What You Get) — குறியீடு எழுதாமல், காட்சி அடிப்படையில் வடிவமைக்க. எ.கா: Adobe Dreamweaver.</li>
+      <li><b>உள்ளடக்க முகாமை முறைமைகள் (CMS):</b> WordPress, Joomla, Wix — தொழில்நுட்ப அறிவின்றி தளம் உருவாக்க.</li>
+    </ul>
+    <table class="dt">
+      <tr><th>உரைப் பதிப்பான் (Text editor)</th><th>WYSIWYG / CMS</th></tr>
+      <tr><td>முழுக் கட்டுப்பாடு; குறியீட்டு அறிவு தேவை</td><td>எளிது; குறியீட்டு அறிவு குறைவாகவே தேவை</td></tr>
+      <tr><td>இலகுவானது, விரைவானது</td><td>தேவையற்ற குறியீடு உருவாகலாம்</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ===================== 10.7 ===================== -->
+<section class="ncard" id="s7">
+  <div class="nhead"><span class="nnum">10.7</span><span class="ntitle">இயங்குநிலை இணையப் பக்கங்கள் — PHP & MySQL</span></div>
+  <div class="nbody">
+    <h4 class="sub">நிலையான vs இயங்குநிலை (Static vs Dynamic)</h4>
+    <table class="dt">
+      <tr><th>நிலையான (Static)</th><th>இயங்குநிலை (Dynamic)</th></tr>
+      <tr><td>எல்லா பயனருக்கும் ஒரே உள்ளடக்கம் (HTML மட்டும்)</td><td>பயனர்/தரவுத்தளத்துக்கு ஏற்ப மாறும் உள்ளடக்கம்</td></tr>
+      <tr><td>சேவையகச் செயலாக்கம் இல்லை</td><td>PHP போன்ற சேவையக மொழி + தரவுத்தளம்</td></tr>
+    </table>
+    <p><b>PHP (Hypertext Preprocessor)</b> = சேவையகத்தில் இயங்கும் ஸ்கிரிப்ட் மொழி; HTML க்குள் உட்பொதிக்கப்படுகிறது. <b>.php</b> கோப்புகளில், PHP குறியீடு <code class="inline">&lt;?php ... ?&gt;</code> க்குள் எழுதப்படுகிறது.</p>
+    <h4 class="sub">PHP அடிப்படைகள்</h4>
+<pre><span class="tg">&lt;?php</span>
+  <span class="cm">// மாறிகள் — $ அடையாளத்துடன்</span>
+  <span class="se">$name</span> = <span class="st">"Amuthan"</span>;
+  <span class="se">$marks</span> = 78;
+  <span class="kw">echo</span> <span class="st">"வணக்கம் "</span> . <span class="se">$name</span>;   <span class="cm">// வெளியீடு; . = இணைத்தல்</span>
+
+  <span class="cm">// வரிசை (array)</span>
+  <span class="se">$subjects</span> = <span class="kw">array</span>(<span class="st">"ICT"</span>, <span class="st">"Maths"</span>, <span class="st">"Physics"</span>);
+  <span class="kw">echo</span> <span class="se">$subjects</span>[0];   <span class="cm">// ICT</span>
+
+  <span class="cm">// கட்டுப்பாட்டு அமைப்புகள்</span>
+  <span class="kw">if</span> (<span class="se">$marks</span> &gt;= 75) {
+    <span class="kw">echo</span> <span class="st">"A தரம்"</span>;
+  } <span class="kw">else</span> {
+    <span class="kw">echo</span> <span class="st">"B தரம்"</span>;
+  }
+
+  <span class="kw">for</span> (<span class="se">$i</span> = 1; <span class="se">$i</span> &lt;= 5; <span class="se">$i</span>++) {
+    <span class="kw">echo</span> <span class="se">$i</span>;
+  }
+
+  <span class="cm">// சார்பு (function)</span>
+  <span class="kw">function</span> <span class="se">add</span>(<span class="se">$a</span>, <span class="se">$b</span>) {
+    <span class="kw">return</span> <span class="se">$a</span> + <span class="se">$b</span>;
+  }
+  <span class="kw">echo</span> <span class="se">add</span>(3, 4);   <span class="cm">// 7</span>
+<span class="tg">?&gt;</span></pre>
+    <h4 class="sub">HTML படிவங்கள் (Forms)</h4>
+<pre><span class="tg">&lt;form</span> <span class="at">action</span>=<span class="st">"save.php"</span> <span class="at">method</span>=<span class="st">"post"</span><span class="tg">&gt;</span>
+    <span class="tg">&lt;fieldset&gt;</span>
+      <span class="tg">&lt;legend&gt;</span>பதிவு<span class="tg">&lt;/legend&gt;</span>
+      பெயர்: <span class="tg">&lt;input</span> <span class="at">type</span>=<span class="st">"text"</span> <span class="at">name</span>=<span class="st">"uname"</span><span class="tg">&gt;&lt;br&gt;</span>
+      வயது:  <span class="tg">&lt;input</span> <span class="at">type</span>=<span class="st">"number"</span> <span class="at">name</span>=<span class="st">"age"</span><span class="tg">&gt;&lt;br&gt;</span>
+      பாலினம்: <span class="tg">&lt;input</span> <span class="at">type</span>=<span class="st">"radio"</span> <span class="at">name</span>=<span class="st">"g"</span> <span class="at">value</span>=<span class="st">"M"</span><span class="tg">&gt;</span>ஆண்
+      <span class="tg">&lt;input</span> <span class="at">type</span>=<span class="st">"checkbox"</span> <span class="at">name</span>=<span class="st">"agree"</span><span class="tg">&gt;</span>ஒப்புதல்<span class="tg">&lt;br&gt;</span>
+      <span class="tg">&lt;input</span> <span class="at">type</span>=<span class="st">"submit"</span> <span class="at">value</span>=<span class="st">"சமர்ப்பி"</span><span class="tg">&gt;</span>
+    <span class="tg">&lt;/fieldset&gt;</span>
+<span class="tg">&lt;/form&gt;</span></pre>
+    <table class="dt">
+      <tr><th>input வகை</th><th>பயன்</th></tr>
+      <tr><td><code>text</code></td><td>உரை உள்ளீடு</td></tr>
+      <tr><td><code>password</code></td><td>மறைக்கப்பட்ட உரை</td></tr>
+      <tr><td><code>number</code></td><td>எண்</td></tr>
+      <tr><td><code>radio</code></td><td>ஒன்றைத் தெரிவு (குழுவில்)</td></tr>
+      <tr><td><code>checkbox</code></td><td>பலவற்றைத் தெரிவு</td></tr>
+      <tr><td><code>submit</code></td><td>படிவத்தைச் சமர்ப்பிக்கும் பொத்தான்</td></tr>
+    </table>
+    <div class="key"><span class="tag">GET vs POST</span>
+      <b>GET</b> — தரவு URL இல் தெரியும் (<code class="inline">?name=...</code>); சிறிய, பாதுகாப்பற்ற தரவுக்கு (தேடல்). <b>POST</b> — தரவு URL இல் தெரியாது; <b>பாதுகாப்பானது</b> (கடவுச்சொல், படிவம்). PHP இல் <code class="inline">$_POST['uname']</code> / <code class="inline">$_GET['uname']</code> ஆல் பெறப்படுகிறது.
+    </div>
+    <h4 class="sub">படிவத் தரவைப் பெற்று தரவுத்தளத்தில் சேமித்தல் (save.php)</h4>
+<pre><span class="tg">&lt;?php</span>
+  <span class="cm">// 1) படிவத் தரவைப் பெறுதல்</span>
+  <span class="se">$name</span> = <span class="se">$_POST</span>[<span class="st">'uname'</span>];
+  <span class="se">$age</span>  = <span class="se">$_POST</span>[<span class="st">'age'</span>];
+
+  <span class="cm">// 2) தரவுத்தளத்துடன் இணைத்தல்</span>
+  <span class="se">$con</span> = <span class="kw">mysqli_connect</span>(<span class="st">"localhost"</span>, <span class="st">"root"</span>, <span class="st">""</span>, <span class="st">"school"</span>);
+
+  <span class="cm">// 3) தரவைச் சேமித்தல் (INSERT)</span>
+  <span class="se">$sql</span> = <span class="st">"INSERT INTO users (name, age) VALUES ('$name', '$age')"</span>;
+  <span class="kw">mysqli_query</span>(<span class="se">$con</span>, <span class="se">$sql</span>);
+  <span class="kw">echo</span> <span class="st">"சேமிக்கப்பட்டது!"</span>;
+
+  <span class="cm">// 4) தரவை மீட்டெடுத்தல் (SELECT)</span>
+  <span class="se">$result</span> = <span class="kw">mysqli_query</span>(<span class="se">$con</span>, <span class="st">"SELECT * FROM users"</span>);
+  <span class="kw">while</span> (<span class="se">$row</span> = <span class="kw">mysqli_fetch_array</span>(<span class="se">$result</span>)) {
+    <span class="kw">echo</span> <span class="se">$row</span>[<span class="st">'name'</span>] . <span class="st">" - "</span> . <span class="se">$row</span>[<span class="st">'age'</span>] . <span class="st">"&lt;br&gt;"</span>;
+  }
+
+  <span class="kw">mysqli_close</span>(<span class="se">$con</span>);
+<span class="tg">?&gt;</span></pre>
+    <div class="key"><span class="tag">PHP-MySQL படிகள்</span>
+      <b>connect → query (INSERT/SELECT) → fetch (வெளியீட்டுக்கு) → close.</b> படிவத்தின் <code class="inline">action</code> = PHP கோப்பு; <code class="inline">method</code> = post/get; PHP இல் <code class="inline">$_POST</code>/<code class="inline">$_GET</code> ஆல் தரவு பெறப்படுகிறது.
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 10.8 ===================== -->
+<section class="ncard" id="s8">
+  <div class="nhead"><span class="nnum">10.8</span><span class="ntitle">இணையதளங்களை வெளியிடலும் பராமரிப்பும்</span></div>
+  <div class="nbody">
+    <h4 class="sub">வெளியீடு (Publishing)</h4>
+    <ul>
+      <li><b>உள்ளக வெளியீடு (Local):</b> சொந்தக் கணினியில் (localhost — XAMPP) சோதனைக்காக இயக்குதல்.</li>
+      <li><b>இணைய வெளியீடு (Internet):</b> தளத்தை இணையத்தில் அனைவருக்கும் கிடைக்கச் செய்தல் — <b>இணைய புரவலன் (web hosting)</b> தேவை.</li>
+    </ul>
+    <h4 class="sub">இணைய புரவலனும் (Web Hosting) களப் பெயரும்</h4>
+    <ul>
+      <li><b>இணைய புரவலன்:</b> தளத்தின் கோப்புகளை இணையத்தில் சேமித்து, எப்போதும் கிடைக்கச் செய்யும் சேவையகச் சேவை (ISP/hosting நிறுவனம்).</li>
+      <li><b>களப் பெயர் (Domain name):</b> தளத்தின் முகவரி (எ.கா: <code class="inline">www.myschool.lk</code>) — பதிவுசெய்ய வேண்டும்.</li>
+      <li><b>FTP (File Transfer Protocol):</b> கோப்புகளைச் சேவையகத்துக்கு ஏற்ற (upload).</li>
+    </ul>
+    <h4 class="sub">தளச் செயல்திறனைப் பாதிக்கும் காரணிகள் (Website Performance)</h4>
+    <table class="dt">
+      <tr><th>காரணி</th><th>தாக்கம்</th></tr>
+      <tr><td><b>படக் கோப்பு அளவு</b></td><td>பெரிய படங்கள் → மெதுவான ஏற்றம். (சுருக்கம் தேவை)</td></tr>
+      <tr><td><b>குறியீட்டுத் தரம்</b></td><td>நன்கு உகந்த (optimized) குறியீடு → வேகம்</td></tr>
+      <tr><td><b>சேவையக வேகம்/பட்டை அகலம்</b></td><td>நல்ல hosting → வேகமான பதில்</td></tr>
+      <tr><td><b>பயனர் இணைய வேகம்</b></td><td>பயனரின் இணைப்பு வேகமும் தாக்கம் செலுத்தும்</td></tr>
+      <tr><td><b>தற்காலிகச் சேமிப்பு (Caching)</b></td><td>caching → மீள்-வருகையில் வேகம்</td></tr>
+    </table>
+    <h4 class="sub">பராமரிப்பு (Maintenance)</h4>
+    <ul>
+      <li>உள்ளடக்கத்தைப் புதுப்பித்தல், உடைந்த இணைப்புகளைச் (broken links) சரிசெய்தல், பாதுகாப்புப் புதுப்பித்தல், மீள்நகல் (backup).</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ===================== Practice ===================== -->
+<section class="ncard" id="sp">
+  <div class="nhead"><span class="nnum">?</span><span class="ntitle">பயிற்சி வினாக்கள் (விடைகளுடன்)</span></div>
+  <div class="nbody">
+
+    <!-- P1 -->
+    <div class="pq"><span class="qnum">வினா 01</span>
+      <p class="task" style="margin-top:10px">"வணக்கம்" என்பதை மிகப் பெரிய தலைப்பாகவும், கீழே ஒரு பந்தியாக "எனது பக்கம்" என்பதையும் காட்டும் HTML குறியீட்டை எழுதுக.</p>
+      <button class="btn" onclick="toggleAns(this,'p1')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p1"><span class="ans-label">விடை</span>
+<pre><span class="tg">&lt;h1&gt;</span>வணக்கம்<span class="tg">&lt;/h1&gt;</span>
+<span class="tg">&lt;p&gt;</span>எனது பக்கம்<span class="tg">&lt;/p&gt;</span></pre>
+        <div class="note">h1 = மிகப் பெரிய தலைப்பு; p = பந்தி.</div>
+      </div>
+    </div>
+
+    <!-- P2 -->
+    <div class="pq"><span class="qnum">வினா 02</span>
+      <p class="task" style="margin-top:10px">Google க்குச் செல்லும் ஒரு வெளி இணைப்பையும், அதே தளத்தின் about.html க்குச் செல்லும் உள் இணைப்பையும் உருவாக்கும் குறியீட்டை எழுதுக.</p>
+      <button class="btn" onclick="toggleAns(this,'p2')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p2"><span class="ans-label">விடை</span>
+<pre><span class="tg">&lt;a</span> <span class="at">href</span>=<span class="st">"https://www.google.com"</span><span class="tg">&gt;</span>Google<span class="tg">&lt;/a&gt;</span>
+<span class="tg">&lt;a</span> <span class="at">href</span>=<span class="st">"about.html"</span><span class="tg">&gt;</span>எங்களைப் பற்றி<span class="tg">&lt;/a&gt;</span></pre>
+      </div>
+    </div>
+
+    <!-- P3 -->
+    <div class="pq"><span class="qnum">வினா 03</span>
+      <p class="task" style="margin-top:10px">id தெரிவிக்கும் (#) class தெரிவிக்கும் (.) இடையேயான வேறுபாடு என்ன?</p>
+      <button class="btn" onclick="toggleAns(this,'p3')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p3"><span class="ans-label">விடை</span>
+        <p><b>id (#):</b> ஒரு பக்கத்தில் ஒரே ஒரு கூறுக்கு மட்டும் (தனித்துவம்).</p>
+        <p><b>class (.):</b> பல கூறுகளுக்குப் பகிரலாம்.</p>
+        <p>HTML: <code class="inline">&lt;p id="x"&gt;</code> ↔ CSS: <code class="inline">#x{}</code>; <code class="inline">&lt;p class="y"&gt;</code> ↔ CSS: <code class="inline">.y{}</code>.</p>
+      </div>
+    </div>
+
+    <!-- P4 -->
+    <div class="pq"><span class="qnum">வினா 04</span>
+      <p class="task" style="margin-top:10px">CSS ஐ இணைக்கும் மூன்று வழிகளைக் கூறி, பல பக்கங்களைச் சீராக வடிவமைக்க எது சிறந்தது, ஏன் எனக் கூறுக.</p>
+      <button class="btn" onclick="toggleAns(this,'p4')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p4"><span class="ans-label">விடை</span>
+        <p>மூன்று வழிகள்: <b>உள்வரிசை (inline), உள்ளக (internal), வெளியக (external)</b>.</p>
+        <p>பல பக்கங்களுக்கு <b>External CSS</b> சிறந்தது — ஒரே .css கோப்பால் எல்லாப் பக்கங்களையும் வடிவமைக்கலாம்; சீர்மை (consistency) & பராமரிப்பு எளிது.</p>
+      </div>
+    </div>
+
+    <!-- P5 -->
+    <div class="pq"><span class="qnum">வினா 05</span>
+      <p class="task" style="margin-top:10px">பெயர் & புள்ளி ஆகிய இரு நிரல்களைக் கொண்ட, தலைப்பு வரிசையுடன் கூடிய ஓர் HTML அட்டவணையை உருவாக்கும் குறியீட்டை எழுதுக.</p>
+      <button class="btn" onclick="toggleAns(this,'p5')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p5"><span class="ans-label">விடை</span>
+<pre><span class="tg">&lt;table</span> <span class="at">border</span>=<span class="st">"1"</span><span class="tg">&gt;</span>
+    <span class="tg">&lt;tr&gt;&lt;th&gt;</span>பெயர்<span class="tg">&lt;/th&gt;&lt;th&gt;</span>புள்ளி<span class="tg">&lt;/th&gt;&lt;/tr&gt;</span>
+    <span class="tg">&lt;tr&gt;&lt;td&gt;</span>Amuthan<span class="tg">&lt;/td&gt;&lt;td&gt;</span>78<span class="tg">&lt;/td&gt;&lt;/tr&gt;</span>
+<span class="tg">&lt;/table&gt;</span></pre>
+      </div>
+    </div>
+
+    <!-- P6 -->
+    <div class="pq"><span class="qnum">வினா 06</span>
+      <p class="task" style="margin-top:10px">படிவத்தில் (form) GET முறைக்கும் POST முறைக்கும் இடையேயான வேறுபாடு என்ன? கடவுச்சொல் அனுப்ப எது பொருத்தம்?</p>
+      <button class="btn" onclick="toggleAns(this,'p6')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p6"><span class="ans-label">விடை</span>
+        <p><b>GET:</b> தரவு URL இல் தெரியும்; சிறிய, பாதுகாப்பற்ற தரவுக்கு.</p>
+        <p><b>POST:</b> தரவு URL இல் தெரியாது; பாதுகாப்பானது.</p>
+        <p>கடவுச்சொல் அனுப்ப <b>POST</b> பொருத்தம் — தரவு URL இல் வெளிப்படாது.</p>
+      </div>
+    </div>
+
+    <!-- P7 -->
+    <div class="pq"><span class="qnum">வினா 07</span>
+      <p class="task" style="margin-top:10px">$marks ≥ 50 எனில் "சித்தி" எனவும், இல்லாவிடின் "சித்தியடையவில்லை" எனவும் வெளியிடும் PHP குறியீட்டை எழுதுக.</p>
+      <button class="btn" onclick="toggleAns(this,'p7')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p7"><span class="ans-label">விடை</span>
+<pre><span class="tg">&lt;?php</span>
+  <span class="kw">if</span> (<span class="se">$marks</span> &gt;= 50) {
+    <span class="kw">echo</span> <span class="st">"சித்தி"</span>;
+  } <span class="kw">else</span> {
+    <span class="kw">echo</span> <span class="st">"சித்தியடையவில்லை"</span>;
+  }
+<span class="tg">?&gt;</span></pre>
+      </div>
+    </div>
+
+    <!-- P8 -->
+    <div class="pq"><span class="qnum">வினா 08</span>
+      <p class="task" style="margin-top:10px">நிலையான (static) இணையப் பக்கத்துக்கும் இயங்குநிலை (dynamic) பக்கத்துக்கும் இடையேயான வேறுபாடு என்ன?</p>
+      <button class="btn" onclick="toggleAns(this,'p8')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p8"><span class="ans-label">விடை</span>
+        <p><b>நிலையான:</b> எல்லா பயனருக்கும் ஒரே உள்ளடக்கம்; HTML மட்டும்; சேவையகச் செயலாக்கம் இல்லை.</p>
+        <p><b>இயங்குநிலை:</b> பயனர்/தரவுத்தளத்துக்கு ஏற்ப உள்ளடக்கம் மாறும்; PHP போன்ற சேவையக மொழி + தரவுத்தளம் பயன்படும்.</p>
+      </div>
+    </div>
+
+    <!-- P9 -->
+    <div class="pq"><span class="qnum">வினா 09</span>
+      <p class="task" style="margin-top:10px">PHP இல் ஒரு படிவத்திலிருந்து வரும் "uname" புலத்தின் மதிப்பை POST முறையில் பெற்று, தரவுத்தளத்தில் சேமிக்கும் படிகளை வரிசையாகக் கூறுக.</p>
+      <button class="btn" onclick="toggleAns(this,'p9')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p9"><span class="ans-label">விடை</span>
+        <ol>
+          <li>மதிப்பைப் பெறுதல்: <code class="inline">$name = $_POST['uname'];</code></li>
+          <li>இணைத்தல்: <code class="inline">$con = mysqli_connect(...);</code></li>
+          <li>சேமித்தல்: <code class="inline">mysqli_query($con, "INSERT INTO ...")</code></li>
+          <li>இணைப்பை மூடல்: <code class="inline">mysqli_close($con);</code></li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- P10 -->
+    <div class="pq"><span class="qnum">வினா 10</span>
+      <p class="task" style="margin-top:10px">இணையதளத்தின் ஏற்ற வேகத்தைப் (loading speed) பாதிக்கும் இரண்டு காரணிகளைக் கூறி, மேம்படுத்த ஒரு வழியைக் கூறுக.</p>
+      <button class="btn" onclick="toggleAns(this,'p10')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p10"><span class="ans-label">விடை</span>
+        <p><b>காரணிகள்:</b> பெரிய படக் கோப்பு அளவு; சேவையக வேகம்/பட்டை அகலம்; குறியீட்டுத் தரம்; பயனர் இணைய வேகம். (ஏதேனும் இரண்டு.)</p>
+        <p><b>மேம்பாடு:</b> படங்களைச் சுருக்குதல் (compress/optimize images); caching பயன்படுத்துதல்; குறியீட்டை உகந்ததாக்குதல்.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+</main>
+
+<footer>
+  க.பொ.த (உயர்தர) தகவல் மற்றும் தொடர்பாடல் தொழினுட்பம் — அலகு 10: இணையய அபிவிருத்தி குறிப்புகள்
+</footer>
+
+<script>
+function toggleAns(btn,id){
+  var ans=document.getElementById(id);
+  var open=ans.classList.toggle('show');
+  btn.classList.toggle('open',open);
+  btn.textContent=open?'விடையை மறை ▴':'விடையைக் காட்டு ▾';
+}
+</script>
+
+</body>
+</html>

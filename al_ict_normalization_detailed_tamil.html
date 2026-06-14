@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>க.பொ.த (உயர்தரம்) ICT — இயல்நிலையாக்கம் (Normalization) விரிவான குறிப்புகள்</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Catamaran:wght@600;800&family=Hind+Madurai:wght@400;500;600&family=Noto+Sans+Tamil:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F6F4EE; --card:#FFFFFF; --ink:#22303A;
+    --maroon:#8B1E3F; --teal:#1F4E5F; --gold:#C9912B;
+    --line:#E2DDD2; --code-bg:#102A33; --code-ink:#D9EEF2;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--paper);color:var(--ink);
+    font-family:'Hind Madurai','Noto Sans Tamil',sans-serif;
+    line-height:1.8;font-size:17px;}
+  header{background:linear-gradient(135deg,var(--teal) 0%,#143946 100%);
+    color:#F2EFE6;padding:42px 20px 36px;text-align:center;
+    border-bottom:5px solid var(--gold);}
+  header .eyebrow{letter-spacing:.18em;font-size:.8rem;text-transform:uppercase;
+    color:#D8C58A;margin-bottom:10px;}
+  header h1{font-family:'Catamaran','Noto Sans Tamil',sans-serif;font-weight:800;
+    font-size:clamp(1.4rem,4vw,2.05rem);line-height:1.5;}
+  header p{margin-top:10px;font-size:.95rem;color:#BFD4DA}
+  main{max-width:900px;margin:0 auto;padding:36px 18px 70px}
+
+  .toc{background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:16px 24px;margin-bottom:34px;font-size:.92rem;}
+  .toc b{color:var(--teal);font-family:'Catamaran','Noto Sans Tamil',sans-serif}
+  .toc a{color:var(--maroon);text-decoration:none}
+  .toc a:hover{text-decoration:underline}
+  .toc .links{display:flex;flex-wrap:wrap;gap:6px 16px;margin-top:6px}
+
+  .ncard{background:var(--card);border:1px solid var(--line);border-radius:16px;
+    margin-bottom:30px;overflow:hidden;box-shadow:0 2px 10px rgba(34,48,58,.05);}
+  .nhead{display:flex;align-items:center;gap:14px;padding:16px 24px;
+    border-bottom:1px solid var(--line);
+    background:linear-gradient(to right,#FBFAF6,#fff);}
+  .nnum{font-family:'Catamaran',sans-serif;font-weight:800;font-size:.92rem;
+    color:#fff;background:var(--teal);border-radius:10px;padding:5px 13px;
+    white-space:nowrap;}
+  .ntitle{font-family:'Catamaran','Noto Sans Tamil',sans-serif;font-weight:600;
+    font-size:1.04rem;color:var(--teal);}
+  .nbody{padding:22px 26px 26px}
+  .nbody p{margin-bottom:12px}
+  .nbody ul,.nbody ol{margin:6px 26px 14px}
+  .nbody li{margin-bottom:6px}
+  h4.sub{font-family:'Catamaran','Noto Sans Tamil',sans-serif;color:var(--maroon);
+    font-size:1.02rem;margin:20px 0 8px;}
+  .exlabel{display:inline-block;font-weight:700;color:#fff;background:var(--teal);
+    border-radius:7px;padding:2px 12px;font-size:.82rem;margin:16px 0 6px;}
+
+  .key{background:#FBF7EC;border-right:4px solid var(--gold);
+    border-radius:10px;padding:14px 20px;margin:14px 0;}
+  .key .tag{font-size:.78rem;font-weight:700;color:var(--gold);
+    letter-spacing:.1em;display:block;margin-bottom:4px;}
+  .warn{background:#FAEFF1;border-right:4px solid var(--maroon);
+    border-radius:10px;padding:14px 20px;margin:14px 0;}
+  .warn .tag{font-size:.78rem;font-weight:700;color:var(--maroon);
+    letter-spacing:.1em;display:block;margin-bottom:4px;}
+  .good{background:#EDF6EE;border-right:4px solid #2E8B57;
+    border-radius:10px;padding:14px 20px;margin:14px 0;}
+  .good .tag{font-size:.78rem;font-weight:700;color:#2E8B57;
+    letter-spacing:.1em;display:block;margin-bottom:4px;}
+
+  pre{background:var(--code-bg);color:var(--code-ink);border-radius:12px;
+    padding:16px 18px;margin:10px 0;overflow-x:auto;
+    font-family:'JetBrains Mono',monospace;font-size:.85rem;line-height:1.7;
+    direction:ltr;text-align:left;}
+  pre .cm{color:#7FB6A4} pre .kw{color:#F2B36B}
+  code.inline{background:#EDF2F1;color:var(--teal);border-radius:6px;
+    padding:1px 8px;font-family:'JetBrains Mono',monospace;font-size:.85em;}
+
+  table.dt{border-collapse:collapse;margin:10px auto;font-size:.84rem;width:100%}
+  table.dt th{background:var(--teal);color:#fff;padding:7px 10px;
+    font-weight:600;border:1px solid #16404f;text-align:center;}
+  table.dt td{border:1px solid var(--line);padding:6px 10px;
+    background:#FDFCF9;text-align:center;}
+  table.dt caption{caption-side:top;font-weight:600;color:var(--teal);
+    margin-bottom:5px;font-size:.9rem;text-align:left}
+  table.dt code{font-family:'JetBrains Mono',monospace;font-size:.9em;color:var(--maroon)}
+  table.dt .pk{background:#FBF1D8;font-weight:700}
+  table.dt .bad{background:#FBE4E8}
+  .tablewrap{display:flex;flex-wrap:wrap;gap:14px;align-items:flex-start}
+  .tablewrap > div{flex:1;min-width:240px}
+
+  .fd{background:#F4F8F7;border:1px solid #D6E4E0;border-radius:10px;
+    padding:12px 18px;margin:10px 0;font-family:'JetBrains Mono',monospace;
+    font-size:.85rem;line-height:1.9;direction:ltr;overflow-x:auto;}
+  .fd .hl{color:var(--maroon);font-weight:700}
+  .fd .lbl{font-family:'Hind Madurai','Noto Sans Tamil',sans-serif;color:#5A6B74}
+
+  .btn{display:inline-flex;align-items:center;gap:9px;
+    font-family:'Hind Madurai','Noto Sans Tamil',sans-serif;font-weight:600;
+    font-size:1rem;color:#fff;background:var(--teal);border:none;
+    border-radius:999px;padding:11px 26px;margin-top:14px;cursor:pointer;
+    transition:background .2s,transform .15s;}
+  .btn:hover{background:#16404f;transform:translateY(-1px)}
+  .btn:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+  .btn.open{background:var(--maroon)}
+  .answer{display:none;margin-top:20px;border-top:2px dashed var(--line);
+    padding-top:18px;animation:fade .35s ease;}
+  .answer.show{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  .ans-label{display:inline-block;font-weight:700;color:#fff;background:var(--gold);
+    border-radius:8px;padding:3px 14px;font-size:.85rem;margin-bottom:12px;}
+  .qnum{font-family:'Catamaran',sans-serif;font-weight:800;font-size:1rem;
+    color:#fff;background:var(--maroon);border-radius:10px;padding:5px 14px;
+    white-space:nowrap;}
+  .task{font-weight:600;color:var(--maroon)}
+  .pq{border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin-bottom:18px}
+  .note{margin-top:12px;font-size:.9rem;color:#5A6B74;background:#EFF4F2;
+    border-radius:10px;padding:10px 16px;}
+  .scen{background:#FBF7EC;border-right:4px solid var(--gold);border-radius:8px;
+    padding:10px 16px;margin-bottom:10px;font-size:.92rem}
+
+  footer{text-align:center;padding:26px 16px 40px;font-size:.85rem;color:#7A8790;}
+  @media (max-width:560px){
+    .nhead{flex-direction:column;align-items:flex-start;gap:8px}
+    body{font-size:16px}
+  }
+  @media (prefers-reduced-motion:reduce){.answer{animation:none}.btn{transition:none}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">G.C.E. Advanced Level &middot; Sri Lanka &middot; ICT (20) &middot; Unit 8.7</div>
+  <h1>இயல்நிலையாக்கம் (Normalization)<br>விரிவான குறிப்புகள்</h1>
+  <p>0NF → 1NF → 2NF → 3NF — ஒவ்வொன்றும் பல எடுத்துக்காட்டுகளுடன், படிப்படியாக</p>
+</header>
+
+<main>
+
+<div class="toc"><b>உள்ளடக்கம்</b>
+  <div class="links">
+    <a href="#s0">இயல்நிலையாக்கம் என்றால் என்ன?</a>
+    <a href="#sa">முரண்பாடுகள் (Anomalies)</a>
+    <a href="#sfd">செயற்பாட்டுச் சார்புகள் (FD)</a>
+    <a href="#s1">1NF — விரிவாக</a>
+    <a href="#s2">2NF — விரிவாக</a>
+    <a href="#s3">3NF — விரிவாக</a>
+    <a href="#sfull">முழு உதாரணம் (0NF→3NF)</a>
+    <a href="#sp">பயிற்சி வினாக்கள்</a>
+  </div>
+</div>
+
+<!-- ============ Intro ============ -->
+<section class="ncard" id="s0">
+  <div class="nhead"><span class="nnum">அறிமுகம்</span><span class="ntitle">இயல்நிலையாக்கம் என்றால் என்ன? ஏன் தேவை?</span></div>
+  <div class="nbody">
+    <p><b>இயல்நிலையாக்கம் (Normalization)</b> = ஒரு பெரிய, ஒழுங்கற்ற அட்டவணையை, <b>மீள்நிகழ்வை (data redundancy) குறைக்கும்</b> வகையில், விதிமுறைகளின்படி <b>சிறிய, நன்கு கட்டமைக்கப்பட்ட அட்டவணைகளாகப் பிரிக்கும்</b> படிப்படியான செயல்முறை.</p>
+    <p>ஒரே தரவு மீண்டும் மீண்டும் (redundantly) சேமிக்கப்பட்டால் — இடம் வீணாகும், <b>முரண்பாடுகள் (anomalies)</b> ஏற்படும், பராமரிப்பு கடினமாகும். இயல்நிலையாக்கம் இவற்றைத் தீர்க்கிறது.</p>
+    <h4 class="sub">ஏன் இயல்நிலையாக்கம்?</h4>
+    <ul>
+      <li>தரவு <b>மீள்நிகழ்வைக் குறைத்தல்</b> (ஒரே தரவு பல முறை வராமை).</li>
+      <li><b>முரண்பாடுகளைத் தவிர்த்தல்</b> (insert, update, delete anomalies).</li>
+      <li>தரவின் <b>செம்மையை (integrity) & சீர்மையை (consistency)</b> உறுதிசெய்தல்.</li>
+      <li>சேமிப்பு இடத்தைச் <b>சிக்கனமாக்குதல்</b>.</li>
+    </ul>
+    <p>இயல்நிலை வடிவங்கள் (Normal Forms) படிப்படியாக: <b>0NF → 1NF → 2NF → 3NF</b> (மேலும் BCNF, 4NF…). ஒவ்வொன்றும் முந்தையதை உள்ளடக்கி, ஒரு கூடுதல் விதியைச் சேர்க்கிறது.</p>
+    <div class="key"><span class="tag">முக்கிய நினைவுச் சொற்றொடர்</span>
+      "<b>The Key, the Whole Key, and Nothing but the Key</b>" —<br>
+      <b>1NF:</b> ஒவ்வொரு கலமும் ஒற்றை மதிப்பு (atomic) + சாவி உள்ளது.<br>
+      <b>2NF:</b> சாவியற்ற புலங்கள் <b>முழுச் சாவியையும்</b> சார்தல் (பகுதிச் சார்பு இல்லை).<br>
+      <b>3NF:</b> சாவியற்ற புலங்கள் <b>சாவியை மட்டுமே</b> சார்தல் (கடத்துச் சார்பு இல்லை).
+    </div>
+  </div>
+</section>
+
+<!-- ============ Anomalies ============ -->
+<section class="ncard" id="sa">
+  <div class="nhead"><span class="nnum">முரண்பாடு</span><span class="ntitle">மூன்று வகை முரண்பாடுகள் (Anomalies)</span></div>
+  <div class="nbody">
+    <p>இயல்நிலையாக்கப்படாத அட்டவணையில் ஒரே தரவு மீண்டும் வந்தால் ஏற்படும் சிக்கல்கள். கீழே ஒரு <b>ஒழுங்கற்ற</b> அட்டவணை:</p>
+    <table class="dt">
+      <caption>enrolment (ஒழுங்கற்றது — எல்லாம் ஒரே அட்டவணையில்)</caption>
+      <tr><th>std_id</th><th>std_name</th><th>course_id</th><th>course_name</th><th>teacher</th></tr>
+      <tr><td>S1</td><td>Amuthan</td><td>C1</td><td>ICT</td><td>Mr. Raj</td></tr>
+      <tr><td>S1</td><td class="bad">Amuthan</td><td>C2</td><td>Maths</td><td>Mrs. Devi</td></tr>
+      <tr><td>S2</td><td>Keerthana</td><td>C1</td><td class="bad">ICT</td><td class="bad">Mr. Raj</td></tr>
+    </table>
+    <p>"Amuthan", "ICT", "Mr. Raj" போன்ற தரவு மீண்டும் மீண்டும் (சிவப்பு) வருகிறது — இதுவே மீள்நிகழ்வு. இதனால்:</p>
+    <table class="dt" style="text-align:left">
+      <tr><th style="text-align:left">முரண்பாடு</th><th style="text-align:left">விளக்கம் (மேலுள்ள அட்டவணையில்)</th></tr>
+      <tr><td style="text-align:left"><b>சேர்க்கை<br>(Insert)</b></td><td style="text-align:left">இன்னும் மாணவர் சேராத <b>புதிய பாடத்தை</b> (எ.கா: C3 Bio) சேர்க்க முடியாது — ஏனெனில் std_id (சாவி) இல்லாமல் வரிசை சேர்க்க முடியாது.</td></tr>
+      <tr><td style="text-align:left"><b>புதுப்பிப்பு<br>(Update)</b></td><td style="text-align:left">ICT இன் ஆசிரியர் மாறினால், அது <b>பல வரிசைகளில்</b> உள்ளது. சில வரிசைகளில் மட்டும் மாற்றினால் — ஒரே பாடத்துக்கு வெவ்வேறு ஆசிரியர்கள் தோன்றி முரண்பாடு.</td></tr>
+      <tr><td style="text-align:left"><b>நீக்கல்<br>(Delete)</b></td><td style="text-align:left">S2 Keerthana ஐ நீக்கினால், அவர் ஒருவரே C1 ICT ஐ Mr. Raj உடன் கற்றால் — <b>ICT பாடம் & ஆசிரியர் தகவலும் இழக்கப்படும்</b>.</td></tr>
+    </table>
+    <div class="warn"><span class="tag">தீர்வு</span>
+      இம்மூன்று முரண்பாடுகளுக்கும் காரணம் — பல்வேறு கருத்துகள் (மாணவர், பாடம், சேர்க்கை) ஒரே அட்டவணையில் கலந்திருப்பது. இயல்நிலையாக்கம் இவற்றைத் <b>தனித்தனி அட்டவணைகளாகப்</b> பிரித்து முரண்பாடுகளை நீக்குகிறது.
+    </div>
+  </div>
+</section>
+
+<!-- ============ Functional Dependencies ============ -->
+<section class="ncard" id="sfd">
+  <div class="nhead"><span class="nnum">FD</span><span class="ntitle">செயற்பாட்டுச் சார்புகள் (Functional Dependencies)</span></div>
+  <div class="nbody">
+    <p>இயல்நிலையாக்கத்தைப் புரிய <b>செயற்பாட்டுச் சார்பு</b> அடிப்படை. <code class="inline">A → B</code> என்றால் "<b>A ஐ அறிந்தால் B ஐ ஒரே ஒரு வழியில் தீர்மானிக்கலாம்</b>" (A determines B).</p>
+    <div class="fd">
+std_id → std_name      <span class="lbl">மாணவர் இலக்கம் தெரிந்தால் பெயர் தெரியும்</span>
+course_id → course_name <span class="lbl">பாட இலக்கம் தெரிந்தால் பாடப் பெயர் தெரியும்</span>
+    </div>
+    <h4 class="sub">மூன்று வகை சார்புகள்</h4>
+    <table class="dt" style="text-align:left">
+      <tr><th style="text-align:left">வகை</th><th style="text-align:left">விளக்கம்</th><th style="text-align:left">எந்த NF நீக்கும்?</th></tr>
+      <tr><td style="text-align:left"><b>முழுச் சார்பு<br>(Full)</b></td><td style="text-align:left">ஒரு புலம் <b>முழுக் கூட்டுச் சாவியையும்</b> சார்தல். <code>(std_id, course_id) → grade</code></td><td style="text-align:left">விரும்பத்தக்கது ✓</td></tr>
+      <tr><td style="text-align:left"><b>பகுதிச் சார்பு<br>(Partial)</b></td><td style="text-align:left">ஒரு புலம் கூட்டுச் சாவியின் <b>ஒரு பகுதியை மட்டும்</b> சார்தல். <code>(std_id, course_id) → std_name</code> ஆனால் உண்மையில் <code>std_id → std_name</code></td><td style="text-align:left"><b>2NF</b></td></tr>
+      <tr><td style="text-align:left"><b>கடத்துச் சார்பு<br>(Transitive)</b></td><td style="text-align:left">சாவியற்ற புலம் இன்னொரு சாவியற்ற புலத்தைச் சார்தல். <code>std_id → city → postcode</code></td><td style="text-align:left"><b>3NF</b></td></tr>
+    </table>
+    <div class="key"><span class="tag">எளிய புரிதல்</span>
+      <b>பகுதிச் சார்பு</b> = கூட்டுச் சாவி இருக்கும்போது மட்டுமே சாத்தியம் (சாவியின் ஒரு பகுதியை மட்டும் சார்தல்). <b>கடத்துச் சார்பு</b> = "சாவி → A → B" எனச் சங்கிலியாகச் சார்தல். இவை இரண்டுமே மீள்நிகழ்வை உருவாக்குவதால் நீக்கப்படுகின்றன.
+    </div>
+  </div>
+</section>
+
+<!-- ============ 1NF ============ -->
+<section class="ncard" id="s1">
+  <div class="nhead"><span class="nnum">1NF</span><span class="ntitle">முதல் இயல்நிலை (First Normal Form)</span></div>
+  <div class="nbody">
+    <h4 class="sub">விதி</h4>
+    <p>ஒரு அட்டவணை 1NF இல் இருக்க:</p>
+    <ul>
+      <li>ஒவ்வொரு கலமும் (cell) <b>ஒற்றை அணுமதிப்பை (single atomic value)</b> மட்டுமே கொண்டிருக்க வேண்டும்.</li>
+      <li><b>மீள்படும் குழுக்கள் (repeating groups)</b> இருக்கக் கூடாது (ஒரே கலத்தில் பல மதிப்புகள் கூடாது).</li>
+      <li>ஒவ்வொரு வரிசையும் தனித்துவமாக இருக்க வேண்டும் (primary key உண்டு).</li>
+    </ul>
+
+    <span class="exlabel">எடுத்துக்காட்டு 1 — பாடங்கள் ஒரே கலத்தில்</span>
+    <table class="dt">
+      <caption>0NF (தவறு) — subjects கலத்தில் பல மதிப்புகள்</caption>
+      <tr><th>std_id</th><th>name</th><th>subjects</th></tr>
+      <tr><td>S1</td><td>Amuthan</td><td class="bad">ICT, Physics, Maths</td></tr>
+      <tr><td>S2</td><td>Keerthana</td><td class="bad">ICT, Bio</td></tr>
+    </table>
+    <p>↓ ஒவ்வொரு பாடத்துக்கும் தனி வரிசை:</p>
+    <table class="dt">
+      <caption>1NF (சரி) — ஒவ்வொரு கலமும் ஒற்றை மதிப்பு</caption>
+      <tr><th class="pk">std_id</th><th>name</th><th class="pk">subject</th></tr>
+      <tr><td>S1</td><td>Amuthan</td><td>ICT</td></tr>
+      <tr><td>S1</td><td>Amuthan</td><td>Physics</td></tr>
+      <tr><td>S1</td><td>Amuthan</td><td>Maths</td></tr>
+      <tr><td>S2</td><td>Keerthana</td><td>ICT</td></tr>
+      <tr><td>S2</td><td>Keerthana</td><td>Bio</td></tr>
+    </table>
+    <p>primary key = (std_id + subject) கூட்டுச் சாவி.</p>
+
+    <span class="exlabel">எடுத்துக்காட்டு 2 — தொலைபேசி எண்கள்</span>
+    <div class="tablewrap">
+      <div>
+      <table class="dt">
+        <caption>0NF (தவறு)</caption>
+        <tr><th>cust_id</th><th>phones</th></tr>
+        <tr><td>C1</td><td class="bad">0771234, 0817890</td></tr>
+        <tr><td>C2</td><td class="bad">0759999</td></tr>
+      </table>
+      </div>
+      <div>
+      <table class="dt">
+        <caption>1NF (சரி)</caption>
+        <tr><th class="pk">cust_id</th><th class="pk">phone</th></tr>
+        <tr><td>C1</td><td>0771234</td></tr>
+        <tr><td>C1</td><td>0817890</td></tr>
+        <tr><td>C2</td><td>0759999</td></tr>
+      </table>
+      </div>
+    </div>
+
+    <span class="exlabel">எடுத்துக்காட்டு 3 — மீள்படும் நிரல்கள்</span>
+    <table class="dt">
+      <caption>0NF (தவறு) — subject1, subject2, subject3 எனத் தொடர் நிரல்கள்</caption>
+      <tr><th>std_id</th><th>subject1</th><th>subject2</th><th>subject3</th></tr>
+      <tr><td>S1</td><td>ICT</td><td>Physics</td><td>Maths</td></tr>
+    </table>
+    <p>இதுவும் 1NF அல்ல — மீள்படும் நிரல்களும் (repeating columns) ஒரு வகை மீள்படும் குழுவே. தீர்வு: மேலுள்ள உதாரணம் 1 போல் தனி வரிசைகளாக்குக.</p>
+
+    <div class="warn"><span class="tag">பொதுவான பிழை</span>
+      "ICT, Physics" போன்று ஒரே கலத்தில் காற்புள்ளியால் பிரித்து வைப்பது 1NF அல்ல. subject1, subject2, subject3 எனப் பல நிரல்கள் வைப்பதும் 1NF அல்ல. <b>ஒவ்வொரு மதிப்புக்கும் தனி வரிசை</b> தேவை.
+    </div>
+  </div>
+</section>
+
+<!-- ============ 2NF ============ -->
+<section class="ncard" id="s2">
+  <div class="nhead"><span class="nnum">2NF</span><span class="ntitle">இரண்டாம் இயல்நிலை (Second Normal Form)</span></div>
+  <div class="nbody">
+    <h4 class="sub">விதி</h4>
+    <p>ஒரு அட்டவணை 2NF இல் இருக்க:</p>
+    <ul>
+      <li>முதலில் <b>1NF</b> இல் இருக்க வேண்டும்.</li>
+      <li><b>பகுதிச் சார்பு (partial dependency) இருக்கக் கூடாது</b> — ஒவ்வொரு சாவியற்ற புலமும் <b>முழுக் கூட்டுச் சாவியையும்</b> சார்ந்திருக்க வேண்டும்.</li>
+    </ul>
+    <div class="key"><span class="tag">எப்போது 2NF பிரச்சினை?</span>
+      2NF சிக்கல் <b>கூட்டுச் சாவி (composite key)</b> இருக்கும்போது மட்டுமே ஏற்படும். சாவி ஒரே ஒரு புலம் எனில், பகுதிச் சார்பு சாத்தியமில்லை → ஏற்கனவே 2NF இல்.
+    </div>
+
+    <span class="exlabel">எடுத்துக்காட்டு 1 — மாணவர்-பாடச் சேர்க்கை</span>
+    <table class="dt">
+      <caption>1NF ஆனால் 2NF அல்ல — key = (std_id + course_id)</caption>
+      <tr><th class="pk">std_id</th><th class="pk">course_id</th><th>std_name</th><th>course_name</th><th>grade</th></tr>
+      <tr><td>S1</td><td>C1</td><td class="bad">Amuthan</td><td class="bad">ICT</td><td>A</td></tr>
+      <tr><td>S1</td><td>C2</td><td class="bad">Amuthan</td><td class="bad">Maths</td><td>B</td></tr>
+      <tr><td>S2</td><td>C1</td><td>Keerthana</td><td class="bad">ICT</td><td>A</td></tr>
+    </table>
+    <div class="fd">
+சார்புகளை ஆராய்வோம் (key = std_id + course_id):
+std_id → std_name        <span class="lbl">← பகுதிச் சார்பு (சாவியின் ஒரு பகுதி மட்டும்)</span>
+course_id → course_name   <span class="lbl">← பகுதிச் சார்பு</span>
+(std_id, course_id) → grade <span class="lbl">← முழுச் சார்பு (சரி)</span>
+    </div>
+    <p>std_name std_id ஐ மட்டும், course_name course_id ஐ மட்டும் சார்வதால் — பகுதிச் சார்புகள். இவற்றை <b>தனி அட்டவணைகளாகப்</b> பிரிக்க:</p>
+    <div class="tablewrap">
+      <div>
+      <table class="dt">
+        <caption>student</caption>
+        <tr><th class="pk">std_id</th><th>std_name</th></tr>
+        <tr><td>S1</td><td>Amuthan</td></tr>
+        <tr><td>S2</td><td>Keerthana</td></tr>
+      </table>
+      </div>
+      <div>
+      <table class="dt">
+        <caption>course</caption>
+        <tr><th class="pk">course_id</th><th>course_name</th></tr>
+        <tr><td>C1</td><td>ICT</td></tr>
+        <tr><td>C2</td><td>Maths</td></tr>
+      </table>
+      </div>
+    </div>
+    <table class="dt">
+      <caption>enrolment (grade முழுச் சாவியைச் சார்வதால் இங்கேயே)</caption>
+      <tr><th class="pk">std_id</th><th class="pk">course_id</th><th>grade</th></tr>
+      <tr><td>S1</td><td>C1</td><td>A</td></tr>
+      <tr><td>S1</td><td>C2</td><td>B</td></tr>
+      <tr><td>S2</td><td>C1</td><td>A</td></tr>
+    </table>
+
+    <span class="exlabel">எடுத்துக்காட்டு 2 — பணியாளர்-திட்டம்</span>
+    <table class="dt">
+      <caption>1NF ஆனால் 2NF அல்ல — key = (emp_id + project_id)</caption>
+      <tr><th class="pk">emp_id</th><th class="pk">project_id</th><th>emp_name</th><th>hours</th></tr>
+      <tr><td>E1</td><td>P1</td><td class="bad">Sara</td><td>20</td></tr>
+      <tr><td>E1</td><td>P2</td><td class="bad">Sara</td><td>15</td></tr>
+    </table>
+    <p>emp_name emp_id ஐ மட்டும் சார்வது பகுதிச் சார்பு. பிரிக்க → <code class="inline">employee(emp_id, emp_name)</code> மற்றும் <code class="inline">work(emp_id, project_id, hours)</code>.</p>
+  </div>
+</section>
+
+<!-- ============ 3NF ============ -->
+<section class="ncard" id="s3">
+  <div class="nhead"><span class="nnum">3NF</span><span class="ntitle">மூன்றாம் இயல்நிலை (Third Normal Form)</span></div>
+  <div class="nbody">
+    <h4 class="sub">விதி</h4>
+    <p>ஒரு அட்டவணை 3NF இல் இருக்க:</p>
+    <ul>
+      <li>முதலில் <b>2NF</b> இல் இருக்க வேண்டும்.</li>
+      <li><b>கடத்துச் சார்பு (transitive dependency) இருக்கக் கூடாது</b> — சாவியற்ற புலம் இன்னொரு சாவியற்ற புலத்தைச் சார்ந்திருக்கக் கூடாது.</li>
+    </ul>
+
+    <span class="exlabel">எடுத்துக்காட்டு 1 — மாணவர்-நகரம்</span>
+    <table class="dt">
+      <caption>2NF ஆனால் 3NF அல்ல</caption>
+      <tr><th class="pk">std_id</th><th>name</th><th>city</th><th>postcode</th></tr>
+      <tr><td>S1</td><td>Amuthan</td><td>Jaffna</td><td class="bad">40000</td></tr>
+      <tr><td>S2</td><td>Keerthana</td><td>Vavuniya</td><td>43000</td></tr>
+      <tr><td>S3</td><td>Nilavan</td><td>Jaffna</td><td class="bad">40000</td></tr>
+    </table>
+    <div class="fd">
+std_id → city       <span class="lbl">(சாவி → city)</span>
+city → postcode     <span class="lbl">(city → postcode)</span>
+∴ std_id → postcode <span class="lbl">← கடத்துச் சார்பு (மறைமுகம்)</span>
+    </div>
+    <p>postcode std_id ஐ <b>நேரடியாக அல்ல, city ஊடாக மறைமுகமாகச்</b> சார்கிறது. (Jaffna இன் postcode மீண்டும் வருகிறது — மீள்நிகழ்வு.) பிரிக்க:</p>
+    <div class="tablewrap">
+      <div>
+      <table class="dt">
+        <caption>student</caption>
+        <tr><th class="pk">std_id</th><th>name</th><th>city</th></tr>
+        <tr><td>S1</td><td>Amuthan</td><td>Jaffna</td></tr>
+        <tr><td>S2</td><td>Keerthana</td><td>Vavuniya</td></tr>
+        <tr><td>S3</td><td>Nilavan</td><td>Jaffna</td></tr>
+      </table>
+      </div>
+      <div>
+      <table class="dt">
+        <caption>city</caption>
+        <tr><th class="pk">city</th><th>postcode</th></tr>
+        <tr><td>Jaffna</td><td>40000</td></tr>
+        <tr><td>Vavuniya</td><td>43000</td></tr>
+      </table>
+      </div>
+    </div>
+
+    <span class="exlabel">எடுத்துக்காட்டு 2 — பணியாளர்-துறை</span>
+    <table class="dt">
+      <caption>2NF ஆனால் 3NF அல்ல</caption>
+      <tr><th class="pk">emp_id</th><th>emp_name</th><th>dept_id</th><th>dept_name</th></tr>
+      <tr><td>E1</td><td>Sara</td><td>D1</td><td class="bad">Sales</td></tr>
+      <tr><td>E2</td><td>Ravi</td><td>D1</td><td class="bad">Sales</td></tr>
+      <tr><td>E3</td><td>Mala</td><td>D2</td><td>HR</td></tr>
+    </table>
+    <div class="fd">
+emp_id → dept_id, dept_id → dept_name
+∴ emp_id → dept_name <span class="lbl">← கடத்துச் சார்பு</span>
+    </div>
+    <p>பிரிக்க → <code class="inline">employee(emp_id, emp_name, dept_id)</code> மற்றும் <code class="inline">department(dept_id, dept_name)</code>.</p>
+
+    <span class="exlabel">எடுத்துக்காட்டு 3 — நூல்-வெளியீட்டாளர்</span>
+    <table class="dt">
+      <caption>2NF ஆனால் 3NF அல்ல</caption>
+      <tr><th class="pk">book_id</th><th>title</th><th>publisher_id</th><th>publisher_city</th></tr>
+      <tr><td>B1</td><td>ICT Guide</td><td>P1</td><td class="bad">Colombo</td></tr>
+      <tr><td>B2</td><td>Maths</td><td>P1</td><td class="bad">Colombo</td></tr>
+    </table>
+    <p>book_id → publisher_id → publisher_city = கடத்து. பிரிக்க → <code class="inline">book(book_id, title, publisher_id)</code> மற்றும் <code class="inline">publisher(publisher_id, publisher_city)</code>.</p>
+
+    <div class="good"><span class="tag">3NF அடைந்தபின்</span>
+      ஒவ்வொரு அட்டவணையிலும் — சாவியற்ற புலங்கள் அனைத்தும் <b>நேரடியாக primary key ஐ மட்டுமே</b> சார்கின்றன; மீள்நிகழ்வும் முரண்பாடுகளும் நீக்கப்படுகின்றன. பெரும்பாலான நடைமுறை தரவுத்தளங்களுக்கு 3NF போதுமானது.
+    </div>
+  </div>
+</section>
+
+<!-- ============ Full example ============ -->
+<section class="ncard" id="sfull">
+  <div class="nhead"><span class="nnum">முழுமை</span><span class="ntitle">முழு உதாரணம் — 0NF இலிருந்து 3NF வரை</span></div>
+  <div class="nbody">
+    <p>ஒரு கடையின் ஆர்டர் தரவு. படிப்படியாக 3NF வரை எடுத்துச் செல்வோம்.</p>
+
+    <span class="exlabel">படி 0 — 0NF (ஒழுங்கற்றது)</span>
+    <table class="dt">
+      <caption>order — items கலத்தில் பல மதிப்புகள்</caption>
+      <tr><th>order_id</th><th>cust_name</th><th>cust_city</th><th>items</th></tr>
+      <tr><td>O1</td><td>Amuthan</td><td>Jaffna</td><td class="bad">Pen, Book</td></tr>
+      <tr><td>O2</td><td>Keerthana</td><td>Vavuniya</td><td class="bad">Bag</td></tr>
+    </table>
+
+    <span class="exlabel">படி 1 — 1NF (ஒற்றை மதிப்பு)</span>
+    <table class="dt">
+      <caption>ஒவ்வொரு பொருளுக்கும் தனி வரிசை; key = (order_id + item)</caption>
+      <tr><th class="pk">order_id</th><th>cust_name</th><th>cust_city</th><th class="pk">item</th></tr>
+      <tr><td>O1</td><td>Amuthan</td><td>Jaffna</td><td>Pen</td></tr>
+      <tr><td>O1</td><td>Amuthan</td><td>Jaffna</td><td>Book</td></tr>
+      <tr><td>O2</td><td>Keerthana</td><td>Vavuniya</td><td>Bag</td></tr>
+    </table>
+
+    <span class="exlabel">படி 2 — 2NF (பகுதிச் சார்பு நீக்கம்)</span>
+    <p>cust_name, cust_city ஆகியவை order_id ஐ மட்டும் சார்கின்றன (item அல்ல) → பகுதிச் சார்பு. பிரிக்க:</p>
+    <div class="tablewrap">
+      <div>
+      <table class="dt">
+        <caption>order_info</caption>
+        <tr><th class="pk">order_id</th><th>cust_name</th><th>cust_city</th></tr>
+        <tr><td>O1</td><td>Amuthan</td><td>Jaffna</td></tr>
+        <tr><td>O2</td><td>Keerthana</td><td>Vavuniya</td></tr>
+      </table>
+      </div>
+      <div>
+      <table class="dt">
+        <caption>order_item</caption>
+        <tr><th class="pk">order_id</th><th class="pk">item</th></tr>
+        <tr><td>O1</td><td>Pen</td></tr>
+        <tr><td>O1</td><td>Book</td></tr>
+        <tr><td>O2</td><td>Bag</td></tr>
+      </table>
+      </div>
+    </div>
+
+    <span class="exlabel">படி 3 — 3NF (கடத்துச் சார்பு நீக்கம்)</span>
+    <p>order_info இல்: order_id → cust_name → cust_city எனக் கருதினால் (ஒரு வாடிக்கையாளருக்கு ஒரே நகரம்), cust_city கடத்தாகச் சார்கிறது. பிரிக்க:</p>
+    <div class="tablewrap">
+      <div>
+      <table class="dt">
+        <caption>order_info</caption>
+        <tr><th class="pk">order_id</th><th>cust_name</th></tr>
+        <tr><td>O1</td><td>Amuthan</td></tr>
+        <tr><td>O2</td><td>Keerthana</td></tr>
+      </table>
+      </div>
+      <div>
+      <table class="dt">
+        <caption>customer</caption>
+        <tr><th class="pk">cust_name</th><th>cust_city</th></tr>
+        <tr><td>Amuthan</td><td>Jaffna</td></tr>
+        <tr><td>Keerthana</td><td>Vavuniya</td></tr>
+      </table>
+      </div>
+      <div>
+      <table class="dt">
+        <caption>order_item</caption>
+        <tr><th class="pk">order_id</th><th class="pk">item</th></tr>
+        <tr><td>O1</td><td>Pen</td></tr>
+        <tr><td>O1</td><td>Book</td></tr>
+        <tr><td>O2</td><td>Bag</td></tr>
+      </table>
+      </div>
+    </div>
+    <div class="good"><span class="tag">முடிவு</span>
+      மூன்று சுத்தமான அட்டவணைகள் — மீள்நிகழ்வு இல்லை, முரண்பாடுகள் இல்லை. ஒவ்வொரு தகவலும் ஒரே இடத்தில் மட்டும் சேமிக்கப்படுகிறது.
+    </div>
+  </div>
+</section>
+
+<!-- ============ Practice ============ -->
+<section class="ncard" id="sp">
+  <div class="nhead"><span class="nnum">?</span><span class="ntitle">பயிற்சி வினாக்கள் (விடைகளுடன்)</span></div>
+  <div class="nbody">
+
+    <!-- P1 -->
+    <div class="pq"><span class="qnum">வினா 01</span>
+      <p class="task" style="margin-top:10px">இயல்நிலையாக்கம் ஏன் செய்யப்படுகிறது? இரண்டு காரணங்களைக் கூறுக.</p>
+      <button class="btn" onclick="toggleAns(this,'p1')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p1"><span class="ans-label">விடை</span>
+        <p>தரவு மீள்நிகழ்வைக் (redundancy) குறைக்க; முரண்பாடுகளை (insert/update/delete anomalies) தவிர்க்க; தரவுச் சீர்மையை உறுதிசெய்ய; சேமிப்பு இடத்தைச் சிக்கனமாக்க. (ஏதேனும் இரண்டு.)</p>
+      </div>
+    </div>
+
+    <!-- P2 -->
+    <div class="pq"><span class="qnum">வினா 02</span>
+      <div class="scen"><code class="inline">student(std_id, name, hobbies)</code> இல் hobbies கலத்தில் "Reading, Cricket, Music" எனப் பல மதிப்புகள் உள்ளன.</div>
+      <p class="task">இது எந்த NF இல் உள்ளது? 1NF க்கு மாற்றிக் காட்டுக.</p>
+      <button class="btn" onclick="toggleAns(this,'p2')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p2"><span class="ans-label">விடை</span>
+        <p>இது <b>0NF</b> (ஒரே கலத்தில் பல மதிப்புகள்). 1NF க்கு — ஒவ்வொரு hobby க்கும் தனி வரிசை:</p>
+        <table class="dt">
+          <tr><th class="pk">std_id</th><th>name</th><th class="pk">hobby</th></tr>
+          <tr><td>S1</td><td>Amuthan</td><td>Reading</td></tr>
+          <tr><td>S1</td><td>Amuthan</td><td>Cricket</td></tr>
+          <tr><td>S1</td><td>Amuthan</td><td>Music</td></tr>
+        </table>
+        <p>key = (std_id + hobby).</p>
+      </div>
+    </div>
+
+    <!-- P3 -->
+    <div class="pq"><span class="qnum">வினா 03</span>
+      <div class="scen"><code class="inline">grade(std_id, subject_id, std_name, marks)</code>; key = (std_id + subject_id). std_name std_id ஐ மட்டும் சார்கிறது.</div>
+      <p class="task">இங்குள்ள சார்பு வகை என்ன? இந்த அட்டவணை எந்த NF இல் உள்ளது? 2NF க்கு மாற்றுக.</p>
+      <button class="btn" onclick="toggleAns(this,'p3')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p3"><span class="ans-label">விடை</span>
+        <p><b>சார்பு:</b> std_id → std_name = பகுதிச் சார்பு (partial). எனவே 1NF இல் உள்ளது, 2NF அல்ல.</p>
+        <p><b>2NF:</b></p>
+<pre>student(<span class="kw">std_id</span>, std_name)
+grade(<span class="kw">std_id</span>, <span class="kw">subject_id</span>, marks)</pre>
+      </div>
+    </div>
+
+    <!-- P4 -->
+    <div class="pq"><span class="qnum">வினா 04</span>
+      <div class="scen"><code class="inline">car(car_id, model, brand, brand_country)</code>. car_id → brand, brand → brand_country.</div>
+      <p class="task">இங்குள்ள சார்பு வகை என்ன? 3NF க்கு மாற்றுக.</p>
+      <button class="btn" onclick="toggleAns(this,'p4')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p4"><span class="ans-label">விடை</span>
+        <p><b>சார்பு:</b> car_id → brand → brand_country = கடத்துச் சார்பு (transitive).</p>
+        <p><b>3NF:</b></p>
+<pre>car(<span class="kw">car_id</span>, model, brand)
+brand(<span class="kw">brand</span>, brand_country)</pre>
+      </div>
+    </div>
+
+    <!-- P5 -->
+    <div class="pq"><span class="qnum">வினா 05</span>
+      <p class="task" style="margin-top:10px">2NF சிக்கல் (பகுதிச் சார்பு) எந்தச் சந்தர்ப்பத்தில் மட்டுமே ஏற்படும்? ஒரே புலம் primary key ஆக உள்ள அட்டவணை ஏற்கனவே 2NF இல் உள்ளதா?</p>
+      <button class="btn" onclick="toggleAns(this,'p5')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p5"><span class="ans-label">விடை</span>
+        <p>பகுதிச் சார்பு <b>கூட்டுச் சாவி (composite key)</b> இருக்கும்போது மட்டுமே ஏற்படும். ஒரே புலம் primary key எனில் — சாவியின் "பகுதி" என்பதே இல்லை, எனவே பகுதிச் சார்பு சாத்தியமில்லை → 1NF இல் உள்ள அத்தகைய அட்டவணை <b>ஏற்கனவே 2NF இல்</b> உள்ளது.</p>
+      </div>
+    </div>
+
+    <!-- P6 -->
+    <div class="pq"><span class="qnum">வினா 06</span>
+      <div class="scen"><code class="inline">emp(emp_id, name, dept_id, dept_name, dept_head)</code>. emp_id → dept_id; dept_id → dept_name, dept_head.</div>
+      <p class="task">இந்த அட்டவணையை 3NF க்கு மாற்றுக.</p>
+      <button class="btn" onclick="toggleAns(this,'p6')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p6"><span class="ans-label">விடை</span>
+        <p>dept_name மற்றும் dept_head dept_id ஐச் சார்வதால் (emp_id → dept_id → dept_name) கடத்துச் சார்பு. பிரிக்க:</p>
+<pre>employee(<span class="kw">emp_id</span>, name, dept_id)
+department(<span class="kw">dept_id</span>, dept_name, dept_head)</pre>
+      </div>
+    </div>
+
+    <!-- P7 -->
+    <div class="pq"><span class="qnum">வினா 07</span>
+      <div class="scen"><code class="inline">project(emp_id, project_id, emp_name, project_name, hours)</code>; key = (emp_id + project_id). emp_name → emp_id; project_name → project_id.</div>
+      <p class="task">இந்த அட்டவணையை 1NF, 2NF, 3NF எனப் படிப்படியாக மதிப்பிட்டு, இறுதி அட்டவணைகளைக் காட்டுக.</p>
+      <button class="btn" onclick="toggleAns(this,'p7')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p7"><span class="ans-label">விடை</span>
+        <p><b>1NF:</b> ஒவ்வொரு கலமும் ஒற்றை மதிப்பு என்றால் ஏற்கனவே 1NF இல்.</p>
+        <p><b>2NF:</b> emp_name emp_id ஐ மட்டும், project_name project_id ஐ மட்டும் சார்வது பகுதிச் சார்பு. பிரிக்க:</p>
+<pre>employee(<span class="kw">emp_id</span>, emp_name)
+project(<span class="kw">project_id</span>, project_name)
+work(<span class="kw">emp_id</span>, <span class="kw">project_id</span>, hours)</pre>
+        <p><b>3NF:</b> மேலுள்ள அட்டவணைகளில் கடத்துச் சார்பு இல்லை → ஏற்கனவே 3NF இல்.</p>
+      </div>
+    </div>
+
+    <!-- P8 -->
+    <div class="pq"><span class="qnum">வினா 08</span>
+      <p class="task" style="margin-top:10px">"The key, the whole key, and nothing but the key" — இது எவ்வாறு 1NF, 2NF, 3NF உடன் தொடர்புபடுகிறது?</p>
+      <button class="btn" onclick="toggleAns(this,'p8')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p8"><span class="ans-label">விடை</span>
+        <ul>
+          <li><b>"The key"</b> → 1NF: ஒற்றை மதிப்புகள் + primary key உள்ளது.</li>
+          <li><b>"the whole key"</b> → 2NF: சாவியற்ற புலங்கள் முழுச் சாவியையும் சார்தல் (பகுதிச் சார்பு இல்லை).</li>
+          <li><b>"nothing but the key"</b> → 3NF: சாவியற்ற புலங்கள் சாவியை மட்டுமே சார்தல் (கடத்துச் சார்பு இல்லை).</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+</main>
+
+<footer>
+  க.பொ.த (உயர்தர) தகவல் மற்றும் தொடர்பாடல் தொழினுட்பம் — இயல்நிலையாக்கம் (Normalization) விரிவான குறிப்புகள்
+</footer>
+
+<script>
+function toggleAns(btn,id){
+  var ans=document.getElementById(id);
+  var open=ans.classList.toggle('show');
+  btn.classList.toggle('open',open);
+  btn.textContent=open?'விடையை மறை ▴':'விடையைக் காட்டு ▾';
+}
+</script>
+
+</body>
+</html>

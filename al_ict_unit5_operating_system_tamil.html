@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>க.பொ.த (உயர்தரம்) ICT — அலகு 5: கணினி இயக்க முறைமை குறிப்புகள்</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Catamaran:wght@600;800&family=Hind+Madurai:wght@400;500;600&family=Noto+Sans+Tamil:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F6F4EE; --card:#FFFFFF; --ink:#22303A;
+    --maroon:#8B1E3F; --teal:#1F4E5F; --gold:#C9912B;
+    --line:#E2DDD2;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--paper);color:var(--ink);
+    font-family:'Hind Madurai','Noto Sans Tamil',sans-serif;
+    line-height:1.8;font-size:17px;}
+  header{background:linear-gradient(135deg,var(--teal) 0%,#143946 100%);
+    color:#F2EFE6;padding:42px 20px 36px;text-align:center;
+    border-bottom:5px solid var(--gold);}
+  header .eyebrow{letter-spacing:.18em;font-size:.8rem;text-transform:uppercase;
+    color:#D8C58A;margin-bottom:10px;}
+  header h1{font-family:'Catamaran','Noto Sans Tamil',sans-serif;font-weight:800;
+    font-size:clamp(1.4rem,4vw,2.1rem);line-height:1.5;}
+  header p{margin-top:10px;font-size:.95rem;color:#BFD4DA}
+  main{max-width:900px;margin:0 auto;padding:36px 18px 70px}
+
+  .toc{background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:16px 24px;margin-bottom:34px;font-size:.92rem;}
+  .toc b{color:var(--teal);font-family:'Catamaran','Noto Sans Tamil',sans-serif}
+  .toc a{color:var(--maroon);text-decoration:none;white-space:nowrap}
+  .toc a:hover{text-decoration:underline}
+  .toc .links{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:6px}
+
+  .ncard{background:var(--card);border:1px solid var(--line);border-radius:16px;
+    margin-bottom:32px;overflow:hidden;box-shadow:0 2px 10px rgba(34,48,58,.05);}
+  .nhead{display:flex;align-items:center;gap:14px;padding:16px 24px;
+    border-bottom:1px solid var(--line);
+    background:linear-gradient(to right,#FBFAF6,#fff);}
+  .nnum{font-family:'Catamaran',sans-serif;font-weight:800;font-size:.95rem;
+    color:#fff;background:var(--teal);border-radius:10px;padding:5px 13px;
+    white-space:nowrap;}
+  .ntitle{font-family:'Catamaran','Noto Sans Tamil',sans-serif;font-weight:600;
+    font-size:1.04rem;color:var(--teal);}
+  .nbody{padding:22px 26px 26px}
+  .nbody p{margin-bottom:12px}
+  .nbody ul,.nbody ol{margin:6px 26px 14px}
+  .nbody li{margin-bottom:6px}
+  h4.sub{font-family:'Catamaran','Noto Sans Tamil',sans-serif;color:var(--maroon);
+    font-size:1.0rem;margin:18px 0 8px;}
+
+  .key{background:#FBF7EC;border-right:4px solid var(--gold);
+    border-radius:10px;padding:14px 20px;margin:14px 0;}
+  .key .tag{font-size:.78rem;font-weight:700;color:var(--gold);
+    letter-spacing:.1em;display:block;margin-bottom:4px;}
+  .warn{background:#FAEFF1;border-right:4px solid var(--maroon);
+    border-radius:10px;padding:14px 20px;margin:14px 0;}
+  .warn .tag{font-size:.78rem;font-weight:700;color:var(--maroon);
+    letter-spacing:.1em;display:block;margin-bottom:4px;}
+
+  code.inline{background:#EDF2F1;color:var(--teal);border-radius:6px;
+    padding:1px 8px;font-family:'JetBrains Mono',monospace;font-size:.85em;}
+
+  table.dt{border-collapse:collapse;margin:12px auto;font-size:.88rem;width:100%}
+  table.dt th{background:var(--teal);color:#fff;padding:8px 12px;
+    font-weight:600;border:1px solid #16404f;text-align:left;}
+  table.dt td{border:1px solid var(--line);padding:8px 12px;
+    background:#FDFCF9;vertical-align:top;}
+  table.dt caption{caption-side:top;font-weight:600;color:var(--teal);
+    margin-bottom:6px;font-size:.95rem;}
+
+  .diagram{background:#FBFAF6;border:1px solid var(--line);border-radius:12px;
+    padding:16px;margin:14px 0;overflow-x:auto;text-align:center;}
+  .diagram svg{max-width:100%;height:auto}
+  .diagram .cap{font-size:.85rem;color:#5A6B74;margin-top:8px}
+  svg text{font-family:'Noto Sans Tamil','Hind Madurai',sans-serif;}
+
+  .btn{display:inline-flex;align-items:center;gap:9px;
+    font-family:'Hind Madurai','Noto Sans Tamil',sans-serif;font-weight:600;
+    font-size:1rem;color:#fff;background:var(--teal);border:none;
+    border-radius:999px;padding:11px 26px;margin-top:14px;cursor:pointer;
+    transition:background .2s,transform .15s;}
+  .btn:hover{background:#16404f;transform:translateY(-1px)}
+  .btn:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+  .btn.open{background:var(--maroon)}
+  .answer{display:none;margin-top:20px;border-top:2px dashed var(--line);
+    padding-top:18px;animation:fade .35s ease;}
+  .answer.show{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  .ans-label{display:inline-block;font-weight:700;color:#fff;background:var(--gold);
+    border-radius:8px;padding:3px 14px;font-size:.85rem;margin-bottom:12px;}
+  .qnum{font-family:'Catamaran',sans-serif;font-weight:800;font-size:1rem;
+    color:#fff;background:var(--maroon);border-radius:10px;padding:5px 14px;
+    white-space:nowrap;}
+  .task{font-weight:600;color:var(--maroon)}
+  .pq{border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin-bottom:18px}
+  .note{margin-top:12px;font-size:.9rem;color:#5A6B74;background:#EFF4F2;
+    border-radius:10px;padding:10px 16px;}
+
+  footer{text-align:center;padding:26px 16px 40px;font-size:.85rem;color:#7A8790;}
+  @media (max-width:560px){
+    .nhead{flex-direction:column;align-items:flex-start;gap:8px}
+    body{font-size:16px}
+  }
+  @media (prefers-reduced-motion:reduce){.answer{animation:none}.btn{transition:none}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">G.C.E. Advanced Level &middot; Sri Lanka &middot; ICT (20) &middot; Unit 5</div>
+  <h1>கணினி இயக்க முறைமை<br>(Computer Operating System)</h1>
+  <p>OS அறிமுகம் &amp; செயற்பாடுகள் &middot; கோப்பு முகாமை &middot; செயன்முறை முகாமை &middot; வள முகாமை</p>
+</header>
+
+<main>
+
+<div class="toc"><b>உள்ளடக்கம்</b>
+  <div class="links">
+    <a href="#s1">5.1 OS அறிமுகம், செயற்பாடுகள், வகைப்பாடு</a>
+    <a href="#s2">5.2 கோப்பு முகாமை</a>
+    <a href="#s3">5.3 செயன்முறை முகாமை</a>
+    <a href="#s4">5.4 வள முகாமை (நினைவகம் & I/O)</a>
+    <a href="#s5">பயிற்சி வினாக்கள்</a>
+  </div>
+</div>
+
+<!-- ===================== 5.1 ===================== -->
+<section class="ncard" id="s1">
+  <div class="nhead"><span class="nnum">5.1</span><span class="ntitle">இயக்க முறைமை அறிமுகம், செயற்பாடுகள், வகைப்பாடு</span></div>
+  <div class="nbody">
+    <p><b>இயக்க முறைமை (Operating System — OS)</b> என்பது வன்பொருளுக்கும் பயனருக்கும்/பயன்பாட்டு மென்பொருளுக்கும் இடையே செயற்படும் <b>முறைமை மென்பொருள்</b> ஆகும். இது கணினியின் வளங்களை நிர்வகித்து, பயனர் வன்பொருளைப் பயன்படுத்த ஒரு இடைமுகத்தை வழங்குகிறது. எ.கா: Windows, Linux, macOS, Android, iOS.</p>
+    <div class="diagram">
+      <svg viewBox="0 0 480 200" width="460" xmlns="http://www.w3.org/2000/svg">
+        <rect x="120" y="14" width="240" height="36" rx="8" fill="#FDF3E0" stroke="#C9912B" stroke-width="1.7"/><text x="240" y="38" text-anchor="middle" font-size="13" fill="#8a6313" font-weight="600">பயனர் (User)</text>
+        <rect x="100" y="62" width="280" height="36" rx="8" fill="#F3E8EC" stroke="#8B1E3F" stroke-width="1.7"/><text x="240" y="86" text-anchor="middle" font-size="13" fill="#8B1E3F" font-weight="600">பயன்பாட்டு மென்பொருள்</text>
+        <rect x="80" y="110" width="320" height="40" rx="8" fill="#EAF3F5" stroke="#1F4E5F" stroke-width="2"/><text x="240" y="135" text-anchor="middle" font-size="14" fill="#1F4E5F" font-weight="700">இயக்க முறைமை (OS)</text>
+        <rect x="120" y="162" width="240" height="34" rx="8" fill="#E6EAEC" stroke="#5A6B74" stroke-width="1.6"/><text x="240" y="184" text-anchor="middle" font-size="13" fill="#3e4950" font-weight="600">வன்பொருள் (Hardware)</text>
+      </svg>
+      <div class="cap">OS — பயனருக்கும் வன்பொருளுக்கும் இடையேயான அடுக்கு</div>
+    </div>
+    <h4 class="sub">பரிணாம வளர்ச்சி (Evolution) — சுருக்கம்</h4>
+    <ul>
+      <li><b>தொகுதி முறைமைகள் (Batch):</b> ஒத்த வேலைகள் திரட்டப்பட்டு வரிசையாக இயக்கப்பட்டன; பயனர் தலையீடு இல்லை.</li>
+      <li><b>பல்நிரலாக்கம் (Multiprogramming):</b> பல நிரல்கள் நினைவகத்தில் இருந்து CPU பகிரப்பட்டது.</li>
+      <li><b>நேர பகிர்வு (Time-sharing):</b> பல பயனர்கள் ஒரே நேரத்தில் (நேரத் துண்டுகள்).</li>
+      <li><b>நவீன OS:</b> வரைகலை இடைமுகம் (GUI), பல்பணி (multitasking), வலையமைப்பு, மொபைல்.</li>
+    </ul>
+    <h4 class="sub">OS இன் முக்கியச் செயற்பாடுகள் (Functions)</h4>
+    <table class="dt">
+      <tr><th>செயற்பாடு</th><th>விளக்கம்</th></tr>
+      <tr><td><b>பயனர் இடைமுகம்</b><br>(Interface)</td><td>பயனர் கணினியுடன் தொடர்புகொள்ள வழி — CLI (கட்டளை வரி) அல்லது GUI (வரைகலை).</td></tr>
+      <tr><td><b>செயன்முறை முகாமை</b><br>(Process Management)</td><td>செயன்முறைகளை உருவாக்கல், அட்டவணைப்படுத்தல் (scheduling), நிறுத்துதல்.</td></tr>
+      <tr><td><b>வள முகாமை</b><br>(Resource Management)</td><td>CPU, நினைவகம், I/O சாதனங்கள் ஆகியவற்றை ஒதுக்கீடு செய்து நிர்வகித்தல்.</td></tr>
+      <tr><td><b>கோப்பு முகாமை</b><br>(File Management)</td><td>கோப்புகளை உருவாக்கல், சேமித்தல், ஒழுங்கமைத்தல், அணுகல் கட்டுப்பாடு.</td></tr>
+      <tr><td><b>பாதுகாப்பு</b><br>(Security)</td><td>அங்கீகாரம் (passwords), அணுகல் உரிமைகள், தரவுப் பாதுகாப்பு.</td></tr>
+      <tr><td><b>பிழைக் கையாளல்</b></td><td>பிழைகளைக் கண்டறிந்து கையாளுதல்.</td></tr>
+    </table>
+    <h4 class="sub">OS வகைப்பாடு (Classification)</h4>
+    <table class="dt">
+      <tr><th>வகை</th><th>பண்பு / எடுத்துக்காட்டு</th></tr>
+      <tr><td><b>ஒற்றைப் பயனர் ஒற்றைப் பணி</b></td><td>ஒரு நேரத்தில் ஒரு பயனர், ஒரு வேலை. எ.கா: பழைய MS-DOS</td></tr>
+      <tr><td><b>ஒற்றைப் பயனர் பல்பணி</b></td><td>ஒரு பயனர், பல வேலைகள் ஒரே நேரத்தில். எ.கா: Windows (தனிநபர்)</td></tr>
+      <tr><td><b>பல் பயனர்</b><br>(Multi-user)</td><td>பல பயனர்கள் ஒரே நேரத்தில். எ.கா: Unix, Linux சேவையகங்கள்</td></tr>
+      <tr><td><b>நிகழ்நேர</b><br>(Real-time)</td><td>உடனடி, நேரக் கட்டுப்பாட்டுடன். எ.கா: விமானக் கட்டுப்பாடு, ரோபோக்கள்</td></tr>
+      <tr><td><b>பகிர்வு</b><br>(Distributed)</td><td>பல கணினிகள் ஒரு முறைமையாக இணைந்து வேலை செய்தல்</td></tr>
+      <tr><td><b>உட்பொதிந்த</b><br>(Embedded)</td><td>குறிப்பிட்ட சாதனங்களில். எ.கா: ஸ்மார்ட்ஃபோன், சலவை இயந்திரம்</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ===================== 5.2 ===================== -->
+<section class="ncard" id="s2">
+  <div class="nhead"><span class="nnum">5.2</span><span class="ntitle">கோப்பு முகாமை (File Management)</span></div>
+  <div class="nbody">
+    <p>OS கோப்புகளையும் (files) கோப்புறைகளையும் (folders/directories) உருவாக்கி, சேமித்து, ஒழுங்கமைத்து, பாதுகாக்கிறது.</p>
+    <h4 class="sub">கோப்பு வகைகள் (File Types)</h4>
+    <ul>
+      <li>உரைக் கோப்பு (.txt), ஆவணம் (.docx, .pdf), படம் (.jpg, .png), ஒலி (.mp3), காணொளி (.mp4), நிறைவேற்று (.exe), நிரல் (.py).</li>
+      <li>நீட்டிப்பு (extension) கோப்பின் வகையையும் அதைத் திறக்கும் பயன்பாட்டையும் OS க்குக் காட்டுகிறது.</li>
+    </ul>
+    <h4 class="sub">கோப்பகப் படிநிலை (Directory Hierarchy)</h4>
+    <p>கோப்புகள் <b>மரக் கட்டமைப்பில் (tree structure)</b> ஒழுங்கமைக்கப்படுகின்றன — ஒரு மூல (root) கோப்பகத்திலிருந்து கிளைக் கோப்பகங்கள் (subdirectories) வரை.</p>
+    <div class="diagram">
+      <svg viewBox="0 0 460 180" width="440" xmlns="http://www.w3.org/2000/svg">
+        <rect x="190" y="14" width="80" height="30" rx="6" fill="#EAF3F5" stroke="#1F4E5F" stroke-width="1.7"/><text x="230" y="34" text-anchor="middle" font-size="12" fill="#1F4E5F" font-weight="600">Root (C:)</text>
+        <line x1="230" y1="44" x2="110" y2="70" stroke="#22303A"/><line x1="230" y1="44" x2="230" y2="70" stroke="#22303A"/><line x1="230" y1="44" x2="350" y2="70" stroke="#22303A"/>
+        <rect x="70" y="70" width="80" height="28" rx="6" fill="#FDF3E0" stroke="#C9912B" stroke-width="1.5"/><text x="110" y="89" text-anchor="middle" font-size="11" fill="#8a6313">Documents</text>
+        <rect x="190" y="70" width="80" height="28" rx="6" fill="#FDF3E0" stroke="#C9912B" stroke-width="1.5"/><text x="230" y="89" text-anchor="middle" font-size="11" fill="#8a6313">Pictures</text>
+        <rect x="310" y="70" width="80" height="28" rx="6" fill="#FDF3E0" stroke="#C9912B" stroke-width="1.5"/><text x="350" y="89" text-anchor="middle" font-size="11" fill="#8a6313">Programs</text>
+        <line x1="110" y1="98" x2="80" y2="124" stroke="#22303A"/><line x1="110" y1="98" x2="140" y2="124" stroke="#22303A"/>
+        <rect x="48" y="124" width="64" height="26" rx="5" fill="#F3E8EC" stroke="#8B1E3F" stroke-width="1.4"/><text x="80" y="142" text-anchor="middle" font-size="10" fill="#8B1E3F">note.txt</text>
+        <rect x="116" y="124" width="64" height="26" rx="5" fill="#F3E8EC" stroke="#8B1E3F" stroke-width="1.4"/><text x="148" y="142" text-anchor="middle" font-size="10" fill="#8B1E3F">cv.pdf</text>
+      </svg>
+      <div class="cap">மரக் கட்டமைப்பு கோப்பகப் படிநிலை</div>
+    </div>
+    <h4 class="sub">கோப்பு முறைமை (File System) — FAT</h4>
+    <p><b>கோப்பு முறைமை</b> சேமிப்பகத்தில் கோப்புகள் எவ்வாறு சேமிக்கப்பட்டு அணுகப்படுகின்றன என்பதை நிர்வகிக்கிறது. <b>FAT (File Allocation Table)</b> — ஒவ்வொரு கோப்பும் வட்டில் எந்தக் கொத்துகளில் (clusters) உள்ளது என்பதைப் பதிவுசெய்யும் அட்டவணை. வகைகள்: FAT16, FAT32, exFAT. (மற்றவை: NTFS, ext4.)</p>
+    <h4 class="sub">கோப்புப் பாதுகாப்பு (File Security)</h4>
+    <ul>
+      <li><b>அணுகல் உரிமைகள் (Permissions):</b> வாசிப்பு (read), எழுதுதல் (write), நிறைவேற்றல் (execute).</li>
+      <li>கடவுச்சொல் பாதுகாப்பு, மறையாக்கம் (encryption), பயனர் கணக்குகள்.</li>
+    </ul>
+    <h4 class="sub">சேமிப்பு ஒதுக்கீட்டு முறைகள் (Storage Allocation)</h4>
+    <table class="dt">
+      <tr><th>முறை</th><th>விளக்கம்</th><th>நன்மை / குறை</th></tr>
+      <tr><td><b>தொடர்ச்சியான</b><br>(Contiguous)</td><td>கோப்பு அடுத்தடுத்த கொத்துகளில் சேமிக்கப்படும்</td><td>வேகமான அணுகல்; ஆனால் வெளிப்புறத் துண்டாக்கம் (fragmentation) ஏற்படும்</td></tr>
+      <tr><td><b>இணைக்கப்பட்ட</b><br>(Linked)</td><td>ஒவ்வொரு கொத்தும் அடுத்த கொத்தைச் சுட்டிக்காட்டும் (pointer)</td><td>இடம் வீணாகாது; ஆனால் நேரடி (random) அணுகல் கடினம்</td></tr>
+      <tr><td><b>சுட்டெண்</b><br>(Indexed)</td><td>ஒரு சுட்டெண் தொகுதி (index block) கோப்பின் எல்லாக் கொத்து முகவரிகளையும் வைத்திருக்கும்</td><td>நேரடி அணுகல் இலகு; சுட்டெண் தொகுதிக்கு இடம் தேவை</td></tr>
+    </table>
+    <h4 class="sub">துண்டகற்றல் (Defragmentation) &amp; வட்டு வடிவமைப்பு (Formatting)</h4>
+    <ul>
+      <li><b>துண்டகற்றல்:</b> சிதறிக் கிடக்கும் கோப்புப் பகுதிகளை அருகருகே மீள ஒழுங்குபடுத்தி, அணுகல் வேகத்தை அதிகரித்தல். (SSD க்குத் தேவையில்லை.)</li>
+      <li><b>வடிவமைப்பு (Formatting):</b> சேமிப்பகத்தை ஒரு கோப்பு முறைமையுடன் தயார்செய்தல்; இது ஏற்கனவே உள்ள தரவை அழிக்கும்.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ===================== 5.3 ===================== -->
+<section class="ncard" id="s3">
+  <div class="nhead"><span class="nnum">5.3</span><span class="ntitle">செயன்முறை முகாமை (Process Management)</span></div>
+  <div class="nbody">
+    <p><b>செயன்முறை (Process)</b> = நிறைவேற்றப்பட்டுக்கொண்டிருக்கும் ஒரு நிரல் (a program in execution). வட்டில் உள்ள செயலற்ற நிரலுக்கும் (program), நினைவகத்தில் இயங்கும் செயன்முறைக்கும் (process) வேறுபாடு உண்டு.</p>
+    <h4 class="sub">செயன்முறை நிலைகளும் மாற்றங்களும் (States &amp; Transitions)</h4>
+    <div class="diagram">
+      <svg viewBox="0 0 520 230" width="500" xmlns="http://www.w3.org/2000/svg">
+        <defs><marker id="p1" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#22303A"/></marker></defs>
+        <ellipse cx="70" cy="40" rx="52" ry="26" fill="#FDF3E0" stroke="#C9912B" stroke-width="1.7"/><text x="70" y="44" text-anchor="middle" font-size="12" fill="#8a6313" font-weight="600">New (புதிய)</text>
+        <ellipse cx="240" cy="40" rx="52" ry="26" fill="#EAF3F5" stroke="#1F4E5F" stroke-width="1.7"/><text x="240" y="44" text-anchor="middle" font-size="12" fill="#1F4E5F" font-weight="600">Ready (தயார்)</text>
+        <ellipse cx="240" cy="160" rx="52" ry="26" fill="#F3E8EC" stroke="#8B1E3F" stroke-width="2"/><text x="240" y="164" text-anchor="middle" font-size="12" fill="#8B1E3F" font-weight="700">Running (இயங்கும்)</text>
+        <ellipse cx="430" cy="40" rx="56" ry="26" fill="#E6EAEC" stroke="#5A6B74" stroke-width="1.7"/><text x="430" y="44" text-anchor="middle" font-size="12" fill="#3e4950" font-weight="600">Terminated</text>
+        <ellipse cx="430" cy="160" rx="52" ry="26" fill="#FBF7EC" stroke="#C9912B" stroke-width="1.7"/><text x="430" y="164" text-anchor="middle" font-size="11.5" fill="#8a6313" font-weight="600">Waiting (காத்திருப்பு)</text>
+        <line x1="122" y1="40" x2="186" y2="40" stroke="#22303A" stroke-width="1.6" marker-end="url(#p1)"/><text x="154" y="32" text-anchor="middle" font-size="9.5" fill="#5A6B74">admit</text>
+        <line x1="240" y1="66" x2="240" y2="132" stroke="#22303A" stroke-width="1.6" marker-end="url(#p1)"/><text x="288" y="100" text-anchor="middle" font-size="9.5" fill="#5A6B74">dispatch</text>
+        <line x1="220" y1="134" x2="220" y2="66" stroke="#22303A" stroke-width="1.6" marker-end="url(#p1)"/><text x="170" y="100" text-anchor="middle" font-size="9.5" fill="#5A6B74">timeout</text>
+        <line x1="292" y1="155" x2="380" y2="60" stroke="#22303A" stroke-width="1.6" marker-end="url(#p1)"/><text x="355" y="120" text-anchor="middle" font-size="9.5" fill="#5A6B74">exit</text>
+        <line x1="292" y1="160" x2="378" y2="160" stroke="#22303A" stroke-width="1.6" marker-end="url(#p1)"/><text x="335" y="152" text-anchor="middle" font-size="9.5" fill="#5A6B74">I/O wait</text>
+        <line x1="404" y1="138" x2="290" y2="56" stroke="#22303A" stroke-width="1.6" marker-end="url(#p1)"/><text x="380" y="105" text-anchor="middle" font-size="9.5" fill="#5A6B74">I/O done</text>
+      </svg>
+      <div class="cap">செயன்முறை நிலை மாற்ற வரைபடம்</div>
+    </div>
+    <ul>
+      <li><b>New (புதிய):</b> செயன்முறை உருவாக்கப்படுகிறது.</li>
+      <li><b>Ready (தயார்):</b> CPU க்காகக் காத்திருக்கிறது (இயங்கத் தயார்).</li>
+      <li><b>Running (இயங்கும்):</b> CPU இல் நிறைவேற்றப்படுகிறது.</li>
+      <li><b>Waiting/Blocked (காத்திருப்பு):</b> I/O அல்லது நிகழ்வுக்காகக் காத்திருக்கிறது.</li>
+      <li><b>Terminated (முடிந்த):</b> நிறைவேற்றம் நிறைவடைந்தது.</li>
+    </ul>
+    <h4 class="sub">செயன்முறைக் கட்டுப்பாட்டுத் தொகுதி (PCB — Process Control Block)</h4>
+    <p>ஒவ்வொரு செயன்முறை பற்றிய தகவல்களை OS சேமிக்கும் தரவுக் கட்டமைப்பு. உள்ளடக்கம்: செயன்முறை அடையாள எண் (PID), தற்போதைய நிலை, நிரல் எண்ணி (PC), பதிவேடுகளின் பெறுமானம், நினைவக ஒதுக்கீடு, முன்னுரிமை (priority), திறந்த கோப்புகள்.</p>
+    <h4 class="sub">சூழல் மாற்றம் (Context Switching)</h4>
+    <p>CPU ஒரு செயன்முறையிலிருந்து இன்னொன்றுக்கு மாறும்போது, தற்போதைய செயன்முறையின் நிலையை அதன் PCB இல் <b>சேமித்து</b>, அடுத்த செயன்முறையின் நிலையை PCB இலிருந்து <b>மீளேற்றும்</b>. இதுவே சூழல் மாற்றம். (இது ஒரு செலவு — overhead.)</p>
+    <h4 class="sub">அட்டவணைப்படுத்திகள் (Schedulers)</h4>
+    <ul>
+      <li><b>நீண்டகால (Long-term):</b> எந்த வேலைகள் நினைவகத்துக்குள் அனுமதிக்கப்படும் எனத் தீர்மானிக்கும்.</li>
+      <li><b>குறுங்கால (Short-term / CPU scheduler):</b> Ready வரிசையிலிருந்து எந்த செயன்முறை அடுத்து CPU பெறும் எனத் தீர்மானிக்கும் (மிக அடிக்கடி).</li>
+      <li><b>நடுத்தர (Medium-term):</b> செயன்முறைகளை தற்காலிகமாக நினைவகத்திலிருந்து வெளியேற்றுதல் (swapping).</li>
+    </ul>
+    <h4 class="sub">பல்நிரலாக்கமும் (Multiprogramming) நேர பகிர்வும் (Time-sharing)</h4>
+    <table class="dt">
+      <tr><th>பல்நிரலாக்கம் (Multiprogramming)</th><th>நேர பகிர்வு (Time-sharing)</th></tr>
+      <tr><td>பல நிரல்கள் நினைவகத்தில்; ஒன்று I/O க்காகக் காத்திருக்கும்போது CPU இன்னொன்றுக்கு மாறும்</td><td>ஒவ்வொரு பயனருக்கும் ஒரு சிறு <b>நேரத் துண்டு (time slice)</b> வழங்கப்படும்; வேகமாக மாறுவதால் ஒரே நேரம் போல் தோன்றும்</td></tr>
+      <tr><td>நோக்கம்: CPM பயன்பாட்டை அதிகரித்தல்</td><td>நோக்கம்: பல பயனர்களுக்கு உடனடிப் பதில்</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ===================== 5.4 ===================== -->
+<section class="ncard" id="s4">
+  <div class="nhead"><span class="nnum">5.4</span><span class="ntitle">வள முகாமை — நினைவகம் &amp; I/O சாதனங்கள்</span></div>
+  <div class="nbody">
+    <h4 class="sub">நினைவக முகாமை (Memory Management)</h4>
+    <p>OS முதன்மை நினைவகத்தை (RAM) செயன்முறைகளுக்கு ஒதுக்கி, கண்காணித்து, பகிர்ந்து, மீட்டெடுக்கிறது.</p>
+    <ul>
+      <li><b>MMU (Memory Management Unit):</b> தர்க்க (logical/virtual) முகவரிகளை இயற்பியல் (physical) முகவரிகளாக <b>மொழிபெயர்க்கும்</b> வன்பொருள்.</li>
+      <li><b>மெய்நிகர் நினைவகம் (Virtual Memory):</b> இரண்டாம்நிலை வட்டின் ஒரு பகுதியை (paging file / swap) RAM போல் பயன்படுத்தி, கிடைக்கும் நினைவகத்தை <b>பௌதிக RAM ஐ விட அதிகமாகக்</b> காட்டும் நுட்பம். RAM இல் இடமின்மையால் பெரிய நிரல்களையும் இயக்க முடிகிறது.</li>
+      <li><b>பக்கமாக்கல் (Paging):</b> நினைவகத்தை சம அளவு <b>பக்கங்களாக (pages)</b> பிரித்து, தேவையான பக்கங்களை மட்டும் RAM க்குக் கொண்டுவருதல். வெளிப்புறத் துண்டாக்கத்தைத் தவிர்க்கிறது.</li>
+    </ul>
+    <div class="diagram">
+      <svg viewBox="0 0 500 130" width="480" xmlns="http://www.w3.org/2000/svg">
+        <defs><marker id="m1" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#22303A"/></marker></defs>
+        <rect x="14" y="44" width="120" height="46" rx="8" fill="#EAF3F5" stroke="#1F4E5F" stroke-width="1.7"/><text x="74" y="64" text-anchor="middle" font-size="11.5" fill="#1F4E5F" font-weight="600">தர்க்க முகவரி</text><text x="74" y="80" text-anchor="middle" font-size="10" fill="#5A6B74">(CPU)</text>
+        <line x1="134" y1="67" x2="172" y2="67" stroke="#22303A" stroke-width="1.7" marker-end="url(#m1)"/>
+        <rect x="174" y="44" width="120" height="46" rx="8" fill="#FDF3E0" stroke="#C9912B" stroke-width="1.8"/><text x="234" y="70" text-anchor="middle" font-size="13" fill="#8a6313" font-weight="700">MMU</text>
+        <line x1="294" y1="67" x2="332" y2="67" stroke="#22303A" stroke-width="1.7" marker-end="url(#m1)"/>
+        <rect x="334" y="44" width="150" height="46" rx="8" fill="#F3E8EC" stroke="#8B1E3F" stroke-width="1.7"/><text x="409" y="64" text-anchor="middle" font-size="11.5" fill="#8B1E3F" font-weight="600">இயற்பியல் முகவரி</text><text x="409" y="80" text-anchor="middle" font-size="10" fill="#5A6B74">(RAM)</text>
+      </svg>
+      <div class="cap">MMU — தர்க்க முகவரியை இயற்பியல் முகவரியாக மொழிபெயர்த்தல்</div>
+    </div>
+    <h4 class="sub">உள்ளீடு/வெளியீட்டுச் சாதன முகாமை (I/O Device Management)</h4>
+    <ul>
+      <li><b>சாதன இயக்கிகள் (Device Drivers):</b> ஒவ்வொரு வன்பொருள் சாதனத்துடனும் (printer, mouse, keyboard) OS தொடர்புகொள்ள உதவும் சிறப்பு மென்பொருள். ஒவ்வொரு சாதனத்துக்கும் அதற்கான இயக்கி தேவை.</li>
+      <li><b>கடிதப்பை (Spooling — Simultaneous Peripheral Operation On-Line):</b> மெதுவான சாதனங்களுக்கான (எ.கா: printer) வேலைகளை ஒரு <b>தாங்கல் (buffer / queue)</b> இல் வரிசையாகச் சேமித்து, சாதனம் தயாராகும்போது ஒவ்வொன்றாக அனுப்புதல். இதனால் CPU மெதுவான சாதனத்துக்காகக் காத்திருக்க வேண்டியதில்லை.</li>
+    </ul>
+    <div class="key"><span class="tag">Spooling — எளிய உதாரணம்</span>
+      பல பயனர்கள் ஒரே அச்சுப்பொறிக்கு ஒரே நேரத்தில் வேலை அனுப்பினாலும், அவை ஒரு வரிசையில் (print queue) சேமிக்கப்பட்டு, அச்சுப்பொறி ஒவ்வொன்றாக அச்சிடும். CPU இதற்காகக் காத்திருக்காது — தன் வேலையைத் தொடரும்.
+    </div>
+  </div>
+</section>
+
+<!-- ===================== Practice ===================== -->
+<section class="ncard" id="s5">
+  <div class="nhead"><span class="nnum">?</span><span class="ntitle">பயிற்சி வினாக்கள் (விடைகளுடன்)</span></div>
+  <div class="nbody">
+
+    <!-- P1 -->
+    <div class="pq">
+      <span class="qnum">வினா 01</span>
+      <p class="task" style="margin-top:10px">இயக்க முறைமையின் (OS) நான்கு முக்கியச் செயற்பாடுகளைக் குறிப்பிடுக.</p>
+      <button class="btn" onclick="toggleAns(this,'p1')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p1"><span class="ans-label">விடை</span>
+        <p>பயனர் இடைமுகம் வழங்கல், செயன்முறை முகாமை, வள முகாமை, கோப்பு முகாமை, பாதுகாப்பு (இவற்றுள் நான்கு). மேலும்: நினைவக முகாமை, பிழைக் கையாளல்.</p>
+      </div>
+    </div>
+
+    <!-- P2 -->
+    <div class="pq">
+      <span class="qnum">வினா 02</span>
+      <p class="task" style="margin-top:10px">"நிரல் (Program)" க்கும் "செயன்முறை (Process)" க்கும் இடையேயான வேறுபாடு என்ன?</p>
+      <button class="btn" onclick="toggleAns(this,'p2')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p2"><span class="ans-label">விடை</span>
+        <p><b>நிரல்:</b> வட்டில் சேமிக்கப்பட்ட செயலற்ற (passive) கட்டளைகளின் தொகுப்பு.</p>
+        <p><b>செயன்முறை:</b> நிறைவேற்றப்பட்டுக்கொண்டிருக்கும் (active) ஒரு நிரல் — நினைவகத்தில், CPU வளங்களுடன்.</p>
+      </div>
+    </div>
+
+    <!-- P3 -->
+    <div class="pq">
+      <span class="qnum">வினா 03</span>
+      <p class="task" style="margin-top:10px">செயன்முறையின் நிலைகளை (states) வரிசையாக எழுதி, Ready → Running மாற்றம் எவ்வாறு நிகழ்கிறது எனக் கூறுக.</p>
+      <button class="btn" onclick="toggleAns(this,'p3')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p3"><span class="ans-label">விடை</span>
+        <p>நிலைகள்: <b>New → Ready → Running → (Waiting) → Terminated</b>.</p>
+        <p>Ready நிலையில் CPU க்காகக் காத்திருக்கும் செயன்முறையை, குறுங்கால அட்டவணைப்படுத்தி (short-term scheduler) தெரிவுசெய்து CPU வழங்கும்போது — இது <b>dispatch</b> எனப்படும் — அது Running ஆகிறது.</p>
+      </div>
+    </div>
+
+    <!-- P4 -->
+    <div class="pq">
+      <span class="qnum">வினா 04</span>
+      <p class="task" style="margin-top:10px">PCB (Process Control Block) என்றால் என்ன? அதில் சேமிக்கப்படும் <b>மூன்று</b> தகவல்களைக் குறிப்பிடுக.</p>
+      <button class="btn" onclick="toggleAns(this,'p4')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p4"><span class="ans-label">விடை</span>
+        <p>PCB — ஒவ்வொரு செயன்முறை பற்றிய தகவல்களை OS சேமிக்கும் தரவுக் கட்டமைப்பு.</p>
+        <p>உள்ளடக்கம் (ஏதேனும் மூன்று): செயன்முறை அடையாள எண் (PID), தற்போதைய நிலை, நிரல் எண்ணி (PC), பதிவேடுகளின் பெறுமானம், நினைவக ஒதுக்கீடு, முன்னுரிமை.</p>
+      </div>
+    </div>
+
+    <!-- P5 -->
+    <div class="pq">
+      <span class="qnum">வினா 05</span>
+      <p class="task" style="margin-top:10px">மெய்நிகர் நினைவகம் (Virtual Memory) என்றால் என்ன? அதன் நன்மை யாது?</p>
+      <button class="btn" onclick="toggleAns(this,'p5')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p5"><span class="ans-label">விடை</span>
+        <p>இரண்டாம்நிலை வட்டின் ஒரு பகுதியை RAM போலப் பயன்படுத்தி, கிடைக்கும் நினைவகத்தை இயற்பியல் RAM ஐ விட அதிகமாகக் காட்டும் நுட்பமே மெய்நிகர் நினைவகம்.</p>
+        <p><b>நன்மை:</b> RAM இன் அளவை விடப் பெரிய நிரல்களையும் இயக்க முடியும்; ஒரே நேரத்தில் அதிக செயன்முறைகளை வைத்திருக்கலாம்.</p>
+      </div>
+    </div>
+
+    <!-- P6 -->
+    <div class="pq">
+      <span class="qnum">வினா 06</span>
+      <p class="task" style="margin-top:10px">சேமிப்பு ஒதுக்கீட்டு முறைகள் மூன்றையும் (Contiguous, Linked, Indexed) சுருக்கமாக விளக்குக.</p>
+      <button class="btn" onclick="toggleAns(this,'p6')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p6"><span class="ans-label">விடை</span>
+        <ul>
+          <li><b>தொடர்ச்சியான:</b> கோப்பு அடுத்தடுத்த கொத்துகளில் சேமிக்கப்படும் — அணுகல் வேகம், ஆனால் துண்டாக்கம்.</li>
+          <li><b>இணைக்கப்பட்ட:</b> ஒவ்வொரு கொத்தும் அடுத்த கொத்தைச் சுட்டிக்காட்டும் — இடம் வீணாகாது, ஆனால் நேரடி அணுகல் கடினம்.</li>
+          <li><b>சுட்டெண்:</b> ஒரு index block எல்லாக் கொத்து முகவரிகளையும் வைத்திருக்கும் — நேரடி அணுகல் இலகு.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- P7 -->
+    <div class="pq">
+      <span class="qnum">வினா 07</span>
+      <p class="task" style="margin-top:10px">Spooling என்றால் என்ன? அது எந்தச் சாதனத்தில் பொதுவாகப் பயன்படுகிறது?</p>
+      <button class="btn" onclick="toggleAns(this,'p7')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p7"><span class="ans-label">விடை</span>
+        <p>Spooling — மெதுவான சாதனங்களுக்கான வேலைகளை ஒரு தாங்கல்/வரிசையில் (buffer/queue) சேமித்து, சாதனம் தயாராகும்போது ஒவ்வொன்றாக அனுப்பும் நுட்பம். இதனால் CPU காத்திருக்க வேண்டியதில்லை.</p>
+        <p>பொதுவாக <b>அச்சுப்பொறியில் (printer)</b> — print queue வடிவில் — பயன்படுகிறது.</p>
+      </div>
+    </div>
+
+    <!-- P8 -->
+    <div class="pq">
+      <span class="qnum">வினா 08</span>
+      <p class="task" style="margin-top:10px">துண்டகற்றல் (Defragmentation) எதற்காகச் செய்யப்படுகிறது? இது SSD க்கு ஏன் தேவையில்லை?</p>
+      <button class="btn" onclick="toggleAns(this,'p8')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p8"><span class="ans-label">விடை</span>
+        <p>வட்டில் சிதறிக் கிடக்கும் கோப்புப் பகுதிகளை அருகருகே மீள ஒழுங்குபடுத்தி, அணுகல் வேகத்தை அதிகரிக்கவே துண்டகற்றல் செய்யப்படுகிறது.</p>
+        <p>SSD இல் இயங்கும் பாகங்கள் (read/write head) இல்லை; எந்த இடத்தையும் சம வேகத்தில் அணுகும். எனவே துண்டாக்கம் வேகத்தைப் பாதிக்காது — defragmentation தேவையில்லை (மேலும் அது SSD இன் ஆயுளைக் குறைக்கும்).</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+</main>
+
+<footer>
+  க.பொ.த (உயர்தர) தகவல் மற்றும் தொடர்பாடல் தொழினுட்பம் — அலகு 5: கணினி இயக்க முறைமை குறிப்புகள்
+</footer>
+
+<script>
+function toggleAns(btn,id){
+  var ans=document.getElementById(id);
+  var open=ans.classList.toggle('show');
+  btn.classList.toggle('open',open);
+  btn.textContent=open?'விடையை மறை ▴':'விடையைக் காட்டு ▾';
+}
+</script>
+
+</body>
+</html>

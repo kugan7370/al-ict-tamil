@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>க.பொ.த (உயர்தரம்) ICT — அலகு 2: கணினி அறிமுகம் குறிப்புகள்</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Catamaran:wght@600;800&family=Hind+Madurai:wght@400;500;600&family=Noto+Sans+Tamil:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F6F4EE; --card:#FFFFFF; --ink:#22303A;
+    --maroon:#8B1E3F; --teal:#1F4E5F; --gold:#C9912B;
+    --line:#E2DDD2;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--paper);color:var(--ink);
+    font-family:'Hind Madurai','Noto Sans Tamil',sans-serif;
+    line-height:1.8;font-size:17px;}
+  header{background:linear-gradient(135deg,var(--teal) 0%,#143946 100%);
+    color:#F2EFE6;padding:42px 20px 36px;text-align:center;
+    border-bottom:5px solid var(--gold);}
+  header .eyebrow{letter-spacing:.18em;font-size:.8rem;text-transform:uppercase;
+    color:#D8C58A;margin-bottom:10px;}
+  header h1{font-family:'Catamaran','Noto Sans Tamil',sans-serif;font-weight:800;
+    font-size:clamp(1.4rem,4vw,2.1rem);line-height:1.5;}
+  header p{margin-top:10px;font-size:.95rem;color:#BFD4DA}
+  main{max-width:900px;margin:0 auto;padding:36px 18px 70px}
+
+  .toc{background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:16px 24px;margin-bottom:34px;font-size:.92rem;}
+  .toc b{color:var(--teal);font-family:'Catamaran','Noto Sans Tamil',sans-serif}
+  .toc a{color:var(--maroon);text-decoration:none;white-space:nowrap}
+  .toc a:hover{text-decoration:underline}
+  .toc .links{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:6px}
+
+  .ncard{background:var(--card);border:1px solid var(--line);border-radius:16px;
+    margin-bottom:32px;overflow:hidden;box-shadow:0 2px 10px rgba(34,48,58,.05);}
+  .nhead{display:flex;align-items:center;gap:14px;padding:16px 24px;
+    border-bottom:1px solid var(--line);
+    background:linear-gradient(to right,#FBFAF6,#fff);}
+  .nnum{font-family:'Catamaran',sans-serif;font-weight:800;font-size:.95rem;
+    color:#fff;background:var(--teal);border-radius:10px;padding:5px 13px;
+    white-space:nowrap;}
+  .ntitle{font-family:'Catamaran','Noto Sans Tamil',sans-serif;font-weight:600;
+    font-size:1.06rem;color:var(--teal);}
+  .nbody{padding:22px 26px 26px}
+  .nbody p{margin-bottom:12px}
+  .nbody ul,.nbody ol{margin:6px 26px 14px}
+  .nbody li{margin-bottom:6px}
+  h4.sub{font-family:'Catamaran','Noto Sans Tamil',sans-serif;color:var(--maroon);
+    font-size:1.0rem;margin:18px 0 8px;}
+
+  .key{background:#FBF7EC;border-right:4px solid var(--gold);
+    border-radius:10px;padding:14px 20px;margin:14px 0;}
+  .key .tag{font-size:.78rem;font-weight:700;color:var(--gold);
+    letter-spacing:.1em;display:block;margin-bottom:4px;}
+  .warn{background:#FAEFF1;border-right:4px solid var(--maroon);
+    border-radius:10px;padding:14px 20px;margin:14px 0;}
+  .warn .tag{font-size:.78rem;font-weight:700;color:var(--maroon);
+    letter-spacing:.1em;display:block;margin-bottom:4px;}
+
+  code.inline{background:#EDF2F1;color:var(--teal);border-radius:6px;
+    padding:1px 8px;font-family:'JetBrains Mono',monospace;font-size:.85em;}
+
+  table.dt{border-collapse:collapse;margin:12px auto;font-size:.88rem;width:100%}
+  table.dt th{background:var(--teal);color:#fff;padding:8px 12px;
+    font-weight:600;border:1px solid #16404f;text-align:left;}
+  table.dt td{border:1px solid var(--line);padding:8px 12px;
+    background:#FDFCF9;vertical-align:top;}
+  table.dt caption{caption-side:top;font-weight:600;color:var(--teal);
+    margin-bottom:6px;font-size:.95rem;}
+
+  .diagram{background:#FBFAF6;border:1px solid var(--line);border-radius:12px;
+    padding:16px;margin:14px 0;overflow-x:auto;text-align:center;}
+  .diagram svg{max-width:100%;height:auto}
+  .diagram .cap{font-size:.85rem;color:#5A6B74;margin-top:8px}
+  svg text{font-family:'Noto Sans Tamil','Hind Madurai',sans-serif;}
+
+  .btn{display:inline-flex;align-items:center;gap:9px;
+    font-family:'Hind Madurai','Noto Sans Tamil',sans-serif;font-weight:600;
+    font-size:1rem;color:#fff;background:var(--teal);border:none;
+    border-radius:999px;padding:11px 26px;margin-top:14px;cursor:pointer;
+    transition:background .2s,transform .15s;}
+  .btn:hover{background:#16404f;transform:translateY(-1px)}
+  .btn:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+  .btn.open{background:var(--maroon)}
+  .answer{display:none;margin-top:20px;border-top:2px dashed var(--line);
+    padding-top:18px;animation:fade .35s ease;}
+  .answer.show{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  .ans-label{display:inline-block;font-weight:700;color:#fff;background:var(--gold);
+    border-radius:8px;padding:3px 14px;font-size:.85rem;margin-bottom:12px;}
+  .qnum{font-family:'Catamaran',sans-serif;font-weight:800;font-size:1rem;
+    color:#fff;background:var(--maroon);border-radius:10px;padding:5px 14px;
+    white-space:nowrap;}
+  .task{font-weight:600;color:var(--maroon)}
+  .pq{border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin-bottom:18px}
+  .note{margin-top:12px;font-size:.9rem;color:#5A6B74;background:#EFF4F2;
+    border-radius:10px;padding:10px 16px;}
+
+  footer{text-align:center;padding:26px 16px 40px;font-size:.85rem;color:#7A8790;}
+  @media (max-width:560px){
+    .nhead{flex-direction:column;align-items:flex-start;gap:8px}
+    body{font-size:16px}
+  }
+  @media (prefers-reduced-motion:reduce){.answer{animation:none}.btn{transition:none}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">G.C.E. Advanced Level &middot; Sri Lanka &middot; ICT (20) &middot; Unit 2</div>
+  <h1>கணினி அறிமுகம்<br>(Introduction to Computer)</h1>
+  <p>கணினி வரலாறு &amp; தலைமுறைகள் &middot; வன்பொருள் &middot; வொன்-நியூமன் கட்டமைப்பு &middot; நினைவகப் படிநிலை</p>
+</header>
+
+<main>
+
+<div class="toc"><b>உள்ளடக்கம்</b>
+  <div class="links">
+    <a href="#s1">2.1 வரலாறு, தலைமுறைகள், வகைப்பாடு</a>
+    <a href="#s2">2.2 வன்பொருள் கூறுகள் & Parallel/Grid</a>
+    <a href="#s3">2.3 வொன்-நியூமன் கட்டமைப்பு</a>
+    <a href="#s4">2.4 நினைவகப் படிநிலை (RAM, ROM, Cache)</a>
+    <a href="#s5">பயிற்சி வினாக்கள்</a>
+  </div>
+</div>
+
+<!-- ===================== 2.1 ===================== -->
+<section class="ncard" id="s1">
+  <div class="nhead"><span class="nnum">2.1</span><span class="ntitle">கணினியின் வரலாறு, தலைமுறைகள், வகைப்பாடு</span></div>
+  <div class="nbody">
+    <h4 class="sub">கணினியின் வரலாறு — முன்னோடிக் கருவிகள்</h4>
+    <p>எண்ணுதலுக்கும் கணித்தலுக்குமான கருவிகள் காலகாலமாக வளர்ந்தே இன்றைய கணினி உருவாகியது:</p>
+    <ul>
+      <li><b>அபாகஸ் (Abacus):</b> மிகப் பழமையான எண்ணுதல் கருவி (சுமார் கி.மு. 3000).</li>
+      <li><b>பாஸ்கலின் (Pascaline):</b> பிளேஸ் பாஸ்கல் — முதல் இயந்திரக் கூட்டல்/கழித்தல் கணிப்பான் (1642).</li>
+      <li><b>பகுப்பாய்வு இயந்திரம் (Analytical Engine):</b> <b>சார்ள்ஸ் பாபேஜ் (Charles Babbage)</b> — நவீன கணினியின் அடிப்படைக் கருத்துகளை வழங்கியதால் <b>"கணினியின் தந்தை"</b> எனப்படுகிறார்.</li>
+      <li><b>அடா லவ்லேஸ் (Ada Lovelace):</b> முதல் நிரலாளர் (first programmer) எனக் கருதப்படுபவர்.</li>
+      <li><b>ENIAC:</b> முதல் பொது நோக்கு எலெக்ட்ரோனிக் கணினிகளுள் ஒன்று (வெற்றிடக் குழாய்கள் பயன்படுத்தியது).</li>
+    </ul>
+
+    <h4 class="sub">கணினியின் தலைமுறைகள் (Generations 1G–4G)</h4>
+    <p>ஒவ்வொரு தலைமுறையும் அதன் காலத்தில் பயன்படுத்தப்பட்ட <b>முதன்மை எலெக்ட்ரோனிக் தொழில்நுட்பத்தால்</b> அடையாளப்படுத்தப்படுகிறது:</p>
+    <table class="dt">
+      <caption>கணினியின் தலைமுறைகள்</caption>
+      <tr><th>தலைமுறை</th><th>தொழில்நுட்பம்</th><th>பண்புகள்</th><th>எடுத்துக்காட்டு</th></tr>
+      <tr><td><b>1G</b><br>(1940–56)</td><td>வெற்றிடக் குழாய்<br>(Vacuum Tube)</td><td>மிகப் பெரியது, அதிக வெப்பம், அதிக மின்சாரம், மெதுவானது, நம்பகத்தன்மை குறைவு</td><td>ENIAC, UNIVAC</td></tr>
+      <tr><td><b>2G</b><br>(1956–63)</td><td>டிரான்சிஸ்டர்<br>(Transistor)</td><td>சிறியது, வேகம் கூடியது, குறைந்த வெப்பம்/மின்சாரம், நம்பகம் கூடியது</td><td>IBM 1401</td></tr>
+      <tr><td><b>3G</b><br>(1964–71)</td><td>ஒருங்கிணைந்த சுற்று<br>(IC — Integrated Circuit)</td><td>மேலும் சிறியது, வேகமானது, விலை குறைவு, OS பயன்பாடு</td><td>IBM 360</td></tr>
+      <tr><td><b>4G</b><br>(1971–இன்று)</td><td>நுண்செயலி<br>(Microprocessor / VLSI)</td><td>மிகச் சிறியது, மிக வேகமானது, தனிநபர் கணினி (PC), GUI</td><td>Intel 4004, நவீன PC</td></tr>
+    </table>
+    <div class="key"><span class="tag">போக்கு (Trend)</span>
+      தலைமுறை முன்னேற முன்னேற: <b>அளவு குறைகிறது, வேகம் கூடுகிறது, விலை குறைகிறது, நம்பகத்தன்மை கூடுகிறது, மின்சார நுகர்வு குறைகிறது.</b> (5G — செயற்கை நுண்ணறிவு / AI அடிப்படையிலானது எனக் கருதப்படுகிறது.)
+    </div>
+
+    <h4 class="sub">கணினிகளின் வகைப்பாடு (Classification)</h4>
+    <p><b>1) தொழில்நுட்பம் / தரவு வகையை அடிப்படையாகக் கொண்டு:</b></p>
+    <ul>
+      <li><b>அனலொக் கணினி (Analog):</b> தொடர்ச்சியாக மாறும் பௌதிக அளவுகளை (வெப்பம், அழுத்தம், மின்னழுத்தம்) கையாளும். எ.கா: வெப்பமானி, பழைய வேக மானி.</li>
+      <li><b>டிஜிட்டல் கணினி (Digital):</b> தனித்த (0,1) எண்மானத் தரவைக் கையாளும். எ.கா: நவீன PC.</li>
+      <li><b>கலப்பினக் கணினி (Hybrid):</b> இரண்டினதும் பண்புகள். எ.கா: மருத்துவ ICU கண்காணிப்புக் கருவிகள்.</li>
+    </ul>
+    <p><b>2) நோக்கத்தை அடிப்படையாகக் கொண்டு:</b></p>
+    <ul>
+      <li><b>பொது நோக்கு (General Purpose):</b> பல வேலைகளுக்கு. எ.கா: PC, லேப்டாப்.</li>
+      <li><b>விசேட நோக்கு (Special Purpose):</b> ஒரே வேலைக்கு வடிவமைக்கப்பட்டது. எ.கா: ATM, கணிப்பான், சலவை இயந்திரக் கட்டுப்படுத்தி.</li>
+    </ul>
+    <p><b>3) அளவு / சக்தியை அடிப்படையாகக் கொண்டு:</b></p>
+    <table class="dt">
+      <tr><th>வகை</th><th>பண்பு / பயன்பாடு</th></tr>
+      <tr><td><b>மீக்கணினி</b><br>(Supercomputer)</td><td>மிக அதிக வேகம்/சக்தி; வானிலை முன்னறிவிப்பு, விண்வெளி ஆராய்ச்சி, அணு உருவகப்படுத்தல்</td></tr>
+      <tr><td><b>பேராயக் கணினி</b><br>(Mainframe)</td><td>ஒரே நேரத்தில் ஆயிரக்கணக்கான பயனர்கள்; வங்கிகள், அரசு, பெருநிறுவனங்கள்</td></tr>
+      <tr><td><b>சிறுகணினி</b><br>(Minicomputer)</td><td>நடுத்தர அளவு; சிறு/நடுத்தர நிறுவனங்கள்</td></tr>
+      <tr><td><b>நுண்கணினி</b><br>(Microcomputer)</td><td>தனிநபர் பயன்பாடு; PC, லேப்டாப், டேப்லட், ஸ்மார்ட்ஃபோன்</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ===================== 2.2 ===================== -->
+<section class="ncard" id="s2">
+  <div class="nhead"><span class="nnum">2.2</span><span class="ntitle">வன்பொருள் கூறுகள்; Parallel &amp; Grid Computing</span></div>
+  <div class="nbody">
+    <p>ஒரு கணினி முறைமையின் வன்பொருள் கூறுகள் <b>உள்ளீடு → செயலாக்கம் → வெளியீடு + சேமிப்பு</b> எனப் பிரிக்கப்படுகின்றன.</p>
+    <div class="diagram">
+      <svg viewBox="0 0 620 230" width="600" xmlns="http://www.w3.org/2000/svg">
+        <defs><marker id="h1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="#22303A"/></marker></defs>
+        <rect x="20" y="80" width="120" height="56" rx="10" fill="#FDF3E0" stroke="#C9912B" stroke-width="1.8"/><text x="80" y="104" text-anchor="middle" font-size="13" fill="#8a6313" font-weight="600">உள்ளீட்டுச்</text><text x="80" y="122" text-anchor="middle" font-size="13" fill="#8a6313" font-weight="600">சாதனங்கள்</text>
+        <!-- CPU box -->
+        <rect x="220" y="48" width="180" height="120" rx="12" fill="#EAF3F5" stroke="#1F4E5F" stroke-width="2"/>
+        <text x="310" y="40" text-anchor="middle" font-size="13" fill="#1F4E5F" font-weight="700">CPU (செயலகம்)</text>
+        <rect x="240" y="64" width="64" height="38" rx="6" fill="#fff" stroke="#1F4E5F"/><text x="272" y="88" text-anchor="middle" font-size="12" fill="#1F4E5F">CU</text>
+        <rect x="316" y="64" width="64" height="38" rx="6" fill="#fff" stroke="#1F4E5F"/><text x="348" y="88" text-anchor="middle" font-size="12" fill="#1F4E5F">ALU</text>
+        <rect x="240" y="116" width="140" height="36" rx="6" fill="#fff" stroke="#1F4E5F"/><text x="310" y="139" text-anchor="middle" font-size="12" fill="#1F4E5F">Registers</text>
+        <rect x="480" y="80" width="120" height="56" rx="10" fill="#F3E8EC" stroke="#8B1E3F" stroke-width="1.8"/><text x="540" y="104" text-anchor="middle" font-size="13" fill="#8B1E3F" font-weight="600">வெளியீட்டுச்</text><text x="540" y="122" text-anchor="middle" font-size="13" fill="#8B1E3F" font-weight="600">சாதனங்கள்</text>
+        <line x1="140" y1="108" x2="218" y2="108" stroke="#22303A" stroke-width="1.7" marker-end="url(#h1)"/>
+        <line x1="400" y1="108" x2="478" y2="108" stroke="#22303A" stroke-width="1.7" marker-end="url(#h1)"/>
+        <rect x="240" y="186" width="140" height="34" rx="8" fill="#FBF7EC" stroke="#C9912B" stroke-width="1.6"/><text x="310" y="208" text-anchor="middle" font-size="12.5" fill="#8a6313" font-weight="600">நினைவகம் / சேமிப்பு</text>
+        <line x1="310" y1="168" x2="310" y2="184" stroke="#22303A" stroke-width="1.7" marker-end="url(#h1)"/>
+        <line x1="310" y1="186" x2="310" y2="170" stroke="#22303A" stroke-width="1.7" marker-end="url(#h1)"/>
+      </svg>
+      <div class="cap">கணினியின் அடிப்படை வன்பொருள் அமைப்பு</div>
+    </div>
+
+    <h4 class="sub">உள்ளீட்டுச் சாதனங்கள் (Input Devices)</h4>
+    <p>தரவையும் கட்டளைகளையும் கணினிக்குள் வழங்கும் சாதனங்கள்: விசைப்பலகை, சுட்டி (mouse), ஸ்கேனர், மைக்ரோஃபோன், கமரா, தொடுதிரை, OMR/OCR/MICR வாசிப்பான், லைட் பேனா, ஜொய்ஸ்டிக்.</p>
+    <h4 class="sub">வெளியீட்டுச் சாதனங்கள் (Output Devices)</h4>
+    <p>செயலாக்கப்பட்ட தகவலை வழங்கும் சாதனங்கள்: திரை (monitor), அச்சுப்பொறி (printer), ஒலிபெருக்கி (speaker), புரொஜெக்டர், plotter.</p>
+    <h4 class="sub">மைய செயலகம் (CPU — Central Processing Unit)</h4>
+    <p>கணினியின் "மூளை". மூன்று முக்கியப் பகுதிகள்:</p>
+    <ul>
+      <li><b>கட்டுப்பாட்டலகு (CU — Control Unit):</b> அனைத்துச் செயற்பாடுகளையும் ஒருங்கிணைத்து, கட்டளைகளை இடைமாற்றம் (decode) செய்து கட்டுப்படுத்தும்.</li>
+      <li><b>கணித தர்க்க அலகு (ALU — Arithmetic Logic Unit):</b> கணிதச் செயற்பாடுகளையும் (+, −, ×, ÷) தர்க்க ஒப்பீடுகளையும் (>, <, =) செய்யும்.</li>
+      <li><b>பதிவேடுகள் (Registers):</b> CPU இனுள்ளேயே உள்ள மிக வேகமான, சிறிய தற்காலிக சேமிப்பகங்கள்.</li>
+    </ul>
+    <h4 class="sub">சேமிப்புச் சாதனங்கள் (Storage Devices)</h4>
+    <ul>
+      <li><b>முதன்மை நினைவகம் (Primary):</b> RAM, ROM (CPU நேரடியாக அணுகும்).</li>
+      <li><b>இரண்டாம் நிலை (Secondary):</b> நிரந்தரச் சேமிப்பு — HDD, SSD, பென் டிரைவ், CD/DVD, மெமரி கார்ட்.</li>
+    </ul>
+
+    <h4 class="sub">இணைச் செயலாக்கமும் (Parallel) வலைச் செயலாக்கமும் (Grid)</h4>
+    <table class="dt">
+      <tr><th>இணைச் செயலாக்கம் (Parallel Computing)</th><th>வலைச் செயலாக்கம் (Grid Computing)</th></tr>
+      <tr><td>ஒரே கணினியில் <b>பல செயலிகள்</b> ஒரு பணியை <b>பல சிறு பகுதிகளாகப் பிரித்து</b> ஒரே நேரத்தில் செய்தல்</td><td>பல்வேறு இடங்களில் உள்ள <b>பல கணினிகள்</b> இணையம் ஊடாக இணைந்து ஒரு பெரிய பணியைப் பகிர்ந்து செய்தல்</td></tr>
+      <tr><td>நெருங்கிய இணைப்பு (ஒரே அமைப்பு)</td><td>தளர்வான இணைப்பு (வேறுபட்ட கணினிகள், இடங்கள்)</td></tr>
+      <tr><td>எ.கா: பல-கரு (multi-core) செயலிகள்</td><td>எ.கா: SETI@home, அறிவியல் ஆராய்ச்சி வலையமைப்புகள்</td></tr>
+    </table>
+    <div class="key"><span class="tag">எளிதில் நினைவில்</span>
+      <b>Parallel</b> = ஒரே கணினி, பல செயலிகள். <b>Grid</b> = பல கணினிகள், பல இடங்கள், இணையம் ஊடாக இணைந்து. இரண்டின் நோக்கமும் — பெரிய பணியை வேகமாக முடித்தல்.
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 2.3 ===================== -->
+<section class="ncard" id="s3">
+  <div class="nhead"><span class="nnum">2.3</span><span class="ntitle">வொன்-நியூமன் கட்டமைப்பு (Von-Neumann Architecture)</span></div>
+  <div class="nbody">
+    <h4 class="sub">சேமித்த நிரல் கருத்து (Stored Program Concept)</h4>
+    <p>1945 இல் <b>ஜான் வொன் நியூமன்</b> முன்வைத்த கருத்து: <b>நிரலும் (instructions) தரவும் ஒரே நினைவகத்தில் சேமிக்கப்பட்டு</b>, CPU ஆல் ஒன்றன்பின் ஒன்றாக எடுக்கப்பட்டு நிறைவேற்றப்படுகின்றன. இதுவே இன்றும் பெரும்பாலான கணினிகளின் அடிப்படை வடிவமைப்பு.</p>
+    <div class="diagram">
+      <svg viewBox="0 0 600 330" width="580" xmlns="http://www.w3.org/2000/svg">
+        <defs><marker id="v1" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#22303A"/></marker></defs>
+        <!-- CPU big box -->
+        <rect x="40" y="30" width="300" height="180" rx="12" fill="#EAF3F5" stroke="#1F4E5F" stroke-width="2"/>
+        <text x="190" y="22" text-anchor="middle" font-size="14" fill="#1F4E5F" font-weight="700">CPU (மைய செயலகம்)</text>
+        <rect x="64" y="56" width="118" height="50" rx="8" fill="#fff" stroke="#1F4E5F" stroke-width="1.6"/><text x="123" y="78" text-anchor="middle" font-size="12.5" fill="#1F4E5F" font-weight="600">கட்டுப்பாட்டலகு</text><text x="123" y="95" text-anchor="middle" font-size="11" fill="#5A6B74">CU</text>
+        <rect x="200" y="56" width="118" height="50" rx="8" fill="#fff" stroke="#1F4E5F" stroke-width="1.6"/><text x="259" y="78" text-anchor="middle" font-size="12.5" fill="#1F4E5F" font-weight="600">கணித தர்க்க அலகு</text><text x="259" y="95" text-anchor="middle" font-size="11" fill="#5A6B74">ALU</text>
+        <rect x="64" y="132" width="254" height="50" rx="8" fill="#FBF7EC" stroke="#C9912B" stroke-width="1.6"/><text x="191" y="162" text-anchor="middle" font-size="12.5" fill="#8a6313" font-weight="600">பதிவேடுகள் (Registers)</text>
+        <!-- Memory -->
+        <rect x="420" y="60" width="150" height="120" rx="12" fill="#F3E8EC" stroke="#8B1E3F" stroke-width="2"/>
+        <text x="495" y="52" text-anchor="middle" font-size="13.5" fill="#8B1E3F" font-weight="700">நினைவகம்</text>
+        <text x="495" y="116" text-anchor="middle" font-size="12" fill="#8B1E3F">நிரல் + தரவு</text>
+        <text x="495" y="136" text-anchor="middle" font-size="11" fill="#5A6B74">(Memory)</text>
+        <!-- buses -->
+        <line x1="340" y1="100" x2="418" y2="100" stroke="#1F4E5F" stroke-width="2.4" marker-end="url(#v1)"/>
+        <line x1="418" y1="120" x2="340" y2="120" stroke="#1F4E5F" stroke-width="2.4" marker-end="url(#v1)"/>
+        <text x="379" y="92" text-anchor="middle" font-size="10.5" fill="#1F4E5F">Data Bus</text>
+        <line x1="340" y1="150" x2="418" y2="150" stroke="#8B1E3F" stroke-width="2.4" marker-end="url(#v1)"/>
+        <text x="379" y="168" text-anchor="middle" font-size="10.5" fill="#8B1E3F">Control Bus</text>
+        <!-- IO -->
+        <rect x="60" y="250" width="120" height="50" rx="10" fill="#FDF3E0" stroke="#C9912B" stroke-width="1.7"/><text x="120" y="280" text-anchor="middle" font-size="12.5" fill="#8a6313" font-weight="600">உள்ளீடு</text>
+        <rect x="420" y="250" width="120" height="50" rx="10" fill="#FDF3E0" stroke="#C9912B" stroke-width="1.7"/><text x="480" y="280" text-anchor="middle" font-size="12.5" fill="#8a6313" font-weight="600">வெளியீடு</text>
+        <line x1="120" y1="250" x2="120" y2="180" stroke="#22303A" stroke-width="1.6" marker-end="url(#v1)"/>
+        <line x1="480" y1="250" x2="480" y2="182" stroke="#22303A" stroke-width="1.6" marker-end="url(#v1)"/>
+      </svg>
+      <div class="cap">வொன்-நியூமன் கட்டமைப்பு — CU, ALU, Registers, நினைவகம், Buses</div>
+    </div>
+
+    <h4 class="sub">முக்கியக் கூறுகள்</h4>
+    <ul>
+      <li><b>ALU (கணித தர்க்க அலகு):</b> கணிதம் (+, −, ×, ÷) மற்றும் தர்க்க ஒப்பீடுகள் (AND, OR, >, <, =).</li>
+      <li><b>CU (கட்டுப்பாட்டலகு):</b> கட்டளைகளை எடுத்து, இடைமாற்றம் செய்து, அனைத்தலகுகளையும் ஒருங்கிணைக்கும்.</li>
+      <li><b>பதிவேடுகள் (Registers):</b> மிக வேகமான தற்காலிகச் சேமிப்பு. முக்கியவை:
+        <ul>
+          <li><b>PC (Program Counter):</b> அடுத்து நிறைவேற்றப்பட வேண்டிய கட்டளையின் முகவரி.</li>
+          <li><b>MAR (Memory Address Register):</b> அணுகப்பட வேண்டிய நினைவக முகவரி.</li>
+          <li><b>MDR (Memory Data Register):</b> நினைவகத்துடன் பரிமாறப்படும் தரவு.</li>
+          <li><b>IR (Instruction Register):</b> தற்போது நிறைவேற்றப்படும் கட்டளை.</li>
+          <li><b>Accumulator:</b> ALU இன் இடைமுடிவுகளைச் சேமிக்கும்.</li>
+        </ul>
+      </li>
+      <li><b>பேருந்து (Bus):</b> கூறுகளுக்கிடையில் தரவைக் கடத்தும் இணைப்புப் பாதைகள்:
+        <ul>
+          <li><b>தரவுப் பேருந்து (Data Bus):</b> உண்மையான தரவைக் கடத்தும் (இருதிசை).</li>
+          <li><b>முகவரிப் பேருந்து (Address Bus):</b> நினைவக முகவரிகளைக் கடத்தும் (ஒருதிசை).</li>
+          <li><b>கட்டுப்பாட்டுப் பேருந்து (Control Bus):</b> கட்டுப்பாட்டுச் சமிக்ஞைகளைக் கடத்தும்.</li>
+        </ul>
+      </li>
+    </ul>
+
+    <h4 class="sub">எடு-நிறைவேற்று சுழற்சி (Fetch–Execute Cycle)</h4>
+    <p>CPU ஒவ்வொரு கட்டளையையும் நிறைவேற்ற மீண்டும் மீண்டும் செய்யும் சுழற்சி:</p>
+    <div class="diagram">
+      <svg viewBox="0 0 600 130" width="580" xmlns="http://www.w3.org/2000/svg">
+        <defs><marker id="f1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="#22303A"/></marker></defs>
+        <rect x="14" y="45" width="120" height="56" rx="10" fill="#EAF3F5" stroke="#1F4E5F" stroke-width="1.8"/><text x="74" y="70" text-anchor="middle" font-size="13" fill="#1F4E5F" font-weight="600">எடுத்தல்</text><text x="74" y="88" text-anchor="middle" font-size="10.5" fill="#5A6B74">Fetch</text>
+        <line x1="134" y1="73" x2="166" y2="73" stroke="#22303A" stroke-width="1.7" marker-end="url(#f1)"/>
+        <rect x="168" y="45" width="124" height="56" rx="10" fill="#FDF3E0" stroke="#C9912B" stroke-width="1.8"/><text x="230" y="70" text-anchor="middle" font-size="13" fill="#8a6313" font-weight="600">இடைமாற்றம்</text><text x="230" y="88" text-anchor="middle" font-size="10.5" fill="#5A6B74">Decode</text>
+        <line x1="292" y1="73" x2="324" y2="73" stroke="#22303A" stroke-width="1.7" marker-end="url(#f1)"/>
+        <rect x="326" y="45" width="124" height="56" rx="10" fill="#F3E8EC" stroke="#8B1E3F" stroke-width="1.8"/><text x="388" y="70" text-anchor="middle" font-size="13" fill="#8B1E3F" font-weight="600">நிறைவேற்றல்</text><text x="388" y="88" text-anchor="middle" font-size="10.5" fill="#5A6B74">Execute</text>
+        <line x1="450" y1="73" x2="482" y2="73" stroke="#22303A" stroke-width="1.7" marker-end="url(#f1)"/>
+        <rect x="484" y="45" width="104" height="56" rx="10" fill="#EAF3F5" stroke="#1F4E5F" stroke-width="1.8"/><text x="536" y="70" text-anchor="middle" font-size="13" fill="#1F4E5F" font-weight="600">சேமி</text><text x="536" y="88" text-anchor="middle" font-size="10.5" fill="#5A6B74">Store</text>
+        <path d="M536 101 Q536 122 300 122 Q74 122 74 101" fill="none" stroke="#5A6B74" stroke-width="1.4" stroke-dasharray="5 4" marker-end="url(#f1)"/>
+      </svg>
+      <div class="cap">சுழற்சி மீண்டும் மீண்டும் நிகழும்</div>
+    </div>
+    <ol>
+      <li><b>எடுத்தல் (Fetch):</b> PC சுட்டும் முகவரியிலிருந்து கட்டளை நினைவகத்திலிருந்து எடுக்கப்பட்டு IR இல் வைக்கப்படும்; PC அடுத்த கட்டளைக்கு அதிகரிக்கும்.</li>
+      <li><b>இடைமாற்றம் (Decode):</b> CU கட்டளையின் அர்த்தத்தை விளங்கிக்கொள்ளும்.</li>
+      <li><b>நிறைவேற்றல் (Execute):</b> ALU/பொருத்தமான அலகு கட்டளையை நிறைவேற்றும்.</li>
+      <li><b>சேமித்தல் (Store):</b> முடிவு பதிவேடு/நினைவகத்தில் சேமிக்கப்படும். பின் சுழற்சி மீண்டும் தொடங்கும்.</li>
+    </ol>
+
+    <h4 class="sub">பல-கரு செயலிகள் (Multi-core Processors)</h4>
+    <p>ஒரே செயலிச் சில்லினுள் (chip) <b>இரண்டு அல்லது அதற்கு மேற்பட்ட சுயாதீன செயலகக் கருக்கள் (cores)</b> இருத்தல். ஒவ்வொரு கருவும் தனித்தனியாகக் கட்டளைகளை நிறைவேற்ற முடிவதால், பல பணிகளை ஒரே நேரத்தில் (parallel) செய்து செயல்திறன் கூடுகிறது. எ.கா: Dual-core (2), Quad-core (4), Octa-core (8).</p>
+    <div class="warn"><span class="tag">வொன்-நியூமன் இடர் (Bottleneck)</span>
+      நிரலும் தரவும் ஒரே நினைவகத்தைப் பகிர்வதால், CPU வேகமாக இருந்தாலும் <b>ஒரே பேருந்து</b> ஊடாகவே தரவும் கட்டளையும் வரவேண்டியிருப்பதால் வேகக் கட்டுப்பாடு ஏற்படுகிறது — இதுவே "வொன்-நியூமன் இடைஞ்சல்".
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 2.4 ===================== -->
+<section class="ncard" id="s4">
+  <div class="nhead"><span class="nnum">2.4</span><span class="ntitle">நினைவகப் படிநிலை (Memory Hierarchy)</span></div>
+  <div class="nbody">
+    <p>கணினியின் நினைவகங்கள் <b>வேகம், விலை, கொள்ளளவு</b> அடிப்படையில் ஒரு படிநிலையாக (pyramid) அமைக்கப்படுகின்றன. <b>மேலே செல்லச் செல்ல</b> — வேகம் கூடும், விலை கூடும், கொள்ளளவு குறையும்.</p>
+    <div class="diagram">
+      <svg viewBox="0 0 560 320" width="540" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="280,20 200,90 360,90" fill="#8B1E3F" stroke="#5e132b"/><text x="280" y="70" text-anchor="middle" font-size="13" fill="#fff" font-weight="700">Registers</text>
+        <polygon points="200,92 360,92 400,160 160,160" fill="#C9912B" stroke="#8a6313"/><text x="280" y="132" text-anchor="middle" font-size="13" fill="#fff" font-weight="700">Cache</text>
+        <polygon points="160,162 400,162 440,232 120,232" fill="#1F4E5F" stroke="#143946"/><text x="280" y="202" text-anchor="middle" font-size="13" fill="#fff" font-weight="700">RAM (முதன்மை)</text>
+        <polygon points="120,234 440,234 480,304 80,304" fill="#5A6B74" stroke="#3e4950"/><text x="280" y="274" text-anchor="middle" font-size="13" fill="#fff" font-weight="700">இரண்டாம்நிலை (HDD/SSD)</text>
+        <!-- arrows -->
+        <text x="510" y="60" font-size="11" fill="#8B1E3F" font-weight="600">வேகம் ↑</text>
+        <text x="510" y="80" font-size="11" fill="#8B1E3F" font-weight="600">விலை ↑</text>
+        <text x="510" y="285" font-size="11" fill="#1F4E5F" font-weight="600">கொள்ளளவு ↑</text>
+        <text x="30" y="60" font-size="11" fill="#5A6B74">↑ CPU க்கு</text>
+        <text x="30" y="76" font-size="11" fill="#5A6B74">அண்மை</text>
+      </svg>
+      <div class="cap">நினைவகப் படிநிலை — மேலே வேகம்/விலை கூடும், கீழே கொள்ளளவு கூடும்</div>
+    </div>
+
+    <h4 class="sub">1) பதிவேடுகள் (Registers)</h4>
+    <p>CPU இனுள்ளேயே உள்ள <b>மிக வேகமான, மிகச் சிறிய</b> சேமிப்பகம். தற்போது செயலாக்கப்படும் தரவு/கட்டளைகளை வைத்திருக்கும்.</p>
+    <h4 class="sub">2) நிலையக நினைவகம் (Cache Memory)</h4>
+    <p>CPU க்கும் RAM க்கும் இடையே உள்ள வேகமான சிறு நினைவகம். <b>அடிக்கடி பயன்படும் தரவு/கட்டளைகளை</b> வைத்து, CPU மெதுவான RAM க்காகக் காத்திருப்பதைக் குறைக்கிறது. நிலைகள்: L1 (மிக வேகம், சிறியது), L2, L3.</p>
+    <h4 class="sub">3) முதன்மை நினைவகம் — RAM &amp; ROM</h4>
+    <p><b>RAM (Random Access Memory):</b> தற்காலிக (<b>நிலையற்ற/volatile</b>) வேலை நினைவகம் — மின்சாரம் போனால் உள்ளடக்கம் அழியும். தற்போது இயங்கும் நிரல்களும் தரவும் இங்கேயே இருக்கும்.</p>
+    <table class="dt">
+      <caption>RAM வகைகள்</caption>
+      <tr><th>வகை</th><th>பண்பு</th></tr>
+      <tr><td><b>SRAM</b><br>(Static RAM)</td><td>வேகமானது, விலை கூடியது, புதுப்பித்தல் (refresh) தேவையில்லை; cache இல் பயன்படும்</td></tr>
+      <tr><td><b>DRAM</b><br>(Dynamic RAM)</td><td>மெதுவானது, விலை குறைவு, தொடர்ந்து புதுப்பித்தல் தேவை; முதன்மை RAM ஆகப் பயன்படும்</td></tr>
+      <tr><td><b>SDRAM</b><br>(Synchronous DRAM)</td><td>CPU கடிகாரத்துடன் ஒத்திசைந்து (synchronized) வேலை செய்யும் வேகமான DRAM; நவீன RAM</td></tr>
+    </table>
+    <p><b>ROM (Read Only Memory):</b> நிரந்தர (<b>நிலையான/non-volatile</b>) நினைவகம் — மின்சாரம் போனாலும் உள்ளடக்கம் நிலைத்திருக்கும். வழக்கமாக வாசிக்க மட்டுமே; கணினி தொடங்கும் நிரல் (BIOS/boot) இதில் இருக்கும்.</p>
+    <table class="dt">
+      <caption>ROM வகைகள்</caption>
+      <tr><th>வகை</th><th>பண்பு</th></tr>
+      <tr><td><b>PROM</b><br>(Programmable ROM)</td><td>ஒரே ஒரு முறை மட்டும் நிரல் எழுதலாம்; பின் மாற்ற முடியாது</td></tr>
+      <tr><td><b>EPROM</b><br>(Erasable PROM)</td><td><b>புற ஊதாக் கதிரால் (UV light)</b> அழித்து மீண்டும் எழுதலாம்</td></tr>
+      <tr><td><b>EEPROM</b><br>(Electrically Erasable PROM)</td><td><b>மின்சாரத்தால்</b> அழித்து மீண்டும் எழுதலாம்; flash memory இதன் வடிவமே</td></tr>
+    </table>
+    <h4 class="sub">4) இரண்டாம் நிலைச் சேமிப்பு (Secondary Storage)</h4>
+    <p>நிரந்தர (non-volatile), பெருங்கொள்ளளவு, விலை குறைந்த சேமிப்பு. CPU நேரடியாக அணுகாது — முதலில் RAM க்கு ஏற்றப்படும். எ.கா: HDD, SSD, பென் டிரைவ், CD/DVD, மெமரி கார்ட்.</p>
+
+    <h4 class="sub">நிலையற்ற vs நிலையான (Volatile vs Non-volatile)</h4>
+    <table class="dt">
+      <tr><th>நிலையற்றது (Volatile)</th><th>நிலையானது (Non-volatile)</th></tr>
+      <tr><td>மின்சாரம் போனால் உள்ளடக்கம் <b>அழியும்</b></td><td>மின்சாரம் போனாலும் உள்ளடக்கம் <b>நிலைக்கும்</b></td></tr>
+      <tr><td>எ.கா: RAM, Cache, Registers</td><td>எ.கா: ROM, HDD, SSD, பென் டிரைவ்</td></tr>
+    </table>
+    <div class="key"><span class="tag">RAM vs ROM — பரீட்சை நுணுக்கம்</span>
+      <b>RAM</b> = தற்காலிகம், நிலையற்றது, வாசிக்க/எழுத முடியும், வேலை நினைவகம். <b>ROM</b> = நிரந்தரம், நிலையானது, வழக்கமாக வாசிக்க மட்டும், தொடக்க நிரல். "RAM போனால் வேலை நிற்கும்; ROM போனால் கணினியே தொடங்காது."
+    </div>
+  </div>
+</section>
+
+<!-- ===================== Practice ===================== -->
+<section class="ncard" id="s5">
+  <div class="nhead"><span class="nnum">?</span><span class="ntitle">பயிற்சி வினாக்கள் (விடைகளுடன்)</span></div>
+  <div class="nbody">
+
+    <!-- P1 -->
+    <div class="pq">
+      <span class="qnum">வினா 01</span>
+      <p class="task" style="margin-top:10px">கணினியின் நான்கு தலைமுறைகளையும் (1G–4G), அவை ஒவ்வொன்றிலும் பயன்படுத்தப்பட்ட முதன்மை எலெக்ட்ரோனிக் தொழில்நுட்பத்தையும் எழுதுக.</p>
+      <button class="btn" onclick="toggleAns(this,'p1')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p1"><span class="ans-label">விடை</span>
+        <table class="dt">
+          <tr><th>தலைமுறை</th><th>தொழில்நுட்பம்</th></tr>
+          <tr><td>1G</td><td>வெற்றிடக் குழாய் (Vacuum Tube)</td></tr>
+          <tr><td>2G</td><td>டிரான்சிஸ்டர் (Transistor)</td></tr>
+          <tr><td>3G</td><td>ஒருங்கிணைந்த சுற்று (IC)</td></tr>
+          <tr><td>4G</td><td>நுண்செயலி (Microprocessor / VLSI)</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- P2 -->
+    <div class="pq">
+      <span class="qnum">வினா 02</span>
+      <p class="task" style="margin-top:10px">CPU இன் மூன்று முக்கியப் பகுதிகள் யாவை? ஒவ்வொன்றினதும் செயற்பாட்டைச் சுருக்கமாக எழுதுக.</p>
+      <button class="btn" onclick="toggleAns(this,'p2')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p2"><span class="ans-label">விடை</span>
+        <ul>
+          <li><b>CU (கட்டுப்பாட்டலகு):</b> அனைத்துச் செயற்பாடுகளையும் ஒருங்கிணைத்து, கட்டளைகளை இடைமாற்றம் செய்து கட்டுப்படுத்தும்.</li>
+          <li><b>ALU (கணித தர்க்க அலகு):</b> கணிதச் செயற்பாடுகளையும் தர்க்க ஒப்பீடுகளையும் செய்யும்.</li>
+          <li><b>Registers (பதிவேடுகள்):</b> CPU இனுள் உள்ள மிக வேகமான தற்காலிகச் சேமிப்பகங்கள்.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- P3 -->
+    <div class="pq">
+      <span class="qnum">வினா 03</span>
+      <p class="task" style="margin-top:10px">எடு-நிறைவேற்று சுழற்சியின் (Fetch-Execute Cycle) படிகளை வரிசையாக விளக்குக.</p>
+      <button class="btn" onclick="toggleAns(this,'p3')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p3"><span class="ans-label">விடை</span>
+        <ol>
+          <li><b>Fetch (எடுத்தல்):</b> PC சுட்டும் முகவரியிலிருந்து கட்டளை நினைவகத்திலிருந்து எடுக்கப்பட்டு IR இல் வைக்கப்படும்.</li>
+          <li><b>Decode (இடைமாற்றம்):</b> CU கட்டளையின் அர்த்தத்தை விளங்கிக்கொள்ளும்.</li>
+          <li><b>Execute (நிறைவேற்றல்):</b> ALU/பொருத்தமான அலகு கட்டளையை நிறைவேற்றும்.</li>
+          <li><b>Store (சேமித்தல்):</b> முடிவு பதிவேடு/நினைவகத்தில் சேமிக்கப்பட்டு, சுழற்சி மீண்டும் தொடங்கும்.</li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- P4 -->
+    <div class="pq">
+      <span class="qnum">வினா 04</span>
+      <p class="task" style="margin-top:10px">RAM க்கும் ROM க்கும் இடையேயான வேறுபாடுகளை (குறைந்தது மூன்று) எழுதுக.</p>
+      <button class="btn" onclick="toggleAns(this,'p4')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p4"><span class="ans-label">விடை</span>
+        <table class="dt">
+          <tr><th>RAM</th><th>ROM</th></tr>
+          <tr><td>தற்காலிகம் (நிலையற்றது)</td><td>நிரந்தரம் (நிலையானது)</td></tr>
+          <tr><td>மின்சாரம் போனால் அழியும்</td><td>மின்சாரம் போனாலும் நிலைக்கும்</td></tr>
+          <tr><td>வாசிக்க/எழுத முடியும்</td><td>வழக்கமாக வாசிக்க மட்டும்</td></tr>
+          <tr><td>இயங்கும் நிரல்/தரவு வைத்திருக்கும்</td><td>தொடக்க நிரல் (BIOS) வைத்திருக்கும்</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- P5 -->
+    <div class="pq">
+      <span class="qnum">வினா 05</span>
+      <p class="task" style="margin-top:10px">பின்வரும் நினைவகங்களை — Registers, RAM, Cache, இரண்டாம்நிலை (HDD) — <b>வேகத்தின் அடிப்படையில் கூடியதிலிருந்து குறைந்தது</b> வரை வரிசைப்படுத்துக.</p>
+      <button class="btn" onclick="toggleAns(this,'p5')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p5"><span class="ans-label">விடை</span>
+        <p><b>Registers → Cache → RAM → இரண்டாம்நிலை (HDD/SSD)</b></p>
+        <div class="note">வேகம்/விலை: Registers அதிகம் → HDD குறைவு. கொள்ளளவு இதற்கு எதிர்மாறாக: HDD அதிகம் → Registers குறைவு.</div>
+      </div>
+    </div>
+
+    <!-- P6 -->
+    <div class="pq">
+      <span class="qnum">வினா 06</span>
+      <p class="task" style="margin-top:10px">EPROM க்கும் EEPROM க்கும் இடையேயான வேறுபாடு என்ன?</p>
+      <button class="btn" onclick="toggleAns(this,'p6')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p6"><span class="ans-label">விடை</span>
+        <p><b>EPROM:</b> உள்ளடக்கத்தை <b>புற ஊதாக் கதிரால் (UV light)</b> அழித்து மீண்டும் எழுதலாம்.</p>
+        <p><b>EEPROM:</b> உள்ளடக்கத்தை <b>மின்சாரத்தால்</b> அழித்து மீண்டும் எழுதலாம் (UV தேவையில்லை). Flash memory இதன் வடிவமே.</p>
+      </div>
+    </div>
+
+    <!-- P7 -->
+    <div class="pq">
+      <span class="qnum">வினா 07</span>
+      <p class="task" style="margin-top:10px">இணைச் செயலாக்கத்துக்கும் (Parallel) வலைச் செயலாக்கத்துக்கும் (Grid) இடையேயான வேறுபாட்டை எடுத்துக்காட்டுடன் தருக.</p>
+      <button class="btn" onclick="toggleAns(this,'p7')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p7"><span class="ans-label">விடை</span>
+        <p><b>இணைச் செயலாக்கம் (Parallel):</b> ஒரே கணினியில் பல செயலிகள் ஒரு பணியைப் பல சிறு பகுதிகளாகப் பிரித்து ஒரே நேரத்தில் செய்தல். உ-ம்: multi-core செயலிகள்.</p>
+        <p><b>வலைச் செயலாக்கம் (Grid):</b> பல்வேறு இடங்களில் உள்ள பல கணினிகள் இணையம் ஊடாக இணைந்து ஒரு பெரிய பணியைப் பகிர்ந்து செய்தல். உ-ம்: SETI@home.</p>
+      </div>
+    </div>
+
+    <!-- P8 -->
+    <div class="pq">
+      <span class="qnum">வினா 08</span>
+      <p class="task" style="margin-top:10px">"சேமித்த நிரல் கருத்து" (Stored Program Concept) என்றால் என்ன? இது யாரால் முன்வைக்கப்பட்டது?</p>
+      <button class="btn" onclick="toggleAns(this,'p8')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p8"><span class="ans-label">விடை</span>
+        <p><b>ஜான் வொன் நியூமன்</b> (1945) முன்வைத்த கருத்து இது. இதன்படி, <b>நிரலும் (instructions) தரவும் ஒரே நினைவகத்தில் சேமிக்கப்பட்டு</b>, CPU ஆல் ஒன்றன்பின் ஒன்றாக எடுக்கப்பட்டு நிறைவேற்றப்படுகின்றன. இதுவே நவீன கணினிகளின் அடிப்படை வடிவமைப்பு.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+</main>
+
+<footer>
+  க.பொ.த (உயர்தர) தகவல் மற்றும் தொடர்பாடல் தொழினுட்பம் — அலகு 2: கணினி அறிமுகம் குறிப்புகள்
+</footer>
+
+<script>
+function toggleAns(btn,id){
+  var ans=document.getElementById(id);
+  var open=ans.classList.toggle('show');
+  btn.classList.toggle('open',open);
+  btn.textContent=open?'விடையை மறை ▴':'விடையைக் காட்டு ▾';
+}
+</script>
+
+</body>
+</html>

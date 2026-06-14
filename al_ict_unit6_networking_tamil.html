@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>க.பொ.த (உயர்தரம்) ICT — அலகு 6: தரவுத் தொடர்பாடலும் வலையமைப்பும் குறிப்புகள்</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Catamaran:wght@600;800&family=Hind+Madurai:wght@400;500;600&family=Noto+Sans+Tamil:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F6F4EE; --card:#FFFFFF; --ink:#22303A;
+    --maroon:#8B1E3F; --teal:#1F4E5F; --gold:#C9912B;
+    --line:#E2DDD2; --code-bg:#102A33; --code-ink:#D9EEF2;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--paper);color:var(--ink);
+    font-family:'Hind Madurai','Noto Sans Tamil',sans-serif;
+    line-height:1.8;font-size:17px;}
+  header{background:linear-gradient(135deg,var(--teal) 0%,#143946 100%);
+    color:#F2EFE6;padding:42px 20px 36px;text-align:center;
+    border-bottom:5px solid var(--gold);}
+  header .eyebrow{letter-spacing:.18em;font-size:.8rem;text-transform:uppercase;
+    color:#D8C58A;margin-bottom:10px;}
+  header h1{font-family:'Catamaran','Noto Sans Tamil',sans-serif;font-weight:800;
+    font-size:clamp(1.4rem,4vw,2.05rem);line-height:1.5;}
+  header p{margin-top:10px;font-size:.95rem;color:#BFD4DA}
+  main{max-width:920px;margin:0 auto;padding:36px 18px 70px}
+
+  .toc{background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:16px 24px;margin-bottom:34px;font-size:.9rem;}
+  .toc b{color:var(--teal);font-family:'Catamaran','Noto Sans Tamil',sans-serif}
+  .toc a{color:var(--maroon);text-decoration:none}
+  .toc a:hover{text-decoration:underline}
+  .toc .links{display:flex;flex-wrap:wrap;gap:6px 16px;margin-top:6px}
+
+  .ncard{background:var(--card);border:1px solid var(--line);border-radius:16px;
+    margin-bottom:30px;overflow:hidden;box-shadow:0 2px 10px rgba(34,48,58,.05);}
+  .nhead{display:flex;align-items:center;gap:14px;padding:16px 24px;
+    border-bottom:1px solid var(--line);
+    background:linear-gradient(to right,#FBFAF6,#fff);}
+  .nnum{font-family:'Catamaran',sans-serif;font-weight:800;font-size:.92rem;
+    color:#fff;background:var(--teal);border-radius:10px;padding:5px 12px;
+    white-space:nowrap;}
+  .ntitle{font-family:'Catamaran','Noto Sans Tamil',sans-serif;font-weight:600;
+    font-size:1.02rem;color:var(--teal);}
+  .nbody{padding:22px 26px 26px}
+  .nbody p{margin-bottom:12px}
+  .nbody ul,.nbody ol{margin:6px 26px 14px}
+  .nbody li{margin-bottom:6px}
+  h4.sub{font-family:'Catamaran','Noto Sans Tamil',sans-serif;color:var(--maroon);
+    font-size:1.0rem;margin:18px 0 8px;}
+
+  .key{background:#FBF7EC;border-right:4px solid var(--gold);
+    border-radius:10px;padding:14px 20px;margin:14px 0;}
+  .key .tag{font-size:.78rem;font-weight:700;color:var(--gold);
+    letter-spacing:.1em;display:block;margin-bottom:4px;}
+  .warn{background:#FAEFF1;border-right:4px solid var(--maroon);
+    border-radius:10px;padding:14px 20px;margin:14px 0;}
+  .warn .tag{font-size:.78rem;font-weight:700;color:var(--maroon);
+    letter-spacing:.1em;display:block;margin-bottom:4px;}
+
+  .work{background:#F4F8F7;border:1px solid #D6E4E0;border-radius:10px;
+    padding:14px 18px;margin:12px 0;font-family:'JetBrains Mono',monospace;
+    font-size:.84rem;line-height:1.85;direction:ltr;overflow-x:auto;}
+  .work .hl{color:var(--maroon);font-weight:700}
+  .work .gd{color:#1F7A55;font-weight:700}
+  .work .lbl{font-family:'Hind Madurai','Noto Sans Tamil',sans-serif;color:#5A6B74}
+
+  code.inline{background:#EDF2F1;color:var(--teal);border-radius:6px;
+    padding:1px 8px;font-family:'JetBrains Mono',monospace;font-size:.85em;}
+
+  table.dt{border-collapse:collapse;margin:12px auto;font-size:.86rem;width:100%}
+  table.dt th{background:var(--teal);color:#fff;padding:8px 11px;
+    font-weight:600;border:1px solid #16404f;text-align:left;}
+  table.dt td{border:1px solid var(--line);padding:7px 11px;
+    background:#FDFCF9;vertical-align:top;}
+  table.dt caption{caption-side:top;font-weight:600;color:var(--teal);
+    margin-bottom:6px;font-size:.95rem;}
+  table.dt.c td,table.dt.c th{text-align:center}
+  table.dt code{font-family:'JetBrains Mono',monospace;font-size:.88em;color:var(--maroon)}
+
+  .diagram{background:#FBFAF6;border:1px solid var(--line);border-radius:12px;
+    padding:16px;margin:14px 0;overflow-x:auto;text-align:center;}
+  .diagram svg{max-width:100%;height:auto}
+  .diagram .cap{font-size:.85rem;color:#5A6B74;margin-top:8px}
+  svg text{font-family:'Noto Sans Tamil','Hind Madurai',sans-serif;}
+
+  .btn{display:inline-flex;align-items:center;gap:9px;
+    font-family:'Hind Madurai','Noto Sans Tamil',sans-serif;font-weight:600;
+    font-size:1rem;color:#fff;background:var(--teal);border:none;
+    border-radius:999px;padding:11px 26px;margin-top:14px;cursor:pointer;
+    transition:background .2s,transform .15s;}
+  .btn:hover{background:#16404f;transform:translateY(-1px)}
+  .btn:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+  .btn.open{background:var(--maroon)}
+  .answer{display:none;margin-top:20px;border-top:2px dashed var(--line);
+    padding-top:18px;animation:fade .35s ease;}
+  .answer.show{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  .ans-label{display:inline-block;font-weight:700;color:#fff;background:var(--gold);
+    border-radius:8px;padding:3px 14px;font-size:.85rem;margin-bottom:12px;}
+  .qnum{font-family:'Catamaran',sans-serif;font-weight:800;font-size:1rem;
+    color:#fff;background:var(--maroon);border-radius:10px;padding:5px 14px;
+    white-space:nowrap;}
+  .task{font-weight:600;color:var(--maroon)}
+  .pq{border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin-bottom:18px}
+  .note{margin-top:12px;font-size:.9rem;color:#5A6B74;background:#EFF4F2;
+    border-radius:10px;padding:10px 16px;}
+
+  footer{text-align:center;padding:26px 16px 40px;font-size:.85rem;color:#7A8790;}
+  @media (max-width:560px){
+    .nhead{flex-direction:column;align-items:flex-start;gap:8px}
+    body{font-size:16px}
+  }
+  @media (prefers-reduced-motion:reduce){.answer{animation:none}.btn{transition:none}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">G.C.E. Advanced Level &middot; Sri Lanka &middot; ICT (20) &middot; Unit 6</div>
+  <h1>தரவுத் தொடர்பாடலும் வலையமைப்பும்<br>(Data Communication &amp; Networking)</h1>
+  <p>சமிக்ஞைகள் &middot; கடத்து ஊடகங்கள் &middot; குறியாக்கம் &middot; வலை வடிவியல் &middot; IP & subnetting &middot; TCP/IP & OSI &middot; பாதுகாப்பு</p>
+</header>
+
+<main>
+
+<div class="toc"><b>உள்ளடக்கம்</b>
+  <div class="links">
+    <a href="#s1">6.1 சமிக்ஞை வகைகள்</a>
+    <a href="#s2">6.2 கடத்து ஊடகங்கள்</a>
+    <a href="#s3">6.3 தரவுக் குறியாக்கம் & பிழைச் சோதனை</a>
+    <a href="#s4">6.4 PSTN & மோடம்</a>
+    <a href="#s5">6.5 வலை வடிவியல்</a>
+    <a href="#s6">6.6 MAC நெறிமுறை & Ethernet</a>
+    <a href="#s7">6.7 இணையம் & IP முகவரியிடல்</a>
+    <a href="#s8">6.8 கடத்து நெறிமுறைகள் (TCP/UDP)</a>
+    <a href="#s9">6.9 இணையப் பயன்பாடுகள் (DNS/HTTP)</a>
+    <a href="#s10">6.10 வலை மாதிரிகள் (OSI/TCP-IP)</a>
+    <a href="#s11">6.11 வலைப் பாதுகாப்பு</a>
+    <a href="#s12">6.12 ISP & வீட்டு வலையமைப்பு</a>
+    <a href="#sp">பயிற்சி வினாக்கள்</a>
+  </div>
+</div>
+
+<!-- ===================== 6.1 ===================== -->
+<section class="ncard" id="s1">
+  <div class="nhead"><span class="nnum">6.1</span><span class="ntitle">சமிக்ஞை வகைகள் — டிஜிட்டல் & அனலொக்</span></div>
+  <div class="nbody">
+    <p>தரவு கடத்தப்படுவதற்கு <b>சமிக்ஞைகளாக (signals)</b> மாற்றப்படுகிறது. இரு முக்கிய வகைகள்:</p>
+    <div class="diagram">
+      <svg viewBox="0 0 560 140" width="540" xmlns="http://www.w3.org/2000/svg">
+        <text x="140" y="18" text-anchor="middle" font-size="13" fill="#1F4E5F" font-weight="600">அனலொக் (தொடர்ச்சி)</text>
+        <line x1="20" y1="80" x2="270" y2="80" stroke="#ccc"/>
+        <path d="M20 80 Q50 30 80 80 Q110 130 140 80 Q170 30 200 80 Q230 130 260 80" fill="none" stroke="#8B1E3F" stroke-width="2.2"/>
+        <text x="420" y="18" text-anchor="middle" font-size="13" fill="#1F4E5F" font-weight="600">டிஜிட்டல் (படிநிலை)</text>
+        <line x1="300" y1="80" x2="550" y2="80" stroke="#ccc"/>
+        <path d="M300 100 L320 100 L320 50 L360 50 L360 100 L400 100 L400 50 L440 50 L440 100 L480 100 L480 50 L520 50 L520 100 L540 100" fill="none" stroke="#1F4E5F" stroke-width="2.2"/>
+      </svg>
+      <div class="cap">அனலொக் = மென்மையான அலை; டிஜிட்டல் = 0/1 படிநிலை</div>
+    </div>
+    <table class="dt c">
+      <tr><th style="text-align:center">அனலொக் (Analog)</th><th style="text-align:center">டிஜிட்டல் (Digital)</th></tr>
+      <tr><td>தொடர்ச்சியாக மாறும் அலை</td><td>தனித்த இரு நிலைகள் (0, 1)</td></tr>
+      <tr><td>எ.கா: மனிதக் குரல், பழைய தொலைபேசி</td><td>எ.கா: கணினித் தரவு</td></tr>
+      <tr><td>இரைச்சலால் (noise) எளிதில் பாதிக்கப்படும்</td><td>இரைச்சலை எதிர்த்து நிற்கும்</td></tr>
+    </table>
+    <h4 class="sub">அலையின் பண்புகள் (Properties of a Wave)</h4>
+    <ul>
+      <li><b>வீச்சு (Amplitude):</b> அலையின் உயரம் / வலிமை (சமிக்ஞையின் வலு).</li>
+      <li><b>அதிர்வெண் (Frequency):</b> ஒரு செக்கனில் முழு அலைச் சுழற்சிகளின் எண்ணிக்கை (Hz இல்).</li>
+      <li><b>அலைநீளம் (Wavelength):</b> ஒரு முழு அலையின் நீளம் (அதிர்வெண்ணுக்கு எதிர்விகிதம்).</li>
+      <li><b>கட்டம் (Phase):</b> ஒரு நேரப் புள்ளியில் அலையின் நிலை (கோணத்தில் — degrees).</li>
+    </ul>
+    <div class="key"><span class="tag">தொடர்பு</span>
+      வேகம் (v) = அதிர்வெண் (f) × அலைநீளம் (λ). அதிர்வெண் கூடினால் அலைநீளம் குறையும். வீச்சு = வலு/சத்தம்; அதிர்வெண் = ஓசையின் "உயரம் (pitch)".
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 6.2 ===================== -->
+<section class="ncard" id="s2">
+  <div class="nhead"><span class="nnum">6.2</span><span class="ntitle">கடத்து ஊடகங்கள் (Transmission Media)</span></div>
+  <div class="nbody">
+    <h4 class="sub">வழிநடத்தப்பட்ட ஊடகங்கள் (Guided — கம்பி வழி)</h4>
+    <table class="dt">
+      <tr><th>ஊடகம்</th><th>பண்பு</th><th>பயன்பாடு</th></tr>
+      <tr><td><b>முறுக்கிய இணை</b><br>(Twisted Pair)</td><td>முறுக்கப்பட்ட செப்புக் கம்பி இணைகள்; மலிவானது; குறுந்தூரம்; இரைச்சல் தாங்கல் குறைவு</td><td>LAN (Ethernet), தொலைபேசி</td></tr>
+      <tr><td><b>அச்சுக் கம்பி</b><br>(Coaxial)</td><td>நடு செப்புக் கம்பி + பாதுகாப்பு உறை; நடுத்தர பட்டை அகலம், சிறந்த இரைச்சல் தாங்கல்</td><td>கேபிள் TV, பழைய வலையமைப்பு</td></tr>
+      <tr><td><b>ஒளி இழை</b><br>(Fibre Optics)</td><td>ஒளியால் தரவு கடத்தல்; மிக அதிக வேகம் & பட்டை அகலம்; இரைச்சல் பாதிப்பில்லை; விலை கூடியது</td><td>நெடுந்தூர, அதிவேக முதுகெலும்பு (backbone)</td></tr>
+    </table>
+    <h4 class="sub">வழிநடத்தப்படாத ஊடகங்கள் (Unguided — கம்பியில்லா)</h4>
+    <p>காற்று/வெற்றிடம் ஊடாக மின்காந்த அலைகளால் கடத்தல்: <b>வானொலி அலைகள் (Radio), நுண்ணலை (Microwave), அகச்சிவப்பு (Infrared), செயற்கைக்கோள் (Satellite), Wi-Fi, Bluetooth.</b> கம்பி தேவையில்லை; இடப்பெயர்வுக்கு (mobility) ஏற்றது.</p>
+    <h4 class="sub">கடத்தலின் முக்கியப் பண்புகள் / பிரச்சினைகள்</h4>
+    <table class="dt">
+      <tr><th>சொல்</th><th>விளக்கம்</th></tr>
+      <tr><td><b>பட்டை அகலம்</b><br>(Bandwidth)</td><td>ஒரு செக்கனில் கடத்தக்கூடிய அதிகபட்சத் தரவளவு (bps). கூடினால் வேகம் கூடும்.</td></tr>
+      <tr><td><b>தாமதம்</b><br>(Latency)</td><td>தரவு மூலத்திலிருந்து இலக்கை அடைய எடுக்கும் காலம். குறைவானது நல்லது.</td></tr>
+      <tr><td><b>இரைச்சல்</b><br>(Noise)</td><td>சமிக்ஞையில் கலக்கும் தேவையற்ற தொந்தரவு — தரவைச் சிதைக்கும்.</td></tr>
+      <tr><td><b>தேய்வு</b><br>(Attenuation)</td><td>தூரம் செல்லச் செல்ல சமிக்ஞையின் வலு குறைதல். (மீள்வலுவூட்டிகள்/repeaters தீர்வு.)</td></tr>
+      <tr><td><b>சிதைவு</b><br>(Distortion)</td><td>சமிக்ஞையின் வடிவம் மாறுதல்.</td></tr>
+    </table>
+    <div class="key"><span class="tag">சிறந்த ஊடகம்?</span>
+      வேகம், பட்டை அகலம், இரைச்சல் தாங்கல், தூரம் ஆகியவற்றில் <b>ஒளி இழை (fibre)</b> சிறந்தது — ஆனால் விலை கூடியது. குறுந்தூர LAN க்கு twisted pair மலிவானது.
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 6.3 ===================== -->
+<section class="ncard" id="s3">
+  <div class="nhead"><span class="nnum">6.3</span><span class="ntitle">டிஜிட்டல் தரவுக் குறியாக்கம் & பிழைச் சோதனை</span></div>
+  <div class="nbody">
+    <h4 class="sub">இரு மின்னழுத்த நிலைகள்</h4>
+    <p>டிஜிட்டல் தரவு இரு மின்னழுத்த நிலைகளால் குறிக்கப்படுகிறது — <b>உயர் மின்னழுத்தம் = 1, தாழ் மின்னழுத்தம் = 0</b> (அல்லது நேர்/பூஜ்ஜிய மின்னழுத்தம்).</p>
+    <h4 class="sub">மான்செஸ்டர் குறியாக்கம் (Manchester Encoding)</h4>
+    <p>ஒவ்வொரு பிட்டிலும் <b>நடுவில் ஒரு மாற்றம் (transition)</b> இருக்கும்: <b>0 = உயர்→தாழ்</b>, <b>1 = தாழ்→உயர்</b> (ஒரு பொதுவான வழக்கப்படி). இம்மாற்றம் <b>கடிகார ஒத்திசைவையும் (synchronization) தரவையும்</b> ஒரே சமிக்ஞையில் கொண்டுசெல்கிறது.</p>
+    <div class="diagram">
+      <svg viewBox="0 0 520 130" width="500" xmlns="http://www.w3.org/2000/svg">
+        <text x="20" y="16" font-size="11" fill="#5A6B74" class="lbl">பிட்:</text>
+        <text x="70" y="16" text-anchor="middle" font-size="13" fill="#8B1E3F" font-weight="700">0</text>
+        <text x="150" y="16" text-anchor="middle" font-size="13" fill="#8B1E3F" font-weight="700">1</text>
+        <text x="230" y="16" text-anchor="middle" font-size="13" fill="#8B1E3F" font-weight="700">1</text>
+        <text x="310" y="16" text-anchor="middle" font-size="13" fill="#8B1E3F" font-weight="700">0</text>
+        <text x="390" y="16" text-anchor="middle" font-size="13" fill="#8B1E3F" font-weight="700">1</text>
+        <!-- grid -->
+        <g stroke="#ddd"><line x1="30" y1="30" x2="30" y2="110"/><line x1="110" y1="30" x2="110" y2="110"/><line x1="190" y1="30" x2="190" y2="110"/><line x1="270" y1="30" x2="270" y2="110"/><line x1="350" y1="30" x2="350" y2="110"/><line x1="430" y1="30" x2="430" y2="110"/></g>
+        <!-- Manchester: 0=H->L, 1=L->H -->
+        <path d="M30 45 L70 45 L70 95 L110 95
+                 L110 95 L150 95 L150 45 L190 45
+                 L190 95 L230 95 L230 45 L270 45
+                 L270 45 L310 45 L310 95 L350 95
+                 L350 95 L390 95 L390 45 L430 45"
+              fill="none" stroke="#1F4E5F" stroke-width="2.4"/>
+      </svg>
+      <div class="cap">மான்செஸ்டர் குறியாக்கம் (0 = உயர்→தாழ், 1 = தாழ்→உயர்)</div>
+    </div>
+    <div class="key"><span class="tag">நன்மை</span>
+      ஒவ்வொரு பிட்டிலும் மாற்றம் இருப்பதால், <b>தனியான கடிகாரக் கம்பி தேவையில்லை</b> — பெறுநர் சமிக்ஞையிலிருந்தே கடிகாரத்தை மீட்டெடுக்க முடியும் (சுய-ஒத்திசைவு / self-clocking).
+    </div>
+    <h4 class="sub">ஒத்திசைவு (Synchronization)</h4>
+    <p>அனுப்புநரும் பெறுநரும் <b>ஒரே நேர அடிப்படையில்</b> இருக்க வேண்டும் — இல்லாவிடின் பிட்களைத் தவறாக வாசிப்பர். <b>ஒத்திசை (synchronous)</b> கடத்தலில் பொதுக் கடிகாரம்; <b>ஒத்திசையா (asynchronous)</b> கடத்தலில் start/stop பிட்கள்.</p>
+    <h4 class="sub">சமநிலைப் பிட் — பிழை கண்டறிதல் (Parity for Error Detection)</h4>
+    <p>தரவுடன் ஒரு கூடுதல் <b>சமநிலைப் பிட் (parity bit)</b> சேர்க்கப்படுகிறது:</p>
+    <ul>
+      <li><b>இரட்டைச் சமநிலை (Even parity):</b> மொத்த 1 களின் எண்ணிக்கை <b>இரட்டையாக</b> இருக்கப் parity bit அமைக்கப்படும்.</li>
+      <li><b>ஒற்றைச் சமநிலை (Odd parity):</b> மொத்த 1 களின் எண்ணிக்கை <b>ஒற்றையாக</b> இருக்கும்படி.</li>
+    </ul>
+    <div class="work">
+தரவு = 1010110  <span class="lbl">(1 களின் எண்ணிக்கை = 4, இரட்டை)</span>
+இரட்டைச் சமநிலை: parity bit = <span class="hl">0</span> → 10101100
+ஒற்றைச் சமநிலை: parity bit = <span class="hl">1</span> → 10101101
+    </div>
+    <div class="warn"><span class="tag">வரம்பு</span>
+      Parity ஒற்றைப் பிட் பிழையைக் <b>கண்டறியும்</b> மட்டுமே — <b>திருத்தாது</b>; இரட்டைப் பிட் பிழைகளைக் கண்டறிய முடியாது (இரண்டு மாறினால் சமநிலை மாறாது).
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 6.4 ===================== -->
+<section class="ncard" id="s4">
+  <div class="nhead"><span class="nnum">6.4</span><span class="ntitle">PSTN, பண்பேற்றம் & மோடம்</span></div>
+  <div class="nbody">
+    <p><b>PSTN (Public Switched Telephone Network)</b> — பாரம்பரிய <b>அனலொக் குரல்</b> தொலைபேசி வலையமைப்பு; மனிதக் குரலைக் கடத்த வடிவமைக்கப்பட்டது.</p>
+    <h4 class="sub">பண்பேற்றமும் (Modulation) பண்பகற்றலும் (Demodulation)</h4>
+    <p>கணினியின் டிஜிட்டல் தரவை அனலொக் தொலைபேசிக் கம்பி வழியாக அனுப்ப — டிஜிட்டலை அனலொக்காக மாற்ற வேண்டும்.</p>
+    <ul>
+      <li><b>பண்பேற்றம் (Modulation):</b> டிஜிட்டல் → அனலொக் (அனுப்பும்போது). ஒரு கேரியர் அலையின் வீச்சு/அதிர்வெண்/கட்டம் மாற்றப்படும் (ASK, FSK, PSK).</li>
+      <li><b>பண்பகற்றல் (Demodulation):</b> அனலொக் → டிஜிட்டல் (பெறும்போது).</li>
+    </ul>
+    <h4 class="sub">மோடம் (Modem = Modulator + Demodulator)</h4>
+    <div class="diagram">
+      <svg viewBox="0 0 540 100" width="520" xmlns="http://www.w3.org/2000/svg">
+        <defs><marker id="md" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#22303A"/></marker></defs>
+        <rect x="10" y="34" width="84" height="40" rx="8" fill="#EAF3F5" stroke="#1F4E5F" stroke-width="1.6"/><text x="52" y="59" text-anchor="middle" font-size="12" fill="#1F4E5F">கணினி</text>
+        <text x="135" y="44" text-anchor="middle" font-size="10" fill="#5A6B74">டிஜிட்டல்</text>
+        <line x1="94" y1="54" x2="176" y2="54" stroke="#22303A" stroke-width="1.6" marker-end="url(#md)"/>
+        <rect x="178" y="34" width="84" height="40" rx="8" fill="#FDF3E0" stroke="#C9912B" stroke-width="1.7"/><text x="220" y="59" text-anchor="middle" font-size="12" fill="#8a6313" font-weight="600">Modem</text>
+        <text x="305" y="44" text-anchor="middle" font-size="10" fill="#5A6B74">அனலொக்</text>
+        <line x1="262" y1="54" x2="346" y2="54" stroke="#22303A" stroke-width="1.6" marker-end="url(#md)"/>
+        <rect x="348" y="34" width="100" height="40" rx="8" fill="#F3E8EC" stroke="#8B1E3F" stroke-width="1.6"/><text x="398" y="59" text-anchor="middle" font-size="11.5" fill="#8B1E3F">PSTN/தொலைபேசி</text>
+      </svg>
+      <div class="cap">மோடம் — கணினிக்கும் தொலைபேசி வலைக்கும் இடையே மாற்றி</div>
+    </div>
+    <p>மோடம் <b>அனுப்பும்போது பண்பேற்றமும் (digital→analog), பெறும்போது பண்பகற்றலும் (analog→digital)</b> செய்கிறது. எனவே "Mo-dem".</p>
+  </div>
+</section>
+
+<!-- ===================== 6.5 ===================== -->
+<section class="ncard" id="s5">
+  <div class="nhead"><span class="nnum">6.5</span><span class="ntitle">வலை வடிவியல் (Network Topologies); Hubs & Switches</span></div>
+  <div class="nbody">
+    <p><b>வடிவியல் (Topology)</b> = வலையமைப்பில் சாதனங்கள் எவ்வாறு இணைக்கப்படுகின்றன என்ற அமைப்பு.</p>
+    <div class="diagram">
+      <svg viewBox="0 0 620 200" width="600" xmlns="http://www.w3.org/2000/svg">
+        <!-- BUS -->
+        <text x="80" y="16" text-anchor="middle" font-size="12" fill="#1F4E5F" font-weight="600">Bus</text>
+        <line x1="20" y1="60" x2="140" y2="60" stroke="#8B1E3F" stroke-width="2.4"/>
+        <g fill="#EAF3F5" stroke="#1F4E5F" stroke-width="1.5"><rect x="30" y="30" width="22" height="16"/><rect x="70" y="30" width="22" height="16"/><rect x="110" y="30" width="22" height="16"/></g>
+        <line x1="41" y1="46" x2="41" y2="60" stroke="#22303A"/><line x1="81" y1="46" x2="81" y2="60" stroke="#22303A"/><line x1="121" y1="46" x2="121" y2="60" stroke="#22303A"/>
+        <!-- STAR -->
+        <text x="230" y="16" text-anchor="middle" font-size="12" fill="#1F4E5F" font-weight="600">Star</text>
+        <circle cx="230" cy="55" r="13" fill="#FDF3E0" stroke="#C9912B" stroke-width="1.6"/><text x="230" y="59" text-anchor="middle" font-size="8">HUB</text>
+        <g fill="#EAF3F5" stroke="#1F4E5F" stroke-width="1.5"><rect x="180" y="30" width="20" height="14"/><rect x="260" y="30" width="20" height="14"/><rect x="180" y="75" width="20" height="14"/><rect x="260" y="75" width="20" height="14"/></g>
+        <line x1="218" y1="48" x2="195" y2="40" stroke="#22303A"/><line x1="242" y1="48" x2="265" y2="40" stroke="#22303A"/><line x1="218" y1="62" x2="195" y2="78" stroke="#22303A"/><line x1="242" y1="62" x2="265" y2="78" stroke="#22303A"/>
+        <!-- RING -->
+        <text x="400" y="16" text-anchor="middle" font-size="12" fill="#1F4E5F" font-weight="600">Ring</text>
+        <circle cx="400" cy="58" r="32" fill="none" stroke="#8B1E3F" stroke-width="2"/>
+        <g fill="#EAF3F5" stroke="#1F4E5F" stroke-width="1.5"><rect x="389" y="20" width="22" height="14"/><rect x="425" y="50" width="22" height="14"/><rect x="389" y="82" width="22" height="14"/><rect x="353" y="50" width="22" height="14"/></g>
+        <!-- MESH -->
+        <text x="540" y="16" text-anchor="middle" font-size="12" fill="#1F4E5F" font-weight="600">Mesh</text>
+        <g fill="#EAF3F5" stroke="#1F4E5F" stroke-width="1.5"><rect x="505" y="28" width="20" height="14"/><rect x="560" y="28" width="20" height="14"/><rect x="505" y="78" width="20" height="14"/><rect x="560" y="78" width="20" height="14"/></g>
+        <g stroke="#8B1E3F" stroke-width="1.3"><line x1="515" y1="42" x2="570" y2="42"/><line x1="515" y1="78" x2="570" y2="78"/><line x1="515" y1="42" x2="515" y2="78"/><line x1="570" y1="42" x2="570" y2="78"/><line x1="515" y1="42" x2="570" y2="78"/><line x1="570" y1="42" x2="515" y2="78"/></g>
+      </svg>
+      <div class="cap">நான்கு முக்கிய வடிவியல்கள்</div>
+    </div>
+    <table class="dt">
+      <tr><th>வடிவியல்</th><th>அமைப்பு</th><th>நன்மை / குறை</th></tr>
+      <tr><td><b>பேருந்து (Bus)</b></td><td>ஒரே முதுகெலும்புக் கம்பியில் அனைத்துச் சாதனங்களும்</td><td>மலிவு, எளிது; ஆனால் முதுகெலும்பு செயலிழந்தால் முழு வலையும் நிற்கும்; மோதல்கள்</td></tr>
+      <tr><td><b>நட்சத்திரம் (Star)</b></td><td>அனைத்துச் சாதனங்களும் ஒரு மைய hub/switch உடன்</td><td>ஒரு கம்பி தோல்வி → ஒரு சாதனம் மட்டும் பாதிப்பு; ஆனால் மையம் தோல்வி → முழு வலையும்; மிகப் பொதுவானது</td></tr>
+      <tr><td><b>வளையம் (Ring)</b></td><td>ஒவ்வொரு சாதனமும் அடுத்ததுடன், வட்ட வடிவில்</td><td>தரவு ஒரு திசையில் பாயும்; ஒரு சாதன/கம்பித் தோல்வி → முழு வலையும் பாதிப்பு</td></tr>
+      <tr><td><b>வலை (Mesh)</b></td><td>ஒவ்வொரு சாதனமும் ஏனைய அனைத்துடனும்</td><td>மிக நம்பகமானது (பல பாதைகள்); ஆனால் அதிக கம்பி/செலவு</td></tr>
+    </table>
+    <h4 class="sub">Hub vs Switch</h4>
+    <table class="dt">
+      <tr><th>Hub</th><th>Switch</th></tr>
+      <tr><td>பெறும் தரவை <b>எல்லாத் துறைகளுக்கும்</b> அனுப்பும் (broadcast)</td><td>MAC முகவரியைப் பார்த்து <b>சரியான இலக்குத் துறைக்கு மட்டும்</b> அனுப்பும்</td></tr>
+      <tr><td>"முட்டாள்" சாதனம்; மோதல்/இரைச்சல் அதிகம்</td><td>"புத்திசாலி" சாதனம்; திறன் கூடியது, பாதுகாப்பு கூடியது</td></tr>
+    </table>
+    <div class="key"><span class="tag">முக்கிய வேறுபாடு</span>
+      <b>Hub = எல்லோருக்கும் அனுப்பு</b> (பட்டை அகலம் வீண், பாதுகாப்பு குறைவு). <b>Switch = இலக்குக்கு மட்டும்</b> (திறன், பாதுகாப்பு). நவீன வலைகளில் switch ஆதிக்கம்.
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 6.6 ===================== -->
+<section class="ncard" id="s6">
+  <div class="nhead"><span class="nnum">6.6</span><span class="ntitle">MAC நெறிமுறை — LAN, MAC முகவரி, Frame, Ethernet</span></div>
+  <div class="nbody">
+    <p><b>LAN (Local Area Network)</b> — ஒரு சிறிய புவியியல் பகுதியில் (வீடு, பாடசாலை, அலுவலகம்) உள்ள வலையமைப்பு. பல சாதனங்கள் ஒரே ஊடகத்தைப் பகிரும்போது, யார் எப்போது அனுப்பலாம் எனத் தீர்மானிக்க <b>MAC (Media Access Control) நெறிமுறை</b> தேவை.</p>
+    <h4 class="sub">MAC முகவரி (Physical Address)</h4>
+    <p>ஒவ்வொரு வலையமைப்பு அட்டைக்கும் (NIC) தயாரிப்பின்போதே வழங்கப்படும் <b>தனித்துவமான 48-பிட் (6 பைட்) வன்பொருள் முகவரி</b>. Hex இல் எழுதப்படும். எ.கா: <code class="inline">00:1A:2B:3C:4D:5E</code>. இது <b>நிரந்தரமானது</b> (IP முகவரி மாறக்கூடியது).</p>
+    <h4 class="sub">சட்டகம் (Frame)</h4>
+    <p>தரவு இணைப்பு அடுக்கில் (Data Link Layer) தரவு <b>சட்டகங்களாகப் (frames)</b> பொதியப்படுகிறது. ஒரு சட்டகத்தில்: இலக்கு MAC, மூல MAC, தரவு, பிழைச் சோதனைக் குறியீடு (CRC) ஆகியன இருக்கும்.</p>
+    <h4 class="sub">ALOHA இலிருந்து Ethernet வரை</h4>
+    <ul>
+      <li><b>ALOHA:</b> ஆரம்பகால நெறிமுறை — எப்போது வேண்டுமானாலும் அனுப்பு; மோதல் ஏற்பட்டால் சிறிது காத்திருந்து மீண்டும் அனுப்பு. திறன் குறைவு.</li>
+      <li><b>CSMA/CD (Ethernet):</b> <b>Carrier Sense Multiple Access with Collision Detection</b> — அனுப்பும் முன் ஊடகம் காலியா எனச் சோதி (carrier sense); மோதல் ஏற்பட்டால் கண்டறிந்து (collision detection), சீரற்ற நேரம் காத்திருந்து மீண்டும் அனுப்பு. Ethernet இன் அடிப்படை.</li>
+    </ul>
+    <h4 class="sub">Broadcasting vs Unicasting</h4>
+    <ul>
+      <li><b>Unicast:</b> ஒரு அனுப்புநரிடமிருந்து <b>ஒரே ஒரு</b> குறிப்பிட்ட பெறுநருக்கு.</li>
+      <li><b>Broadcast:</b> ஒரு அனுப்புநரிடமிருந்து வலையில் உள்ள <b>அனைத்து</b> சாதனங்களுக்கும்.</li>
+      <li>(<b>Multicast:</b> ஒரு குழுவுக்கு மட்டும்.)</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ===================== 6.7 ===================== -->
+<section class="ncard" id="s7">
+  <div class="nhead"><span class="nnum">6.7</span><span class="ntitle">இணையம் — IP முகவரியிடல், Subnetting, DHCP, Routers</span></div>
+  <div class="nbody">
+    <h4 class="sub">நுழைவாயில்கள் (Gateways) & திசைவிகள் (Routers)</h4>
+    <p><b>Gateway</b> — வெவ்வேறு வலையமைப்புகளை இணைக்கும் புள்ளி. <b>Router (திசைவி)</b> — பல வலைகளுக்கிடையே தரவுப் <b>பொதிகளை (packets) சிறந்த பாதையில்</b> அனுப்பும் சாதனம். IP முகவரிகளைப் பயன்படுத்தித் திசைவகுக்கிறது.</p>
+    <h4 class="sub">IPv4 முகவரியிடல்</h4>
+    <p>IPv4 ஒரு <b>32-பிட்</b> முகவரி; நான்கு 8-பிட் தொகுதிகளாக (octets) புள்ளிகளால் பிரிக்கப்பட்டு தசமத்தில் எழுதப்படும். எ.கா: <code class="inline">192.168.1.10</code>. ஒவ்வொரு octet உம் 0–255.</p>
+    <table class="dt c">
+      <caption>IP முகவரி வகுப்புகள் (Classes)</caption>
+      <tr><th>வகுப்பு</th><th>முதல் octet</th><th>பயன்பாடு</th></tr>
+      <tr><td>A</td><td>0–127</td><td>மிகப் பெரிய வலைகள்</td></tr>
+      <tr><td>B</td><td>128–191</td><td>நடுத்தர வலைகள்</td></tr>
+      <tr><td>C</td><td>192–223</td><td>சிறிய வலைகள்</td></tr>
+      <tr><td>D</td><td>224–239</td><td>Multicast</td></tr>
+      <tr><td>E</td><td>240–255</td><td>ஆராய்ச்சி</td></tr>
+    </table>
+    <h4 class="sub">தனிப்பட்ட IP முகவரிகள் (Private IPs)</h4>
+    <p>உள் வலைகளுக்கு (LAN) மட்டுமே; இணையத்தில் நேரடியாகப் பயன்படாது:</p>
+    <ul>
+      <li><code class="inline">10.0.0.0 – 10.255.255.255</code> (Class A)</li>
+      <li><code class="inline">172.16.0.0 – 172.31.255.255</code> (Class B)</li>
+      <li><code class="inline">192.168.0.0 – 192.168.255.255</code> (Class C)</li>
+    </ul>
+    <h4 class="sub">துணைவலையாக்கம் (Subnetting), Subnet Mask & CIDR</h4>
+    <p>ஒரு IP முகவரி இரு பகுதிகள்: <b>வலைப் பகுதி (Network)</b> + <b>புரவலன் பகுதி (Host)</b>. <b>Subnet mask</b> எந்தப் பகுதி எது எனக் காட்டுகிறது (1 = network, 0 = host). <b>CIDR</b> குறியீடு <code class="inline">/n</code> = network பகுதியில் உள்ள 1 களின் எண்ணிக்கை.</p>
+    <div class="work">
+IP = 192.168.1.10 / 24
+Subnet mask = 255.255.255.0
+                = 11111111.11111111.11111111.00000000
+                  ←—— Network (24) ——→ ←Host(8)→
+
+Network address = 192.168.1.<span class="hl">0</span>     (host பிட்கள் எல்லாம் 0)
+Broadcast address = 192.168.1.<span class="hl">255</span>  (host பிட்கள் எல்லாம் 1)
+பயன்படுத்தக்கூடிய hosts = 2⁸ − 2 = <span class="gd">254</span>
+   (−2: network & broadcast முகவரிகள் தவிர்க்கப்படுகின்றன)
+    </div>
+    <div class="key"><span class="tag">Host எண்ணிக்கை சூத்திரம்</span>
+      Host பிட்கள் = h எனில், பயன்படுத்தக்கூடிய hosts = <b>2ʰ − 2</b>. /24 → h=8 → 254; /26 → h=6 → 62; /30 → h=2 → 2.
+    </div>
+    <h4 class="sub">DHCP, IPv6, Packet Switching</h4>
+    <ul>
+      <li><b>DHCP (Dynamic Host Configuration Protocol):</b> சாதனங்களுக்கு IP முகவரிகளைத் <b>தானாக ஒதுக்கும்</b> நெறிமுறை (கைமுறை அமைப்பு தேவையில்லை).</li>
+      <li><b>IPv6:</b> <b>128-பிட்</b> முகவரி (IPv4 இன் 32-பிட் தீர்ந்துவிட்டதால்). Hex இல், 8 குழுக்களாக. எ.கா: <code class="inline">2001:0db8::1</code>. மிக அதிக முகவரிகளை வழங்குகிறது.</li>
+      <li><b>பொதி மாற்றம் (Packet Switching):</b> தரவு சிறு <b>பொதிகளாகப் (packets)</b> பிரிக்கப்பட்டு, ஒவ்வொன்றும் தனித்தனிப் பாதையில் சென்று இலக்கில் மீண்டும் இணைக்கப்படும்.</li>
+      <li><b>சிறந்த முயற்சி வழங்கல் (Best-effort delivery):</b> IP வழங்கலை உத்தரவாதம் செய்யாது — பொதிகள் தொலையலாம், ஒழுங்கு மாறலாம். நம்பகத்தன்மையை TCP கவனிக்கும்.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ===================== 6.8 ===================== -->
+<section class="ncard" id="s8">
+  <div class="nhead"><span class="nnum">6.8</span><span class="ntitle">கடத்து நெறிமுறைகள் — Ports, UDP, TCP</span></div>
+  <div class="nbody">
+    <h4 class="sub">துறைகள் (Ports)</h4>
+    <p>ஒரே சாதனத்தில் இயங்கும் பல பயன்பாடுகளை வேறுபடுத்த <b>துறை எண்கள் (port numbers)</b> பயன்படுகின்றன (0–65535). எ.கா: HTTP=80, HTTPS=443, FTP=21, DNS=53, SMTP=25.</p>
+    <h4 class="sub">TCP vs UDP</h4>
+    <table class="dt">
+      <tr><th>TCP (Transmission Control Protocol)</th><th>UDP (User Datagram Protocol)</th></tr>
+      <tr><td><b>இணைப்பு சார்ந்தது</b> (connection-oriented) — முதலில் இணைப்பு (3-way handshake)</td><td><b>இணைப்பற்றது</b> (connectionless) — நேரடியாக அனுப்பும்</td></tr>
+      <tr><td>நம்பகமானது — வழங்கல், ஒழுங்கு, பிழைச் சோதனை உறுதி</td><td>நம்பகமற்றது — வழங்கல்/ஒழுங்கு உத்தரவாதம் இல்லை</td></tr>
+      <tr><td>மெதுவானது (கூடுதல் கட்டுப்பாடு)</td><td>வேகமானது (குறைந்த மேல்நிலைச் செலவு)</td></tr>
+      <tr><td>எ.கா: இணையம் (HTTP), மின்னஞ்சல், கோப்பு பரிமாற்றம் (FTP)</td><td>எ.கா: நேரலை ஒளி/ஒலி (streaming), online games, DNS, VoIP</td></tr>
+    </table>
+    <div class="key"><span class="tag">எப்போது எது?</span>
+      <b>TCP</b> = துல்லியம் முக்கியம் (கோப்பு, இணையப்பக்கம், மின்னஞ்சல் — ஒரு பிட் கூடத் தவறக்கூடாது). <b>UDP</b> = வேகம் முக்கியம், சில இழப்பு பரவாயில்லை (நேரலை வீடியோ, விளையாட்டு — காலதாமதத்தை விட சிறு இழப்பு மேல்).
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 6.9 ===================== -->
+<section class="ncard" id="s9">
+  <div class="nhead"><span class="nnum">6.9</span><span class="ntitle">இணையப் பயன்பாடுகள் — DNS, HTTP, Client-Server</span></div>
+  <div class="nbody">
+    <h4 class="sub">வாடிக்கையாளர்-சேவையக மாதிரி (Client-Server Model)</h4>
+    <p><b>வாடிக்கையாளர் (Client)</b> சேவையைக் கோரும் (எ.கா: உலாவி); <b>சேவையகம் (Server)</b> சேவையை வழங்கும் (எ.கா: இணையச் சேவையகம்). வாடிக்கையாளர் கோரிக்கை அனுப்ப, சேவையகம் பதில் அனுப்பும்.</p>
+    <h4 class="sub">DNS (Domain Name System)</h4>
+    <p>மனிதர்கள் நினைவில் வைக்கக்கூடிய <b>களப் பெயர்களை (domain names)</b> கணினிகள் பயன்படுத்தும் <b>IP முகவரிகளாக மொழிபெயர்க்கும்</b> முறைமை. எ.கா: <code class="inline">www.google.com → 142.250.x.x</code>. DNS "இணையத்தின் தொலைபேசி அட்டவணை".</p>
+    <p>DNS ஒரு <b>படிநிலைக் கட்டமைப்பு (hierarchical):</b></p>
+    <div class="work">
+.                        <span class="lbl">← Root</span>
+.com  .org  .lk          <span class="lbl">← Top-Level Domain (TLD)</span>
+google.com  nie.lk       <span class="lbl">← Second-Level Domain</span>
+www.google.com           <span class="lbl">← Subdomain / Host</span>
+    </div>
+    <p><b>பெயர் தீர்வு (Name Resolution):</b> உலாவி DNS தீர்விக்கு (resolver) கேட்க → root → TLD → authoritative server எனப் படிப்படியாக வினவி IP முகவரி பெறப்படுகிறது.</p>
+    <h4 class="sub">HTTP (HyperText Transfer Protocol)</h4>
+    <p>இணையப் பக்கங்களை (web pages) கடத்தும் நெறிமுறை. வாடிக்கையாளர் (உலாவி) <b>request</b> அனுப்ப, சேவையகம் <b>response</b> (HTML பக்கம்) அனுப்பும். <b>HTTPS</b> = HTTP + மறையாக்கம் (SSL/TLS) — பாதுகாப்பானது.</p>
+  </div>
+</section>
+
+<!-- ===================== 6.10 ===================== -->
+<section class="ncard" id="s10">
+  <div class="nhead"><span class="nnum">6.10</span><span class="ntitle">வலை மேற்கோள் மாதிரிகள் — TCP/IP & OSI</span></div>
+  <div class="nbody">
+    <p>வலையமைப்புச் செயற்பாடுகள் <b>அடுக்குகளாக (layers)</b> பிரிக்கப்பட்டுள்ளன — ஒவ்வொரு அடுக்கும் ஒரு குறிப்பிட்ட பணியைச் செய்து, அடுத்த அடுக்குக்குச் சேவை வழங்குகிறது.</p>
+    <div class="diagram">
+      <svg viewBox="0 0 600 320" width="580" xmlns="http://www.w3.org/2000/svg">
+        <text x="150" y="18" text-anchor="middle" font-size="14" fill="#8B1E3F" font-weight="700">OSI (7 அடுக்குகள்)</text>
+        <text x="450" y="18" text-anchor="middle" font-size="14" fill="#1F4E5F" font-weight="700">TCP/IP (4 அடுக்குகள்)</text>
+        <g font-size="11.5">
+          <rect x="40" y="30" width="220" height="32" fill="#F3E8EC" stroke="#8B1E3F"/><text x="150" y="51" text-anchor="middle">7. Application (பயன்பாடு)</text>
+          <rect x="40" y="64" width="220" height="32" fill="#F3E8EC" stroke="#8B1E3F"/><text x="150" y="85" text-anchor="middle">6. Presentation</text>
+          <rect x="40" y="98" width="220" height="32" fill="#F3E8EC" stroke="#8B1E3F"/><text x="150" y="119" text-anchor="middle">5. Session</text>
+          <rect x="40" y="132" width="220" height="32" fill="#FDF3E0" stroke="#C9912B"/><text x="150" y="153" text-anchor="middle">4. Transport</text>
+          <rect x="40" y="166" width="220" height="32" fill="#EAF3F5" stroke="#1F4E5F"/><text x="150" y="187" text-anchor="middle">3. Network</text>
+          <rect x="40" y="200" width="220" height="32" fill="#E6EAEC" stroke="#5A6B74"/><text x="150" y="221" text-anchor="middle">2. Data Link</text>
+          <rect x="40" y="234" width="220" height="32" fill="#E6EAEC" stroke="#5A6B74"/><text x="150" y="255" text-anchor="middle">1. Physical (இயற்பியல்)</text>
+        </g>
+        <g font-size="11.5">
+          <rect x="340" y="30" width="220" height="100" fill="#F3E8EC" stroke="#8B1E3F"/><text x="450" y="84" text-anchor="middle" font-weight="600">Application</text>
+          <rect x="340" y="132" width="220" height="32" fill="#FDF3E0" stroke="#C9912B"/><text x="450" y="153" text-anchor="middle" font-weight="600">Transport</text>
+          <rect x="340" y="166" width="220" height="32" fill="#EAF3F5" stroke="#1F4E5F"/><text x="450" y="187" text-anchor="middle" font-weight="600">Internet</text>
+          <rect x="340" y="200" width="220" height="66" fill="#E6EAEC" stroke="#5A6B74"/><text x="450" y="237" text-anchor="middle" font-weight="600">Network Access</text>
+        </g>
+      </svg>
+      <div class="cap">OSI இன் 7 அடுக்குகளும் TCP/IP இன் 4 அடுக்குகளுக்கு இணையாதல்</div>
+    </div>
+    <h4 class="sub">தரவு அலகுகள் (Data Units — PDU)</h4>
+    <table class="dt c">
+      <tr><th>அடுக்கு</th><th>தரவு அலகு</th></tr>
+      <tr><td>Application/Transport (TCP)</td><td>பிரிவு (Segment)</td></tr>
+      <tr><td>Network / Internet</td><td><b>பொதி (Packet)</b></td></tr>
+      <tr><td>Data Link</td><td><b>சட்டகம் (Frame)</b></td></tr>
+      <tr><td>Physical</td><td><b>பிட் (Bit)</b></td></tr>
+    </table>
+    <div class="key"><span class="tag">நினைவில்</span>
+      OSI = <b>7 அடுக்கு</b> (கோட்பாட்டு மாதிரி); TCP/IP = <b>4 அடுக்கு</b> (நடைமுறை மாதிரி). கீழிருந்து மேல்: Physical → bit, Data Link → frame, Network → packet. OSI மேல் 3 அடுக்குகள் (App, Presentation, Session) = TCP/IP இன் ஒரே Application அடுக்கு.
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 6.11 ===================== -->
+<section class="ncard" id="s11">
+  <div class="nhead"><span class="nnum">6.11</span><span class="ntitle">வலைப் பாதுகாப்பு (Network Security)</span></div>
+  <div class="nbody">
+    <h4 class="sub">மறையாக்கம் (Encryption)</h4>
+    <table class="dt">
+      <tr><th>பகிரப்பட்ட (சமச்சீர்) சாவி</th><th>பொது/தனிச் (அசமச்சீர்) சாவி</th></tr>
+      <tr><td><b>ஒரே சாவி</b> மறையாக்கத்துக்கும் மறைவிலக்கலுக்கும் (Symmetric)</td><td><b>இரு சாவிகள்</b>: பொது (public) + தனிப்பட்ட (private)</td></tr>
+      <tr><td>வேகமானது; ஆனால் சாவியைப் பகிர்தல் ஆபத்து</td><td>பாதுகாப்பானது; பொதுச் சாவியால் மறையாக்கம், தனிச் சாவியால் மட்டுமே மறைவிலக்கல்</td></tr>
+    </table>
+    <p><b>பொது/தனிச் சாவி எடுத்துக்காட்டு:</b> அனுப்புநர் பெறுநரின் <b>பொதுச் சாவியால்</b> மறையாக்கம் செய்கிறார்; பெறுநர் தன் <b>தனிச் சாவியால்</b> மட்டுமே திறக்க முடியும்.</p>
+    <h4 class="sub">இலக்கமுறை கையொப்பம் (Digital Signature)</h4>
+    <p>அனுப்புநர் தன் <b>தனிச் சாவியால்</b> செய்தியில் "கையொப்பமிட", பெறுநர் அனுப்புநரின் <b>பொதுச் சாவியால்</b> சரிபார்க்கிறார். இது <b>அனுப்புநரை உறுதிப்படுத்துகிறது (authentication)</b> மற்றும் செய்தி மாற்றப்படவில்லை என்பதை உறுதிசெய்கிறது (integrity).</p>
+    <h4 class="sub">அச்சுறுத்தல்கள் (Threats)</h4>
+    <table class="dt">
+      <tr><th>அச்சுறுத்தல்</th><th>விளக்கம்</th></tr>
+      <tr><td><b>வைரஸ் (Virus)</b></td><td>மற்றொரு நிரலுடன் இணைந்து பரவி, கோப்புகளைப் பாதிக்கும் தீம்பொருள்</td></tr>
+      <tr><td><b>ட்ரோஜன் (Trojan)</b></td><td>பயனுள்ள மென்பொருள் போல் தோன்றி, மறைவாகத் தீங்கிழைக்கும்</td></tr>
+      <tr><td><b>மால்வேர் (Malware)</b></td><td>தீங்கிழைக்கும் மென்பொருள்களின் பொதுப்பெயர் (virus, worm, spyware…)</td></tr>
+      <tr><td><b>ஃபிஷிங் (Phishing)</b></td><td>நம்பகமான நிறுவனம் போல் நடித்து, கடவுச்சொல்/அட்டை விபரம் திருடும் மோசடி (போலி மின்னஞ்சல்/இணையதளம்)</td></tr>
+    </table>
+    <h4 class="sub">பாதுகாப்பு நடவடிக்கைகள்</h4>
+    <ul>
+      <li><b>தீச்சுவர் (Firewall):</b> வலையமைப்புக்கு உள்ளே/வெளியே செல்லும் தரவைக் கண்காணித்து, விதிகளின்படி அனுமதிக்கும்/தடுக்கும் (வன்பொருள் அல்லது மென்பொருள்).</li>
+      <li><b>வைரஸ் எதிர்ப்பி (Antivirus):</b> தீம்பொருளைக் கண்டறிந்து, தடுத்து, அகற்றும் மென்பொருள்; வழக்கமாகப் புதுப்பிக்கப்பட வேண்டும்.</li>
+      <li>வலுவான கடவுச்சொற்கள், இரு-படி அங்கீகாரம், மறையாக்கம், வழக்கமான புதுப்பித்தல்.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ===================== 6.12 ===================== -->
+<section class="ncard" id="s12">
+  <div class="nhead"><span class="nnum">6.12</span><span class="ntitle">ISP களும் வீட்டு வலையமைப்புகளும்</span></div>
+  <div class="nbody">
+    <p><b>ISP (Internet Service Provider)</b> — இணைய இணைப்பை வழங்கும் நிறுவனம் (எ.கா: SLT, Dialog). வீட்டு/அலுவலக வலையை இணையத்துடன் இணைக்கிறது.</p>
+    <h4 class="sub">DSL / ADSL</h4>
+    <ul>
+      <li><b>DSL (Digital Subscriber Line):</b> தற்போதுள்ள தொலைபேசிக் கம்பி வழியாக டிஜிட்டல் இணைய இணைப்பு வழங்கும் தொழில்நுட்பம்; குரல் & தரவு ஒரே நேரத்தில்.</li>
+      <li><b>ADSL (Asymmetric DSL):</b> <b>பதிவிறக்க வேகம் (download) பதிவேற்ற வேகத்தை (upload) விட அதிகம்</b> — பெரும்பாலான பயனர்கள் அதிகம் பதிவிறக்குவதால். வீட்டுப் பயன்பாட்டுக்கு ஏற்றது.</li>
+    </ul>
+    <h4 class="sub">NAT (Network Address Translation)</h4>
+    <p>பல சாதனங்கள் ஒரே <b>பொது IP முகவரியைப்</b> பகிர்ந்து இணையத்தை அணுக உதவும் நுட்பம். வீட்டு router உள் வலையின் <b>தனிப்பட்ட IP முகவரிகளை</b> ஒரு பொது IP முகவரியாக மொழிபெயர்க்கிறது. இது IPv4 முகவரிப் பற்றாக்குறையைக் குறைக்கிறது, பாதுகாப்பையும் வழங்குகிறது.</p>
+    <div class="diagram">
+      <svg viewBox="0 0 540 130" width="520" xmlns="http://www.w3.org/2000/svg">
+        <defs><marker id="n1" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#22303A"/></marker></defs>
+        <g font-size="10.5"><rect x="14" y="20" width="86" height="26" rx="5" fill="#EAF3F5" stroke="#1F4E5F"/><text x="57" y="37" text-anchor="middle">192.168.1.2</text><rect x="14" y="56" width="86" height="26" rx="5" fill="#EAF3F5" stroke="#1F4E5F"/><text x="57" y="73" text-anchor="middle">192.168.1.3</text><rect x="14" y="92" width="86" height="26" rx="5" fill="#EAF3F5" stroke="#1F4E5F"/><text x="57" y="109" text-anchor="middle">192.168.1.4</text></g>
+        <line x1="100" y1="65" x2="180" y2="65" stroke="#22303A" stroke-width="1.5" marker-end="url(#n1)"/>
+        <rect x="182" y="46" width="110" height="40" rx="8" fill="#FDF3E0" stroke="#C9912B" stroke-width="1.7"/><text x="237" y="63" text-anchor="middle" font-size="12" fill="#8a6313" font-weight="700">Router (NAT)</text><text x="237" y="78" text-anchor="middle" font-size="9" fill="#5A6B74">தனி→பொது</text>
+        <line x1="292" y1="65" x2="372" y2="65" stroke="#22303A" stroke-width="1.5" marker-end="url(#n1)"/>
+        <rect x="374" y="46" width="150" height="40" rx="8" fill="#F3E8EC" stroke="#8B1E3F" stroke-width="1.6"/><text x="449" y="63" text-anchor="middle" font-size="11" fill="#8B1E3F">இணையம்</text><text x="449" y="78" text-anchor="middle" font-size="9.5" fill="#5A6B74">ஒரு பொது IP</text>
+      </svg>
+      <div class="cap">NAT — பல தனி IP → ஒரு பொது IP</div>
+    </div>
+    <h4 class="sub">பினாமி (Proxy) சேவையகம்</h4>
+    <p>வாடிக்கையாளருக்கும் இணையத்துக்கும் இடையே இடைத்தரகராகச் செயற்படும் சேவையகம். <b>நன்மைகள்:</b> தற்காலிகச் சேமிப்பு (caching — வேகம்), அணுகல் கட்டுப்பாடு/வடிகட்டல் (content filtering), பயனர் அடையாளம் மறைத்தல் (anonymity), பாதுகாப்பு.</p>
+  </div>
+</section>
+
+<!-- ===================== Practice ===================== -->
+<section class="ncard" id="sp">
+  <div class="nhead"><span class="nnum">?</span><span class="ntitle">பயிற்சி வினாக்கள் (விடைகளுடன்)</span></div>
+  <div class="nbody">
+
+    <!-- P1 -->
+    <div class="pq">
+      <span class="qnum">வினா 01</span>
+      <p class="task" style="margin-top:10px">அனலொக் சமிக்ஞைக்கும் டிஜிட்டல் சமிக்ஞைக்கும் இடையேயான வேறுபாடுகளை (ஏதேனும் மூன்று) எழுதுக.</p>
+      <button class="btn" onclick="toggleAns(this,'p1')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p1"><span class="ans-label">விடை</span>
+        <ul>
+          <li>அனலொக் = தொடர்ச்சியான அலை; டிஜிட்டல் = தனித்த இரு நிலைகள் (0,1).</li>
+          <li>அனலொக் இரைச்சலால் எளிதில் பாதிப்படையும்; டிஜிட்டல் இரைச்சலை எதிர்த்து நிற்கும்.</li>
+          <li>அனலொக் எ.கா: மனிதக் குரல்; டிஜிட்டல் எ.கா: கணினித் தரவு.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- P2 -->
+    <div class="pq">
+      <span class="qnum">வினா 02</span>
+      <p class="task" style="margin-top:10px">ஒளி இழை (fibre optics) ஐ முறுக்கிய இணைக் கம்பியுடன் (twisted pair) ஒப்பிட்டு, இரண்டு நன்மைகளை எழுதுக.</p>
+      <button class="btn" onclick="toggleAns(this,'p2')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p2"><span class="ans-label">விடை</span>
+        <ul>
+          <li>மிக அதிக பட்டை அகலம் & வேகம்.</li>
+          <li>மின்காந்த இரைச்சல் பாதிப்பில்லை.</li>
+          <li>குறைந்த தேய்வு (attenuation) — நெடுந்தூரம் சாத்தியம். (குறை: விலை கூடியது.)</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- P3 -->
+    <div class="pq">
+      <span class="qnum">வினா 03</span>
+      <p class="task" style="margin-top:10px">தரவு <code class="inline">1101001</code> க்கு (அ) இரட்டைச் சமநிலை (ஆ) ஒற்றைச் சமநிலை parity bit ஐக் கணக்கிடுக.</p>
+      <button class="btn" onclick="toggleAns(this,'p3')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p3"><span class="ans-label">விடை</span>
+        <div class="work">
+1101001 இல் 1 களின் எண்ணிக்கை = 4 (இரட்டை)
+(அ) இரட்டைச் சமநிலை: ஏற்கனவே இரட்டை → parity = <span class="gd">0</span>
+(ஆ) ஒற்றைச் சமநிலை: ஒற்றையாக்க → parity = <span class="gd">1</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- P4 -->
+    <div class="pq">
+      <span class="qnum">வினா 04</span>
+      <p class="task" style="margin-top:10px">Hub க்கும் Switch க்கும் இடையேயான வேறுபாடு என்ன? எது மிகவும் திறன்மிக்கது, ஏன்?</p>
+      <button class="btn" onclick="toggleAns(this,'p4')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p4"><span class="ans-label">விடை</span>
+        <p><b>Hub:</b> பெறும் தரவை எல்லாத் துறைகளுக்கும் அனுப்பும் (broadcast).</p>
+        <p><b>Switch:</b> MAC முகவரியைப் பார்த்து சரியான இலக்குத் துறைக்கு மட்டும் அனுப்பும்.</p>
+        <p>Switch மிகத் திறன்மிக்கது — தேவையற்ற போக்குவரத்தைத் தவிர்த்து, பட்டை அகலத்தை வீணாக்காமல், பாதுகாப்பையும் வழங்குகிறது.</p>
+      </div>
+    </div>
+
+    <!-- P5 -->
+    <div class="pq">
+      <span class="qnum">வினா 05</span>
+      <p class="task" style="margin-top:10px">IP முகவரி <code class="inline">192.168.10.0 / 24</code> க்கு: (அ) subnet mask (ஆ) broadcast முகவரி (இ) பயன்படுத்தக்கூடிய host எண்ணிக்கையைக் கண்டறிக.</p>
+      <button class="btn" onclick="toggleAns(this,'p5')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p5"><span class="ans-label">விடை</span>
+        <div class="work">
+(அ) /24 → Subnet mask = <span class="gd">255.255.255.0</span>
+(ஆ) Broadcast = <span class="gd">192.168.10.255</span>  (host பிட்கள் எல்லாம் 1)
+(இ) Host பிட்கள் = 8 → 2⁸ − 2 = <span class="gd">254</span> hosts
+        </div>
+      </div>
+    </div>
+
+    <!-- P6 -->
+    <div class="pq">
+      <span class="qnum">வினா 06</span>
+      <p class="task" style="margin-top:10px">TCP க்கும் UDP க்கும் இடையேயான வேறுபாடுகளை எழுதி, நேரலை வீடியோ அழைப்புக்கு (video call) எது பொருத்தம், ஏன் எனக் கூறுக.</p>
+      <button class="btn" onclick="toggleAns(this,'p6')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p6"><span class="ans-label">விடை</span>
+        <p><b>TCP:</b> இணைப்பு சார்ந்தது, நம்பகமானது, ஒழுங்கு உறுதி, மெதுவானது.</p>
+        <p><b>UDP:</b> இணைப்பற்றது, நம்பகமற்றது, வேகமானது.</p>
+        <p>நேரலை வீடியோ அழைப்புக்கு <b>UDP</b> பொருத்தம் — வேகம் முக்கியம்; சில பொதிகள் இழந்தாலும் (சிறு தர இழப்பு) காலதாமதத்தைவிட அது மேல். TCP இன் மறு-அனுப்பல் தாமதம் நேரலைக்கு ஏற்காது.</p>
+      </div>
+    </div>
+
+    <!-- P7 -->
+    <div class="pq">
+      <span class="qnum">வினா 07</span>
+      <p class="task" style="margin-top:10px">DNS இன் பணி என்ன? <code class="inline">www.nie.lk</code> ஐ உதாரணமாகக் கொண்டு பெயர் தீர்வை (name resolution) சுருக்கமாக விளக்குக.</p>
+      <button class="btn" onclick="toggleAns(this,'p7')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p7"><span class="ans-label">விடை</span>
+        <p>DNS — களப் பெயர்களை IP முகவரிகளாக மொழிபெயர்க்கிறது.</p>
+        <p>உலாவி DNS resolver ஐக் கேட்கும் → Root server → .lk (TLD) server → nie.lk authoritative server எனப் படிப்படியாக வினவி, <code class="inline">www.nie.lk</code> இன் IP முகவரியைப் பெற்று, பின் அந்த IP உடன் இணைக்கிறது.</p>
+      </div>
+    </div>
+
+    <!-- P8 -->
+    <div class="pq">
+      <span class="qnum">வினா 08</span>
+      <p class="task" style="margin-top:10px">OSI மாதிரியின் அடுக்குகளின் எண்ணிக்கை எவ்வளவு? Network, Data Link, Physical அடுக்குகளின் தரவு அலகுகள் (data units) யாவை?</p>
+      <button class="btn" onclick="toggleAns(this,'p8')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p8"><span class="ans-label">விடை</span>
+        <p>OSI = <b>7 அடுக்குகள்</b> (TCP/IP = 4).</p>
+        <table class="dt c">
+          <tr><th>அடுக்கு</th><th>தரவு அலகு</th></tr>
+          <tr><td>Network</td><td>பொதி (Packet)</td></tr>
+          <tr><td>Data Link</td><td>சட்டகம் (Frame)</td></tr>
+          <tr><td>Physical</td><td>பிட் (Bit)</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- P9 -->
+    <div class="pq">
+      <span class="qnum">வினா 09</span>
+      <p class="task" style="margin-top:10px">பொதுச் சாவி/தனிச் சாவி மறையாக்கத்தில், ஒரு செய்தியைப் பாதுகாப்பாக அனுப்ப எந்தச் சாவி பயன்படுகிறது? பெறுநர் எவ்வாறு திறக்கிறார்?</p>
+      <button class="btn" onclick="toggleAns(this,'p9')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p9"><span class="ans-label">விடை</span>
+        <p>அனுப்புநர் பெறுநரின் <b>பொதுச் சாவியால் (public key)</b> செய்தியை மறையாக்கம் செய்கிறார். பெறுநர் தன் <b>தனிச் சாவியால் (private key)</b> மட்டுமே அதைத் திறக்க முடியும். தனிச் சாவி பகிரப்படாததால் பாதுகாப்பு உறுதி.</p>
+      </div>
+    </div>
+
+    <!-- P10 -->
+    <div class="pq">
+      <span class="qnum">வினா 10</span>
+      <p class="task" style="margin-top:10px">NAT இன் பணி என்ன? வீட்டு வலையமைப்பில் அது எவ்வாறு பயனளிக்கிறது?</p>
+      <button class="btn" onclick="toggleAns(this,'p10')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p10"><span class="ans-label">விடை</span>
+        <p>NAT — உள் வலையின் பல தனிப்பட்ட IP முகவரிகளை ஒரு பொது IP முகவரியாக மொழிபெயர்க்கிறது.</p>
+        <p><b>பயன்:</b> ஒரே பொது IP ஐப் பல சாதனங்கள் பகிர்ந்து இணையத்தை அணுகலாம் → IPv4 முகவரிப் பற்றாக்குறையைக் குறைக்கிறது; உள் சாதனங்களை வெளியில் இருந்து மறைப்பதால் பாதுகாப்பும் கூடுகிறது.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+</main>
+
+<footer>
+  க.பொ.த (உயர்தர) தகவல் மற்றும் தொடர்பாடல் தொழினுட்பம் — அலகு 6: தரவுத் தொடர்பாடலும் வலையமைப்பும் குறிப்புகள்
+</footer>
+
+<script>
+function toggleAns(btn,id){
+  var ans=document.getElementById(id);
+  var open=ans.classList.toggle('show');
+  btn.classList.toggle('open',open);
+  btn.textContent=open?'விடையை மறை ▴':'விடையைக் காட்டு ▾';
+}
+</script>
+
+</body>
+</html>

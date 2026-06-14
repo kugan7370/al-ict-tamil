@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>க.பொ.த (உயர்தரம்) ICT — அலகு 12: வணிகத்தில் ICT குறிப்புகள்</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Catamaran:wght@600;800&family=Hind+Madurai:wght@400;500;600&family=Noto+Sans+Tamil:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F6F4EE; --card:#FFFFFF; --ink:#22303A;
+    --maroon:#8B1E3F; --teal:#1F4E5F; --gold:#C9912B;
+    --line:#E2DDD2;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--paper);color:var(--ink);
+    font-family:'Hind Madurai','Noto Sans Tamil',sans-serif;
+    line-height:1.8;font-size:17px;}
+  header{background:linear-gradient(135deg,var(--teal) 0%,#143946 100%);
+    color:#F2EFE6;padding:42px 20px 36px;text-align:center;
+    border-bottom:5px solid var(--gold);}
+  header .eyebrow{letter-spacing:.18em;font-size:.8rem;text-transform:uppercase;
+    color:#D8C58A;margin-bottom:10px;}
+  header h1{font-family:'Catamaran','Noto Sans Tamil',sans-serif;font-weight:800;
+    font-size:clamp(1.4rem,4vw,2.1rem);line-height:1.5;}
+  header p{margin-top:10px;font-size:.95rem;color:#BFD4DA}
+  main{max-width:900px;margin:0 auto;padding:36px 18px 70px}
+
+  .toc{background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:16px 24px;margin-bottom:34px;font-size:.92rem;}
+  .toc b{color:var(--teal);font-family:'Catamaran','Noto Sans Tamil',sans-serif}
+  .toc a{color:var(--maroon);text-decoration:none}
+  .toc a:hover{text-decoration:underline}
+  .toc .links{display:flex;flex-wrap:wrap;gap:6px 16px;margin-top:6px}
+
+  .ncard{background:var(--card);border:1px solid var(--line);border-radius:16px;
+    margin-bottom:30px;overflow:hidden;box-shadow:0 2px 10px rgba(34,48,58,.05);}
+  .nhead{display:flex;align-items:center;gap:14px;padding:16px 24px;
+    border-bottom:1px solid var(--line);
+    background:linear-gradient(to right,#FBFAF6,#fff);}
+  .nnum{font-family:'Catamaran',sans-serif;font-weight:800;font-size:.92rem;
+    color:#fff;background:var(--teal);border-radius:10px;padding:5px 12px;
+    white-space:nowrap;}
+  .ntitle{font-family:'Catamaran','Noto Sans Tamil',sans-serif;font-weight:600;
+    font-size:1.02rem;color:var(--teal);}
+  .nbody{padding:22px 26px 26px}
+  .nbody p{margin-bottom:12px}
+  .nbody ul,.nbody ol{margin:6px 26px 14px}
+  .nbody li{margin-bottom:6px}
+  h4.sub{font-family:'Catamaran','Noto Sans Tamil',sans-serif;color:var(--maroon);
+    font-size:1.0rem;margin:18px 0 8px;}
+
+  .key{background:#FBF7EC;border-right:4px solid var(--gold);
+    border-radius:10px;padding:14px 20px;margin:14px 0;}
+  .key .tag{font-size:.78rem;font-weight:700;color:var(--gold);
+    letter-spacing:.1em;display:block;margin-bottom:4px;}
+  .warn{background:#FAEFF1;border-right:4px solid var(--maroon);
+    border-radius:10px;padding:14px 20px;margin:14px 0;}
+  .warn .tag{font-size:.78rem;font-weight:700;color:var(--maroon);
+    letter-spacing:.1em;display:block;margin-bottom:4px;}
+
+  code.inline{background:#EDF2F1;color:var(--teal);border-radius:6px;
+    padding:1px 8px;font-family:'JetBrains Mono',monospace;font-size:.85em;}
+
+  table.dt{border-collapse:collapse;margin:12px auto;font-size:.86rem;width:100%}
+  table.dt th{background:var(--teal);color:#fff;padding:8px 11px;
+    font-weight:600;border:1px solid #16404f;text-align:left;}
+  table.dt td{border:1px solid var(--line);padding:7px 11px;
+    background:#FDFCF9;vertical-align:top;}
+  table.dt caption{caption-side:top;font-weight:600;color:var(--teal);
+    margin-bottom:6px;font-size:.95rem;}
+  table.dt.c td,table.dt.c th{text-align:center}
+  table.dt code{font-family:'JetBrains Mono',monospace;font-size:.88em;color:var(--maroon)}
+
+  .diagram{background:#FBFAF6;border:1px solid var(--line);border-radius:12px;
+    padding:16px;margin:14px 0;overflow-x:auto;text-align:center;}
+  .diagram svg{max-width:100%;height:auto}
+  .diagram .cap{font-size:.85rem;color:#5A6B74;margin-top:8px}
+  svg text{font-family:'Noto Sans Tamil','Hind Madurai',sans-serif;}
+
+  .btn{display:inline-flex;align-items:center;gap:9px;
+    font-family:'Hind Madurai','Noto Sans Tamil',sans-serif;font-weight:600;
+    font-size:1rem;color:#fff;background:var(--teal);border:none;
+    border-radius:999px;padding:11px 26px;margin-top:14px;cursor:pointer;
+    transition:background .2s,transform .15s;}
+  .btn:hover{background:#16404f;transform:translateY(-1px)}
+  .btn:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+  .btn.open{background:var(--maroon)}
+  .answer{display:none;margin-top:20px;border-top:2px dashed var(--line);
+    padding-top:18px;animation:fade .35s ease;}
+  .answer.show{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  .ans-label{display:inline-block;font-weight:700;color:#fff;background:var(--gold);
+    border-radius:8px;padding:3px 14px;font-size:.85rem;margin-bottom:12px;}
+  .qnum{font-family:'Catamaran',sans-serif;font-weight:800;font-size:1rem;
+    color:#fff;background:var(--maroon);border-radius:10px;padding:5px 14px;
+    white-space:nowrap;}
+  .task{font-weight:600;color:var(--maroon)}
+  .pq{border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin-bottom:18px}
+  .note{margin-top:12px;font-size:.9rem;color:#5A6B74;background:#EFF4F2;
+    border-radius:10px;padding:10px 16px;}
+
+  footer{text-align:center;padding:26px 16px 40px;font-size:.85rem;color:#7A8790;}
+  @media (max-width:560px){
+    .nhead{flex-direction:column;align-items:flex-start;gap:8px}
+    body{font-size:16px}
+  }
+  @media (prefers-reduced-motion:reduce){.answer{animation:none}.btn{transition:none}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">G.C.E. Advanced Level &middot; Sri Lanka &middot; ICT (20) &middot; Unit 12</div>
+  <h1>வணிகத்தில் ICT<br>(ICT in Business)</h1>
+  <p>இலக்கமுறைப் பொருளாதாரம் &middot; மின்-வணிகம் & மின்-வியாபாரம் &middot; மின்-சந்தைப்படுத்தல்</p>
+</header>
+
+<main>
+
+<div class="toc"><b>உள்ளடக்கம்</b>
+  <div class="links">
+    <a href="#s1">12.1 இலக்கமுறைப் பொருளாதாரம்</a>
+    <a href="#s2">12.2 மின்-வணிகமும் மின்-வியாபாரமும்</a>
+    <a href="#s3">12.3 மின்-சந்தைப்படுத்தல்</a>
+    <a href="#sp">பயிற்சி வினாக்கள்</a>
+  </div>
+</div>
+
+<!-- ===================== 12.1 ===================== -->
+<section class="ncard" id="s1">
+  <div class="nhead"><span class="nnum">12.1</span><span class="ntitle">இலக்கமுறைப் பொருளாதாரம் (Digital Economy)</span></div>
+  <div class="nbody">
+    <p><b>இலக்கமுறைப் பொருளாதாரம்</b> = இணையம், கணினிகள், டிஜிட்டல் தொழில்நுட்பங்களை அடிப்படையாகக் கொண்டு இயங்கும் பொருளாதார நடவடிக்கைகள். ICT வணிகத்தின் ஒவ்வொரு துறையையும் மாற்றியுள்ளது.</p>
+    <h4 class="sub">புதிய வணிக முறைகள் (New Business Methods)</h4>
+    <table class="dt">
+      <tr><th>முறை</th><th>விளக்கம்</th></tr>
+      <tr><td><b>தலைகீழ் ஏலம்</b><br>(Reverse Auction)</td><td>வழக்கமான ஏலத்துக்கு எதிராக — <b>வாங்குநர் தேவையை அறிவிக்க, விற்பனையாளர்கள் போட்டியிட்டு விலையைக் குறைக்கின்றனர்</b>; குறைந்த விலை வழங்குநர் வெல்கிறார்.</td></tr>
+      <tr><td><b>குழு கொள்வனவு</b><br>(Group Purchasing)</td><td>பல வாங்குநர்கள் ஒன்றிணைந்து மொத்தமாக வாங்கி, <b>தள்ளுபடி/குறைந்த விலை</b> பெறுதல்.</td></tr>
+      <tr><td><b>மின்-சந்தை</b><br>(E-marketplace)</td><td>பல விற்பனையாளர்களும் வாங்குநர்களும் சந்தித்து வர்த்தகம் செய்யும் இணையத் தளம். எ.கா: Amazon, Daraz, eBay.</td></tr>
+    </table>
+    <h4 class="sub">நிறுவன வகைகள் (Organization Types)</h4>
+    <table class="dt">
+      <tr><th>வகை</th><th>விளக்கம்</th><th>எடுத்துக்காட்டு</th></tr>
+      <tr><td><b>முழுச் செங்கல்</b><br>(Pure Brick)</td><td>இணைய இருப்பு இல்லை; உடல்ரீதியான கடை மட்டும் (traditional)</td><td>உள்ளூர் சில்லறைக் கடை</td></tr>
+      <tr><td><b>செங்கல்-சொடுக்கு</b><br>(Brick-and-Click)</td><td>உடல் கடையும் இணையதளமும் இரண்டும் (கலப்பினம்)</td><td>உடல் கடை + ஆன்லைன் ஆர்டர்</td></tr>
+      <tr><td><b>முழுச் சொடுக்கு</b><br>(Pure Click)</td><td>உடல் கடை இல்லை; இணையம் வழியாக மட்டும் (online only)</td><td>Amazon (ஆரம்பத்தில்), Daraz</td></tr>
+    </table>
+    <h4 class="sub">வணிகத்துறைகளில் ICT</h4>
+    <table class="dt">
+      <tr><th>துறை</th><th>ICT பயன்பாடு</th></tr>
+      <tr><td><b>கணக்கியல்</b><br>(Accounting)</td><td>கணக்கியல் மென்பொருள் (QuickBooks, Tally), தானியங்கி பற்று-வரவு, அறிக்கைகள்</td></tr>
+      <tr><td><b>மனிதவள (HR)</b></td><td>பணியாளர் தரவுத்தளம், சம்பளக் கணக்கீடு, ஆட்சேர்ப்பு, வருகைப் பதிவு</td></tr>
+      <tr><td><b>உற்பத்தி</b><br>(Production)</td><td>CAD/CAM, தானியங்கி உற்பத்திக் கோடுகள், ரோபோக்கள், தர கட்டுப்பாடு</td></tr>
+      <tr><td><b>சந்தைப்படுத்தல்</b><br>(Marketing)</td><td>இணைய விளம்பரம், சமூக ஊடகம், மின்னஞ்சல் சந்தைப்படுத்தல், தரவுப் பகுப்பாய்வு</td></tr>
+      <tr><td><b>விநியோகச் சங்கிலி</b><br>(Supply Chain)</td><td>சரக்குக் கண்காணிப்பு, தானியங்கி மறு-ஆர்டர், விநியோகி ஒருங்கிணைப்பு (SCM)</td></tr>
+    </table>
+    <h4 class="sub">பணம் செலுத்தலும் பாதுகாப்பும் (Payment & Security)</h4>
+    <ul>
+      <li><b>பணம் செலுத்தும் நுழைவாயில் (Payment Gateway):</b> ஆன்லைன் பணப் பரிவர்த்தனைகளை பாதுகாப்பாக அங்கீகரித்து செயலாக்கும் சேவை (வாங்குநர் ↔ வங்கி இடையே).</li>
+      <li><b>தரவு மறையாக்கம் (Data Encryption):</b> பணம்/அட்டை விபரங்களை மறையாக்கிப் பாதுகாத்தல் (SSL/TLS).</li>
+      <li><b>மூன்றாம் தரப்பு பணம் செலுத்தும் முறைமைகள் (Third-party Payment):</b> வணிகருக்கும் வாங்குநருக்கும் இடையே இடைத்தரகராகச் செயற்படும் சேவை. எ.கா: PayPal, PayHere, Stripe.</li>
+    </ul>
+    <h4 class="sub">மின்-வணிக அச்சுறுத்தல்கள் (E-commerce Threats)</h4>
+    <ul>
+      <li><b>தனியுரிமை (Privacy):</b> தனிப்பட்ட/நிதித் தரவு திருடப்படுதல், தவறாகப் பயன்படுத்தப்படுதல்.</li>
+      <li><b>திருட்டுப்படியெடுப்பு (Piracy):</b> டிஜிட்டல் பொருட்களை (மென்பொருள், ஊடகம்) அனுமதியின்றி நகலெடுத்தல்.</li>
+      <li>(மேலும்: ஃபிஷிங், மோசடி, அட்டை மோசடி, தரவு மீறல்.)</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ===================== 12.2 ===================== -->
+<section class="ncard" id="s2">
+  <div class="nhead"><span class="nnum">12.2</span><span class="ntitle">மின்-வணிகமும் (E-commerce) மின்-வியாபாரமும் (E-business)</span></div>
+  <div class="nbody">
+    <h4 class="sub">வரைவிலக்கணமும் வீச்சும் (Scope)</h4>
+    <table class="dt">
+      <tr><th>மின்-வணிகம் (E-commerce)</th><th>மின்-வியாபாரம் (E-business)</th></tr>
+      <tr><td>இணையம் வழியான <b>வாங்குதல்/விற்றல்</b> (பரிவர்த்தனைகள்)</td><td>வணிகத்தின் <b>அனைத்து செயற்பாடுகளும்</b> இணைய வழியில் (வாங்கல்/விற்றல் + உள் செயல்பாடுகள், HR, SCM…)</td></tr>
+      <tr><td>குறுகிய வீச்சு (transaction-focused)</td><td>பரந்த வீச்சு (e-commerce ஐ உள்ளடக்கியது)</td></tr>
+    </table>
+    <div class="key"><span class="tag">தொடர்பு</span>
+      <b>மின்-வணிகம் ⊂ மின்-வியாபாரம்.</b> மின்-வணிகம் = வாங்கல்/விற்றல் மட்டும்; மின்-வியாபாரம் = அதையும் சேர்த்து முழு வணிகச் செயற்பாடுகளும்.
+    </div>
+    <h4 class="sub">பரிவர்த்தனை வகைகள் (Types of Transactions)</h4>
+    <table class="dt">
+      <tr><th>வகை</th><th>யாரிடமிருந்து → யாருக்கு</th><th>எடுத்துக்காட்டு</th></tr>
+      <tr><td><b>B2B</b></td><td>வணிகம் → வணிகம் (Business to Business)</td><td>உற்பத்தியாளர் → மொத்த விற்பனையாளர்</td></tr>
+      <tr><td><b>B2C</b></td><td>வணிகம் → நுகர்வோர் (Business to Consumer)</td><td>Amazon → வாடிக்கையாளர்</td></tr>
+      <tr><td><b>C2C</b></td><td>நுகர்வோர் → நுகர்வோர் (Consumer to Consumer)</td><td>ikman.lk இல் தனிநபர்கள் விற்பனை</td></tr>
+      <tr><td><b>C2B</b></td><td>நுகர்வோர் → வணிகம் (Consumer to Business)</td><td>தனிநபர் தனது சேவையை/புகைப்படத்தை நிறுவனத்துக்கு விற்றல் (freelancer)</td></tr>
+      <tr><td><b>B2E</b></td><td>வணிகம் → பணியாளர் (Business to Employee)</td><td>நிறுவன உள்வலை (intranet) — பணியாளர் சேவைகள்</td></tr>
+      <tr><td><b>G2C</b></td><td>அரசு → குடிமகன் (Government to Citizen)</td><td>ஆன்லைன் வரி, மின்-அரசு சேவைகள்</td></tr>
+    </table>
+    <div class="diagram">
+      <svg viewBox="0 0 460 130" width="440" xmlns="http://www.w3.org/2000/svg">
+        <defs><marker id="b1" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#22303A"/></marker></defs>
+        <rect x="40" y="30" width="90" height="34" rx="7" fill="#EAF3F5" stroke="#1F4E5F"/><text x="85" y="51" text-anchor="middle" font-size="12" fill="#1F4E5F" font-weight="600">வணிகம் (B)</text>
+        <rect x="330" y="30" width="90" height="34" rx="7" fill="#FDF3E0" stroke="#C9912B"/><text x="375" y="51" text-anchor="middle" font-size="12" fill="#8a6313" font-weight="600">நுகர்வோர் (C)</text>
+        <line x1="130" y1="47" x2="328" y2="47" stroke="#8B1E3F" stroke-width="1.6" marker-end="url(#b1)"/><text x="230" y="40" text-anchor="middle" font-size="12" fill="#8B1E3F" font-weight="700">B2C</text>
+        <line x1="328" y1="80" x2="130" y2="80" stroke="#1F4E5F" stroke-width="1.6" marker-end="url(#b1)"/><text x="230" y="98" text-anchor="middle" font-size="12" fill="#1F4E5F" font-weight="700">C2B</text>
+        <text x="85" y="95" text-anchor="middle" font-size="10" fill="#5A6B74">(B2B = B↔B)</text>
+        <text x="375" y="113" text-anchor="middle" font-size="10" fill="#5A6B74">(C2C = C↔C)</text>
+      </svg>
+      <div class="cap">பரிவர்த்தனை வகைகள் — அனுப்புநர் & பெறுநரின் வகையால் பெயரிடப்படுகின்றன</div>
+    </div>
+    <h4 class="sub">மின்-வணிக வணிக மாதிரிகள் (Business Models)</h4>
+    <ul>
+      <li><b>மெய்நிகர் கடைமுகப்பு (Virtual Storefront):</b> ஒரு நிறுவனத்தின் சொந்த ஆன்லைன் கடை.</li>
+      <li><b>ஆன்லைன் சந்தைகள் (Online Marketplaces):</b> பல விற்பனையாளர்கள் ஒரே தளத்தில் (Amazon, Daraz).</li>
+      <li><b>உள்ளடக்க வழங்குநர்கள் (Content Providers):</b> தகவல்/பொழுதுபோக்கு வழங்கல் (Netflix, செய்தித் தளங்கள்).</li>
+      <li><b>ஆன்லைன் நுழைவாயில்கள் (Online Portals):</b> பல சேவைகளை ஒரே இடத்தில் (Yahoo).</li>
+      <li><b>மெய்நிகர் சமூகங்கள் (Virtual Communities):</b> பயனர்கள் தொடர்புகொள்ளும் தளங்கள் (சமூக ஊடகம், மன்றங்கள்).</li>
+    </ul>
+    <h4 class="sub">நன்மைகளும் குறைபாடுகளும்</h4>
+    <table class="dt">
+      <tr><th>நன்மைகள் (Advantages)</th><th>குறைபாடுகள் (Disadvantages)</th></tr>
+      <tr><td>24/7 கிடைக்கும்; புவியியல் எல்லை இல்லை</td><td>பாதுகாப்பு/தனியுரிமை அச்சுறுத்தல்கள்</td></tr>
+      <tr><td>குறைந்த இயக்கச் செலவு (கடை வாடகை இல்லை)</td><td>பொருளைத் தொட்டுப் பார்க்க முடியாது</td></tr>
+      <tr><td>பரந்த சந்தை, அதிக வாடிக்கையாளர்கள்</td><td>இணைய இணைப்பு/மின்சாரம் தேவை</td></tr>
+      <tr><td>விலை ஒப்பிடல் எளிது; தனிப்பயன் சலுகைகள்</td><td>விநியோகத் தாமதம்; மோசடி இடர்</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ===================== 12.3 ===================== -->
+<section class="ncard" id="s3">
+  <div class="nhead"><span class="nnum">12.3</span><span class="ntitle">மின்-சந்தைப்படுத்தல் (E-marketing)</span></div>
+  <div class="nbody">
+    <p><b>மின்-சந்தைப்படுத்தல்</b> = டிஜிட்டல் தொழில்நுட்பங்களை (இணையம், மொபைல், மின்னஞ்சல், சமூக ஊடகம்) பயன்படுத்திப் பொருட்களையும் சேவைகளையும் விளம்பரப்படுத்துதல், விற்பனை செய்தல்.</p>
+    <h4 class="sub">இணைய விளம்பரம் (Web Advertising)</h4>
+    <ul>
+      <li><b>பேனர் விளம்பரங்கள் (Banner ads):</b> இணையப் பக்கங்களில் காட்சி விளம்பரங்கள்.</li>
+      <li><b>தேடுபொறி விளம்பரம் (Search engine / pay-per-click):</b> தேடல் முடிவுகளில் விளம்பரம் (Google Ads).</li>
+      <li><b>சமூக ஊடக விளம்பரம், மின்னஞ்சல் சந்தைப்படுத்தல், pop-up விளம்பரங்கள்.</b></li>
+    </ul>
+    <h4 class="sub">சந்தைப்படுத்தலில் தரவுத்தளங்கள் (Databases in Marketing)</h4>
+    <p>வாடிக்கையாளர் தரவை (கொள்வனவு வரலாறு, விருப்பங்கள், நடத்தை) தரவுத்தளங்களில் சேமித்து, பகுப்பாய்வு செய்து — <b>இலக்கு வைக்கப்பட்ட (targeted), தனிப்பயனாக்கப்பட்ட</b> சந்தைப்படுத்தல் சாத்தியமாகிறது. (CRM — வாடிக்கையாளர் உறவு முகாமை.)</p>
+    <h4 class="sub">AI கருவிகள் — வாடிக்கையாளர் நடத்தை முன்னறிவிப்பு</h4>
+    <p>செயற்கை நுண்ணறிவு (AI) & இயந்திரக் கற்றல் (ML) கருவிகள் கடந்தகாலத் தரவைப் பகுப்பாய்வு செய்து — வாடிக்கையாளர் <b>அடுத்து என்ன வாங்குவார், எப்போது வாங்குவார்</b> என்பதை முன்னறிவிக்கின்றன. எ.கா: "இதை வாங்கியவர்கள் இதையும் வாங்கினர்" பரிந்துரைகள் (recommendation systems — Amazon, Netflix).</p>
+    <h4 class="sub">மொபைல் சந்தைப்படுத்தல் (Mobile Marketing)</h4>
+    <p>ஸ்மார்ட்ஃபோன்கள் வழியாக — SMS விளம்பரம், செயலி (app) அறிவிப்புகள், இட அடிப்படையிலான விளம்பரம் (location-based), QR குறியீடுகள். மக்கள் அதிக நேரம் மொபைலில் இருப்பதால் மிக ஆற்றல்மிக்கது.</p>
+    <h4 class="sub">ICT மூலம் போட்டி நன்மைகள் (Competitive Advantages)</h4>
+    <ul>
+      <li>பரந்த, உலகளாவிய சந்தை அணுகல்.</li>
+      <li>குறைந்த செலவில் இலக்கு வைக்கப்பட்ட விளம்பரம்.</li>
+      <li>வாடிக்கையாளர் தரவுப் பகுப்பாய்வால் சிறந்த தீர்மானங்கள்.</li>
+      <li>தனிப்பயனாக்கப்பட்ட சேவை → வாடிக்கையாளர் விசுவாசம்.</li>
+      <li>விரைவான சந்தை மாற்றங்களுக்கு ஏற்ப விரைந்து செயற்படல்.</li>
+    </ul>
+    <div class="key"><span class="tag">மரபு vs மின்-சந்தைப்படுத்தல்</span>
+      மரபு விளம்பரம் (TV, பத்திரிகை) = பரந்த, இலக்கற்ற, விலை கூடியது. மின்-சந்தைப்படுத்தல் = <b>இலக்கு வைக்கப்பட்டது, அளவிடக்கூடியது (measurable), மலிவானது, ஊடாடும் (interactive)</b>.
+    </div>
+  </div>
+</section>
+
+<!-- ===================== Practice ===================== -->
+<section class="ncard" id="sp">
+  <div class="nhead"><span class="nnum">?</span><span class="ntitle">பயிற்சி வினாக்கள் (விடைகளுடன்)</span></div>
+  <div class="nbody">
+
+    <!-- P1 -->
+    <div class="pq"><span class="qnum">வினா 01</span>
+      <p class="task" style="margin-top:10px">தலைகீழ் ஏலம் (reverse auction) என்றால் என்ன? வழக்கமான ஏலத்திலிருந்து இது எவ்வாறு வேறுபடுகிறது?</p>
+      <button class="btn" onclick="toggleAns(this,'p1')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p1"><span class="ans-label">விடை</span>
+        <p>தலைகீழ் ஏலத்தில், வாங்குநர் தனது தேவையை அறிவிக்க, <b>விற்பனையாளர்கள் போட்டியிட்டு விலையைக் குறைக்கின்றனர்</b>; குறைந்த விலை வழங்குநர் வெல்கிறார்.</p>
+        <p>வழக்கமான ஏலத்தில் — வாங்குநர்கள் போட்டியிட்டு விலையை <b>உயர்த்துகின்றனர்</b>. எனவே இது "தலைகீழ்".</p>
+      </div>
+    </div>
+
+    <!-- P2 -->
+    <div class="pq"><span class="qnum">வினா 02</span>
+      <p class="task" style="margin-top:10px">Pure Brick, Brick-and-Click, Pure Click நிறுவனங்களின் வேறுபாட்டை ஒவ்வொன்றுக்கும் உதாரணத்துடன் கூறுக.</p>
+      <button class="btn" onclick="toggleAns(this,'p2')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p2"><span class="ans-label">விடை</span>
+        <ul>
+          <li><b>Pure Brick:</b> உடல் கடை மட்டும், இணைய இருப்பு இல்லை. உ-ம்: உள்ளூர் சில்லறைக் கடை.</li>
+          <li><b>Brick-and-Click:</b> உடல் கடையும் இணையதளமும் இரண்டும். உ-ம்: கடை + ஆன்லைன் ஆர்டர்.</li>
+          <li><b>Pure Click:</b> இணையம் வழியாக மட்டும், உடல் கடை இல்லை. உ-ம்: Daraz.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- P3 -->
+    <div class="pq"><span class="qnum">வினா 03</span>
+      <p class="task" style="margin-top:10px">பணம் செலுத்தும் நுழைவாயில் (payment gateway) இன் பணி என்ன? மூன்றாம் தரப்பு பணம் செலுத்தும் முறைமைக்கு ஓர் உதாரணம் தருக.</p>
+      <button class="btn" onclick="toggleAns(this,'p3')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p3"><span class="ans-label">விடை</span>
+        <p>Payment gateway — ஆன்லைன் பணப் பரிவர்த்தனைகளை வாங்குநர் ↔ வங்கி இடையே பாதுகாப்பாக அங்கீகரித்து செயலாக்கும் சேவை.</p>
+        <p>மூன்றாம் தரப்பு உதாரணம்: <b>PayPal, PayHere, Stripe.</b></p>
+      </div>
+    </div>
+
+    <!-- P4 -->
+    <div class="pq"><span class="qnum">வினா 04</span>
+      <p class="task" style="margin-top:10px">மின்-வணிகத்துக்கும் (e-commerce) மின்-வியாபாரத்துக்கும் (e-business) இடையேயான வேறுபாடு என்ன?</p>
+      <button class="btn" onclick="toggleAns(this,'p4')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p4"><span class="ans-label">விடை</span>
+        <p><b>மின்-வணிகம்:</b> இணையம் வழியான வாங்குதல்/விற்றல் (பரிவர்த்தனைகள்) மட்டும்.</p>
+        <p><b>மின்-வியாபாரம்:</b> வாங்கல்/விற்றல் + வணிகத்தின் அனைத்து செயற்பாடுகளும் (HR, SCM, உள் செயல்பாடுகள்) இணைய வழியில். மின்-வணிகம் மின்-வியாபாரத்தின் ஒரு பகுதி.</p>
+      </div>
+    </div>
+
+    <!-- P5 -->
+    <div class="pq"><span class="qnum">வினா 05</span>
+      <p class="task" style="margin-top:10px">பின்வரும் ஒவ்வொன்றும் எந்த வகை மின்-வணிகப் பரிவர்த்தனை எனக் கூறுக:<br>(அ) Amazon தளத்தில் ஒரு புத்தகம் வாங்குதல் (ஆ) ikman.lk இல் தனிநபர் தனது பழைய தொலைபேசியை விற்றல் (இ) ஆன்லைனில் வரி செலுத்துதல்</p>
+      <button class="btn" onclick="toggleAns(this,'p5')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p5"><span class="ans-label">விடை</span>
+        <p>(அ) Amazon → வாடிக்கையாளர் = <b>B2C</b></p>
+        <p>(ஆ) தனிநபர் → தனிநபர் = <b>C2C</b></p>
+        <p>(இ) குடிமகன் ↔ அரசு = <b>G2C</b></p>
+      </div>
+    </div>
+
+    <!-- P6 -->
+    <div class="pq"><span class="qnum">வினா 06</span>
+      <p class="task" style="margin-top:10px">மின்-வணிகத்தின் இரண்டு நன்மைகளையும் இரண்டு குறைபாடுகளையும் எழுதுக.</p>
+      <button class="btn" onclick="toggleAns(this,'p6')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p6"><span class="ans-label">விடை</span>
+        <p><b>நன்மைகள்:</b> 24/7 கிடைக்கும்; புவியியல் எல்லை இல்லை; குறைந்த இயக்கச் செலவு; பரந்த சந்தை. (ஏதேனும் இரண்டு.)</p>
+        <p><b>குறைபாடுகள்:</b> பாதுகாப்பு/தனியுரிமை அச்சுறுத்தல்; பொருளைத் தொட்டுப் பார்க்க முடியாது; இணைய இணைப்பு தேவை; விநியோகத் தாமதம். (ஏதேனும் இரண்டு.)</p>
+      </div>
+    </div>
+
+    <!-- P7 -->
+    <div class="pq"><span class="qnum">வினா 07</span>
+      <p class="task" style="margin-top:10px">சந்தைப்படுத்தலில் AI கருவிகள் எவ்வாறு பயன்படுகின்றன? ஓர் உதாரணம் தருக.</p>
+      <button class="btn" onclick="toggleAns(this,'p7')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p7"><span class="ans-label">விடை</span>
+        <p>AI கருவிகள் கடந்தகாலத் தரவைப் பகுப்பாய்வு செய்து, வாடிக்கையாளர் அடுத்து என்ன/எப்போது வாங்குவார் என்பதை முன்னறிவிக்கின்றன.</p>
+        <p><b>உதாரணம்:</b> "இதை வாங்கியவர்கள் இதையும் வாங்கினர்" பரிந்துரைகள் (Amazon, Netflix recommendation systems).</p>
+      </div>
+    </div>
+
+    <!-- P8 -->
+    <div class="pq"><span class="qnum">வினா 08</span>
+      <p class="task" style="margin-top:10px">மரபு சந்தைப்படுத்தலை விட மின்-சந்தைப்படுத்தல் வழங்கும் இரண்டு போட்டி நன்மைகளைக் கூறுக.</p>
+      <button class="btn" onclick="toggleAns(this,'p8')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p8"><span class="ans-label">விடை</span>
+        <p>இலக்கு வைக்கப்பட்ட விளம்பரம் (குறைந்த செலவில்); உலகளாவிய சந்தை அணுகல்; வாடிக்கையாளர் தரவுப் பகுப்பாய்வால் சிறந்த தீர்மானம்; தனிப்பயனாக்கப்பட்ட சேவை; அளவிடக்கூடிய (measurable) முடிவுகள். (ஏதேனும் இரண்டு.)</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+</main>
+
+<footer>
+  க.பொ.த (உயர்தர) தகவல் மற்றும் தொடர்பாடல் தொழினுட்பம் — அலகு 12: வணிகத்தில் ICT குறிப்புகள்
+</footer>
+
+<script>
+function toggleAns(btn,id){
+  var ans=document.getElementById(id);
+  var open=ans.classList.toggle('show');
+  btn.classList.toggle('open',open);
+  btn.textContent=open?'விடையை மறை ▴':'விடையைக் காட்டு ▾';
+}
+</script>
+
+</body>
+</html>

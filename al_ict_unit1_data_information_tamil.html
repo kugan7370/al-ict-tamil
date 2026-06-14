@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>க.பொ.த (உயர்தரம்) ICT — அலகு 1: தரவு, தகவல் & ICT அறிமுகம் குறிப்புகள்</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Catamaran:wght@600;800&family=Hind+Madurai:wght@400;500;600&family=Noto+Sans+Tamil:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F6F4EE; --card:#FFFFFF; --ink:#22303A;
+    --maroon:#8B1E3F; --teal:#1F4E5F; --gold:#C9912B;
+    --line:#E2DDD2;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--paper);color:var(--ink);
+    font-family:'Hind Madurai','Noto Sans Tamil',sans-serif;
+    line-height:1.8;font-size:17px;}
+  header{background:linear-gradient(135deg,var(--teal) 0%,#143946 100%);
+    color:#F2EFE6;padding:42px 20px 36px;text-align:center;
+    border-bottom:5px solid var(--gold);}
+  header .eyebrow{letter-spacing:.18em;font-size:.8rem;text-transform:uppercase;
+    color:#D8C58A;margin-bottom:10px;}
+  header h1{font-family:'Catamaran','Noto Sans Tamil',sans-serif;font-weight:800;
+    font-size:clamp(1.4rem,4vw,2.1rem);line-height:1.5;}
+  header p{margin-top:10px;font-size:.95rem;color:#BFD4DA}
+  main{max-width:900px;margin:0 auto;padding:36px 18px 70px}
+
+  .toc{background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:16px 24px;margin-bottom:34px;font-size:.92rem;}
+  .toc b{color:var(--teal);font-family:'Catamaran','Noto Sans Tamil',sans-serif}
+  .toc a{color:var(--maroon);text-decoration:none;white-space:nowrap}
+  .toc a:hover{text-decoration:underline}
+  .toc .links{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:6px}
+
+  .ncard{background:var(--card);border:1px solid var(--line);border-radius:16px;
+    margin-bottom:32px;overflow:hidden;box-shadow:0 2px 10px rgba(34,48,58,.05);}
+  .nhead{display:flex;align-items:center;gap:14px;padding:16px 24px;
+    border-bottom:1px solid var(--line);
+    background:linear-gradient(to right,#FBFAF6,#fff);}
+  .nnum{font-family:'Catamaran',sans-serif;font-weight:800;font-size:.95rem;
+    color:#fff;background:var(--teal);border-radius:10px;padding:5px 13px;
+    white-space:nowrap;}
+  .ntitle{font-family:'Catamaran','Noto Sans Tamil',sans-serif;font-weight:600;
+    font-size:1.08rem;color:var(--teal);}
+  .nbody{padding:22px 26px 26px}
+  .nbody p{margin-bottom:12px}
+  .nbody ul,.nbody ol{margin:6px 26px 14px}
+  .nbody li{margin-bottom:6px}
+  h4.sub{font-family:'Catamaran','Noto Sans Tamil',sans-serif;color:var(--maroon);
+    font-size:1.0rem;margin:18px 0 8px;}
+
+  .key{background:#FBF7EC;border-right:4px solid var(--gold);
+    border-radius:10px;padding:14px 20px;margin:14px 0;}
+  .key .tag{font-size:.78rem;font-weight:700;color:var(--gold);
+    letter-spacing:.1em;display:block;margin-bottom:4px;}
+  .warn{background:#FAEFF1;border-right:4px solid var(--maroon);
+    border-radius:10px;padding:14px 20px;margin:14px 0;}
+  .warn .tag{font-size:.78rem;font-weight:700;color:var(--maroon);
+    letter-spacing:.1em;display:block;margin-bottom:4px;}
+
+  code.inline{background:#EDF2F1;color:var(--teal);border-radius:6px;
+    padding:1px 8px;font-family:'JetBrains Mono',monospace;font-size:.85em;}
+
+  table.dt{border-collapse:collapse;margin:12px auto;font-size:.9rem;width:100%}
+  table.dt th{background:var(--teal);color:#fff;padding:8px 14px;
+    font-weight:600;border:1px solid #16404f;text-align:left;}
+  table.dt td{border:1px solid var(--line);padding:8px 14px;
+    background:#FDFCF9;vertical-align:top;}
+  table.dt caption{caption-side:top;font-weight:600;color:var(--teal);
+    margin-bottom:6px;font-size:.95rem;}
+
+  .diagram{background:#FBFAF6;border:1px solid var(--line);border-radius:12px;
+    padding:16px;margin:14px 0;overflow-x:auto;text-align:center;}
+  .diagram svg{max-width:100%;height:auto}
+  .diagram .cap{font-size:.85rem;color:#5A6B74;margin-top:8px}
+  svg text{font-family:'Noto Sans Tamil','Hind Madurai',sans-serif;}
+
+  .btn{display:inline-flex;align-items:center;gap:9px;
+    font-family:'Hind Madurai','Noto Sans Tamil',sans-serif;font-weight:600;
+    font-size:1rem;color:#fff;background:var(--teal);border:none;
+    border-radius:999px;padding:11px 26px;margin-top:14px;cursor:pointer;
+    transition:background .2s,transform .15s;}
+  .btn:hover{background:#16404f;transform:translateY(-1px)}
+  .btn:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+  .btn.open{background:var(--maroon)}
+  .answer{display:none;margin-top:20px;border-top:2px dashed var(--line);
+    padding-top:18px;animation:fade .35s ease;}
+  .answer.show{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  .ans-label{display:inline-block;font-weight:700;color:#fff;background:var(--gold);
+    border-radius:8px;padding:3px 14px;font-size:.85rem;margin-bottom:12px;}
+  .qnum{font-family:'Catamaran',sans-serif;font-weight:800;font-size:1rem;
+    color:#fff;background:var(--maroon);border-radius:10px;padding:5px 14px;
+    white-space:nowrap;}
+  .task{font-weight:600;color:var(--maroon)}
+  .pq{border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin-bottom:18px}
+  .note{margin-top:12px;font-size:.9rem;color:#5A6B74;background:#EFF4F2;
+    border-radius:10px;padding:10px 16px;}
+
+  footer{text-align:center;padding:26px 16px 40px;font-size:.85rem;color:#7A8790;}
+  @media (max-width:560px){
+    .nhead{flex-direction:column;align-items:flex-start;gap:8px}
+    body{font-size:16px}
+  }
+  @media (prefers-reduced-motion:reduce){.answer{animation:none}.btn{transition:none}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">G.C.E. Advanced Level &middot; Sri Lanka &middot; ICT (20) &middot; Unit 1</div>
+  <h1>தரவு, தகவல் &amp; தகவல் தொடர்பாடல்<br>தொழில்நுட்பத்தின் (ICT) அறிமுகம்</h1>
+  <p>தரவு வாழ்க்கைச் சுழற்சி &middot; தகவலின் பண்புகள் &middot; தரவுச் செயலாக்கம் &middot; ICT பயன்பாடுகளும் தாக்கங்களும்</p>
+</header>
+
+<main>
+
+<div class="toc"><b>உள்ளடக்கம்</b>
+  <div class="links">
+    <a href="#s1">1.1 தரவு வாழ்க்கைச் சுழற்சி & Big Data</a>
+    <a href="#s2">1.2 கைமுறை குறைபாடுகள் & ICT எழுச்சி</a>
+    <a href="#s3">1.3 தகவல் உருவாக்க மாதிரி (IPO)</a>
+    <a href="#s4">1.4 வன்பொருள், மென்பொருள், மனிதர்</a>
+    <a href="#s5">1.5 தரவுச் செயலாக்கப் படிகள் & OMR/OCR/MICR</a>
+    <a href="#s6">1.6 ICT இன் பயன்பாட்டுத் துறைகள்</a>
+    <a href="#s7">1.7 ICT இன் நன்மைகளும் சிக்கல்களும்</a>
+    <a href="#s8">பயிற்சி வினாக்கள்</a>
+  </div>
+</div>
+
+<!-- ===================== 1.1 ===================== -->
+<section class="ncard" id="s1">
+  <div class="nhead"><span class="nnum">1.1</span><span class="ntitle">தரவின் வாழ்க்கைச் சுழற்சி, தரவு vs தகவல், Big Data</span></div>
+  <div class="nbody">
+    <h4 class="sub">தரவு (Data) vs தகவல் (Information)</h4>
+    <p><b>தரவு</b> — செயலாக்கப்படாத, தனித்து அர்த்தமற்ற மூலக் கூறுகள் (எண்கள், எழுத்துகள், படங்கள், குறியீடுகள்). <b>தகவல்</b> — தரவைச் செயலாக்கி, அர்த்தமுள்ளதாகவும் பயனுள்ளதாகவும் மாற்றிய விளைவு.</p>
+    <table class="dt">
+      <tr><th>தரவு (Data)</th><th>தகவல் (Information)</th></tr>
+      <tr><td>செயலாக்கப்படாதது</td><td>செயலாக்கப்பட்டது</td></tr>
+      <tr><td>தனித்து அர்த்தமற்றது</td><td>அர்த்தமுள்ளது</td></tr>
+      <tr><td>எ.கா: 78, 85, 62</td><td>எ.கா: "வகுப்பின் சராசரிப் புள்ளி 75"</td></tr>
+      <tr><td>தீர்மானத்துக்கு நேரடியாகப் பயன்படாது</td><td>தீர்மானம் எடுக்கப் பயன்படும்</td></tr>
+    </table>
+    <div class="key"><span class="tag">அடிப்படை</span>
+      <b>தரவு → (செயலாக்கம்) → தகவல்.</b> செயலாக்கம்தான் தரவை தகவலாக மாற்றுகிறது.
+    </div>
+    <h4 class="sub">தரவின் வாழ்க்கைச் சுழற்சி (Data Life Cycle)</h4>
+    <div class="diagram">
+      <svg viewBox="0 0 600 220" width="580" xmlns="http://www.w3.org/2000/svg">
+        <defs><marker id="d1" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#22303A"/></marker></defs>
+        <g font-size="12.5">
+          <ellipse cx="90" cy="45" rx="74" ry="28" fill="#EAF3F5" stroke="#1F4E5F" stroke-width="1.7"/><text x="90" y="42" text-anchor="middle" fill="#1F4E5F" font-weight="600">சேகரிப்பு</text><text x="90" y="58" text-anchor="middle" font-size="10.5" fill="#5A6B74">Collection</text>
+          <ellipse cx="300" cy="45" rx="74" ry="28" fill="#FDF3E0" stroke="#C9912B" stroke-width="1.7"/><text x="300" y="42" text-anchor="middle" fill="#8a6313" font-weight="600">சேமிப்பு</text><text x="300" y="58" text-anchor="middle" font-size="10.5" fill="#5A6B74">Storage</text>
+          <ellipse cx="510" cy="45" rx="74" ry="28" fill="#F3E8EC" stroke="#8B1E3F" stroke-width="1.7"/><text x="510" y="42" text-anchor="middle" fill="#8B1E3F" font-weight="600">செயலாக்கம்</text><text x="510" y="58" text-anchor="middle" font-size="10.5" fill="#5A6B74">Processing</text>
+          <ellipse cx="510" cy="170" rx="74" ry="28" fill="#EAF3F5" stroke="#1F4E5F" stroke-width="1.7"/><text x="510" y="167" text-anchor="middle" fill="#1F4E5F" font-weight="600">பயன்பாடு</text><text x="510" y="183" text-anchor="middle" font-size="10.5" fill="#5A6B74">Usage</text>
+          <ellipse cx="300" cy="170" rx="74" ry="28" fill="#FDF3E0" stroke="#C9912B" stroke-width="1.7"/><text x="300" y="167" text-anchor="middle" fill="#8a6313" font-weight="600">காப்பகப்படுத்தல்</text><text x="300" y="183" text-anchor="middle" font-size="10.5" fill="#5A6B74">Archiving</text>
+          <ellipse cx="90" cy="170" rx="74" ry="28" fill="#F3E8EC" stroke="#8B1E3F" stroke-width="1.7"/><text x="90" y="167" text-anchor="middle" fill="#8B1E3F" font-weight="600">அழித்தல்</text><text x="90" y="183" text-anchor="middle" font-size="10.5" fill="#5A6B74">Destruction</text>
+        </g>
+        <line x1="164" y1="45" x2="222" y2="45" stroke="#22303A" stroke-width="1.6" marker-end="url(#d1)"/>
+        <line x1="374" y1="45" x2="432" y2="45" stroke="#22303A" stroke-width="1.6" marker-end="url(#d1)"/>
+        <line x1="510" y1="73" x2="510" y2="138" stroke="#22303A" stroke-width="1.6" marker-end="url(#d1)"/>
+        <line x1="436" y1="170" x2="378" y2="170" stroke="#22303A" stroke-width="1.6" marker-end="url(#d1)"/>
+        <line x1="226" y1="170" x2="168" y2="170" stroke="#22303A" stroke-width="1.6" marker-end="url(#d1)"/>
+      </svg>
+      <div class="cap">தரவின் வாழ்க்கைச் சுழற்சி நிலைகள்</div>
+    </div>
+    <ol>
+      <li><b>சேகரிப்பு (Collection):</b> மூலங்களிலிருந்து தரவைப் பெறுதல்.</li>
+      <li><b>சேமிப்பு (Storage):</b> தரவை முறையாகச் சேமித்தல்.</li>
+      <li><b>செயலாக்கம் (Processing):</b> தரவை தகவலாக மாற்றுதல்.</li>
+      <li><b>பயன்பாடு (Usage):</b> தகவலைப் பயன்படுத்தித் தீர்மானம் எடுத்தல்.</li>
+      <li><b>காப்பகப்படுத்தல் (Archiving):</b> இனிமேல் தேவையில்லாத, ஆனால் பாதுகாக்கப்பட வேண்டிய தரவைச் சேமித்து வைத்தல்.</li>
+      <li><b>அழித்தல் (Destruction):</b> தேவையற்ற தரவைப் பாதுகாப்பாக நீக்குதல்.</li>
+    </ol>
+    <h4 class="sub">மதிப்புமிக்க தகவலின் பண்புகள் (Characteristics of Valuable Information)</h4>
+    <ul>
+      <li><b>துல்லியம் (Accuracy):</b> பிழையற்றதாக இருத்தல்.</li>
+      <li><b>முழுமை (Completeness):</b> தேவையான அனைத்தும் இருத்தல்.</li>
+      <li><b>நேரத்தகுதி (Timeliness):</b> தேவைப்படும் நேரத்தில் கிடைத்தல்.</li>
+      <li><b>பொருத்தப்பாடு (Relevance):</b> நோக்கத்துக்கு ஏற்றதாக இருத்தல்.</li>
+      <li><b>நம்பகத்தன்மை (Reliability):</b> நம்பகமான மூலத்திலிருந்து வருதல்.</li>
+      <li><b>புரிந்துகொள்ளக்கூடியது (Understandability):</b> பயனருக்குப் புரியும் வடிவில் இருத்தல்.</li>
+    </ul>
+    <h4 class="sub">பெருந்தரவு (Big Data)</h4>
+    <p>மரபுவழி முறைகளால் கையாள முடியாத அளவுக்குப் பாரிய, விரைவாக வளரும், பல்வேறு வகையான தரவுத் தொகுப்பே <b>Big Data</b>. இதன் பண்புகள் <b>3 V கள்</b> (சில நேரம் 5 V):</p>
+    <ul>
+      <li><b>Volume (கனவளவு):</b> மிகப் பெரிய தரவளவு.</li>
+      <li><b>Velocity (வேகம்):</b> தரவு உருவாகும்/பாயும் வேகம்.</li>
+      <li><b>Variety (பல்வகைமை):</b> உரை, படம், ஒலி, காணொளி எனப் பல வடிவம்.</li>
+      <li>(மேலும்: <b>Veracity</b> — நம்பகத்தன்மை, <b>Value</b> — பயன்மதிப்பு.)</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ===================== 1.2 ===================== -->
+<section class="ncard" id="s2">
+  <div class="nhead"><span class="nnum">1.2</span><span class="ntitle">கைமுறை குறைபாடுகள், ICT எழுச்சி, Mobile & Cloud Computing</span></div>
+  <div class="nbody">
+    <h4 class="sub">கைமுறை முறைகளின் குறைபாடுகள் (Drawbacks of Manual Methods)</h4>
+    <ul>
+      <li><b>மெதுவானது</b> — அதிக நேரம் தேவை.</li>
+      <li><b>பிழைகள் அதிகம்</b> — மனிதப் பிழைகள் (human errors).</li>
+      <li><b>அதிக இடம்</b> — காகிதக் கோப்புகளுக்குப் பௌதிக இடம் தேவை.</li>
+      <li><b>தேடல் கடினம்</b> — தகவலைத் தேடுவது நேரம் எடுக்கும்.</li>
+      <li><b>பாதுகாப்பு குறைவு</b> — தீ, நீர், திருட்டு போன்றவற்றால் இழப்பு.</li>
+      <li><b>பகிர்தல் கடினம்</b> — ஒரே நேரத்தில் பலரால் பயன்படுத்த முடியாது.</li>
+      <li><b>நகல் எடுத்தல் கடினம்</b> — மீள்நகல் (backup) கடினம்.</li>
+    </ul>
+    <p>இக்குறைபாடுகளுக்குத் தீர்வாகவே <b>ICT (தகவல் தொடர்பாடல் தொழில்நுட்பம்)</b> எழுச்சி பெற்றது — வேகம், துல்லியம், பாதுகாப்பு, எளிய தேடல், பகிர்தல் ஆகியவற்றை வழங்குகிறது.</p>
+    <h4 class="sub">Mobile Computing (இடப்பெயர்வுக் கணிப்பீடு)</h4>
+    <p>கணினி வளங்களையும் இணையத்தையும் <b>எங்கிருந்தும், நகர்ந்துகொண்டிருக்கும்போதும்</b> பயன்படுத்தும் தொழில்நுட்பம். எ.கா: ஸ்மார்ட்ஃபோன், டேப்லட், லேப்டாப் வழியாக மின்னஞ்சல், வங்கிச் சேவை, இடங்காட்டி (GPS).</p>
+    <h4 class="sub">Cloud Computing (முகில் கணிப்பீடு)</h4>
+    <p>கணினி வளங்களை (சேமிப்பு, செயலாக்கம், மென்பொருள்) <b>இணையம் ஊடாக</b>, தேவைக்கேற்ப, வாடகை அடிப்படையில் பயன்படுத்தும் முறை. சொந்தக் கணினியில் சேமிக்காமல், தொலைவிலுள்ள சேவையகங்களில் சேமித்து எங்கிருந்தும் அணுகலாம். எ.கா: Google Drive, Dropbox, Gmail.</p>
+    <table class="dt">
+      <tr><th>நன்மை</th><th>விளக்கம்</th></tr>
+      <tr><td>செலவு குறைவு</td><td>சொந்த வன்பொருள்/மென்பொருளில் முதலீடு தேவையில்லை</td></tr>
+      <tr><td>எங்கிருந்தும் அணுகல்</td><td>இணைய இணைப்பு இருந்தால் போதும்</td></tr>
+      <tr><td>அளவிடுதிறன் (Scalability)</td><td>தேவைக்கேற்ப வளங்களை அதிகரிக்க/குறைக்கலாம்</td></tr>
+      <tr><td>தானியங்கி மீள்நகல்</td><td>தரவு இழப்பு குறைவு</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ===================== 1.3 ===================== -->
+<section class="ncard" id="s3">
+  <div class="nhead"><span class="nnum">1.3</span><span class="ntitle">தகவல் உருவாக்கத்தின் சுருக்க மாதிரி (Input → Process → Output)</span></div>
+  <div class="nbody">
+    <p>எந்தவொரு தகவல் முறைமையினதும் அடிப்படைச் சுருக்க மாதிரி <b>IPO</b> (Input–Process–Output) ஆகும்.</p>
+    <div class="diagram">
+      <svg viewBox="0 0 600 150" width="580" xmlns="http://www.w3.org/2000/svg">
+        <defs><marker id="p1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="#22303A"/></marker></defs>
+        <rect x="20" y="45" width="140" height="64" rx="12" fill="#FDF3E0" stroke="#C9912B" stroke-width="1.9"/>
+        <text x="90" y="74" text-anchor="middle" font-size="15" fill="#8a6313" font-weight="700">உள்ளீடு</text>
+        <text x="90" y="95" text-anchor="middle" font-size="11.5" fill="#5A6B74">Input (தரவு)</text>
+        <line x1="160" y1="77" x2="222" y2="77" stroke="#22303A" stroke-width="1.9" marker-end="url(#p1)"/>
+        <rect x="224" y="45" width="150" height="64" rx="12" fill="#F3E8EC" stroke="#8B1E3F" stroke-width="1.9"/>
+        <text x="299" y="74" text-anchor="middle" font-size="15" fill="#8B1E3F" font-weight="700">செயலாக்கம்</text>
+        <text x="299" y="95" text-anchor="middle" font-size="11.5" fill="#5A6B74">Process</text>
+        <line x1="374" y1="77" x2="436" y2="77" stroke="#22303A" stroke-width="1.9" marker-end="url(#p1)"/>
+        <rect x="438" y="45" width="140" height="64" rx="12" fill="#EAF3F5" stroke="#1F4E5F" stroke-width="1.9"/>
+        <text x="508" y="74" text-anchor="middle" font-size="15" fill="#1F4E5F" font-weight="700">வெளியீடு</text>
+        <text x="508" y="95" text-anchor="middle" font-size="11.5" fill="#5A6B74">Output (தகவல்)</text>
+        <text x="300" y="135" text-anchor="middle" font-size="11.5" fill="#5A6B74">(சேமிப்பு / Storage — அனைத்து நிலைகளையும் ஆதரிக்கிறது)</text>
+      </svg>
+    </div>
+    <ul>
+      <li><b>உள்ளீடு (Input):</b> செயலாக்கப்பட வேண்டிய தரவை முறைமைக்கு வழங்குதல்.</li>
+      <li><b>செயலாக்கம் (Process):</b> தரவின் மீது கணிப்பீடு, ஒப்பீடு, வரிசைப்படுத்தல் முதலியன செய்தல்.</li>
+      <li><b>வெளியீடு (Output):</b> செயலாக்கப்பட்ட தகவலை வழங்குதல்.</li>
+      <li><b>சேமிப்பு (Storage):</b> தரவையும் தகவலையும் எதிர்காலப் பயன்பாட்டுக்காகச் சேமித்தல்.</li>
+    </ul>
+    <div class="key"><span class="tag">எடுத்துக்காட்டு</span>
+      மாணவர் புள்ளிகள் (உள்ளீடு) → சராசரி கணித்தல் (செயலாக்கம்) → அறிக்கை அட்டை (வெளியீடு). புள்ளிகளும் அறிக்கையும் தரவுத்தளத்தில் (சேமிப்பு) வைக்கப்படுகின்றன.
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 1.4 ===================== -->
+<section class="ncard" id="s4">
+  <div class="nhead"><span class="nnum">1.4</span><span class="ntitle">வன்பொருள், மென்பொருள், மனித இயக்குநர்கள்</span></div>
+  <div class="nbody">
+    <p>ஒரு கணினி முறைமை மூன்று முக்கிய கூறுகளால் ஆனது:</p>
+    <table class="dt">
+      <tr><th>கூறு</th><th>விளக்கம்</th><th>எடுத்துக்காட்டு</th></tr>
+      <tr><td><b>வன்பொருள்</b><br>(Hardware)</td><td>தொடக்கூடிய பௌதிகக் கூறுகள்</td><td>CPU, விசைப்பலகை, திரை, அச்சுப்பொறி, RAM</td></tr>
+      <tr><td><b>மென்பொருள்</b><br>(Software)</td><td>வன்பொருளை இயக்கும் நிரல்கள் (தொட முடியாதது)</td><td>இயக்க முறைமை, MS Word, உலாவி, விளையாட்டுகள்</td></tr>
+      <tr><td><b>மனித இயக்குநர்</b><br>(Human-ware / Operators)</td><td>முறைமையைப் பயன்படுத்தும், இயக்கும் மனிதர்கள்</td><td>பயனர், நிரலாளர், தரவு உள்ளீட்டாளர், முறைமை ஆய்வாளர்</td></tr>
+    </table>
+    <h4 class="sub">மென்பொருள் வகைகள்</h4>
+    <ul>
+      <li><b>முறைமை மென்பொருள் (System Software):</b> கணினியை இயக்கி நிர்வகிக்கும். எ.கா: இயக்க முறைமை (Windows, Linux), மொழிபெயர்ப்பிகள் (compilers).</li>
+      <li><b>பயன்பாட்டு மென்பொருள் (Application Software):</b> குறிப்பிட்ட பயனர் வேலைகளுக்கானது. எ.கா: MS Word, Excel, உலாவி.</li>
+    </ul>
+    <div class="key"><span class="tag">பரீட்சை நுணுக்கம்</span>
+      வன்பொருள் = <b>தொடக்கூடியது</b>; மென்பொருள் = <b>தொட முடியாதது</b> (நிரல்கள்). வன்பொருள் இல்லாமல் மென்பொருள் இயங்காது; மென்பொருள் இல்லாமல் வன்பொருள் பயனற்றது.
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 1.5 ===================== -->
+<section class="ncard" id="s5">
+  <div class="nhead"><span class="nnum">1.5</span><span class="ntitle">தரவுச் செயலாக்கப் படிகள், OMR/OCR/MICR, தொகுதி & நிகழ்நேரம்</span></div>
+  <div class="nbody">
+    <h4 class="sub">தரவுச் செயலாக்கப் படிகள் (Data Processing Steps)</h4>
+    <ol>
+      <li><b>சேகரிப்பு (Gathering / Collection):</b> மூலங்களிலிருந்து தரவைப் பெறுதல்.</li>
+      <li><b>செல்லுபடியாக்கல் (Validation):</b> தரவு சரியானதா, முழுமையானதா எனச் சரிபார்த்தல்.</li>
+      <li><b>செயலாக்கம் (Processing):</b> கணிப்பீடு, வரிசைப்படுத்தல், சுருக்கம் ஆக்குதல்.</li>
+      <li><b>வெளியீடு (Output):</b> தகவலை வழங்குதல்.</li>
+      <li><b>சேமிப்பு (Storage):</b> எதிர்காலப் பயன்பாட்டுக்காகச் சேமித்தல்.</li>
+    </ol>
+    <h4 class="sub">தானியங்கி தரவு உள்ளீட்டுச் சாதனங்கள்</h4>
+    <table class="dt">
+      <tr><th>சாதனம்</th><th>முழுப் பெயர்</th><th>செயற்பாடு / பயன்பாடு</th></tr>
+      <tr><td><b>OMR</b></td><td>Optical Mark Recognition</td><td>குறியிடப்பட்ட இடங்களை (குமிழ்கள்) வாசித்தல். எ.கா: MCQ விடைத்தாள்கள், வாக்கெடுப்பு.</td></tr>
+      <tr><td><b>OCR</b></td><td>Optical Character Recognition</td><td>அச்சிட்ட/கையெழுத்து எழுத்துகளை எழுத்துகளாக மாற்றி வாசித்தல். எ.கா: அச்சிட்ட ஆவணங்களை டிஜிட்டலாக்கல்.</td></tr>
+      <tr><td><b>MICR</b></td><td>Magnetic Ink Character Recognition</td><td>காந்த மையால் அச்சிட்ட எழுத்துகளை வாசித்தல். எ.கா: வங்கிக் காசோலைகள் (cheques).</td></tr>
+    </table>
+    <h4 class="sub">செயலாக்க முறைகள் — தொகுதி vs நிகழ்நேரம்</h4>
+    <table class="dt">
+      <tr><th>தொகுதிச் செயலாக்கம் (Batch)</th><th>நிகழ்நேரச் செயலாக்கம் (Real-time)</th></tr>
+      <tr><td>தரவு திரட்டப்பட்டு, பின் ஒன்றாகச் செயலாக்கப்படும்</td><td>தரவு உடனுக்குடன் செயலாக்கப்படும்</td></tr>
+      <tr><td>உடனடி விடை தேவையில்லாதவை</td><td>உடனடி விடை அவசியம்</td></tr>
+      <tr><td>எ.கா: மாதாந்த சம்பளப் பட்டியல், மின்/நீர்க் கட்டண அறிக்கை</td><td>எ.கா: ATM பணப் பரிமாற்றம், விமான இருக்கை முன்பதிவு, ஆன்லைன் வங்கிச் சேவை</td></tr>
+    </table>
+    <div class="key"><span class="tag">எளிதில் நினைவில்</span>
+      <b>Batch</b> = காத்திருந்து கூட்டாக (சம்பளம், கட்டணப் பட்டியல்). <b>Real-time</b> = உடனுக்குடன் (ATM, முன்பதிவு).
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 1.6 ===================== -->
+<section class="ncard" id="s6">
+  <div class="nhead"><span class="nnum">1.6</span><span class="ntitle">ICT இன் பயன்பாட்டுத் துறைகள்</span></div>
+  <div class="nbody">
+    <table class="dt">
+      <tr><th>துறை</th><th>ICT பயன்பாடுகள்</th></tr>
+      <tr><td><b>கல்வி</b><br>(Education)</td><td>இ-கற்றல் (e-learning), இணையவழி வகுப்புகள், மெய்நிகர் ஆய்வகங்கள், கல்விச் செயலிகள், CAL.</td></tr>
+      <tr><td><b>சுகாதாரம்</b><br>(Healthcare)</td><td>தொலைமருத்துவம் (telemedicine), நோயாளர் பதிவுகள், CT/MRI ஸ்கேன், மருத்துவ ரோபோக்கள்.</td></tr>
+      <tr><td><b>விவசாயம்</b><br>(Agriculture)</td><td>தானியங்கி நீர்ப்பாசனம், மண்/வானிலை உணரிகள், சந்தை விலைத் தகவல், drone கண்காணிப்பு.</td></tr>
+      <tr><td><b>வணிகம்</b><br>(Business)</td><td>இ-வணிகம் (e-commerce), இணைய வங்கி, ATM, பங்குச் சந்தை, விளம்பரம்.</td></tr>
+      <tr><td><b>பொறியியல்</b><br>(Engineering)</td><td>CAD/CAM வடிவமைப்பு, உருவகப்படுத்தல் (simulation), தானியங்கி உற்பத்தி.</td></tr>
+      <tr><td><b>சுற்றுலா</b><br>(Tourism)</td><td>இணைய முன்பதிவு, மெய்நிகர் சுற்றுலா, வழிகாட்டிச் செயலிகள், மின்-டிக்கட்.</td></tr>
+      <tr><td><b>ஊடகம்</b><br>(Media)</td><td>டிஜிட்டல் ஒளிபரப்பு, இணைய செய்தி, சமூக ஊடகம், streaming.</td></tr>
+      <tr><td><b>சட்ட அமுலாக்கம்</b><br>(Law Enforcement)</td><td>குற்றத் தரவுத்தளம், விரல் ரேகை/முக அடையாளம், CCTV, வாகனப் பதிவு.</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ===================== 1.7 ===================== -->
+<section class="ncard" id="s7">
+  <div class="nhead"><span class="nnum">1.7</span><span class="ntitle">ICT இன் நன்மைகளும் சிக்கல்களும்</span></div>
+  <div class="nbody">
+    <h4 class="sub">நன்மைகள் (Benefits)</h4>
+    <ul>
+      <li><b>சமூக:</b> எளிதான தொடர்பாடல், தகவல் அணுகல், சமூக ஊடகம், தொலைக்கல்வி/மருத்துவம்.</li>
+      <li><b>பொருளாதார:</b> புதிய வேலைவாய்ப்புகள், இ-வணிகம், செலவுக் குறைப்பு, உற்பத்தித்திறன்.</li>
+      <li><b>சுற்றுச்சூழல்:</b> காகிதப் பயன்பாடு குறைப்பு (paperless), பயணம் குறைதல், திறன்மிக்க வள முகாமை.</li>
+    </ul>
+    <h4 class="sub">சிக்கல்கள் / பிரச்சினைகள் (Issues)</h4>
+    <ul>
+      <li><b>சமூக:</b> தனிமைப்படுதல், அடிமைத்தனம் (addiction), தவறான தகவல் பரவல், சைபர் தாக்குதல்.</li>
+      <li><b>பொருளாதார:</b> வேலையிழப்பு (தானியக்கத்தால்), சைபர் மோசடி.</li>
+      <li><b>சுற்றுச்சூழல்:</b> மின்-கழிவு (e-waste), மின்சார நுகர்வு.</li>
+      <li><b>ஒழுக்க/சட்ட:</b> தனியுரிமை மீறல், பதிப்புரிமை மீறல், திருட்டு.</li>
+    </ul>
+    <h4 class="sub">முக்கிய சொற்கள் (Key Terms)</h4>
+    <table class="dt">
+      <tr><th>சொல்</th><th>விளக்கம்</th></tr>
+      <tr><td><b>பதிப்புரிமை</b><br>(Copyright)</td><td>ஒரு படைப்பை (மென்பொருள், நூல், பாடல்) உருவாக்கியவருக்கு வழங்கப்படும் சட்ட உரிமை.</td></tr>
+      <tr><td><b>திருட்டுப்படியெடுப்பு</b><br>(Piracy)</td><td>பதிப்புரிமையுள்ள மென்பொருள்/ஊடகத்தை அனுமதியின்றி நகலெடுத்தல்/விநியோகித்தல்.</td></tr>
+      <tr><td><b>கருத்துத் திருட்டு</b><br>(Plagiarism)</td><td>பிறரின் படைப்பை/கருத்தை மூலம் குறிப்பிடாமல் தன்னுடையதாகக் காட்டுதல்.</td></tr>
+      <tr><td><b>டிஜிட்டல் இடைவெளி</b><br>(Digital Divide)</td><td>ICT வசதிகளை அணுகுவோருக்கும் அணுக முடியாதோருக்கும் இடையேயான இடைவெளி.</td></tr>
+      <tr><td><b>மின்-கழிவு</b><br>(E-waste)</td><td>பயன்படுத்தி எறியப்படும் எலெக்ட்ரோனிக் சாதனங்கள் — சுற்றுச்சூழல்/சுகாதாரப் பிரச்சினை.</td></tr>
+      <tr><td><b>SDGs</b></td><td>நிலையான அபிவிருத்தி இலக்குகள் (Sustainable Development Goals) — ஐ.நா. வகுத்த 17 இலக்குகள்; ICT இவற்றை அடைய உதவுகிறது.</td></tr>
+    </table>
+    <div class="warn"><span class="tag">வேறுபாடு — அடிக்கடி குழப்பம்</span>
+      <b>Piracy</b> = அனுமதியின்றி <b>நகலெடுத்தல்/விற்றல்</b> (மென்பொருள், படம், பாடல்). <b>Plagiarism</b> = பிறர் படைப்பை <b>தன்னுடையதாகக் காட்டுதல்</b> (மூலம் குறிப்பிடாமை). இரண்டும் வேறுபட்டவை!
+    </div>
+  </div>
+</section>
+
+<!-- ===================== Practice ===================== -->
+<section class="ncard" id="s8">
+  <div class="nhead"><span class="nnum">?</span><span class="ntitle">பயிற்சி வினாக்கள் (விடைகளுடன்)</span></div>
+  <div class="nbody">
+
+    <!-- P1 -->
+    <div class="pq">
+      <span class="qnum">வினா 01</span>
+      <p class="task" style="margin-top:10px">தரவுக்கும் தகவலுக்கும் இடையேயான வேறுபாட்டை, ஒரு உதாரணத்துடன் விளக்குக.</p>
+      <button class="btn" onclick="toggleAns(this,'p1')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p1"><span class="ans-label">விடை</span>
+        <p><b>தரவு</b> செயலாக்கப்படாத, தனித்து அர்த்தமற்ற மூலக் கூறு; <b>தகவல்</b> தரவைச் செயலாக்கி அர்த்தமுள்ளதாக்கிய விளைவு.</p>
+        <p><b>உதாரணம்:</b> 78, 85, 62 ஆகியவை தரவு. இவற்றைச் செயலாக்கிப் பெறும் "வகுப்பின் சராசரி 75" என்பது தகவல்.</p>
+      </div>
+    </div>
+
+    <!-- P2 -->
+    <div class="pq">
+      <span class="qnum">வினா 02</span>
+      <p class="task" style="margin-top:10px">மதிப்புமிக்க தகவலின் <b>நான்கு</b> பண்புகளைக் குறிப்பிடுக.</p>
+      <button class="btn" onclick="toggleAns(this,'p2')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p2"><span class="ans-label">விடை</span>
+        <p>துல்லியம் (Accuracy), முழுமை (Completeness), நேரத்தகுதி (Timeliness), பொருத்தப்பாடு (Relevance). (மேலும்: நம்பகத்தன்மை, புரிந்துகொள்ளக்கூடியது.)</p>
+      </div>
+    </div>
+
+    <!-- P3 -->
+    <div class="pq">
+      <span class="qnum">வினா 03</span>
+      <p class="task" style="margin-top:10px">பின்வரும் ஒவ்வொரு சந்தர்ப்பத்துக்கும் ஏற்ற உள்ளீட்டுச் சாதனத்தை (OMR / OCR / MICR) தெரிவுசெய்க:<br>(அ) வங்கிக் காசோலை செயலாக்கம் &nbsp;(ஆ) MCQ விடைத்தாள் திருத்தல் &nbsp;(இ) அச்சிட்ட ஆவணத்தை டிஜிட்டலாக்கல்</p>
+      <button class="btn" onclick="toggleAns(this,'p3')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p3"><span class="ans-label">விடை</span>
+        <p>(அ) காசோலை → <b>MICR</b> &nbsp;|&nbsp; (ஆ) MCQ விடைத்தாள் → <b>OMR</b> &nbsp;|&nbsp; (இ) அச்சிட்ட ஆவணம் → <b>OCR</b></p>
+      </div>
+    </div>
+
+    <!-- P4 -->
+    <div class="pq">
+      <span class="qnum">வினா 04</span>
+      <p class="task" style="margin-top:10px">தொகுதிச் செயலாக்கத்துக்கும் (batch) நிகழ்நேரச் செயலாக்கத்துக்கும் (real-time) இடையேயான வேறுபாட்டை ஒவ்வொன்றுக்கும் ஓர் உதாரணத்துடன் தருக.</p>
+      <button class="btn" onclick="toggleAns(this,'p4')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p4"><span class="ans-label">விடை</span>
+        <p><b>தொகுதி:</b> தரவு திரட்டப்பட்டுப் பின் கூட்டாகச் செயலாக்கப்படும்; உடனடி விடை தேவையில்லை. உ-ம்: மாதாந்த சம்பளப் பட்டியல்.</p>
+        <p><b>நிகழ்நேரம்:</b> தரவு உடனுக்குடன் செயலாக்கப்பட்டு உடனடி விடை தரப்படும். உ-ம்: ATM பணப் பரிமாற்றம் / விமான இருக்கை முன்பதிவு.</p>
+      </div>
+    </div>
+
+    <!-- P5 -->
+    <div class="pq">
+      <span class="qnum">வினா 05</span>
+      <p class="task" style="margin-top:10px">Piracy (திருட்டுப்படியெடுப்பு) க்கும் Plagiarism (கருத்துத் திருட்டு) க்கும் உள்ள வேறுபாடு என்ன?</p>
+      <button class="btn" onclick="toggleAns(this,'p5')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p5"><span class="ans-label">விடை</span>
+        <p><b>Piracy:</b> பதிப்புரிமையுள்ள மென்பொருள்/ஊடகத்தை அனுமதியின்றி நகலெடுத்து விநியோகித்தல் அல்லது விற்றல்.</p>
+        <p><b>Plagiarism:</b> பிறரின் படைப்பை/கருத்தை மூலத்தைக் குறிப்பிடாமல் தன்னுடையதாகக் காட்டுதல்.</p>
+        <p>சுருக்கமாக — Piracy = அனுமதியற்ற நகல்; Plagiarism = உரிமை மறுக்கப்பட்ட பயன்பாடு (மூலம் காட்டாமை).</p>
+      </div>
+    </div>
+
+    <!-- P6 -->
+    <div class="pq">
+      <span class="qnum">வினா 06</span>
+      <p class="task" style="margin-top:10px">தகவல் உருவாக்கத்தின் சுருக்க மாதிரியை (IPO) வரைபடத்துடன் விளக்கி, ஒரு பாடசாலை அறிக்கை அட்டை உருவாக்கத்தை அதற்கு எடுத்துக்காட்டாகப் பொருத்துக.</p>
+      <button class="btn" onclick="toggleAns(this,'p6')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p6"><span class="ans-label">விடை</span>
+        <p><b>மாதிரி:</b> உள்ளீடு (Input) → செயலாக்கம் (Process) → வெளியீடு (Output); சேமிப்பு (Storage) அனைத்தையும் ஆதரிக்கிறது.</p>
+        <table class="dt">
+          <tr><th>நிலை</th><th>அறிக்கை அட்டை உதாரணம்</th></tr>
+          <tr><td>உள்ளீடு</td><td>மாணவரின் பாடவாரியான புள்ளிகள்</td></tr>
+          <tr><td>செயலாக்கம்</td><td>மொத்தம், சராசரி, தரம், தரவரிசை கணித்தல்</td></tr>
+          <tr><td>வெளியீடு</td><td>அச்சிடப்பட்ட அறிக்கை அட்டை</td></tr>
+          <tr><td>சேமிப்பு</td><td>புள்ளிகளும் முடிவுகளும் தரவுத்தளத்தில்</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- P7 -->
+    <div class="pq">
+      <span class="qnum">வினா 07</span>
+      <p class="task" style="margin-top:10px">Big Data இன் <b>3 V</b> பண்புகள் யாவை? ஒவ்வொன்றையும் சுருக்கமாக விளக்குக.</p>
+      <button class="btn" onclick="toggleAns(this,'p7')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p7"><span class="ans-label">விடை</span>
+        <ul>
+          <li><b>Volume (கனவளவு):</b> மிகப் பெரிய அளவிலான தரவு.</li>
+          <li><b>Velocity (வேகம்):</b> தரவு உருவாகும் / பாயும் வேகம்.</li>
+          <li><b>Variety (பல்வகைமை):</b> உரை, படம், ஒலி, காணொளி எனப் பல்வேறு வடிவங்கள்.</li>
+        </ul>
+        <p>(மேலும் சில நேரம் Veracity — நம்பகத்தன்மை, Value — பயன்மதிப்பு சேர்க்கப்படும்.)</p>
+      </div>
+    </div>
+
+    <!-- P8 -->
+    <div class="pq">
+      <span class="qnum">வினா 08</span>
+      <p class="task" style="margin-top:10px">கைமுறை முறைகளின் <b>நான்கு</b> குறைபாடுகளைக் குறிப்பிட்டு, அவை ICT ஆல் எவ்வாறு தீர்க்கப்படுகின்றன எனக் கூறுக.</p>
+      <button class="btn" onclick="toggleAns(this,'p8')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p8"><span class="ans-label">விடை</span>
+        <table class="dt">
+          <tr><th>கைமுறை குறைபாடு</th><th>ICT தீர்வு</th></tr>
+          <tr><td>மெதுவானது</td><td>வேகமான செயலாக்கம்</td></tr>
+          <tr><td>பிழைகள் அதிகம்</td><td>துல்லியம் கூடுதல்</td></tr>
+          <tr><td>அதிக இடம் தேவை</td><td>டிஜிட்டல் சேமிப்பு (குறைந்த இடம்)</td></tr>
+          <tr><td>தேடல்/பகிர்தல் கடினம்</td><td>விரைவான தேடல், எளிய பகிர்தல்</td></tr>
+        </table>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+</main>
+
+<footer>
+  க.பொ.த (உயர்தர) தகவல் மற்றும் தொடர்பாடல் தொழினுட்பம் — அலகு 1: தரவு, தகவல் &amp; ICT அறிமுகம் குறிப்புகள்
+</footer>
+
+<script>
+function toggleAns(btn,id){
+  var ans=document.getElementById(id);
+  var open=ans.classList.toggle('show');
+  btn.classList.toggle('open',open);
+  btn.textContent=open?'விடையை மறை ▴':'விடையைக் காட்டு ▾';
+}
+</script>
+
+</body>
+</html>

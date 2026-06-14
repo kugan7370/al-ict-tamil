@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>க.பொ.த (உயர்தரம்) ICT — அலகு 3: தரவு பிரதிநிதித்துவம் குறிப்புகள்</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Catamaran:wght@600;800&family=Hind+Madurai:wght@400;500;600&family=Noto+Sans+Tamil:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F6F4EE; --card:#FFFFFF; --ink:#22303A;
+    --maroon:#8B1E3F; --teal:#1F4E5F; --gold:#C9912B;
+    --line:#E2DDD2; --code-bg:#102A33; --code-ink:#D9EEF2;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--paper);color:var(--ink);
+    font-family:'Hind Madurai','Noto Sans Tamil',sans-serif;
+    line-height:1.8;font-size:17px;}
+  header{background:linear-gradient(135deg,var(--teal) 0%,#143946 100%);
+    color:#F2EFE6;padding:42px 20px 36px;text-align:center;
+    border-bottom:5px solid var(--gold);}
+  header .eyebrow{letter-spacing:.18em;font-size:.8rem;text-transform:uppercase;
+    color:#D8C58A;margin-bottom:10px;}
+  header h1{font-family:'Catamaran','Noto Sans Tamil',sans-serif;font-weight:800;
+    font-size:clamp(1.4rem,4vw,2.1rem);line-height:1.5;}
+  header p{margin-top:10px;font-size:.95rem;color:#BFD4DA}
+  main{max-width:900px;margin:0 auto;padding:36px 18px 70px}
+
+  .toc{background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:16px 24px;margin-bottom:34px;font-size:.92rem;}
+  .toc b{color:var(--teal);font-family:'Catamaran','Noto Sans Tamil',sans-serif}
+  .toc a{color:var(--maroon);text-decoration:none;white-space:nowrap}
+  .toc a:hover{text-decoration:underline}
+  .toc .links{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:6px}
+
+  .ncard{background:var(--card);border:1px solid var(--line);border-radius:16px;
+    margin-bottom:32px;overflow:hidden;box-shadow:0 2px 10px rgba(34,48,58,.05);}
+  .nhead{display:flex;align-items:center;gap:14px;padding:16px 24px;
+    border-bottom:1px solid var(--line);
+    background:linear-gradient(to right,#FBFAF6,#fff);}
+  .nnum{font-family:'Catamaran',sans-serif;font-weight:800;font-size:.95rem;
+    color:#fff;background:var(--teal);border-radius:10px;padding:5px 13px;
+    white-space:nowrap;}
+  .ntitle{font-family:'Catamaran','Noto Sans Tamil',sans-serif;font-weight:600;
+    font-size:1.05rem;color:var(--teal);}
+  .nbody{padding:22px 26px 26px}
+  .nbody p{margin-bottom:12px}
+  .nbody ul,.nbody ol{margin:6px 26px 14px}
+  .nbody li{margin-bottom:6px}
+  h4.sub{font-family:'Catamaran','Noto Sans Tamil',sans-serif;color:var(--maroon);
+    font-size:1.0rem;margin:18px 0 8px;}
+
+  .key{background:#FBF7EC;border-right:4px solid var(--gold);
+    border-radius:10px;padding:14px 20px;margin:14px 0;}
+  .key .tag{font-size:.78rem;font-weight:700;color:var(--gold);
+    letter-spacing:.1em;display:block;margin-bottom:4px;}
+  .warn{background:#FAEFF1;border-right:4px solid var(--maroon);
+    border-radius:10px;padding:14px 20px;margin:14px 0;}
+  .warn .tag{font-size:.78rem;font-weight:700;color:var(--maroon);
+    letter-spacing:.1em;display:block;margin-bottom:4px;}
+
+  .work{background:#F4F8F7;border:1px solid #D6E4E0;border-radius:10px;
+    padding:14px 18px;margin:12px 0;font-family:'JetBrains Mono',monospace;
+    font-size:.86rem;line-height:1.85;direction:ltr;overflow-x:auto;}
+  .work .hl{color:var(--maroon);font-weight:700}
+  .work .gd{color:#1F7A55;font-weight:700}
+  .work .lbl{font-family:'Hind Madurai','Noto Sans Tamil',sans-serif;color:#5A6B74}
+
+  code.inline{background:#EDF2F1;color:var(--teal);border-radius:6px;
+    padding:1px 8px;font-family:'JetBrains Mono',monospace;font-size:.85em;}
+
+  table.dt{border-collapse:collapse;margin:12px auto;font-size:.88rem;width:100%}
+  table.dt th{background:var(--teal);color:#fff;padding:8px 12px;
+    font-weight:600;border:1px solid #16404f;text-align:center;}
+  table.dt td{border:1px solid var(--line);padding:7px 12px;
+    background:#FDFCF9;vertical-align:top;text-align:center;}
+  table.dt td.l{text-align:left}
+  table.dt caption{caption-side:top;font-weight:600;color:var(--teal);
+    margin-bottom:6px;font-size:.95rem;}
+  table.dt code{font-family:'JetBrains Mono',monospace;font-size:.9em;color:var(--maroon)}
+  table.dt.mono td{font-family:'JetBrains Mono',monospace}
+
+  .btn{display:inline-flex;align-items:center;gap:9px;
+    font-family:'Hind Madurai','Noto Sans Tamil',sans-serif;font-weight:600;
+    font-size:1rem;color:#fff;background:var(--teal);border:none;
+    border-radius:999px;padding:11px 26px;margin-top:14px;cursor:pointer;
+    transition:background .2s,transform .15s;}
+  .btn:hover{background:#16404f;transform:translateY(-1px)}
+  .btn:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+  .btn.open{background:var(--maroon)}
+  .answer{display:none;margin-top:20px;border-top:2px dashed var(--line);
+    padding-top:18px;animation:fade .35s ease;}
+  .answer.show{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  .ans-label{display:inline-block;font-weight:700;color:#fff;background:var(--gold);
+    border-radius:8px;padding:3px 14px;font-size:.85rem;margin-bottom:12px;}
+  .qnum{font-family:'Catamaran',sans-serif;font-weight:800;font-size:1rem;
+    color:#fff;background:var(--maroon);border-radius:10px;padding:5px 14px;
+    white-space:nowrap;}
+  .task{font-weight:600;color:var(--maroon)}
+  .pq{border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin-bottom:18px}
+  .note{margin-top:12px;font-size:.9rem;color:#5A6B74;background:#EFF4F2;
+    border-radius:10px;padding:10px 16px;}
+
+  footer{text-align:center;padding:26px 16px 40px;font-size:.85rem;color:#7A8790;}
+  @media (max-width:560px){
+    .nhead{flex-direction:column;align-items:flex-start;gap:8px}
+    body{font-size:16px}
+  }
+  @media (prefers-reduced-motion:reduce){.answer{animation:none}.btn{transition:none}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">G.C.E. Advanced Level &middot; Sri Lanka &middot; ICT (20) &middot; Unit 3</div>
+  <h1>தரவு பிரதிநிதித்துவம்<br>(Data Representation)</h1>
+  <p>எண் முறைமைகள் &amp; மாற்றங்கள் &middot; குறியிட்ட முழுஎண்கள் &middot; எழுத்துப் பிரதிநிதித்துவம் &middot; ஈருறுப்புக் கணிதம் &amp; தர்க்கச் செயற்பாடுகள்</p>
+</header>
+
+<main>
+
+<div class="toc"><b>உள்ளடக்கம்</b>
+  <div class="links">
+    <a href="#s1">3.1a எண் முறைமைகள் & இட மதிப்பு</a>
+    <a href="#s2">3.1b அடிமாற்றங்கள் (Conversions)</a>
+    <a href="#s3">3.1c குறியிட்ட முழுஎண்கள்</a>
+    <a href="#s4">3.2 எழுத்துப் பிரதிநிதித்துவம்</a>
+    <a href="#s5">3.3a ஈருறுப்புக் கணிதம்</a>
+    <a href="#s6">3.3b பிட்வாரித் தர்க்கச் செயற்பாடுகள்</a>
+    <a href="#s7">பயிற்சி வினாக்கள்</a>
+  </div>
+</div>
+
+<!-- ===================== 3.1a ===================== -->
+<section class="ncard" id="s1">
+  <div class="nhead"><span class="nnum">3.1a</span><span class="ntitle">எண் முறைமைகள் &amp; இட மதிப்பு (Number Systems &amp; Place Value)</span></div>
+  <div class="nbody">
+    <p>ஒரு <b>எண் முறைமை</b> எண்களை எழுத ஒரு குறிப்பிட்ட எண்ணிக்கையான குறியீடுகளைப் (digits) பயன்படுத்துகிறது. அந்த எண்ணிக்கையே அதன் <b>அடி (base / radix)</b>.</p>
+    <table class="dt">
+      <caption>நான்கு முக்கிய எண் முறைமைகள்</caption>
+      <tr><th>முறைமை</th><th>அடி</th><th>பயன்படும் குறியீடுகள்</th></tr>
+      <tr><td class="l">இருமம் (Binary)</td><td>2</td><td>0, 1</td></tr>
+      <tr><td class="l">எண்மம் (Octal)</td><td>8</td><td>0–7</td></tr>
+      <tr><td class="l">தசமம் (Decimal)</td><td>10</td><td>0–9</td></tr>
+      <tr><td class="l">பதின்அறும் (Hexadecimal)</td><td>16</td><td>0–9, A–F</td></tr>
+    </table>
+    <div class="key"><span class="tag">Hex எழுத்துகள்</span>
+      Hexadecimal இல் 10=A, 11=B, 12=C, 13=D, 14=E, 15=F. (4 பிட் ஒன்றாகச் சேர்ந்து ஒரு hex இலக்கமாகும்.)
+    </div>
+    <h4 class="sub">இட மதிப்பு (Place Value / Positional Notation)</h4>
+    <p>ஒவ்வொரு இலக்கத்தின் மதிப்பும் அதன் <b>இடத்தைப் பொறுத்து</b> அடியின் அடுக்குகளால் (powers) தீர்மானிக்கப்படுகிறது. தசம எண் <b>2026</b>:</p>
+    <div class="work">
+2 0 2 6
+<span class="lbl">இடம்:</span> 10³ 10² 10¹ 10⁰
+= 2×1000 + 0×100 + 2×10 + 6×1
+= 2026
+    </div>
+    <p>இருமம் <b>1011₂</b> இன் தசம மதிப்பு:</p>
+    <div class="work">
+1 0 1 1
+<span class="lbl">இடம்:</span> 2³ 2² 2¹ 2⁰
+= 1×8 + 0×4 + 1×2 + 1×1
+= <span class="gd">11₁₀</span>
+    </div>
+    <div class="key"><span class="tag">2 இன் அடுக்குகள் — மனப்பாடம்</span>
+      2⁰=1, 2¹=2, 2²=4, 2³=8, 2⁴=16, 2⁵=32, 2⁶=64, 2⁷=128, 2⁸=256. (8-பிட் இடமதிப்புகள்: 128 64 32 16 8 4 2 1.)
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 3.1b ===================== -->
+<section class="ncard" id="s2">
+  <div class="nhead"><span class="nnum">3.1b</span><span class="ntitle">அடிமாற்றங்கள் (Base Conversions) — படிமுறையுடன்</span></div>
+  <div class="nbody">
+
+    <h4 class="sub">1) தசமம் → இருமம் (வகுத்தல் முறை)</h4>
+    <p>தசம எண்ணை <b>2 ஆல் தொடர்ந்து வகுத்து, மீதிகளைக் கீழிருந்து மேலாக</b> எழுதுக. உதாரணம்: 45₁₀ → இருமம்</p>
+    <div class="work">
+45 ÷ 2 = 22 <span class="lbl">மீதி</span> <span class="hl">1</span>   ↑
+22 ÷ 2 = 11 <span class="lbl">மீதி</span> <span class="hl">0</span>   │ கீழிருந்து
+11 ÷ 2 =  5 <span class="lbl">மீதி</span> <span class="hl">1</span>   │ மேலாக
+ 5 ÷ 2 =  2 <span class="lbl">மீதி</span> <span class="hl">1</span>   │ வாசிக்க
+ 2 ÷ 2 =  1 <span class="lbl">மீதி</span> <span class="hl">0</span>   │
+ 1 ÷ 2 =  0 <span class="lbl">மீதி</span> <span class="hl">1</span>   │
+பதில் = <span class="gd">101101₂</span>
+    </div>
+
+    <h4 class="sub">2) இருமம் → தசமம் (இட மதிப்பு முறை)</h4>
+    <p>ஒவ்வொரு 1 இன் இட மதிப்பையும் கூட்டுக. உதாரணம்: 101101₂ → தசமம்</p>
+    <div class="work">
+1   0   1   1   0   1
+32  16  8   4   2   1
+= 32 + 0 + 8 + 4 + 0 + 1
+= <span class="gd">45₁₀</span>
+    </div>
+
+    <h4 class="sub">3) தசமம் → எண்மம் (8 ஆல் வகுத்தல்) &amp; தசமம் → Hex (16 ஆல் வகுத்தல்)</h4>
+    <p>250₁₀ → எண்மம்:</p>
+    <div class="work">
+250 ÷ 8 = 31 <span class="lbl">மீதி</span> <span class="hl">2</span>
+ 31 ÷ 8 =  3 <span class="lbl">மீதி</span> <span class="hl">7</span>
+  3 ÷ 8 =  0 <span class="lbl">மீதி</span> <span class="hl">3</span>
+பதில் = <span class="gd">372₈</span>
+    </div>
+    <p>250₁₀ → Hex:</p>
+    <div class="work">
+250 ÷ 16 = 15 <span class="lbl">மீதி</span> <span class="hl">10 = A</span>
+ 15 ÷ 16 =  0 <span class="lbl">மீதி</span> <span class="hl">15 = F</span>
+பதில் = <span class="gd">FA₁₆</span>
+    </div>
+
+    <h4 class="sub">4) இருமம் ↔ எண்மம் (3 பிட் குழுக்கள்)</h4>
+    <p>எண்மம் அடி 8 = 2³ என்பதால், <b>வலமிருந்து 3 பிட்களாகக் குழுவாக்கி</b> ஒவ்வொரு குழுவையும் ஓர் எண்ம இலக்கமாக மாற்றுக. 110101₂ → எண்மம்:</p>
+    <div class="work">
+110 101
+ |   |
+ 6   5
+பதில் = <span class="gd">65₈</span>
+    </div>
+    <p>எதிர்மாறாக (எண்மம் → இருமம்): ஒவ்வொரு எண்ம இலக்கத்தையும் 3 பிட்களாக விரிக்க. 47₈ → 100 111 → <b>100111₂</b></p>
+
+    <h4 class="sub">5) இருமம் ↔ Hex (4 பிட் குழுக்கள்)</h4>
+    <p>Hex அடி 16 = 2⁴ என்பதால், <b>வலமிருந்து 4 பிட்களாகக் குழுவாக்குக</b>. 11010110₂ → Hex:</p>
+    <div class="work">
+1101 0110
+ |    |
+ D    6      (1101=13=D, 0110=6)
+பதில் = <span class="gd">D6₁₆</span>
+    </div>
+    <p>எதிர்மாறாக (Hex → இருமம்): ஒவ்வொரு hex இலக்கத்தையும் 4 பிட்களாக விரிக்க. 2F₁₆ → 0010 1111 → <b>00101111₂</b></p>
+
+    <h4 class="sub">6) எண்மம் ↔ Hex (இருமம் ஊடாக)</h4>
+    <p>நேரடி வழி இல்லை — <b>இருமத்தை இடைநிலையாகப் பயன்படுத்துக</b>. 57₈ → இருமம் (101 111) → 4-பிட் குழு (0010 1111) → Hex (2F). எனவே 57₈ = 2F₁₆.</p>
+
+    <table class="dt mono">
+      <caption>விரைவு மாற்று அட்டவணை (0–15)</caption>
+      <tr><th>தசமம்</th><th>இருமம்</th><th>எண்மம்</th><th>Hex</th></tr>
+      <tr><td>0</td><td>0000</td><td>0</td><td>0</td></tr>
+      <tr><td>1</td><td>0001</td><td>1</td><td>1</td></tr>
+      <tr><td>2</td><td>0010</td><td>2</td><td>2</td></tr>
+      <tr><td>5</td><td>0101</td><td>5</td><td>5</td></tr>
+      <tr><td>8</td><td>1000</td><td>10</td><td>8</td></tr>
+      <tr><td>10</td><td>1010</td><td>12</td><td>A</td></tr>
+      <tr><td>12</td><td>1100</td><td>14</td><td>C</td></tr>
+      <tr><td>15</td><td>1111</td><td>17</td><td>F</td></tr>
+    </table>
+    <div class="warn"><span class="tag">பொதுவான பிழை</span>
+      பிட்களைக் குழுவாக்கும்போது எப்போதும் <b>வலமிருந்து இடமாக</b> குழுவாக்குக. குழுவில் பிட்கள் போதாவிட்டால் <b>இடப்புறம் 0 சேர்த்து</b> நிரப்புக (எ.கா: 10110 → 010 110).
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 3.1c ===================== -->
+<section class="ncard" id="s3">
+  <div class="nhead"><span class="nnum">3.1c</span><span class="ntitle">குறியிட்ட முழுஎண் பிரதிநிதித்துவம் (Signed Integers)</span></div>
+  <div class="nbody">
+    <p>எதிர்ம எண்களையும் (negative) கணினியில் பிரதிநிதித்துவப்படுத்த மூன்று முறைகள் உள்ளன. மூன்றிலும் <b>இடதுபுற மிக முக்கிய பிட் (MSB) = குறிப் பிட்</b> (sign bit): <b>0 = நேர்ம (+), 1 = எதிர்ம (−)</b>. கீழே 8-பிட் முறையில் உதாரணங்கள்.</p>
+
+    <h4 class="sub">1) குறி-எண்ணளவு (Sign-Magnitude)</h4>
+    <p>முதல் பிட் = குறி; எஞ்சிய பிட்கள் = எண்ணின் அளவு (magnitude). +18 மற்றும் −18:</p>
+    <div class="work">
++18 = <span class="gd">0</span> 0010010
+−18 = <span class="hl">1</span> 0010010
+      ↑ குறிப் பிட் மட்டும் மாறுகிறது
+    </div>
+
+    <h4 class="sub">2) 1's நிரப்பி (1's Complement)</h4>
+    <p>நேர்ம எண்ணின் ஒவ்வொரு பிட்டையும் <b>புரட்டுக (0↔1)</b>. −18:</p>
+    <div class="work">
++18      = 0001 0010
+பிட் புரட்டு = <span class="hl">1110 1101</span>   ← −18 (1's complement)
+    </div>
+
+    <h4 class="sub">3) 2's நிரப்பி (2's Complement) — மிக முக்கியம்</h4>
+    <p><b>1's complement + 1</b>. இதுவே நவீன கணினிகளில் பயன்படும் முறை (கூட்டல்/கழித்தல் எளிது, பூஜ்ஜியம் ஒரே வடிவம்). −18:</p>
+    <div class="work">
++18           = 0001 0010
+1's complement = 1110 1101
++ 1            = <span class="hl">1110 1110</span>   ← −18 (2's complement)
+    </div>
+    <p><b>2's complement எண்ணைத் திரும்ப மாற்ற</b> (மதிப்பறிய): மீண்டும் 2's complement எடுத்து அளவைப் பெறுக. 1110 1110 → புரட்டு (0001 0001) +1 = 0001 0010 = 18; குறிப் பிட் 1 எனவே <b>−18</b>.</p>
+
+    <table class="dt mono">
+      <caption>−5 இன் மூன்று வடிவங்கள் (8-பிட்)</caption>
+      <tr><th>முறை</th><th>+5</th><th>−5</th></tr>
+      <tr><td class="l">Sign-Magnitude</td><td>0000 0101</td><td>1000 0101</td></tr>
+      <tr><td class="l">1's Complement</td><td>0000 0101</td><td>1111 1010</td></tr>
+      <tr><td class="l">2's Complement</td><td>0000 0101</td><td>1111 1011</td></tr>
+    </table>
+    <div class="key"><span class="tag">ஏன் 2's complement?</span>
+      Sign-magnitude மற்றும் 1's complement இல் <b>பூஜ்ஜியத்துக்கு இரு வடிவங்கள்</b> (+0, −0) உள்ளன — குழப்பம். 2's complement இல் <b>பூஜ்ஜியம் ஒரே வடிவம்</b>; மேலும் கழித்தலைக் கூட்டலாகவே செய்யலாம். எனவே கணினிகள் 2's complement ஐப் பயன்படுத்துகின்றன.
+    </div>
+    <div class="note">8-பிட் வீச்சம்: Sign-magnitude & 1's complement → −127 முதல் +127; 2's complement → <b>−128 முதல் +127</b>.</div>
+  </div>
+</section>
+
+<!-- ===================== 3.2 ===================== -->
+<section class="ncard" id="s4">
+  <div class="nhead"><span class="nnum">3.2</span><span class="ntitle">எழுத்துப் பிரதிநிதித்துவம் (Character Representation)</span></div>
+  <div class="nbody">
+    <p>எழுத்துகள், இலக்கங்கள், குறியீடுகள் ஆகியவற்றை கணினி <b>எண்மக் குறியீடுகளாக</b> (codes) சேமிக்கிறது. முக்கிய குறியீட்டுத் திட்டங்கள்:</p>
+    <table class="dt">
+      <tr><th>குறியீடு</th><th>பிட்கள்</th><th>விளக்கம்</th></tr>
+      <tr><td class="l"><b>BCD</b><br>(Binary Coded Decimal)</td><td>4-பிட்</td><td class="l">ஒவ்வொரு தசம இலக்கத்தையும் (0–9) தனித்தனியே 4 பிட்களால் குறித்தல். எ.கா: 25 → 0010 0101. கணித்தலுக்கு எளிது; ஆனால் இடம் வீண்.</td></tr>
+      <tr><td class="l"><b>EBCDIC</b><br>(Extended BCD Interchange Code)</td><td>8-பிட்</td><td class="l">IBM பேராயக் கணினிகளில் பயன்பட்டது; 256 எழுத்துகள் வரை. ASCII உடன் ஒத்திசையாது.</td></tr>
+      <tr><td class="l"><b>ASCII</b><br>(American Standard Code)</td><td>7-பிட் (நீட்டிக்கப்பட்டது 8)</td><td class="l">128 எழுத்துகள் (ஆங்கில எழுத்துகள், இலக்கங்கள், குறியீடுகள், கட்டுப்பாட்டுக் குறியீடுகள்). மிகப் பரவலானது.</td></tr>
+      <tr><td class="l"><b>Unicode</b></td><td>16-பிட் & மேல்</td><td class="l">உலகின் <b>அனைத்து மொழி</b> எழுத்துகளையும் (தமிழ், சிங்களம், சீனம், எமோஜி…) குறிக்கும் உலகளாவிய தரநிலை. ASCII இதன் துணைக்கணம்.</td></tr>
+    </table>
+    <h4 class="sub">ASCII — சில முக்கியக் குறியீடுகள்</h4>
+    <table class="dt mono">
+      <tr><th>எழுத்து</th><th>தசமம்</th><th>இருமம் (8-பிட்)</th></tr>
+      <tr><td>'A'</td><td>65</td><td>0100 0001</td></tr>
+      <tr><td>'Z'</td><td>90</td><td>0101 1010</td></tr>
+      <tr><td>'a'</td><td>97</td><td>0110 0001</td></tr>
+      <tr><td>'0'</td><td>48</td><td>0011 0000</td></tr>
+      <tr><td>'space'</td><td>32</td><td>0010 0000</td></tr>
+    </table>
+    <div class="key"><span class="tag">நினைவில் வைக்க</span>
+      'A'=65, 'a'=97 (வேறுபாடு 32), '0'=48. தொடர் எழுத்துகள் தொடர் எண்கள் — 'B'=66, 'C'=67… எனவே ஒரு எழுத்தின் குறியீடு தெரிந்தால் அடுத்தவற்றைக் கணிக்கலாம். <b>BCD = இலக்கங்களுக்கு மட்டும்; ASCII/Unicode = எல்லா எழுத்துகளுக்கும்.</b>
+    </div>
+    <div class="warn"><span class="tag">Unicode ஏன் தேவை?</span>
+      ASCII (128/256 எழுத்துகள்) ஆங்கிலத்துக்குப் போதுமானது; ஆனால் தமிழ், சிங்களம் போன்ற மொழிகளுக்குப் போதாது. Unicode அனைத்து உலக மொழிகளையும் ஒரே தரநிலையில் குறிப்பதால் பன்மொழி உரைகளைக் கையாள முடிகிறது.
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 3.3a ===================== -->
+<section class="ncard" id="s5">
+  <div class="nhead"><span class="nnum">3.3a</span><span class="ntitle">ஈருறுப்புக் கணிதம் — கூட்டலும் கழித்தலும்</span></div>
+  <div class="nbody">
+    <h4 class="sub">ஈருறுப்புக் கூட்டல் (Binary Addition)</h4>
+    <p>அடிப்படை விதிகள்: <code class="inline">0+0=0</code>, <code class="inline">0+1=1</code>, <code class="inline">1+0=1</code>, <code class="inline">1+1=10</code> (0 எழுதி 1 carry), <code class="inline">1+1+1=11</code> (1 எழுதி 1 carry).</p>
+    <p>உதாரணம்: 1011₂ + 1101₂</p>
+    <div class="work">
+  <span class="lbl">carry→</span> 1 1 1
+     1 0 1 1     <span class="lbl">(11)</span>
+   + 1 1 0 1     <span class="lbl">(13)</span>
+   ---------
+   <span class="gd">1 1 0 0 0</span>     <span class="lbl">(24) ✓</span>
+    </div>
+
+    <h4 class="sub">ஈருறுப்புக் கழித்தல் — முறை 1: நேரடிக் கடன் (Borrow)</h4>
+    <p>விதிகள்: <code class="inline">0−0=0</code>, <code class="inline">1−0=1</code>, <code class="inline">1−1=0</code>, <code class="inline">0−1=1</code> (மேலிருந்து 1 கடன்). உதாரணம்: 1101₂ − 1010₂</p>
+    <div class="work">
+     1 1 0 1     <span class="lbl">(13)</span>
+   - 1 0 1 0     <span class="lbl">(10)</span>
+   ---------
+     <span class="gd">0 0 1 1</span>     <span class="lbl">(3) ✓</span>
+    </div>
+
+    <h4 class="sub">ஈருறுப்புக் கழித்தல் — முறை 2: 2's complement (கணினி முறை)</h4>
+    <p>A − B ஐ <b>A + (B இன் 2's complement)</b> ஆகச் செய்க; இறுதியில் வரும் <b>carry-out ஐ விட்டுவிடுக</b>. உதாரணம்: 13 − 10 (8-பிட்)</p>
+    <div class="work">
+13           = 0000 1101
+10           = 0000 1010
+−10 (2's comp): புரட்டு 1111 0101 +1 = 1111 0110
+
+  0000 1101      <span class="lbl">(13)</span>
++ 1111 0110      <span class="lbl">(−10)</span>
+-----------
+<span class="hl">1</span> 0000 0011     ← carry-out 1 ஐ விட்டுவிடு
+பதில் = <span class="gd">0000 0011 = 3 ✓</span>
+    </div>
+    <div class="key"><span class="tag">ஏன் கணினிகள் இம்முறை?</span>
+      தனியான கழித்தல் சுற்று தேவையில்லை — <b>கூட்டல் சுற்றே</b> கழித்தலையும் செய்துவிடும். எனவே வன்பொருள் எளிமையாகிறது. கழித்தல் = "எதிர்ம எண்ணைக் கூட்டல்".
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 3.3b ===================== -->
+<section class="ncard" id="s6">
+  <div class="nhead"><span class="nnum">3.3b</span><span class="ntitle">பிட்வாரித் தர்க்கச் செயற்பாடுகள் (Bitwise Logical Operations)</span></div>
+  <div class="nbody">
+    <p>இவை <b>ஒவ்வொரு பிட்டின் மீதும் தனித்தனியே</b> செயற்படுகின்றன. அடிப்படைச் சத்திய அட்டவணைகள் (truth tables):</p>
+    <table class="dt mono">
+      <caption>NOT (புரட்டல்) — ஒற்றை உள்ளீடு</caption>
+      <tr><th>A</th><th>NOT A</th></tr>
+      <tr><td>0</td><td>1</td></tr>
+      <tr><td>1</td><td>0</td></tr>
+    </table>
+    <table class="dt mono">
+      <caption>AND · OR · XOR — இரட்டை உள்ளீடு</caption>
+      <tr><th>A</th><th>B</th><th>A AND B</th><th>A OR B</th><th>A XOR B</th></tr>
+      <tr><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+      <tr><td>0</td><td>1</td><td>0</td><td>1</td><td>1</td></tr>
+      <tr><td>1</td><td>0</td><td>0</td><td>1</td><td>1</td></tr>
+      <tr><td>1</td><td>1</td><td>1</td><td>1</td><td>0</td></tr>
+    </table>
+    <ul>
+      <li><b>NOT:</b> பிட்டைப் புரட்டும் (0→1, 1→0).</li>
+      <li><b>AND:</b> <b>இரண்டும் 1</b> எனில் மட்டுமே 1.</li>
+      <li><b>OR:</b> <b>ஏதேனும் ஒன்று 1</b> எனில் 1.</li>
+      <li><b>XOR:</b> <b>இரண்டும் வேறுபட்டால்</b> மட்டுமே 1 (ஒன்று 0, மற்றொன்று 1).</li>
+    </ul>
+
+    <h4 class="sub">பல-பிட் உதாரணம் — A = 1100, B = 1010</h4>
+    <div class="work">
+        A = 1 1 0 0
+        B = 1 0 1 0
+--------------------
+A AND B = 1 0 0 0     <span class="lbl">(இரண்டும் 1 ஆன இடம் மட்டும்)</span>
+A OR  B = 1 1 1 0     <span class="lbl">(ஏதேனும் 1 ஆன இடம்)</span>
+A XOR B = 0 1 1 0     <span class="lbl">(வேறுபட்ட இடம் மட்டும்)</span>
+  NOT A = 0 0 1 1     <span class="lbl">(A இன் ஒவ்வொரு பிட்டையும் புரட்டு)</span>
+    </div>
+    <div class="key"><span class="tag">நினைவில் வைக்க</span>
+      <b>AND</b> = "எல்லாம் சரியெனில்" (பெருக்கல் போல்: 1×1=1). <b>OR</b> = "ஏதேனும் ஒன்று சரியெனில்". <b>XOR</b> = "வேறுபட்டால்" (சமமெனில் 0). <b>NOT</b> = புரட்டல்.
+    </div>
+    <div class="note">பயன்பாடுகள்: AND — பிட் masking (குறிப்பிட்ட பிட்களை எடுக்க); OR — பிட் set செய்ய; XOR — பிட் toggle / எளிய மறையாக்கம் (encryption); NOT — 1's complement.</div>
+  </div>
+</section>
+
+<!-- ===================== Practice ===================== -->
+<section class="ncard" id="s7">
+  <div class="nhead"><span class="nnum">?</span><span class="ntitle">பயிற்சி வினாக்கள் (விடைகளுடன்)</span></div>
+  <div class="nbody">
+
+    <!-- P1 -->
+    <div class="pq">
+      <span class="qnum">வினா 01</span>
+      <p class="task" style="margin-top:10px">பின்வருவனவற்றை மாற்றுக: (அ) 57₁₀ → இருமம் &nbsp;(ஆ) 11010₂ → தசமம் &nbsp;(இ) 200₁₀ → Hex</p>
+      <button class="btn" onclick="toggleAns(this,'p1')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p1"><span class="ans-label">விடை</span>
+        <div class="work">
+(அ) 57 ÷ 2 மீதிகள்: 1,0,0,1,1,1 (கீழிருந்து மேல்) = <span class="gd">111001₂</span>
+(ஆ) 1 1 0 1 0 = 16+8+0+2+0 = <span class="gd">26₁₀</span>
+(இ) 200 ÷ 16 = 12 மீதி 8 → 8;  12 ÷ 16 = 0 மீதி 12 → C
+    = <span class="gd">C8₁₆</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- P2 -->
+    <div class="pq">
+      <span class="qnum">வினா 02</span>
+      <p class="task" style="margin-top:10px">110110111₂ ஐ (அ) எண்மமாகவும் (ஆ) Hex ஆகவும் மாற்றுக.</p>
+      <button class="btn" onclick="toggleAns(this,'p2')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p2"><span class="ans-label">விடை</span>
+        <div class="work">
+(அ) எண்மம் — வலமிருந்து 3 பிட் குழு:
+    110 110 111  →  6 6 7  = <span class="gd">667₈</span>
+(ஆ) Hex — வலமிருந்து 4 பிட் குழு (இடப்புறம் 0 நிரப்பு):
+    0001 1011 0111  →  1 B 7  = <span class="gd">1B7₁₆</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- P3 -->
+    <div class="pq">
+      <span class="qnum">வினா 03</span>
+      <p class="task" style="margin-top:10px">−20 ஐ 8-பிட் (அ) sign-magnitude (ஆ) 1's complement (இ) 2's complement வடிவில் எழுதுக.</p>
+      <button class="btn" onclick="toggleAns(this,'p3')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p3"><span class="ans-label">விடை</span>
+        <div class="work">
++20 = 0001 0100
+(அ) Sign-magnitude: <span class="gd">1001 0100</span>  (குறிப் பிட் 1)
+(ஆ) 1's complement: புரட்டு = <span class="gd">1110 1011</span>
+(இ) 2's complement: 1110 1011 + 1 = <span class="gd">1110 1100</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- P4 -->
+    <div class="pq">
+      <span class="qnum">வினா 04</span>
+      <p class="task" style="margin-top:10px">ஈருறுப்புக் கூட்டலைச் செய்க: 10110₂ + 1101₂. பதிலைத் தசமத்தில் சரிபார்க்கவும்.</p>
+      <button class="btn" onclick="toggleAns(this,'p4')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p4"><span class="ans-label">விடை</span>
+        <div class="work">
+   1 0 1 1 0      <span class="lbl">(22)</span>
+ +   1 1 0 1      <span class="lbl">(13)</span>
+ ----------
+   <span class="gd">1 0 0 0 1 1</span>      <span class="lbl">(35) ✓  22+13=35</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- P5 -->
+    <div class="pq">
+      <span class="qnum">வினா 05</span>
+      <p class="task" style="margin-top:10px">2's complement முறையில் 8-பிட்டில் கணக்கிடுக: 25 − 18.</p>
+      <button class="btn" onclick="toggleAns(this,'p5')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p5"><span class="ans-label">விடை</span>
+        <div class="work">
+ 25 = 0001 1001
+ 18 = 0001 0010
+−18 (2's comp): புரட்டு 1110 1101 + 1 = 1110 1110
+
+   0001 1001      <span class="lbl">(25)</span>
+ + 1110 1110      <span class="lbl">(−18)</span>
+ -----------
+ <span class="hl">1</span> 0000 0111     ← carry-out விடு
+ பதில் = <span class="gd">0000 0111 = 7 ✓</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- P6 -->
+    <div class="pq">
+      <span class="qnum">வினா 06</span>
+      <p class="task" style="margin-top:10px">A = 10110₂, B = 01101₂ எனில், A AND B, A OR B, A XOR B, NOT A ஆகியவற்றைக் கணக்கிடுக.</p>
+      <button class="btn" onclick="toggleAns(this,'p6')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p6"><span class="ans-label">விடை</span>
+        <div class="work">
+      A = 1 0 1 1 0
+      B = 0 1 1 0 1
+------------------
+A AND B = <span class="gd">0 0 1 0 0</span>
+A OR  B = <span class="gd">1 1 1 1 1</span>
+A XOR B = <span class="gd">1 1 0 1 1</span>
+  NOT A = <span class="gd">0 1 0 0 1</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- P7 -->
+    <div class="pq">
+      <span class="qnum">வினா 07</span>
+      <p class="task" style="margin-top:10px">BCD, ASCII, Unicode ஆகியவற்றின் வேறுபாடுகளைச் சுருக்கமாக எழுதி, தமிழ் எழுத்துகளைச் சேமிக்க எது பொருத்தம் எனக் கூறுக.</p>
+      <button class="btn" onclick="toggleAns(this,'p7')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p7"><span class="ans-label">விடை</span>
+        <ul>
+          <li><b>BCD:</b> 4-பிட்; தசம இலக்கங்களை (0–9) மட்டும் குறிக்கும்.</li>
+          <li><b>ASCII:</b> 7/8-பிட்; ஆங்கில எழுத்து, இலக்கம், குறியீடு (128/256 எழுத்துகள்).</li>
+          <li><b>Unicode:</b> 16-பிட் & மேல்; உலகின் அனைத்து மொழி எழுத்துகளும்.</li>
+        </ul>
+        <p>தமிழ் எழுத்துகளுக்கு <b>Unicode</b> பொருத்தம் — ASCII இல் தமிழ் எழுத்துகள் இல்லை.</p>
+      </div>
+    </div>
+
+    <!-- P8 -->
+    <div class="pq">
+      <span class="qnum">வினா 08</span>
+      <p class="task" style="margin-top:10px">42₈ ஐ Hex ஆக மாற்றுக. (படிமுறையைக் காட்டுக.)</p>
+      <button class="btn" onclick="toggleAns(this,'p8')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p8"><span class="ans-label">விடை</span>
+        <div class="work">
+எண்மம் → இருமம் (ஒவ்வொரு இலக்கமும் 3 பிட்):
+  4 2  →  100 010  =  100010₂
+இருமம் → Hex (வலமிருந்து 4 பிட், இடப்புறம் 0 நிரப்பு):
+  0010 0010  →  2 2
+பதில் = <span class="gd">22₁₆</span>
+        </div>
+        <div class="note">எண்மம் ↔ Hex நேரடி வழி இல்லை; இருமம் இடைநிலையாகப் பயன்படுத்தப்படுகிறது.</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+</main>
+
+<footer>
+  க.பொ.த (உயர்தர) தகவல் மற்றும் தொடர்பாடல் தொழினுட்பம் — அலகு 3: தரவு பிரதிநிதித்துவம் குறிப்புகள்
+</footer>
+
+<script>
+function toggleAns(btn,id){
+  var ans=document.getElementById(id);
+  var open=ans.classList.toggle('show');
+  btn.classList.toggle('open',open);
+  btn.textContent=open?'விடையை மறை ▴':'விடையைக் காட்டு ▾';
+}
+</script>
+
+</body>
+</html>

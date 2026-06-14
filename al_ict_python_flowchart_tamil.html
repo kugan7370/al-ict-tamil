@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>க.பொ.த (உயர்தரம்) ICT — பாய்ச்சல் கோட்டுப்படம் & Python — 20 வினா-விடைகள்</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Catamaran:wght@600;800&family=Hind+Madurai:wght@400;500;600&family=Noto+Sans+Tamil:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F6F4EE; --card:#FFFFFF; --ink:#22303A;
+    --maroon:#8B1E3F; --teal:#1F4E5F; --gold:#C9912B;
+    --line:#E2DDD2; --code-bg:#102A33; --code-ink:#D9EEF2;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--paper);color:var(--ink);
+    font-family:'Hind Madurai','Noto Sans Tamil',sans-serif;
+    line-height:1.75;font-size:17px;}
+  header{background:linear-gradient(135deg,var(--teal) 0%,#143946 100%);
+    color:#F2EFE6;padding:42px 20px 36px;text-align:center;
+    border-bottom:5px solid var(--gold);}
+  header .eyebrow{letter-spacing:.18em;font-size:.8rem;text-transform:uppercase;
+    color:#D8C58A;margin-bottom:10px;}
+  header h1{font-family:'Catamaran','Noto Sans Tamil',sans-serif;font-weight:800;
+    font-size:clamp(1.5rem,4vw,2.25rem);line-height:1.45;}
+  header p{margin-top:10px;font-size:.95rem;color:#BFD4DA}
+  main{max-width:900px;margin:0 auto;padding:36px 18px 70px}
+
+  .legend{background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:18px 22px;margin-bottom:14px;display:flex;flex-wrap:wrap;gap:18px;
+    justify-content:center;align-items:center;font-size:.88rem;}
+  .legend span{display:flex;align-items:center;gap:8px}
+
+  .toc{background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:16px 24px;margin-bottom:34px;font-size:.92rem;}
+  .toc b{color:var(--teal);font-family:'Catamaran','Noto Sans Tamil',sans-serif}
+  .toc a{color:var(--maroon);text-decoration:none;white-space:nowrap}
+  .toc a:hover{text-decoration:underline}
+  .toc .links{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:6px}
+
+  .qcard{background:var(--card);border:1px solid var(--line);border-radius:16px;
+    margin-bottom:34px;overflow:hidden;box-shadow:0 2px 10px rgba(34,48,58,.05);}
+  .qhead{display:flex;align-items:center;gap:14px;padding:18px 24px;
+    border-bottom:1px solid var(--line);
+    background:linear-gradient(to right,#FBFAF6,#fff);}
+  .qnum{font-family:'Catamaran',sans-serif;font-weight:800;font-size:1.02rem;
+    color:#fff;background:var(--maroon);border-radius:10px;padding:6px 14px;
+    white-space:nowrap;}
+  .qtitle{font-family:'Catamaran','Noto Sans Tamil',sans-serif;font-weight:600;
+    font-size:1.1rem;color:var(--teal);}
+  .qbody{padding:22px 26px 26px}
+  .scenario{background:#FBF7EC;border-right:4px solid var(--gold);
+    border-radius:10px;padding:16px 20px;margin-bottom:16px;}
+  .scenario .tag{font-size:.78rem;font-weight:600;color:var(--gold);
+    letter-spacing:.1em;display:block;margin-bottom:4px;}
+  ul.rules{margin:10px 24px 6px}
+  ul.rules li{margin-bottom:5px}
+  .task{font-weight:600;color:var(--maroon)}
+
+  .btn{display:inline-flex;align-items:center;gap:9px;
+    font-family:'Hind Madurai','Noto Sans Tamil',sans-serif;font-weight:600;
+    font-size:1rem;color:#fff;background:var(--teal);border:none;
+    border-radius:999px;padding:11px 26px;margin-top:14px;cursor:pointer;
+    transition:background .2s,transform .15s;}
+  .btn:hover{background:#16404f;transform:translateY(-1px)}
+  .btn:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+  .btn.open{background:var(--maroon)}
+
+  .answer{display:none;margin-top:22px;border-top:2px dashed var(--line);
+    padding-top:22px;animation:fade .35s ease;}
+  .answer.show{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  .ans-label{display:inline-block;font-weight:700;color:#fff;background:var(--gold);
+    border-radius:8px;padding:3px 14px;font-size:.85rem;margin-bottom:14px;}
+  h4.part{font-family:'Catamaran','Noto Sans Tamil',sans-serif;color:var(--teal);
+    font-size:1.02rem;margin:18px 0 10px;}
+  .flow-wrap{background:#FBFAF6;border:1px solid var(--line);border-radius:12px;
+    padding:14px;overflow-x:auto;text-align:center;}
+  .flow-wrap svg{max-width:100%;height:auto}
+  svg text{font-family:'Noto Sans Tamil','Hind Madurai',sans-serif;}
+  pre{background:var(--code-bg);color:var(--code-ink);border-radius:12px;
+    padding:18px 20px;overflow-x:auto;font-family:'JetBrains Mono',monospace;
+    font-size:.88rem;line-height:1.65;direction:ltr;text-align:left;}
+  pre .cm{color:#7FB6A4} pre .kw{color:#F2B36B} pre .st{color:#A8D8B9}
+  .note{margin-top:12px;font-size:.9rem;color:#5A6B74;background:#EFF4F2;
+    border-radius:10px;padding:10px 16px;}
+  footer{text-align:center;padding:26px 16px 40px;font-size:.85rem;color:#7A8790;}
+  @media (max-width:560px){
+    .qhead{flex-direction:column;align-items:flex-start;gap:8px}
+    body{font-size:16px}
+  }
+  @media (prefers-reduced-motion:reduce){.answer{animation:none}.btn{transition:none}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">G.C.E. Advanced Level &middot; Sri Lanka &middot; ICT (20)</div>
+  <h1>பாய்ச்சல் கோட்டுப்படம் &amp; Python நிரலாக்கம்<br>சூழ்நிலை அடிப்படையிலான 20 வினா-விடைகள்</h1>
+  <p>ஒவ்வொரு வினாவையும் முதலில் முயன்று பார்த்த பின், “விடையைக் காட்டு” பொத்தானை அழுத்துங்கள்.</p>
+</header>
+
+<main>
+
+  <div class="legend" aria-label="பாய்ச்சல் கோட்டுப்படக் குறியீடுகள்">
+    <span><svg width="54" height="26"><ellipse cx="27" cy="13" rx="25" ry="11" fill="#E8F0EE" stroke="#1F4E5F" stroke-width="1.5"/></svg> ஆரம்பம் / முடிவு</span>
+    <span><svg width="56" height="26"><polygon points="12,3 54,3 44,23 2,23" fill="#FDF3E0" stroke="#C9912B" stroke-width="1.5"/></svg> உள்ளீடு / வெளியீடு</span>
+    <span><svg width="54" height="26"><rect x="2" y="3" width="50" height="20" fill="#F3E8EC" stroke="#8B1E3F" stroke-width="1.5"/></svg> செயல்முறை</span>
+    <span><svg width="56" height="30"><polygon points="28,2 54,15 28,28 2,15" fill="#EAF3F5" stroke="#1F4E5F" stroke-width="1.5"/></svg> தீர்மானம்</span>
+  </div>
+
+  <div class="toc" id="toc"><b>வினாப் பட்டியல்</b><div class="links" id="toclinks"></div></div>
+
+  <div id="qlist"></div>
+
+</main>
+
+<footer>
+  க.பொ.த (உயர்தர) தகவல் மற்றும் தொடர்பாடல் தொழினுட்பம் — பயிற்சி வினாத்தாள் &middot; 20 வினாக்கள் &middot; Python &amp; Flowchart
+</footer>
+
+<script>
+/* ============================================================
+   FLOWCHART RENDERER — draws standard flowchart SVGs from data
+   ============================================================ */
+var CX = 220;
+
+function txt(x,y,t,fs,fill){
+  return '<text x="'+x+'" y="'+y+'" text-anchor="middle" font-size="'+(fs||13)+
+         '" fill="'+(fill||'#22303A')+'">'+t+'</text>';
+}
+function ln(x1,y1,x2,y2,a){
+  return '<line x1="'+x1+'" y1="'+y1+'" x2="'+x2+'" y2="'+y2+
+         '" stroke="#22303A" stroke-width="1.6"'+(a?' marker-end="url(#arr)"':'')+'/>';
+}
+function oval(cy,t){
+  return '<ellipse cx="'+CX+'" cy="'+cy+'" rx="62" ry="20" fill="#E8F0EE" stroke="#1F4E5F" stroke-width="1.6"/>'+
+         txt(CX,cy+5,t,14);
+}
+function maxLen(lines){
+  var m=0; lines.forEach(function(l){ if(l.length>m) m=l.length; }); return m;
+}
+function nodeBox(cx,y,lines,io,maxW){
+  lines=[].concat(lines);
+  var w=Math.max(110, maxLen(lines)*8.6+36);
+  if(maxW && w>maxW) w=maxW;
+  var fs = (maxLen(lines)*8.6+36>w)?11.5:13;
+  var h=lines.length*20+14, s, k=20;
+  if(io){
+    s='<polygon points="'+(cx-w/2+k)+','+y+' '+(cx+w/2)+','+y+' '+(cx+w/2-k)+','+(y+h)+
+      ' '+(cx-w/2)+','+(y+h)+'" fill="#FDF3E0" stroke="#C9912B" stroke-width="1.6"/>';
+  }else{
+    s='<rect x="'+(cx-w/2)+'" y="'+y+'" width="'+w+'" height="'+h+
+      '" fill="#F3E8EC" stroke="#8B1E3F" stroke-width="1.6"/>';
+  }
+  lines.forEach(function(l,i){ s+=txt(cx,y+22+i*20,l,fs); });
+  return {svg:s,h:h,w:w};
+}
+function diamondShape(cy,lines){
+  lines=[].concat(lines);
+  var w=Math.max(170, maxLen(lines)*9.4+62);
+  var fs=13;
+  if(w>214){ w=214; fs=11.5; }
+  var h=(lines.length>1)?96:80;
+  var s='<polygon points="'+CX+','+(cy-h/2)+' '+(CX+w/2)+','+cy+' '+CX+','+(cy+h/2)+
+        ' '+(CX-w/2)+','+cy+'" fill="#EAF3F5" stroke="#1F4E5F" stroke-width="1.6"/>';
+  var y0=cy-(lines.length-1)*10+4;
+  lines.forEach(function(l,i){ s+=txt(CX,y0+i*20,l,fs); });
+  return {svg:s,w:w,h:h};
+}
+
+/* sequence of {io:[..]} / {p:[..]} / {if:{...}} stacked on centre line */
+function seq(items,y,parts,ifOpt){
+  (items||[]).forEach(function(it){
+    parts.push(ln(CX,y,CX,y+26,1)); y+=26;
+    if(it.if){ y=branchIf(it.if,y,parts,ifOpt||{lc:CX-110,rc:CX+110,bw:170}); }
+    else{
+      var b=nodeBox(CX,y,it.io||it.p,!!it.io,200);
+      parts.push(b.svg); y+=b.h;
+    }
+  });
+  return y;
+}
+
+/* decision with yes (left) / no (right) branch boxes, merging below.
+   f = {c:[..], yes:{lines:[..],io}, no:{lines:[..],io}}                */
+function branchIf(f,y,parts,opt){
+  var d=diamondShape(0,f.c);
+  var cy=y+d.h/2;
+  parts.push(diamondShape(cy,f.c).svg);
+  var lv=CX-d.w/2, rv=CX+d.w/2;
+  parts.push(txt(lv-26,cy-8,'ஆம்',12,'#1F4E5F'));
+  parts.push(txt(rv+32,cy-8,'இல்லை',12,'#8B1E3F'));
+  var top=cy+d.h/2+24, ends=[], yMax=cy+d.h/2;
+  [ {br:f.yes,c:opt.lc}, {br:f.no,c:opt.rc} ].forEach(function(side){
+    var L=(side.br&&side.br.lines)?[].concat(side.br.lines):[];
+    if(L.length){
+      var b=nodeBox(side.c,top,L,side.br.io,opt.bw);
+      parts.push(ln((side.c<CX?lv:rv),cy,side.c,cy));
+      parts.push(ln(side.c,cy,side.c,top,1));
+      parts.push(b.svg);
+      ends.push({x:side.c,y:top+b.h});
+      if(top+b.h>yMax) yMax=top+b.h;
+    }else{
+      parts.push(ln((side.c<CX?lv:rv),cy,side.c,cy));
+      ends.push({x:side.c,y:cy});
+    }
+  });
+  var mY=yMax+24;
+  ends.forEach(function(e){
+    parts.push(ln(e.x,e.y,e.x,mY));
+    parts.push(ln(e.x,mY,CX,mY));
+  });
+  return mY;
+}
+
+function buildFlow(sp){
+  var parts=[], y=14, W=440;
+  parts.push(oval(y+20,'ஆரம்பம்')); y+=40;
+
+  if(sp.k==='lin'){
+    y=seq(sp.items,y,parts);
+
+  }else if(sp.k==='if'){
+    y=seq(sp.pre,y,parts);
+    parts.push(ln(CX,y,CX,y+26,1)); y+=26;
+    y=branchIf({c:sp.c,yes:sp.yes,no:sp.no},y,parts,{lc:CX-110,rc:CX+110,bw:172});
+    y=seq(sp.post,y,parts);
+
+  }else if(sp.k==='lad'){
+    y=seq(sp.pre,y,parts);
+    var railX=0, rungInfo=[];
+    /* measure first */
+    sp.rungs.forEach(function(r){
+      var d=diamondShape(0,r.c);
+      var L=[].concat(r.y);
+      var bw=Math.min(Math.max(110,maxLen(L)*8.6+36),150);
+      var bx=CX+d.w/2+16+bw/2;
+      var edge=bx+bw/2;
+      if(edge+14>railX) railX=edge+14;
+      rungInfo.push({d:d,bw:bw,bx:bx,L:L});
+    });
+    if(railX+14>W) W=railX+14;
+    var railSegs=[];
+    sp.rungs.forEach(function(r,i){
+      var info=rungInfo[i];
+      parts.push(ln(CX,y,CX,y+26,1)); y+=26;
+      var cy=y+info.d.h/2;
+      parts.push(diamondShape(cy,r.c).svg);
+      var rv=CX+info.d.w/2;
+      parts.push(txt((rv+info.bx-info.bw/2)/2,cy-8,'ஆம்',12,'#1F4E5F'));
+      var bh=info.L.length*20+14;
+      var b=nodeBox(info.bx,cy-bh/2,info.L,false,info.bw);
+      parts.push(ln(rv,cy,info.bx-info.bw/2,cy,1));
+      parts.push(b.svg);
+      parts.push(ln(info.bx+info.bw/2,cy,railX,cy));
+      railSegs.push(cy);
+      parts.push(txt(CX+22,cy+info.d.h/2+18,'இல்லை',12,'#8B1E3F'));
+      y=cy+info.d.h/2;
+    });
+    /* else box */
+    parts.push(ln(CX,y,CX,y+26,1)); y+=26;
+    var eb=nodeBox(CX,y,sp.els,false,200);
+    parts.push(eb.svg); y+=eb.h;
+    var mY=y+24;
+    parts.push(ln(CX,y,CX,mY));
+    railSegs.forEach(function(cy){ parts.push(ln(railX,cy,railX,mY)); });
+    parts.push(ln(railX,mY,CX,mY));
+    y=mY;
+    y=seq(sp.post,y,parts);
+
+  }else if(sp.k==='loop'){
+    y=seq(sp.pre,y,parts);
+    parts.push(ln(CX,y,CX,y+26,1)); y+=26;
+    var d=diamondShape(0,sp.c);
+    var cy=y+d.h/2;
+    parts.push(diamondShape(cy,sp.c).svg);
+    parts.push(txt(CX+26,cy+d.h/2+18,'ஆம்',12,'#1F4E5F'));
+    parts.push(txt(CX+d.w/2+34,cy-8,'இல்லை',12,'#8B1E3F'));
+    y=cy+d.h/2;
+    y=seq(sp.body,y,parts,{lc:CX-120,rc:CX+120,bw:130});
+    /* loop back to decision */
+    var yLB=y+24;
+    parts.push(ln(CX,y,CX,yLB));
+    parts.push(ln(CX,yLB,28,yLB));
+    parts.push(ln(28,yLB,28,cy));
+    parts.push(ln(28,cy,CX-d.w/2,cy,1));
+    /* exit (no) */
+    var exitR=416;
+    var yEx=yLB+30;
+    parts.push(ln(CX+d.w/2,cy,exitR,cy));
+    parts.push(ln(exitR,cy,exitR,yEx));
+    parts.push(ln(exitR,yEx,CX,yEx));
+    y=yEx;
+    y=seq(sp.post,y,parts,{lc:CX-112,rc:CX+112,bw:156});
+  }
+
+  /* end */
+  parts.push(ln(CX,y,CX,y+26,1)); y+=26;
+  parts.push(oval(y+20,'முடிவு'));
+  var H=y+54;
+  return '<svg viewBox="0 0 '+W+' '+H+'" width="'+Math.min(W,430)+'" xmlns="http://www.w3.org/2000/svg">'+
+         '<defs><marker id="arr" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">'+
+         '<path d="M0,0 L8,4 L0,8 z" fill="#22303A"/></marker></defs>'+parts.join('')+'</svg>';
+}
+
+/* ============ simple Python syntax highlighter ============ */
+function hl(code){
+  return code.split('\n').map(function(line){
+    line=line.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    var ci=line.indexOf('#'), cp=line, cm='';
+    if(ci>-1){ cp=line.slice(0,ci); cm='<span class="cm">'+line.slice(ci)+'</span>'; }
+    cp=cp.replace(/("[^"]*")/g,'<span class="st">$1</span>');
+    cp=cp.replace(/\b(if|elif|else|while|for|in|and|or|not|break|def|return)\b/g,'<span class="kw">$1</span>');
+    cp=cp.replace(/\b(input|int|float|print|range|str)\b/g,'<span class="kw">$1</span>');
+    return cp+cm;
+  }).join('\n');
+}
+
+/* ============================================================
+   20 QUESTIONS — title / scenario / task / flowchart / code / note
+   ============================================================ */
+var Q=[
+
+/* ---------- 01 ---------- */
+{ title:'மின்சாரக் கட்டணக் கணக்கீடு (if / else)',
+  scen:'இலங்கை மின்சார சபை (CEB) ஒரு வீட்டின் மாதாந்திர மின்சாரக் கட்டணத்தைப் பின்வரும் முறையில் கணக்கிடுகிறது:<ul class="rules"><li>முதல் <b>60 அலகுகளுக்கு</b> ஒரு அலகுக்கு <b>ரூ. 10</b></li><li>60 அலகுகளுக்கு மேல் உள்ள <b>ஒவ்வொரு மேலதிக அலகுக்கும் ரூ. 25</b></li></ul>',
+  task:'பயன்படுத்திய அலகுகளின் எண்ணிக்கையை உள்ளீடாகப் பெற்று, மொத்தக் கட்டணத்தைக் கணக்கிட்டு வெளியிடுவதற்கான பாய்ச்சல் கோட்டுப்படம் வரைந்து, Python நிரலையும் எழுதுக.',
+  flow:{k:'if',
+    pre:[{io:['units ஐ உள்ளிடுக']}],
+    c:['units ≤ 60 ?'],
+    yes:{lines:['bill = units × 10']},
+    no:{lines:['bill = 600 +','(units − 60) × 25']},
+    post:[{io:['bill ஐ வெளியிடுக']}]},
+  code:'# மின்சாரக் கட்டணக் கணக்கீடு\nunits = int(input("பயன்படுத்திய அலகுகள்: "))\n\nif units <= 60:\n    bill = units * 10\nelse:\n    bill = 60 * 10 + (units - 60) * 25\n\nprint("மொத்தக் கட்டணம் = ரூ.", bill)',
+  note:'60 × 10 = 600 என்பது முதல் 60 அலகுகளுக்கான நிலையான கட்டணம்.' },
+
+/* ---------- 02 ---------- */
+{ title:'தேர்வுப் புள்ளி → தரம் (if / elif / else)',
+  scen:'ஒரு பாடசாலையில் ICT பாடத்தின் தவணைப் பரீட்சைப் புள்ளிகளுக்கு ஏற்ப தரம் (Grade) வழங்கப்படுகிறது:<ul class="rules"><li>புள்ளி ≥ 75 → <b>A</b></li><li>65 – 74 → <b>B</b></li><li>55 – 64 → <b>C</b></li><li>40 – 54 → <b>S</b></li><li>40 க்குக் குறைவாயின் → <b>F</b></li></ul>',
+  task:'மாணவரின் புள்ளியை உள்ளீடாகப் பெற்று, உரிய தரத்தை வெளியிடும் பாய்ச்சல் கோட்டுப்படம் வரைந்து, Python நிரலையும் எழுதுக.',
+  flow:{k:'lad',
+    pre:[{io:['marks ஐ உள்ளிடுக']}],
+    rungs:[
+      {c:['marks ≥ 75 ?'], y:['grade = "A"']},
+      {c:['marks ≥ 65 ?'], y:['grade = "B"']},
+      {c:['marks ≥ 55 ?'], y:['grade = "C"']},
+      {c:['marks ≥ 40 ?'], y:['grade = "S"']}],
+    els:['grade = "F"'],
+    post:[{io:['grade ஐ வெளியிடுக']}]},
+  code:'# புள்ளிக்கு ஏற்ப தரம் வழங்குதல்\nmarks = int(input("புள்ளியை உள்ளிடுக: "))\n\nif marks >= 75:\n    grade = "A"\nelif marks >= 65:\n    grade = "B"\nelif marks >= 55:\n    grade = "C"\nelif marks >= 40:\n    grade = "S"\nelse:\n    grade = "F"\n\nprint("தரம் =", grade)',
+  note:'elif ஏணிமுறை மேலிருந்து கீழாகச் சரிபார்ப்பதால், ஒவ்வொரு நிலையிலும் மேல் எல்லையை மீண்டும் சோதிக்கத் தேவையில்லை.' },
+
+/* ---------- 03 ---------- */
+{ title:'1 முதல் N வரை கூட்டுத்தொகை (while மடக்கு)',
+  scen:'ஒரு சில்லறை வணிகக் கடையின் காசாளர், 1 ஆம் நாள் ரூ.1, 2 ஆம் நாள் ரூ.2, 3 ஆம் நாள் ரூ.3 என்ற முறையில் நாள்தோறும் சேமிக்கிறார். <b>N</b> நாட்களின் முடிவில் அவரது மொத்தச் சேமிப்பு எவ்வளவு? (அதாவது 1 + 2 + 3 + … + N)',
+  task:'N இன் பெறுமானத்தை உள்ளீடாகப் பெற்று, மொத்தச் சேமிப்பைக் கணக்கிடும் பாய்ச்சல் கோட்டுப்படம் (மடக்குடன்) வரைந்து, Python நிரலையும் எழுதுக.',
+  flow:{k:'loop',
+    pre:[{io:['N ஐ உள்ளிடுக']},{p:['total = 0','i = 1']}],
+    c:['i ≤ N ?'],
+    body:[{p:['total = total + i']},{p:['i = i + 1']}],
+    post:[{io:['total ஐ வெளியிடுக']}]},
+  code:'# 1 முதல் N வரையான கூட்டுத்தொகை — while மடக்கு\nN = int(input("நாட்களின் எண்ணிக்கை (N): "))\n\ntotal = 0\ni = 1\nwhile i <= N:\n    total = total + i\n    i = i + 1\n\nprint("மொத்தச் சேமிப்பு = ரூ.", total)\n\n# for மடக்கு பயன்படுத்தியும் எழுதலாம்:\n# for i in range(1, N + 1):\n#     total = total + i',
+  note:'total = 0, i = 1 ஆகிய தொடக்கப் பெறுமானங்கள் மடக்கிற்கு முன் கட்டாயம் தேவை. i = i + 1 இல்லாவிடின் முடிவிலி மடக்கு உருவாகும்.' },
+
+/* ---------- 04 ---------- */
+{ title:'மூன்று எண்களில் பெரியது',
+  scen:'பாடசாலை விளையாட்டுப் போட்டியில் மூன்று மாணவர்கள் — அமுதன், கீர்த்தனா, நிலாவன் — ஈட்டி எறிதலில் பெற்ற தூரங்கள் (மீற்றரில்) உள்ளிடப்படுகின்றன. மிக நீண்ட தூரத்தைக் கண்டறிய வேண்டும்.',
+  task:'மூன்று தூரங்களையும் (a, b, c) உள்ளீடாகப் பெற்று, அவற்றுள் பெரிய பெறுமானத்தை வெளியிடும் பாய்ச்சல் கோட்டுப்படம் வரைந்து, Python நிரலையும் எழுதுக.',
+  flow:{k:'lad',
+    pre:[{io:['a, b, c ஐ உள்ளிடுக']}],
+    rungs:[
+      {c:['a ≥ b மற்றும்','a ≥ c ?'], y:['max = a']},
+      {c:['b ≥ c ?'], y:['max = b']}],
+    els:['max = c'],
+    post:[{io:['max ஐ வெளியிடுக']}]},
+  code:'# மூன்று எண்களில் பெரியதைக் கண்டறிதல்\na = float(input("அமுதனின் தூரம் (m): "))\nb = float(input("கீர்த்தனாவின் தூரம் (m): "))\nc = float(input("நிலாவனின் தூரம் (m): "))\n\nif a >= b and a >= c:\n    maximum = a\nelif b >= c:\n    maximum = b\nelse:\n    maximum = c\n\nprint("மிக நீண்ட தூரம் =", maximum, "m")',
+  note:'max என்பது Python இன் உள்ளமைச் சார்பின் பெயர் என்பதால், நிரலில் maximum எனப் பயன்படுத்தப்பட்டுள்ளது. max(a, b, c) எனவும் நேரடியாக எழுதலாம்.' },
+
+/* ---------- 05 ---------- */
+{ title:'இரட்டை / ஒற்றை எண் சோதனை',
+  scen:'ஒரு தொழிற்சாலையில் உற்பத்திப் பொருட்களுக்கு வரிசை இலக்கம் வழங்கப்படுகிறது. இரட்டை இலக்கப் பொருட்கள் A பிரிவுக்கும், ஒற்றை இலக்கப் பொருட்கள் B பிரிவுக்கும் அனுப்பப்படுகின்றன.',
+  task:'ஒரு எண்ணை உள்ளீடாகப் பெற்று, அது இரட்டை எண்ணா அல்லது ஒற்றை எண்ணா எனத் தீர்மானித்து வெளியிடும் பாய்ச்சல் கோட்டுப்படம் வரைந்து, Python நிரலையும் எழுதுக.',
+  flow:{k:'if',
+    pre:[{io:['num ஐ உள்ளிடுக']}],
+    c:['num % 2 == 0 ?'],
+    yes:{lines:['"இரட்டை எண்"','என வெளியிடுக'],io:1},
+    no:{lines:['"ஒற்றை எண்"','என வெளியிடுக'],io:1},
+    post:[]},
+  code:'# இரட்டை / ஒற்றை சோதனை\nnum = int(input("எண்ணை உள்ளிடுக: "))\n\nif num % 2 == 0:\n    print("இரட்டை எண் — A பிரிவு")\nelse:\n    print("ஒற்றை எண் — B பிரிவு")',
+  note:'% (modulus) செயலி மீதியைத் தருகிறது. 2 ஆல் வகுக்க மீதி 0 எனில் இரட்டை எண்.' },
+
+/* ---------- 06 ---------- */
+{ title:'வாக்களிக்கும் தகுதிச் சோதனை',
+  scen:'இலங்கையில் தேர்தலில் வாக்களிக்க குறைந்தபட்ச வயது <b>18</b> ஆகும். கிராம அலுவலர் ஒருவர், வந்திருப்பவரின் வயதை வைத்து வாக்களிக்கும் தகுதியைச் சரிபார்க்க வேண்டும்.',
+  task:'வயதை உள்ளீடாகப் பெற்று, “வாக்களிக்கலாம்” அல்லது “வாக்களிக்க முடியாது” என வெளியிடும் பாய்ச்சல் கோட்டுப்படம் வரைந்து, Python நிரலையும் எழுதுக.',
+  flow:{k:'if',
+    pre:[{io:['age ஐ உள்ளிடுக']}],
+    c:['age ≥ 18 ?'],
+    yes:{lines:['"வாக்களிக்கலாம்"','என வெளியிடுக'],io:1},
+    no:{lines:['"வாக்களிக்க','முடியாது" வெளியிடுக'],io:1},
+    post:[]},
+  code:'# வாக்களிக்கும் தகுதி\nage = int(input("வயதை உள்ளிடுக: "))\n\nif age >= 18:\n    print("வாக்களிக்கலாம்")\nelse:\n    print("வாக்களிக்க முடியாது")',
+  note:'≥ (greater than or equal) நிபந்தனை — சரியாக 18 வயது உள்ளவரும் தகுதியுடையவரே.' },
+
+/* ---------- 07 ---------- */
+{ title:'வெப்பநிலை மாற்றம் (செல்சியஸ் → பாரன்ஹீட்)',
+  scen:'நுவரெலியா வானிலை நிலையம் வெப்பநிலையை செல்சியஸில் அளக்கிறது; ஆனால் வெளிநாட்டு ஆய்வு நிறுவனம் ஒன்றுக்கு அறிக்கை பாரன்ஹீட்டில் அனுப்பப்பட வேண்டும். மாற்றுச் சூத்திரம்: <b>F = (C × 9/5) + 32</b>',
+  task:'செல்சியஸ் பெறுமானத்தை உள்ளீடாகப் பெற்று, பாரன்ஹீட் பெறுமானத்தைக் கணக்கிட்டு வெளியிடும் பாய்ச்சல் கோட்டுப்படம் வரைந்து, Python நிரலையும் எழுதுக.',
+  flow:{k:'lin',
+    items:[{io:['C ஐ உள்ளிடுக']},{p:['F = (C × 9/5) + 32']},{io:['F ஐ வெளியிடுக']}]},
+  code:'# செல்சியஸ் → பாரன்ஹீட் மாற்றம்\nC = float(input("வெப்பநிலை (°C): "))\n\nF = (C * 9 / 5) + 32\n\nprint("வெப்பநிலை =", F, "°F")',
+  note:'தீர்மானம் தேவையில்லாத நேரியல் (sequence) கட்டுப்பாட்டு அமைப்புக்கு இது சிறந்த உதாரணம்.' },
+
+/* ---------- 08 ---------- */
+{ title:'நெட்டாண்டு (Leap Year) சோதனை',
+  scen:'பாடசாலை நூலக மென்பொருள் ஒன்றில், பெப்ரவரி மாதத்தின் நாட்களின் எண்ணிக்கையைத் தீர்மானிக்க, உள்ளிடப்படும் ஆண்டு நெட்டாண்டா எனச் சரிபார்க்க வேண்டும்.',
+  task:'ஆண்டை உள்ளீடாகப் பெற்று, அது நெட்டாண்டா இல்லையா என வெளியிடும் பாய்ச்சல் கோட்டுப்படம் வரைந்து, Python நிரலையும் எழுதுக.',
+  flow:{k:'if',
+    pre:[{io:['year ஐ உள்ளிடுக']}],
+    c:['year % 4 == 0 ?'],
+    yes:{lines:['"நெட்டாண்டு"','என வெளியிடுக'],io:1},
+    no:{lines:['"நெட்டாண்டு அல்ல"','என வெளியிடுக'],io:1},
+    post:[]},
+  code:'# நெட்டாண்டு சோதனை\nyear = int(input("ஆண்டை உள்ளிடுக: "))\n\nif (year % 4 == 0 and year % 100 != 0) or year % 400 == 0:\n    print("நெட்டாண்டு")\nelse:\n    print("நெட்டாண்டு அல்ல")',
+  note:'நூற்றாண்டு ஆண்டுகள் (1900, 2100 …) 400 ஆல் வகுபட்டால் மட்டுமே நெட்டாண்டு. பாய்ச்சல் கோட்டுப்படத்தில் எளிமைக்காக year % 4 சோதனை காட்டப்பட்டுள்ளது; முழு விதி Python நிரலில் உள்ளது.' },
+
+/* ---------- 09 ---------- */
+{ title:'ATM பணம் எடுத்தல்',
+  scen:'ATM இயந்திரம் ஒன்றில், வாடிக்கையாளர் எடுக்க விரும்பும் தொகை அவரது கணக்கு மீதியை (balance) விடக் கூடுதலாக இருந்தால் பணம் வழங்கப்படாது.',
+  task:'கணக்கு மீதியையும் (balance), எடுக்க விரும்பும் தொகையையும் (amount) உள்ளீடாகப் பெற்று, பணம் வழங்கலாமா எனத் தீர்மானிக்கும் பாய்ச்சல் கோட்டுப்படம் வரைந்து, Python நிரலையும் எழுதுக.',
+  flow:{k:'if',
+    pre:[{io:['balance, amount','ஐ உள்ளிடுக']}],
+    c:['amount ≤ balance ?'],
+    yes:{lines:['balance = balance','− amount']},
+    no:{lines:['"போதிய பணம்','இல்லை" வெளியிடுக'],io:1},
+    post:[{io:['balance ஐ வெளியிடுக']}]},
+  code:'# ATM பணம் எடுத்தல்\nbalance = float(input("கணக்கு மீதி: "))\namount = float(input("எடுக்க வேண்டிய தொகை: "))\n\nif amount <= balance:\n    balance = balance - amount\n    print("பணம் வழங்கப்பட்டது")\nelse:\n    print("போதிய பணம் இல்லை")\n\nprint("தற்போதைய மீதி = ரூ.", balance)',
+  note:'நிபந்தனை பொய்யாகும்போது balance மாறாது; எனவே இறுதி வெளியீடு இரு வழிகளிலும் சரியாக அமைகிறது.' },
+
+/* ---------- 10 ---------- */
+{ title:'பேருந்துக் கட்டணம் (வயது அடிப்படையில்)',
+  scen:'இ.போ.ச (SLTB) பேருந்து ஒன்றின் அடிப்படைக் கட்டணம் <b>ரூ. 100</b>. சலுகைகள்:<ul class="rules"><li>5 வயதுக்குக் குறைந்த குழந்தைகள் — <b>இலவசம்</b></li><li>5 – 11 வயது — <b>50% கழிவு</b> (ரூ. 50)</li><li>60 வயது அல்லது அதற்கு மேல் — <b>30% கழிவு</b> (ரூ. 70)</li><li>ஏனையோர் — முழுக் கட்டணம்</li></ul>',
+  task:'பயணியின் வயதை உள்ளீடாகப் பெற்று, செலுத்த வேண்டிய கட்டணத்தை வெளியிடும் பாய்ச்சல் கோட்டுப்படம் வரைந்து, Python நிரலையும் எழுதுக.',
+  flow:{k:'lad',
+    pre:[{io:['age ஐ உள்ளிடுக']}],
+    rungs:[
+      {c:['age < 5 ?'],  y:['fare = 0']},
+      {c:['age < 12 ?'], y:['fare = 50']},
+      {c:['age ≥ 60 ?'], y:['fare = 70']}],
+    els:['fare = 100'],
+    post:[{io:['fare ஐ வெளியிடுக']}]},
+  code:'# வயது அடிப்படையில் பேருந்துக் கட்டணம்\nage = int(input("பயணியின் வயது: "))\n\nif age < 5:\n    fare = 0\nelif age < 12:\n    fare = 50\nelif age >= 60:\n    fare = 70\nelse:\n    fare = 100\n\nprint("கட்டணம் = ரூ.", fare)',
+  note:'நிபந்தனைகளின் வரிசை முக்கியம் — age < 5 முதலில் சோதிக்கப்படுவதால், age < 12 இல் 5–11 வயதினர் மட்டுமே எஞ்சுவர்.' },
+
+/* ---------- 11 ---------- */
+{ title:'சம்பளம் + மேலதிக நேரக் கொடுப்பனவு (OT)',
+  scen:'ஆடைத் தொழிற்சாலை ஒன்றில் ஊழியர் ஒருவரின் மணித்தியாலக் கூலி <b>ரூ. 500</b>. ஒரு வாரத்தில் <b>40 மணித்தியாலங்களுக்கு</b> மேல் வேலை செய்தால், மேலதிக ஒவ்வொரு மணித்தியாலத்துக்கும் <b>1.5 மடங்கு</b> (ரூ. 750) வழங்கப்படும்.',
+  task:'வேலை செய்த மணித்தியாலங்களை உள்ளீடாகப் பெற்று, வாரச் சம்பளத்தைக் கணக்கிடும் பாய்ச்சல் கோட்டுப்படம் வரைந்து, Python நிரலையும் எழுதுக.',
+  flow:{k:'if',
+    pre:[{io:['hours ஐ உள்ளிடுக']}],
+    c:['hours ≤ 40 ?'],
+    yes:{lines:['pay = hours × 500']},
+    no:{lines:['pay = 20000 +','(hours − 40) × 750']},
+    post:[{io:['pay ஐ வெளியிடுக']}]},
+  code:'# வாரச் சம்பளம் + OT கணக்கீடு\nhours = float(input("வேலை செய்த மணித்தியாலங்கள்: "))\n\nif hours <= 40:\n    pay = hours * 500\nelse:\n    pay = 40 * 500 + (hours - 40) * 500 * 1.5\n\nprint("வாரச் சம்பளம் = ரூ.", pay)',
+  note:'40 × 500 = 20000 — முதல் 40 மணித்தியாலங்களுக்கான அடிப்படைச் சம்பளம்; மிகுதி OT வீதத்தில் (1.5×) கணக்கிடப்படுகிறது.' },
+
+/* ---------- 12 ---------- */
+{ title:'நீர்க் கட்டணம் (மூன்று அடுக்கு வீதம்)',
+  scen:'தேசிய நீர் வழங்கல் சபை மாதாந்த நீர்க் கட்டணத்தைப் பின்வருமாறு கணக்கிடுகிறது:<ul class="rules"><li>முதல் <b>10 அலகுகள்</b> — அலகுக்கு <b>ரூ. 5</b></li><li><b>11 – 25 அலகுகள்</b> — மேலதிக அலகுக்கு <b>ரூ. 12</b></li><li><b>25 க்கு மேல்</b> — மேலதிக அலகுக்கு <b>ரூ. 20</b></li></ul>',
+  task:'பயன்படுத்திய அலகுகளை உள்ளீடாகப் பெற்று, மொத்தக் கட்டணத்தை வெளியிடும் பாய்ச்சல் கோட்டுப்படம் வரைந்து, Python நிரலையும் எழுதுக.',
+  flow:{k:'lad',
+    pre:[{io:['units ஐ உள்ளிடுக']}],
+    rungs:[
+      {c:['units ≤ 10 ?'], y:['bill = units × 5']},
+      {c:['units ≤ 25 ?'], y:['bill = 50 +','(units−10) × 12']}],
+    els:['bill = 230 + (units − 25) × 20'],
+    post:[{io:['bill ஐ வெளியிடுக']}]},
+  code:'# அடுக்கு வீத நீர்க் கட்டணம்\nunits = int(input("பயன்படுத்திய அலகுகள்: "))\n\nif units <= 10:\n    bill = units * 5\nelif units <= 25:\n    bill = 10 * 5 + (units - 10) * 12\nelse:\n    bill = 10 * 5 + 15 * 12 + (units - 25) * 20\n\nprint("நீர்க் கட்டணம் = ரூ.", bill)',
+  note:'50 = முதல் 10 அலகுகளின் கட்டணம்; 230 = 50 + (15 × 12). அடுக்கு (slab) முறையில் ஒவ்வொரு அடுக்கும் தனித்தனியே கணக்கிடப்படும்.' },
+
+/* ---------- 13 ---------- */
+{ title:'காரணியம் (Factorial — N!)',
+  scen:'கணிதப் பாட ஆய்வகத்தில், N பொருட்களை வரிசைப்படுத்தும் வழிகளின் எண்ணிக்கை N! (1 × 2 × 3 × … × N) எனக் கணக்கிடப்படுகிறது. உதாரணம்: 5! = 120.',
+  task:'N ஐ உள்ளீடாகப் பெற்று, N! ஐக் கணக்கிடும் பாய்ச்சல் கோட்டுப்படம் வரைந்து, Python நிரலையும் எழுதுக.',
+  flow:{k:'loop',
+    pre:[{io:['N ஐ உள்ளிடுக']},{p:['fact = 1','i = 1']}],
+    c:['i ≤ N ?'],
+    body:[{p:['fact = fact × i']},{p:['i = i + 1']}],
+    post:[{io:['fact ஐ வெளியிடுக']}]},
+  code:'# N! (காரணியம்) கணக்கிடல்\nN = int(input("N ஐ உள்ளிடுக: "))\n\nfact = 1\ni = 1\nwhile i <= N:\n    fact = fact * i\n    i = i + 1\n\nprint(N, "! =", fact)',
+  note:'பெருக்கலுக்கான தொடக்கப் பெறுமானம் fact = 1 (0 அல்ல!). fact = 0 எனில் விடை எப்போதும் 0 ஆகிவிடும்.' },
+
+/* ---------- 14 ---------- */
+{ title:'பெருக்கல் அட்டவணை (Multiplication Table)',
+  scen:'தரம் 5 புலமைப்பரிசில் வகுப்பு ஆசிரியர் ஒருவருக்கு, எந்த எண்ணுக்கும் 1 முதல் 12 வரையான பெருக்கல் அட்டவணையை அச்சிடும் சிறிய நிரல் தேவை.',
+  task:'N ஐ உள்ளீடாகப் பெற்று, N × 1 முதல் N × 12 வரை வெளியிடும் பாய்ச்சல் கோட்டுப்படம் வரைந்து, Python நிரலையும் எழுதுக.',
+  flow:{k:'loop',
+    pre:[{io:['N ஐ உள்ளிடுக']},{p:['i = 1']}],
+    c:['i ≤ 12 ?'],
+    body:[{io:['N × i பெறுமானத்தை','வெளியிடுக']},{p:['i = i + 1']}],
+    post:[]},
+  code:'# பெருக்கல் அட்டவணை\nN = int(input("எந்த எண்ணின் அட்டவணை? "))\n\ni = 1\nwhile i <= 12:\n    print(N, "x", i, "=", N * i)\n    i = i + 1',
+  note:'வெளியீடு (output) படிமுறை மடக்கினுள் அமைவதால், ஒவ்வொரு சுற்றிலும் ஒரு வரி அச்சிடப்படும்.' },
+
+/* ---------- 15 ---------- */
+{ title:'இலக்கங்களின் கூட்டுத்தொகை',
+  scen:'பரீட்சை அட்டை இலக்கங்களைச் சரிபார்க்கும் முறைமை ஒன்றில், ஒரு எண்ணின் இலக்கங்களின் கூட்டுத்தொகை சரிபார்ப்பு இலக்கமாகப் (check digit) பயன்படுத்தப்படுகிறது. உதாரணம்: 472 → 4 + 7 + 2 = 13.',
+  task:'ஒரு முழு எண்ணை உள்ளீடாகப் பெற்று, அதன் இலக்கங்களின் கூட்டுத்தொகையைக் கணக்கிடும் பாய்ச்சல் கோட்டுப்படம் வரைந்து, Python நிரலையும் எழுதுக.',
+  flow:{k:'loop',
+    pre:[{io:['n ஐ உள்ளிடுக']},{p:['s = 0']}],
+    c:['n > 0 ?'],
+    body:[{p:['s = s + (n % 10)']},{p:['n = n // 10']}],
+    post:[{io:['s ஐ வெளியிடுக']}]},
+  code:'# இலக்கங்களின் கூட்டுத்தொகை\nn = int(input("எண்ணை உள்ளிடுக: "))\n\ns = 0\nwhile n > 0:\n    s = s + (n % 10)   # கடைசி இலக்கம்\n    n = n // 10        # கடைசி இலக்கத்தை நீக்கு\n\nprint("இலக்கக் கூட்டுத்தொகை =", s)',
+  note:'n % 10 கடைசி இலக்கத்தைத் தரும்; n // 10 (முழு வகுத்தல்) கடைசி இலக்கத்தை நீக்கும்.' },
+
+/* ---------- 16 ---------- */
+{ title:'எண்ணைத் தலைகீழாக்கல் (Reverse)',
+  scen:'பழைய தரவுத் தளம் ஒன்றில் சில பதிவெண்கள் தலைகீழாகப் பதியப்பட்டுள்ளன. அவற்றைச் சீர்செய்ய, ஒரு எண்ணின் இலக்கங்களைத் தலைகீழ் வரிசையில் மாற்ற வேண்டும். உதாரணம்: 1234 → 4321.',
+  task:'ஒரு முழு எண்ணை உள்ளீடாகப் பெற்று, அதன் தலைகீழ் எண்ணை வெளியிடும் பாய்ச்சல் கோட்டுப்படம் வரைந்து, Python நிரலையும் எழுதுக.',
+  flow:{k:'loop',
+    pre:[{io:['n ஐ உள்ளிடுக']},{p:['rev = 0']}],
+    c:['n > 0 ?'],
+    body:[{p:['rev = rev×10 + n%10']},{p:['n = n // 10']}],
+    post:[{io:['rev ஐ வெளியிடுக']}]},
+  code:'# எண்ணைத் தலைகீழாக்கல்\nn = int(input("எண்ணை உள்ளிடுக: "))\n\nrev = 0\nwhile n > 0:\n    rev = rev * 10 + (n % 10)\n    n = n // 10\n\nprint("தலைகீழ் எண் =", rev)',
+  note:'ஒவ்வொரு சுற்றிலும் rev பத்தால் பெருக்கப்பட்டு புதிய இலக்கம் வலப்புறம் சேர்க்கப்படுகிறது. இதே அமைப்பு பாலிண்ட்ரோம் (palindrome) சோதனைக்கும் பயன்படும்.' },
+
+/* ---------- 17 ---------- */
+{ title:'இரட்டை–ஒற்றை எண்ணிக்கை (10 உள்ளீடுகள்)',
+  scen:'வகுப்பறைச் செயற்பாடு ஒன்றில் மாணவர்கள் 10 எண்களை உள்ளிடுகின்றனர். அவற்றுள் எத்தனை இரட்டை எண்கள், எத்தனை ஒற்றை எண்கள் எனக் கணக்கிட வேண்டும்.',
+  task:'10 எண்களை உள்ளீடாகப் பெற்று, இரட்டை மற்றும் ஒற்றை எண்களின் எண்ணிக்கைகளை வெளியிடும் பாய்ச்சல் கோட்டுப்படம் வரைந்து, Python நிரலையும் எழுதுக.',
+  flow:{k:'loop',
+    pre:[{p:['even = 0, odd = 0','i = 1']}],
+    c:['i ≤ 10 ?'],
+    body:[{io:['num ஐ உள்ளிடுக']},
+          {if:{c:['num % 2 == 0 ?'],
+               yes:{lines:['even = even + 1']},
+               no:{lines:['odd = odd + 1']}}},
+          {p:['i = i + 1']}],
+    post:[{io:['even, odd ஐ','வெளியிடுக']}]},
+  code:'# இரட்டை / ஒற்றை எண்ணிக்கை\neven = 0\nodd = 0\ni = 1\nwhile i <= 10:\n    num = int(input("எண்ணை உள்ளிடுக: "))\n    if num % 2 == 0:\n        even = even + 1\n    else:\n        odd = odd + 1\n    i = i + 1\n\nprint("இரட்டை எண்கள் =", even)\nprint("ஒற்றை எண்கள் =", odd)',
+  note:'மடக்கினுள் தீர்மானம் (decision inside a loop) — A/L இல் அடிக்கடி கேட்கப்படும் கட்டமைப்பு. even, odd ஆகியவை எண்ணிகள் (counters).' },
+
+/* ---------- 18 ---------- */
+{ title:'பகா எண் (Prime Number) சோதனை',
+  scen:'கணினி வலையமைப்புப் பாதுகாப்பில் (encryption) பகா எண்கள் முக்கியப் பங்கு வகிக்கின்றன. ஒரு எண் பகா எண்ணா எனச் சரிபார்க்கும் நிரல் தேவை. (1 ஐயும் தன்னையும் தவிர வேறு வகுத்திகள் இல்லாத எண் பகா எண்.)',
+  task:'n ஐ உள்ளீடாகப் பெற்று, அது பகா எண்ணா இல்லையா என வெளியிடும் பாய்ச்சல் கோட்டுப்படம் வரைந்து, Python நிரலையும் எழுதுக.',
+  flow:{k:'loop',
+    pre:[{io:['n ஐ உள்ளிடுக']},{p:['flag = 0','i = 2']}],
+    c:['i ≤ n − 1 ?'],
+    body:[{if:{c:['n % i == 0 ?'],
+               yes:{lines:['flag = 1']},
+               no:{lines:[]}}},
+          {p:['i = i + 1']}],
+    post:[{if:{c:['flag == 0 ?'],
+               yes:{lines:['"பகா எண்"','வெளியிடுக'],io:1},
+               no:{lines:['"பகா எண் அல்ல"','வெளியிடுக'],io:1}}}]},
+  code:'# பகா எண் சோதனை\nn = int(input("எண்ணை உள்ளிடுக: "))\n\nflag = 0\ni = 2\nwhile i <= n - 1:\n    if n % i == 0:\n        flag = 1     # வகுத்தி கிடைத்தது\n    i = i + 1\n\nif flag == 0 and n > 1:\n    print("பகா எண்")\nelse:\n    print("பகா எண் அல்ல")',
+  note:'flag என்பது நிலை மாறி (flag variable). வகுத்தி கிடைத்தவுடன் break கொண்டு மடக்கை நிறுத்தினால் நிரல் வேகமாகும்; i ≤ n − 1 க்குப் பதில் i × i ≤ n எனவும் மேம்படுத்தலாம்.' },
+
+/* ---------- 19 ---------- */
+{ title:'N எண்களில் மிகப் பெரியது (மடக்கு முறை)',
+  scen:'விவசாயச் சந்தையில் ஒரு நாளில் N விற்பனைப் பதிவுகள் உள்ளிடப்படுகின்றன. அன்றைய மிகப் பெரிய விற்பனைத் தொகையைக் கண்டறிய வேண்டும்.',
+  task:'முதலில் N ஐயும், பின் N தொகைகளையும் உள்ளீடாகப் பெற்று, மிகப் பெரிய தொகையை வெளியிடும் பாய்ச்சல் கோட்டுப்படம் வரைந்து, Python நிரலையும் எழுதுக.',
+  flow:{k:'loop',
+    pre:[{io:['N ஐ உள்ளிடுக']},{io:['முதல் தொகை num','ஐ உள்ளிடுக']},{p:['max = num','i = 2']}],
+    c:['i ≤ N ?'],
+    body:[{io:['num ஐ உள்ளிடுக']},
+          {if:{c:['num > max ?'],
+               yes:{lines:['max = num']},
+               no:{lines:[]}}},
+          {p:['i = i + 1']}],
+    post:[{io:['max ஐ வெளியிடுக']}]},
+  code:'# N எண்களில் மிகப் பெரியது\nN = int(input("பதிவுகளின் எண்ணிக்கை: "))\n\nnum = float(input("தொகை 1: "))\nmaximum = num\ni = 2\nwhile i <= N:\n    num = float(input("தொகை " + str(i) + ": "))\n    if num > maximum:\n        maximum = num\n    i = i + 1\n\nprint("மிகப் பெரிய தொகை = ரூ.", maximum)',
+  note:'முதல் பெறுமானத்தையே max இன் தொடக்கப் பெறுமானமாகக் கொள்வது பாதுகாப்பான முறை (max = 0 எனத் தொடங்கினால் எதிர்ம எண்களுக்குத் தவறான விடை வரும்).' },
+
+/* ---------- 20 ---------- */
+{ title:'பிபனாச்சி தொடர் (Fibonacci Series)',
+  scen:'இயற்கையில் சூரியகாந்திப் பூவின் விதை அமைப்பு, சங்கின் சுருள் போன்றவை பிபனாச்சி தொடரை (0, 1, 1, 2, 3, 5, 8, …) பின்பற்றுகின்றன. ஒவ்வொரு உறுப்பும் முந்தைய இரண்டின் கூட்டுத்தொகை.',
+  task:'N ஐ உள்ளீடாகப் பெற்று, பிபனாச்சி தொடரின் முதல் N உறுப்புகளை வெளியிடும் பாய்ச்சல் கோட்டுப்படம் வரைந்து, Python நிரலையும் எழுதுக.',
+  flow:{k:'loop',
+    pre:[{io:['N ஐ உள்ளிடுக']},{p:['a = 0, b = 1','i = 1']}],
+    c:['i ≤ N ?'],
+    body:[{io:['a ஐ வெளியிடுக']},
+          {p:['c = a + b','a = b, b = c']},
+          {p:['i = i + 1']}],
+    post:[]},
+  code:'# பிபனாச்சி தொடர் — முதல் N உறுப்புகள்\nN = int(input("உறுப்புகளின் எண்ணிக்கை: "))\n\na = 0\nb = 1\ni = 1\nwhile i <= N:\n    print(a, end=" ")\n    c = a + b\n    a = b\n    b = c\n    i = i + 1',
+  note:'a, b ஆகிய இரு மாறிகள் “முந்தைய இரு உறுப்புகளை” நினைவில் வைத்திருக்கின்றன; ஒவ்வொரு சுற்றிலும் அவை ஒரு படி முன்னே நகர்கின்றன.' }
+];
+
+/* ============ build the page ============ */
+function pad(n){ return (n<10?'0':'')+n; }
+
+var list=document.getElementById('qlist');
+var toc=document.getElementById('toclinks');
+
+Q.forEach(function(q,idx){
+  var n=idx+1;
+  toc.insertAdjacentHTML('beforeend','<a href="#q'+n+'">'+pad(n)+'. '+q.title+'</a>');
+  var html=
+  '<section class="qcard" id="q'+n+'">'+
+    '<div class="qhead"><span class="qnum">வினா '+pad(n)+'</span>'+
+    '<span class="qtitle">'+q.title+'</span></div>'+
+    '<div class="qbody">'+
+      '<div class="scenario"><span class="tag">சூழ்நிலை</span>'+q.scen+'</div>'+
+      '<p class="task">'+q.task+'</p>'+
+      '<button class="btn" onclick="toggleAns(this,\'a'+n+'\')">விடையைக் காட்டு ▾</button>'+
+      '<div class="answer" id="a'+n+'">'+
+        '<span class="ans-label">விடை</span>'+
+        '<h4 class="part">அ) பாய்ச்சல் கோட்டுப்படம்</h4>'+
+        '<div class="flow-wrap">'+buildFlow(q.flow)+'</div>'+
+        '<h4 class="part">ஆ) Python நிரல்</h4>'+
+        '<pre>'+hl(q.code)+'</pre>'+
+        (q.note?'<div class="note">குறிப்பு: '+q.note+'</div>':'')+
+      '</div>'+
+    '</div>'+
+  '</section>';
+  list.insertAdjacentHTML('beforeend',html);
+});
+
+function toggleAns(btn,id){
+  var ans=document.getElementById(id);
+  var open=ans.classList.toggle('show');
+  btn.classList.toggle('open',open);
+  btn.textContent=open?'விடையை மறை ▴':'விடையைக் காட்டு ▾';
+}
+</script>
+
+</body>
+</html>

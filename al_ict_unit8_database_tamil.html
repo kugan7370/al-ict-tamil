@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>க.பொ.த (உயர்தரம்) ICT — அலகு 8: தரவுத்தள முகாமை குறிப்புகள்</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Catamaran:wght@600;800&family=Hind+Madurai:wght@400;500;600&family=Noto+Sans+Tamil:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F6F4EE; --card:#FFFFFF; --ink:#22303A;
+    --maroon:#8B1E3F; --teal:#1F4E5F; --gold:#C9912B;
+    --line:#E2DDD2; --code-bg:#102A33; --code-ink:#D9EEF2;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--paper);color:var(--ink);
+    font-family:'Hind Madurai','Noto Sans Tamil',sans-serif;
+    line-height:1.8;font-size:17px;}
+  header{background:linear-gradient(135deg,var(--teal) 0%,#143946 100%);
+    color:#F2EFE6;padding:42px 20px 36px;text-align:center;
+    border-bottom:5px solid var(--gold);}
+  header .eyebrow{letter-spacing:.18em;font-size:.8rem;text-transform:uppercase;
+    color:#D8C58A;margin-bottom:10px;}
+  header h1{font-family:'Catamaran','Noto Sans Tamil',sans-serif;font-weight:800;
+    font-size:clamp(1.4rem,4vw,2.05rem);line-height:1.5;}
+  header p{margin-top:10px;font-size:.95rem;color:#BFD4DA}
+  main{max-width:920px;margin:0 auto;padding:36px 18px 70px}
+
+  .toc{background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:16px 24px;margin-bottom:34px;font-size:.9rem;}
+  .toc b{color:var(--teal);font-family:'Catamaran','Noto Sans Tamil',sans-serif}
+  .toc a{color:var(--maroon);text-decoration:none}
+  .toc a:hover{text-decoration:underline}
+  .toc .links{display:flex;flex-wrap:wrap;gap:6px 16px;margin-top:6px}
+
+  .ncard{background:var(--card);border:1px solid var(--line);border-radius:16px;
+    margin-bottom:30px;overflow:hidden;box-shadow:0 2px 10px rgba(34,48,58,.05);}
+  .nhead{display:flex;align-items:center;gap:14px;padding:16px 24px;
+    border-bottom:1px solid var(--line);
+    background:linear-gradient(to right,#FBFAF6,#fff);}
+  .nnum{font-family:'Catamaran',sans-serif;font-weight:800;font-size:.92rem;
+    color:#fff;background:var(--teal);border-radius:10px;padding:5px 12px;
+    white-space:nowrap;}
+  .ntitle{font-family:'Catamaran','Noto Sans Tamil',sans-serif;font-weight:600;
+    font-size:1.02rem;color:var(--teal);}
+  .nbody{padding:22px 26px 26px}
+  .nbody p{margin-bottom:12px}
+  .nbody ul,.nbody ol{margin:6px 26px 14px}
+  .nbody li{margin-bottom:6px}
+  h4.sub{font-family:'Catamaran','Noto Sans Tamil',sans-serif;color:var(--maroon);
+    font-size:1.0rem;margin:18px 0 8px;}
+
+  .key{background:#FBF7EC;border-right:4px solid var(--gold);
+    border-radius:10px;padding:14px 20px;margin:14px 0;}
+  .key .tag{font-size:.78rem;font-weight:700;color:var(--gold);
+    letter-spacing:.1em;display:block;margin-bottom:4px;}
+  .warn{background:#FAEFF1;border-right:4px solid var(--maroon);
+    border-radius:10px;padding:14px 20px;margin:14px 0;}
+  .warn .tag{font-size:.78rem;font-weight:700;color:var(--maroon);
+    letter-spacing:.1em;display:block;margin-bottom:4px;}
+
+  pre{background:var(--code-bg);color:var(--code-ink);border-radius:12px;
+    padding:18px 20px;margin:12px 0;overflow-x:auto;
+    font-family:'JetBrains Mono',monospace;font-size:.85rem;line-height:1.7;
+    direction:ltr;text-align:left;}
+  pre .cm{color:#7FB6A4} pre .kw{color:#F2B36B} pre .st{color:#A8D8B9}
+  code.inline{background:#EDF2F1;color:var(--teal);border-radius:6px;
+    padding:1px 8px;font-family:'JetBrains Mono',monospace;font-size:.85em;}
+
+  table.dt{border-collapse:collapse;margin:12px auto;font-size:.86rem;width:100%}
+  table.dt th{background:var(--teal);color:#fff;padding:8px 11px;
+    font-weight:600;border:1px solid #16404f;text-align:left;}
+  table.dt td{border:1px solid var(--line);padding:7px 11px;
+    background:#FDFCF9;vertical-align:top;}
+  table.dt caption{caption-side:top;font-weight:600;color:var(--teal);
+    margin-bottom:6px;font-size:.95rem;}
+  table.dt.c td,table.dt.c th{text-align:center}
+  table.dt code{font-family:'JetBrains Mono',monospace;font-size:.88em;color:var(--maroon)}
+  table.dt .pk{background:#FBF1D8;font-weight:700}
+  table.dt .fk{background:#E5EFF1}
+
+  .diagram{background:#FBFAF6;border:1px solid var(--line);border-radius:12px;
+    padding:16px;margin:14px 0;overflow-x:auto;text-align:center;}
+  .diagram svg{max-width:100%;height:auto}
+  .diagram .cap{font-size:.85rem;color:#5A6B74;margin-top:8px}
+  svg text{font-family:'Noto Sans Tamil','Hind Madurai',sans-serif;}
+
+  .btn{display:inline-flex;align-items:center;gap:9px;
+    font-family:'Hind Madurai','Noto Sans Tamil',sans-serif;font-weight:600;
+    font-size:1rem;color:#fff;background:var(--teal);border:none;
+    border-radius:999px;padding:11px 26px;margin-top:14px;cursor:pointer;
+    transition:background .2s,transform .15s;}
+  .btn:hover{background:#16404f;transform:translateY(-1px)}
+  .btn:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+  .btn.open{background:var(--maroon)}
+  .answer{display:none;margin-top:20px;border-top:2px dashed var(--line);
+    padding-top:18px;animation:fade .35s ease;}
+  .answer.show{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  .ans-label{display:inline-block;font-weight:700;color:#fff;background:var(--gold);
+    border-radius:8px;padding:3px 14px;font-size:.85rem;margin-bottom:12px;}
+  .qnum{font-family:'Catamaran',sans-serif;font-weight:800;font-size:1rem;
+    color:#fff;background:var(--maroon);border-radius:10px;padding:5px 14px;
+    white-space:nowrap;}
+  .task{font-weight:600;color:var(--maroon)}
+  .pq{border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin-bottom:18px}
+  .note{margin-top:12px;font-size:.9rem;color:#5A6B74;background:#EFF4F2;
+    border-radius:10px;padding:10px 16px;}
+  .scen{background:#FBF7EC;border-right:4px solid var(--gold);border-radius:8px;
+    padding:10px 16px;margin-bottom:10px;font-size:.92rem}
+
+  footer{text-align:center;padding:26px 16px 40px;font-size:.85rem;color:#7A8790;}
+  @media (max-width:560px){
+    .nhead{flex-direction:column;align-items:flex-start;gap:8px}
+    body{font-size:16px}
+  }
+  @media (prefers-reduced-motion:reduce){.answer{animation:none}.btn{transition:none}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">G.C.E. Advanced Level &middot; Sri Lanka &middot; ICT (20) &middot; Unit 8</div>
+  <h1>தரவுத்தள முகாமை<br>(Database Management)</h1>
+  <p>தரவுத்தள மாதிரிகள் &middot; தொடர்புசார் மாதிரி &middot; SQL &middot; ER வரைபடம் &middot; தர்க்கத் திட்டம் &middot; இயல்நிலையாக்கம்</p>
+</header>
+
+<main>
+
+<div class="toc"><b>உள்ளடக்கம்</b>
+  <div class="links">
+    <a href="#s1">8.1 தரவு, தரவுத்தள மாதிரிகள்</a>
+    <a href="#s2">8.2 தொடர்புசார் மாதிரி & கட்டுப்பாடுகள்</a>
+    <a href="#s3">8.3 DBMS & SQL (DDL, DML)</a>
+    <a href="#s4">8.4 ER வரைபடம்</a>
+    <a href="#s5">8.5 தர்க்கத் திட்டம் & சாவிகள்</a>
+    <a href="#s6">8.6 ER → தர்க்கத் திட்ட மாற்றம்</a>
+    <a href="#s7">8.7 இயல்நிலையாக்கம் (Normalization)</a>
+    <a href="#sp">16 சூழ்நிலை வினாக்கள்</a>
+  </div>
+</div>
+
+<!-- ===================== 8.1 ===================== -->
+<section class="ncard" id="s1">
+  <div class="nhead"><span class="nnum">8.1</span><span class="ntitle">தரவு, தகவல், கட்டமைப்பு & தரவுத்தள மாதிரிகள்</span></div>
+  <div class="nbody">
+    <h4 class="sub">தரவு (Data) vs தகவல் (Information)</h4>
+    <p>இது அடிப்படை — <b>தரவு</b> செயலாக்கப்படாத மூலக் கூறு; <b>தகவல்</b> தரவைச் செயலாக்கி அர்த்தமுள்ளதாக்கிய விளைவு. எ.கா: <code class="inline">78, 85, 62</code> = தரவு; "வகுப்பின் சராசரி 75" = தகவல்.</p>
+    <h4 class="sub">கட்டமைப்புள்ள vs கட்டமைப்பற்ற தரவு</h4>
+    <table class="dt">
+      <tr><th>கட்டமைப்புள்ள (Structured)</th><th>கட்டமைப்பற்ற (Unstructured)</th></tr>
+      <tr><td>முன்வரையறுக்கப்பட்ட வடிவில், அட்டவணைகளில் (வரிசை/நிரல்)</td><td>நிலையான வடிவம் இல்லாதது</td></tr>
+      <tr><td>எளிதில் தேடல்/பகுப்பாய்வு</td><td>தேடல்/பகுப்பாய்வு கடினம்</td></tr>
+      <tr><td>எ.கா: மாணவர் அட்டவணை, வங்கிப் பதிவுகள்</td><td>எ.கா: மின்னஞ்சல், படங்கள், காணொளி, சமூக ஊடகப் பதிவுகள்</td></tr>
+    </table>
+    <h4 class="sub">தரவுத்தளம் ஏன்? (கோப்பு முறை vs தரவுத்தளம்)</h4>
+    <p>பழைய <b>கோப்பு அடிப்படை முறையில்</b> (file-based) — தரவு பல கோப்புகளில் சிதறி, <b>மீள்நிகழ்வு (redundancy), முரண்பாடு (inconsistency)</b>, பகிர்தல் சிரமம் ஏற்பட்டன. <b>தரவுத்தளம் (Database)</b> தரவை ஒருங்கிணைத்து, மீள்நிகழ்வைக் குறைத்து, பகிர்தலை எளிதாக்குகிறது.</p>
+    <h4 class="sub">தரவுத்தள மாதிரிகள் (Database Models)</h4>
+    <table class="dt">
+      <tr><th>மாதிரி</th><th>விளக்கம்</th></tr>
+      <tr><td><b>தட்டைக் கோப்பு (Flat File)</b></td><td>ஒரே அட்டவணையில் அனைத்துத் தரவும்; எளிது, ஆனால் மீள்நிகழ்வு அதிகம்</td></tr>
+      <tr><td><b>படிநிலை (Hierarchical)</b></td><td>மரக் கட்டமைப்பு; ஒரு பெற்றோர் → பல குழந்தைகள் (1:M); எ.கா: IBM IMS</td></tr>
+      <tr><td><b>வலை (Network)</b></td><td>ஒரு குழந்தைக்குப் பல பெற்றோர் இருக்கலாம் (M:N); படிநிலையை விட நெகிழ்வானது</td></tr>
+      <tr><td><b>தொடர்புசார் (Relational)</b></td><td>தரவு <b>அட்டவணைகளாக (tables)</b>, சாவிகளால் இணைக்கப்படும்; மிகப் பரவலானது; எ.கா: MySQL, Oracle</td></tr>
+      <tr><td><b>பொருள்-தொடர்புசார் (Object-Relational)</b></td><td>தொடர்புசார் + பொருள்சார் பண்புகள்; சிக்கலான தரவு வகைகளைக் கையாளும்</td></tr>
+    </table>
+    <div class="diagram">
+      <svg viewBox="0 0 420 150" width="400" xmlns="http://www.w3.org/2000/svg">
+        <text x="100" y="16" text-anchor="middle" font-size="12" fill="#1F4E5F" font-weight="600">படிநிலை (Hierarchical)</text>
+        <rect x="78" y="24" width="44" height="22" fill="#EAF3F5" stroke="#1F4E5F"/><text x="100" y="39" text-anchor="middle" font-size="10">பாடசாலை</text>
+        <line x1="100" y1="46" x2="60" y2="66" stroke="#22303A"/><line x1="100" y1="46" x2="140" y2="66" stroke="#22303A"/>
+        <rect x="38" y="66" width="44" height="22" fill="#FDF3E0" stroke="#C9912B"/><text x="60" y="81" text-anchor="middle" font-size="10">வகுப்பு</text>
+        <rect x="118" y="66" width="44" height="22" fill="#FDF3E0" stroke="#C9912B"/><text x="140" y="81" text-anchor="middle" font-size="10">வகுப்பு</text>
+        <text x="320" y="16" text-anchor="middle" font-size="12" fill="#1F4E5F" font-weight="600">தொடர்புசார் (Relational)</text>
+        <rect x="250" y="30" width="60" height="70" fill="#FDFCF9" stroke="#8B1E3F"/><line x1="250" y1="44" x2="310" y2="44" stroke="#8B1E3F"/><text x="280" y="40" text-anchor="middle" font-size="9" fill="#8B1E3F">Student</text>
+        <rect x="340" y="30" width="60" height="70" fill="#FDFCF9" stroke="#8B1E3F"/><line x1="340" y1="44" x2="400" y2="44" stroke="#8B1E3F"/><text x="370" y="40" text-anchor="middle" font-size="9" fill="#8B1E3F">Course</text>
+        <line x1="310" y1="65" x2="340" y2="65" stroke="#1F4E5F" stroke-width="1.5"/>
+      </svg>
+      <div class="cap">படிநிலை (மரம்) vs தொடர்புசார் (சாவிகளால் இணைந்த அட்டவணைகள்)</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 8.2 ===================== -->
+<section class="ncard" id="s2">
+  <div class="nhead"><span class="nnum">8.2</span><span class="ntitle">தொடர்புசார் மாதிரியின் கூறுகளும் கட்டுப்பாடுகளும்</span></div>
+  <div class="nbody">
+    <p>தொடர்புசார் மாதிரியில் தரவு <b>அட்டவணைகளாக (relations/tables)</b> அமைக்கப்படுகிறது. கீழே student அட்டவணை உதாரணம்:</p>
+    <table class="dt c">
+      <caption>student அட்டவணை (relation)</caption>
+      <tr><th>index_no</th><th>name</th><th>marks</th><th>city</th></tr>
+      <tr><td class="pk">1001</td><td>Amuthan</td><td>78</td><td>Jaffna</td></tr>
+      <tr><td class="pk">1002</td><td>Keerthana</td><td>85</td><td>Vavuniya</td></tr>
+      <tr><td class="pk">1003</td><td>Nilavan</td><td>62</td><td>Jaffna</td></tr>
+    </table>
+    <ul>
+      <li><b>தொடர்பு/அட்டவணை (Relation/Table):</b> முழு அட்டவணை.</li>
+      <li><b>பண்புக்கூறு (Attribute):</b> நிரல் (column) — எ.கா: name, marks.</li>
+      <li><b>பதிவு/வரிசை (Tuple/Record):</b> ஒரு வரிசை (row) — ஒரு மாணவரின் முழுத் தகவல்.</li>
+      <li><b>படி (Degree):</b> பண்புக்கூறுகளின் எண்ணிக்கை (இங்கு 4).</li>
+      <li><b>எண்ணுமை (Cardinality):</b> பதிவுகளின் எண்ணிக்கை (இங்கு 3).</li>
+      <li><b>தொடர்பு (Relationship):</b> அட்டவணைகளுக்கிடையேயான இணைப்பு (சாவிகளால்).</li>
+    </ul>
+    <h4 class="sub">கட்டுப்பாடுகள் (Constraints)</h4>
+    <p>தரவின் <b>செம்மையை (integrity)</b> உறுதிசெய்ய விதிக்கப்படும் விதிகள்:</p>
+    <table class="dt">
+      <tr><th>கட்டுப்பாடு</th><th>செயல்</th></tr>
+      <tr><td><b>NOT NULL</b></td><td>புலம் வெறுமையாக (NULL) இருக்கக் கூடாது — மதிப்பு கட்டாயம்</td></tr>
+      <tr><td><b>UNIQUE</b></td><td>புலத்தின் அனைத்து மதிப்புகளும் தனித்துவமாக இருக்க வேண்டும் (மீள்நிகழ்வு கூடாது)</td></tr>
+      <tr><td><b>PRIMARY KEY</b></td><td>ஒவ்வொரு பதிவையும் தனித்துவமாக அடையாளம் காணும் புலம் = NOT NULL + UNIQUE</td></tr>
+      <tr><td><b>FOREIGN KEY</b></td><td>இன்னொரு அட்டவணையின் primary key ஐச் சுட்டிக்காட்டும் புலம் — அட்டவணைகளை இணைக்கும்</td></tr>
+      <tr><td><b>CHECK</b></td><td>புலத்தின் மதிப்பு ஒரு நிபந்தனையைப் பூர்த்திசெய்ய வேண்டும். எ.கா: <code>CHECK (marks &gt;= 0 AND marks &lt;= 100)</code></td></tr>
+    </table>
+    <div class="key"><span class="tag">PRIMARY KEY vs FOREIGN KEY</span>
+      <b>Primary key</b> = ஒரு அட்டவணையில் ஒவ்வொரு வரிசையையும் தனித்துவமாக அடையாளம் காணும் (எ.கா: index_no). <b>Foreign key</b> = வேறு அட்டவணையின் primary key ஐச் சுட்டி, இரு அட்டவணைகளை இணைக்கும் (referential integrity).
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 8.3 ===================== -->
+<section class="ncard" id="s3">
+  <div class="nhead"><span class="nnum">8.3</span><span class="ntitle">DBMS & SQL — DDL, DML</span></div>
+  <div class="nbody">
+    <p><b>DBMS (Database Management System)</b> = தரவுத்தளத்தை உருவாக்கி, நிர்வகித்து, அணுக உதவும் மென்பொருள் (MySQL, Oracle, SQL Server). <b>SQL (Structured Query Language)</b> = தரவுத்தளத்துடன் தொடர்புகொள்ளும் மொழி.</p>
+    <h4 class="sub">DDL (Data Definition Language) — கட்டமைப்பு கட்டளைகள்</h4>
+<pre><span class="cm">-- அட்டவணை உருவாக்கல்</span>
+CREATE TABLE student (
+    index_no INT PRIMARY KEY,
+    name VARCHAR(50) NOT NULL,
+    marks INT CHECK (marks &gt;= 0 AND marks &lt;= 100),
+    city VARCHAR(30)
+);
+
+<span class="cm">-- அட்டவணையை மாற்றல் (புதிய நிரல் சேர்த்தல்)</span>
+ALTER TABLE student ADD email VARCHAR(60);
+
+<span class="cm">-- நிரலை நீக்கல்</span>
+ALTER TABLE student DROP COLUMN email;
+
+<span class="cm">-- அட்டவணையை முழுமையாக நீக்கல்</span>
+DROP TABLE student;
+
+<span class="cm">-- தரவுத்தளத்தை நீக்கல்</span>
+DROP DATABASE school;</pre>
+    <div class="warn"><span class="tag">DROP எச்சரிக்கை</span>
+      <code class="inline">DROP TABLE</code> அட்டவணையையும் அதன் எல்லாத் தரவையும் <b>நிரந்தரமாக நீக்கும்</b>. <code class="inline">DELETE</code> தரவை மட்டும் நீக்கும் (அட்டவணை அமைப்பு எஞ்சும்); <code class="inline">DROP</code> அமைப்பையும் நீக்கும்.
+    </div>
+    <h4 class="sub">DML (Data Manipulation Language) — தரவு கட்டளைகள்</h4>
+<pre><span class="cm">-- 1) தரவு சேர்த்தல்</span>
+INSERT INTO student VALUES (1001, 'Amuthan', 78, 'Jaffna');
+
+<span class="cm">-- 2) தரவு மீட்டெடுத்தல் — அடிப்படை SELECT</span>
+SELECT * FROM student;                          <span class="cm">-- எல்லா நிரல், எல்லா வரிசை</span>
+SELECT name, marks FROM student;                <span class="cm">-- குறிப்பிட்ட நிரல்கள்</span>
+SELECT * FROM student WHERE marks &gt; 75;          <span class="cm">-- நிபந்தனை</span>
+SELECT * FROM student ORDER BY marks DESC;       <span class="cm">-- வரிசைப்படுத்தல்</span>
+SELECT city, COUNT(*) FROM student GROUP BY city; <span class="cm">-- குழுவாக்கம்</span>
+
+<span class="cm">-- 3) தரவு திருத்தல்</span>
+UPDATE student SET marks = 80 WHERE index_no = 1003;
+
+<span class="cm">-- 4) தரவு நீக்கல்</span>
+DELETE FROM student WHERE index_no = 1003;</pre>
+    <h4 class="sub">பல அட்டவணை SELECT — INNER JOIN</h4>
+    <p>இரு அட்டவணைகளை அவற்றின் <b>பொதுப் புலத்தால் (foreign key)</b> இணைத்து தரவைப் பெறுதல். உதாரணம்: student அட்டவணையும் course அட்டவணையும்:</p>
+<pre><span class="cm">-- ஒவ்வொரு மாணவரின் பெயரும் அவர் கற்கும் பாடப் பெயரும்</span>
+SELECT student.name, course.course_name
+FROM student
+INNER JOIN course
+ON student.course_id = course.course_id;</pre>
+    <div class="key"><span class="tag">INNER JOIN</span>
+      INNER JOIN இரு அட்டவணைகளிலும் <b>பொருந்தும் வரிசைகளை மட்டும்</b> தரும். ON நிபந்தனை எந்தப் புலங்கள் பொருந்த வேண்டும் எனக் காட்டுகிறது (வழக்கமாக foreign key = primary key).
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 8.4 ===================== -->
+<section class="ncard" id="s4">
+  <div class="nhead"><span class="nnum">8.4</span><span class="ntitle">ER வரைபடம் (Entity-Relationship Diagram)</span></div>
+  <div class="nbody">
+    <p><b>ER வரைபடம்</b> = தரவுத்தளத்தின் தர்க்க அமைப்பை வரைபடமாகக் காட்டும் கருவி. முக்கிய குறியீடுகள்:</p>
+    <div class="diagram">
+      <svg viewBox="0 0 520 130" width="500" xmlns="http://www.w3.org/2000/svg">
+        <rect x="20" y="40" width="100" height="44" fill="#EAF3F5" stroke="#1F4E5F" stroke-width="1.7"/><text x="70" y="66" text-anchor="middle" font-size="11.5" fill="#1F4E5F" font-weight="600">நிறுவி (Entity)</text>
+        <ellipse cx="220" cy="62" rx="58" ry="26" fill="#FDF3E0" stroke="#C9912B" stroke-width="1.7"/><text x="220" y="66" text-anchor="middle" font-size="11.5" fill="#8a6313" font-weight="600">பண்புக்கூறு</text>
+        <polygon points="400,38 446,62 400,86 354,62" fill="#F3E8EC" stroke="#8B1E3F" stroke-width="1.7"/><text x="400" y="66" text-anchor="middle" font-size="10.5" fill="#8B1E3F" font-weight="600">தொடர்பு</text>
+        <text x="70" y="108" text-anchor="middle" font-size="9.5" fill="#5A6B74">(செவ்வகம்)</text>
+        <text x="220" y="108" text-anchor="middle" font-size="9.5" fill="#5A6B74">(நீள்வட்டம்)</text>
+        <text x="400" y="108" text-anchor="middle" font-size="9.5" fill="#5A6B74">(சாய்சதுரம்)</text>
+      </svg>
+      <div class="cap">ER குறியீடுகள்: நிறுவி (செவ்வகம்) · பண்புக்கூறு (நீள்வட்டம்) · தொடர்பு (சாய்சதுரம்)</div>
+    </div>
+    <ul>
+      <li><b>நிறுவி (Entity):</b> தரவு சேமிக்கப்படும் பொருள்/கருத்து (Student, Course). செவ்வகம்.</li>
+      <li><b>பண்புக்கூறு (Attribute):</b> நிறுவியின் பண்பு (name, marks). நீள்வட்டம்.</li>
+      <li><b>நிறுவி அடையாளங்காட்டி (Entity Identifier / Key attribute):</b> நிறுவியைத் தனித்துவமாக அடையாளம் காணும் பண்புக்கூறு (index_no). கோடிட்ட நீள்வட்டம்.</li>
+      <li><b>தொடர்பு (Relationship):</b> நிறுவிகளுக்கிடையேயான இணைப்பு (Student "enrols in" Course). சாய்சதுரம்.</li>
+    </ul>
+    <h4 class="sub">எண்ணளவை (Cardinality)</h4>
+    <p>இரு நிறுவிகளுக்கிடையேயான தொடர்பின் வகை:</p>
+    <table class="dt">
+      <tr><th>வகை</th><th>விளக்கம்</th><th>எடுத்துக்காட்டு</th></tr>
+      <tr><td><b>1:1</b> (ஒன்றுக்கு ஒன்று)</td><td>ஒரு நிறுவி ↔ ஒரே ஒரு நிறுவி</td><td>ஒரு நபர் ↔ ஒரு கடவுச்சீட்டு</td></tr>
+      <tr><td><b>1:M</b> (ஒன்றுக்குப் பல)</td><td>ஒரு நிறுவி ↔ பல நிறுவிகள்</td><td>ஒரு வகுப்பு ↔ பல மாணவர்கள்</td></tr>
+      <tr><td><b>M:N</b> (பலருக்குப் பல)</td><td>பல நிறுவிகள் ↔ பல நிறுவிகள்</td><td>பல மாணவர்கள் ↔ பல பாடங்கள்</td></tr>
+    </table>
+    <div class="diagram">
+      <svg viewBox="0 0 480 90" width="460" xmlns="http://www.w3.org/2000/svg">
+        <rect x="20" y="30" width="90" height="38" fill="#EAF3F5" stroke="#1F4E5F" stroke-width="1.6"/><text x="65" y="54" text-anchor="middle" font-size="11" fill="#1F4E5F">Student</text>
+        <polygon points="200,30 250,49 200,68 150,49" fill="#F3E8EC" stroke="#8B1E3F" stroke-width="1.6"/><text x="200" y="53" text-anchor="middle" font-size="9.5" fill="#8B1E3F">enrols</text>
+        <rect x="340" y="30" width="90" height="38" fill="#EAF3F5" stroke="#1F4E5F" stroke-width="1.6"/><text x="385" y="54" text-anchor="middle" font-size="11" fill="#1F4E5F">Course</text>
+        <line x1="110" y1="49" x2="150" y2="49" stroke="#22303A"/><text x="130" y="42" text-anchor="middle" font-size="11" fill="#8B1E3F" font-weight="700">M</text>
+        <line x1="250" y1="49" x2="340" y2="49" stroke="#22303A"/><text x="320" y="42" text-anchor="middle" font-size="11" fill="#8B1E3F" font-weight="700">N</text>
+      </svg>
+      <div class="cap">M:N தொடர்பு உதாரணம் — மாணவர் & பாடம்</div>
+    </div>
+    <h4 class="sub">EER வரைபடம் (Enhanced ER) — அறிமுகம்</h4>
+    <p>EER = ER இன் விரிவாக்கம்; கூடுதல் கருத்துகளைச் சேர்க்கிறது: <b>பொதுமைப்படுத்தல் (generalization), சிறப்பாக்கம் (specialization), பாரம்பரியம் (inheritance), துணைவகுப்புகள் (subclasses)</b>. சிக்கலான தரவு உறவுகளை மாதிரியாக்க உதவுகிறது.</p>
+  </div>
+</section>
+
+<!-- ===================== 8.5 ===================== -->
+<section class="ncard" id="s5">
+  <div class="nhead"><span class="nnum">8.5</span><span class="ntitle">தர்க்கத் திட்டம் (Logical Schema) & சாவிகள்</span></div>
+  <div class="nbody">
+    <p><b>தொடர்புசார் திட்டம் (Relational Schema):</b> ஒரு அட்டவணையின் கட்டமைப்பை எழுத்துருவில் காட்டுதல் — primary key கோடிடப்படும்:</p>
+<pre>student (<span class="kw">index_no</span>, name, marks, city)
+       <span class="cm">  ↑ primary key (கோடிடப்பட்டது)</span>
+
+enrolment (<span class="kw">index_no</span>, <span class="kw">course_id</span>, grade)
+         <span class="cm">  ↑ கூட்டு primary key</span></pre>
+    <ul>
+      <li><b>தொடர்பு நிகழ்வு (Relation Instance):</b> ஒரு குறிப்பிட்ட நேரத்தில் அட்டவணையில் உள்ள உண்மையான தரவு (வரிசைகள்).</li>
+      <li><b>களம் (Domain):</b> ஒரு பண்புக்கூறு எடுக்கக்கூடிய அனுமதிக்கப்பட்ட மதிப்புகளின் தொகுதி. எ.கா: marks இன் domain = 0–100 முழுஎண்கள்; gender இன் domain = {M, F}.</li>
+    </ul>
+    <h4 class="sub">சாவிகளின் வகைகள் (Types of Keys)</h4>
+    <table class="dt">
+      <tr><th>சாவி</th><th>விளக்கம்</th></tr>
+      <tr><td><b>மிகை/வேட்பாளர் சாவி</b><br>(Candidate Key)</td><td>ஒரு வரிசையைத் தனித்துவமாக அடையாளம் காணக்கூடிய <b>ஒவ்வொரு</b> புலம்/புலத் தொகுப்பு. (பல candidate keys இருக்கலாம்.) எ.கா: index_no, NIC.</td></tr>
+      <tr><td><b>முதன்மைச் சாவி</b><br>(Primary Key)</td><td>candidate keys இல் <b>தெரிவுசெய்யப்பட்ட ஒன்று</b> — அட்டவணையின் அதிகாரபூர்வ அடையாளங்காட்டி. NULL இருக்கக் கூடாது.</td></tr>
+      <tr><td><b>மாற்றுச் சாவி</b><br>(Alternate Key)</td><td>primary key ஆகத் தெரிவுசெய்யப்படாத <b>எஞ்சிய candidate keys</b>. எ.கா: index_no primary எனில், NIC = alternate.</td></tr>
+      <tr><td><b>அயற் சாவி</b><br>(Foreign Key)</td><td>இன்னொரு அட்டவணையின் primary key ஐச் சுட்டிக்காட்டும் புலம் — அட்டவணைகளை இணைக்கும்.</td></tr>
+      <tr><td><b>கூட்டுச் சாவி</b><br>(Composite Key)</td><td>இரண்டு அல்லது அதற்கு மேற்பட்ட புலங்கள் சேர்ந்து உருவாகும் primary key.</td></tr>
+    </table>
+    <div class="key"><span class="tag">சாவிகளின் தொடர்பு</span>
+      Candidate keys = தனித்துவமாக அடையாளம் காணக்கூடிய எல்லாமே. அவற்றுள் ஒன்று → Primary key; எஞ்சியவை → Alternate keys. (Primary + Alternate = Candidate.)
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 8.6 ===================== -->
+<section class="ncard" id="s6">
+  <div class="nhead"><span class="nnum">8.6</span><span class="ntitle">ER → தர்க்கத் திட்ட மாற்றம் (ER to Logical Schema)</span></div>
+  <div class="nbody">
+    <p>ER வரைபடத்தை தொடர்புசார் அட்டவணைகளாக மாற்றும் விதிகள்:</p>
+    <h4 class="sub">1) நிறுவி மாற்றம் (Entity Transformation)</h4>
+    <p>ஒவ்வொரு <b>நிறுவியும் ஒரு அட்டவணையாக</b> மாறும்; நிறுவியின் அடையாளங்காட்டி → primary key.</p>
+    <div class="diagram">
+      <svg viewBox="0 0 380 70" width="360" xmlns="http://www.w3.org/2000/svg">
+        <defs><marker id="t1" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#22303A"/></marker></defs>
+        <rect x="14" y="22" width="100" height="34" fill="#EAF3F5" stroke="#1F4E5F" stroke-width="1.6"/><text x="64" y="43" text-anchor="middle" font-size="11" fill="#1F4E5F">Student (entity)</text>
+        <line x1="120" y1="39" x2="170" y2="39" stroke="#22303A" stroke-width="1.5" marker-end="url(#t1)"/>
+        <text x="285" y="43" text-anchor="middle" font-size="11.5" fill="#8B1E3F" font-family="JetBrains Mono">student(index_no, name)</text>
+      </svg>
+    </div>
+    <h4 class="sub">2) பண்புக்கூறு மாற்றம்</h4>
+    <p>ஒவ்வொரு <b>பண்புக்கூறும் அந்த அட்டவணையின் நிரலாக</b> மாறும். கூட்டுப் பண்புக்கூறு (composite) → தனித் தனி நிரல்களாக; பல்மதிப்புப் பண்புக்கூறு (multivalued) → தனி அட்டவணையாக.</p>
+    <h4 class="sub">3) தொடர்பு மாற்றம் (Relationship Transformation)</h4>
+    <table class="dt">
+      <tr><th>தொடர்பு வகை</th><th>மாற்ற விதி</th></tr>
+      <tr><td><b>1:1</b></td><td>ஒரு அட்டவணையின் primary key ஐ மற்றதில் foreign key ஆகச் சேர்க்க</td></tr>
+      <tr><td><b>1:M</b></td><td>"பல" பக்க அட்டவணையில், "ஒன்று" பக்கத்தின் primary key ஐ foreign key ஆகச் சேர்க்க</td></tr>
+      <tr><td><b>M:N</b></td><td><b>ஒரு புதிய இணைப்பு அட்டவணை (junction/bridge table)</b> உருவாக்க — இரு நிறுவிகளின் primary keys ஐயும் foreign keys ஆகக் கொண்டு (சேர்ந்து composite key)</td></tr>
+    </table>
+    <div class="key"><span class="tag">M:N — மிக முக்கியம்</span>
+      M:N தொடர்பை நேரடியாக அட்டவணைகளில் காட்ட முடியாது. எனவே <b>புதிய இணைப்பு அட்டவணை</b> உருவாக்கப்படுகிறது. எ.கா: Student(M) — Course(N) → <code class="inline">enrolment(index_no, course_id, grade)</code> — இதில் index_no, course_id இரண்டும் சேர்ந்து composite primary key, இரண்டும் foreign keys.
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 8.7 ===================== -->
+<section class="ncard" id="s7">
+  <div class="nhead"><span class="nnum">8.7</span><span class="ntitle">இயல்நிலையாக்கம் (Normalization) — 0NF → 3NF</span></div>
+  <div class="nbody">
+    <p><b>இயல்நிலையாக்கம்</b> = அட்டவணைகளை <b>மீள்நிகழ்வையும் (redundancy) முரண்பாடுகளையும் (anomalies)</b> குறைக்கும் வகையில் முறையாகப் பிரிக்கும் செயல்முறை.</p>
+    <h4 class="sub">மீள்நிகழ்வு & முரண்பாடுகள் (Anomalies)</h4>
+    <p>இயல்நிலையாக்கப்படாத அட்டவணையில் ஒரே தரவு மீண்டும் மீண்டும் வந்தால், மூன்று வகை முரண்பாடுகள் ஏற்படும்:</p>
+    <ul>
+      <li><b>சேர்க்கை முரண்பாடு (Insert anomaly):</b> தொடர்பற்ற தரவு இல்லாமல் புதிய பதிவைச் சேர்க்க முடியாமை. எ.கா: இன்னும் மாணவர் இல்லாத புதிய பாடத்தைச் சேர்க்க முடியாது.</li>
+      <li><b>புதுப்பிப்பு முரண்பாடு (Update anomaly):</b> மீண்டும் வரும் தரவை ஒரே இடத்தில் மாற்றி, மற்ற இடங்களில் மறந்தால் முரண்பாடு. எ.கா: ஆசிரியரின் தொலைபேசி எண் பல வரிசைகளில் இருந்தால், ஒன்றை மட்டும் மாற்றினால் முரண்பாடு.</li>
+      <li><b>நீக்கல் முரண்பாடு (Delete anomaly):</b> ஒரு பதிவை நீக்கும்போது தேவையான வேறு தரவும் இழக்கப்படுதல்.</li>
+    </ul>
+    <h4 class="sub">செயற்பாட்டுச் சார்பு (Functional Dependency)</h4>
+    <p><b>A → B</b> எனில் "A ஐ அறிந்தால் B ஐத் தீர்மானிக்கலாம்". எ.கா: index_no → name (மாணவர் இலக்கத்தை அறிந்தால் பெயரைத் தீர்மானிக்கலாம்).</p>
+    <ul>
+      <li><b>முழுச் சார்பு (Full):</b> B முழு (கூட்டு) சாவியையும் சார்ந்தது.</li>
+      <li><b>பகுதிச் சார்பு (Partial):</b> B கூட்டுச் சாவியின் ஒரு பகுதியை மட்டும் சார்ந்தது. (2NF இல் நீக்கப்படும்.)</li>
+      <li><b>கடத்துச் சார்பு (Transitive):</b> A → B, B → C எனில் A → C (மறைமுகம்). (3NF இல் நீக்கப்படும்.)</li>
+    </ul>
+
+    <h4 class="sub">இயல்நிலை வடிவங்கள் — படிப்படியாக</h4>
+    <p><b>தொடக்கம் (0NF / Unnormalized):</b> மீள்படும் குழுக்கள் (repeating groups) உள்ள அட்டவணை:</p>
+    <table class="dt c">
+      <caption>0NF — ஒரே கலத்தில் பல மதிப்புகள்</caption>
+      <tr><th>index_no</th><th>name</th><th>subjects</th></tr>
+      <tr><td>1001</td><td>Amuthan</td><td>ICT, Physics, Maths</td></tr>
+      <tr><td>1002</td><td>Keerthana</td><td>ICT, Bio</td></tr>
+    </table>
+
+    <p><b>1NF (முதல் இயல்நிலை):</b> ஒவ்வொரு கலமும் <b>ஒற்றை அணுமதிப்பு (atomic)</b> கொண்டிருக்க வேண்டும் — மீள்படும் குழுக்கள் கூடாது:</p>
+    <table class="dt c">
+      <caption>1NF — ஒவ்வொரு கலமும் ஒற்றை மதிப்பு</caption>
+      <tr><th>index_no</th><th>name</th><th>subject</th></tr>
+      <tr><td>1001</td><td>Amuthan</td><td>ICT</td></tr>
+      <tr><td>1001</td><td>Amuthan</td><td>Physics</td></tr>
+      <tr><td>1001</td><td>Amuthan</td><td>Maths</td></tr>
+      <tr><td>1002</td><td>Keerthana</td><td>ICT</td></tr>
+      <tr><td>1002</td><td>Keerthana</td><td>Bio</td></tr>
+    </table>
+    <p>(primary key = index_no + subject கூட்டுச் சாவி.)</p>
+
+    <p><b>2NF (இரண்டாம் இயல்நிலை):</b> 1NF ஆக இருந்து, <b>பகுதிச் சார்பு இல்லாமல்</b> இருக்க வேண்டும் — ஒவ்வொரு சாவியற்ற பண்புக்கூறும் <b>முழுக் கூட்டுச் சாவியையும்</b> சார்ந்திருக்க வேண்டும். இங்கு name index_no ஐ மட்டும் சார்ந்தது (subject அல்ல) — பகுதிச் சார்பு! எனவே பிரிக்க:</p>
+    <table class="dt c">
+      <caption>student அட்டவணை</caption>
+      <tr><th>index_no</th><th>name</th></tr>
+      <tr><td>1001</td><td>Amuthan</td></tr>
+      <tr><td>1002</td><td>Keerthana</td></tr>
+    </table>
+    <table class="dt c">
+      <caption>enrolment அட்டவணை</caption>
+      <tr><th>index_no</th><th>subject</th></tr>
+      <tr><td>1001</td><td>ICT</td></tr>
+      <tr><td>1001</td><td>Physics</td></tr>
+      <tr><td>1002</td><td>Bio</td></tr>
+    </table>
+
+    <p><b>3NF (மூன்றாம் இயல்நிலை):</b> 2NF ஆக இருந்து, <b>கடத்துச் சார்பு இல்லாமல்</b> இருக்க வேண்டும் — சாவியற்ற பண்புக்கூறு இன்னொரு சாவியற்ற பண்புக்கூற்றைச் சார்ந்திருக்கக் கூடாது. உதாரணம்: <code class="inline">student(index_no, name, city, city_postcode)</code> — இங்கு index_no → city → city_postcode (கடத்து!). எனவே பிரிக்க:</p>
+    <table class="dt c">
+      <caption>student</caption>
+      <tr><th>index_no</th><th>name</th><th>city</th></tr>
+      <tr><td>1001</td><td>Amuthan</td><td>Jaffna</td></tr>
+    </table>
+    <table class="dt c">
+      <caption>city</caption>
+      <tr><th>city</th><th>postcode</th></tr>
+      <tr><td>Jaffna</td><td>40000</td></tr>
+    </table>
+    <div class="key"><span class="tag">மூன்று வடிவங்களும் — சுருக்கம்</span>
+      <b>1NF:</b> ஒற்றை அணுமதிப்பு (மீள்படும் குழு கூடாது). <b>2NF:</b> 1NF + பகுதிச் சார்பு இல்லை (முழுச் சாவியைச் சார்தல்). <b>3NF:</b> 2NF + கடத்துச் சார்பு இல்லை.<br>
+      நினைவுச் சொற்றொடர்: "<b>The key, the whole key, and nothing but the key</b>" — 1NF (key உள்ளது), 2NF (whole key), 3NF (nothing but the key).
+    </div>
+  </div>
+</section>
+
+<!-- ===================== Practice ===================== -->
+<section class="ncard" id="sp">
+  <div class="nhead"><span class="nnum">16</span><span class="ntitle">சூழ்நிலை அடிப்படையிலான வினாக்கள் (விடைகளுடன்)</span></div>
+  <div class="nbody">
+    <p style="margin-bottom:18px">பின்வரும் வினாக்கள் ஒரு <b>நூலக (library)</b> மற்றும் <b>மருத்துவமனை (hospital)</b> சூழல்களை அடிப்படையாகக் கொண்டவை. முதலில் முயன்று, பின் விடையைச் சரிபார்க்கவும்.</p>
+
+    <!-- P1 -->
+    <div class="pq"><span class="qnum">வினா 01</span>
+      <div class="scen">ஒரு பாடசாலை, மாணவர்களின் பெயர்களையும் முகவரிகளையும் ஒரு Excel தாளில் வைத்துள்ளது. ஒவ்வொரு வகுப்பாசிரியரும் தனிப் பிரதி வைத்துள்ளனர்.</div>
+      <p class="task">இந்த கோப்பு அடிப்படை முறையின் இரண்டு குறைபாடுகளைக் கூறி, தரவுத்தளம் எவ்வாறு தீர்க்கும் எனக் கூறுக.</p>
+      <button class="btn" onclick="toggleAns(this,'p1')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p1"><span class="ans-label">விடை</span>
+        <p><b>குறைபாடுகள்:</b> தரவு மீள்நிகழ்வு (பல பிரதிகள்); முரண்பாடு (ஒரு பிரதியில் மாற்றி மற்றதில் மறந்தால்); பகிர்தல்/புதுப்பித்தல் சிரமம்.</p>
+        <p><b>தரவுத்தளத் தீர்வு:</b> தரவை ஒரே மைய இடத்தில் சேமித்து, மீள்நிகழ்வைக் குறைத்து, அனைவரும் ஒரே துல்லியமான தரவைப் பகிர்ந்து அணுக முடியும்.</p>
+      </div>
+    </div>
+
+    <!-- P2 -->
+    <div class="pq"><span class="qnum">வினா 02</span>
+      <div class="scen">ஒரு நூலகத்தில் <code class="inline">book</code> அட்டவணையில் book_id, title, author, price ஆகிய புலங்கள் உள்ளன.</div>
+      <p class="task">(அ) இந்த அட்டவணையில் எத்தனை பண்புக்கூறுகள் (degree)? (ஆ) book_id க்கு ஏற்ற கட்டுப்பாடு எது, ஏன்?</p>
+      <button class="btn" onclick="toggleAns(this,'p2')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p2"><span class="ans-label">விடை</span>
+        <p>(அ) படி (degree) = <b>4</b> (book_id, title, author, price).</p>
+        <p>(ஆ) book_id க்கு <b>PRIMARY KEY</b> — ஏனெனில் ஒவ்வொரு நூலையும் தனித்துவமாக அடையாளம் காண வேண்டும் (NOT NULL + UNIQUE).</p>
+      </div>
+    </div>
+
+    <!-- P3 -->
+    <div class="pq"><span class="qnum">வினா 03</span>
+      <div class="scen">நூலகத்தில் <code class="inline">book(book_id, title, price)</code> அட்டவணையை உருவாக்க வேண்டும். price 0 க்கு குறைவாக இருக்கக் கூடாது.</div>
+      <p class="task">இந்த அட்டவணையை உருவாக்கும் SQL DDL கட்டளையை எழுதுக.</p>
+      <button class="btn" onclick="toggleAns(this,'p3')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p3"><span class="ans-label">விடை</span>
+<pre>CREATE TABLE book (
+    book_id INT PRIMARY KEY,
+    title VARCHAR(100) NOT NULL,
+    price DECIMAL(8,2) CHECK (price &gt;= 0)
+);</pre>
+      </div>
+    </div>
+
+    <!-- P4 -->
+    <div class="pq"><span class="qnum">வினா 04</span>
+      <div class="scen">book அட்டவணையில் விலை ரூ.1000 க்கு மேற்பட்ட நூல்களின் தலைப்புகளை விலையின் இறங்குவரிசையில் பெற வேண்டும்.</div>
+      <p class="task">இதற்கான SQL SELECT கட்டளையை எழுதுக.</p>
+      <button class="btn" onclick="toggleAns(this,'p4')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p4"><span class="ans-label">விடை</span>
+<pre>SELECT title, price
+FROM book
+WHERE price &gt; 1000
+ORDER BY price DESC;</pre>
+      </div>
+    </div>
+
+    <!-- P5 -->
+    <div class="pq"><span class="qnum">வினா 05</span>
+      <div class="scen">நூலகத்தில் <code class="inline">member(member_id, name)</code> மற்றும் <code class="inline">loan(loan_id, member_id, book_id)</code> அட்டவணைகள் உள்ளன.</div>
+      <p class="task">ஒவ்வொரு கடன் பதிவுக்கும் உறுப்பினரின் பெயரைக் காட்டும் SQL கட்டளையை (INNER JOIN பயன்படுத்தி) எழுதுக.</p>
+      <button class="btn" onclick="toggleAns(this,'p5')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p5"><span class="ans-label">விடை</span>
+<pre>SELECT loan.loan_id, member.name, loan.book_id
+FROM loan
+INNER JOIN member
+ON loan.member_id = member.member_id;</pre>
+        <div class="note">loan.member_id (foreign key) = member.member_id (primary key) — இதுவே இணைப்பு நிபந்தனை.</div>
+      </div>
+    </div>
+
+    <!-- P6 -->
+    <div class="pq"><span class="qnum">வினா 06</span>
+      <div class="scen">member_id 205 உறுப்பினரின் பெயரை "Ravi" ஆக மாற்ற வேண்டும்.</div>
+      <p class="task">இதற்கான SQL கட்டளையை எழுதுக. WHERE விட்டால் என்ன நடக்கும்?</p>
+      <button class="btn" onclick="toggleAns(this,'p6')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p6"><span class="ans-label">விடை</span>
+<pre>UPDATE member SET name = 'Ravi'
+WHERE member_id = 205;</pre>
+        <p>WHERE விட்டால் — <b>எல்லா உறுப்பினர்களின் பெயரும்</b> "Ravi" ஆக மாறிவிடும்!</p>
+      </div>
+    </div>
+
+    <!-- P7 -->
+    <div class="pq"><span class="qnum">வினா 07</span>
+      <div class="scen">ஒரு மருத்துவமனையில் ஒரு நோயாளர் (Patient) பல சந்திப்புகளை (Appointment) மேற்கொள்கிறார்; ஒரு சந்திப்பு ஒரே நோயாளருக்கானது.</div>
+      <p class="task">Patient க்கும் Appointment க்கும் இடையேயான தொடர்பின் எண்ணளவை (cardinality) என்ன?</p>
+      <button class="btn" onclick="toggleAns(this,'p7')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p7"><span class="ans-label">விடை</span>
+        <p><b>1:M (ஒன்றுக்குப் பல)</b> — ஒரு நோயாளர் பல சந்திப்புகளை மேற்கொள்ளலாம், ஆனால் ஒரு சந்திப்பு ஒரே நோயாளருக்கானது.</p>
+      </div>
+    </div>
+
+    <!-- P8 -->
+    <div class="pq"><span class="qnum">வினா 08</span>
+      <div class="scen">ஒரு மருத்துவமனையில் ஒரு மருத்துவர் பல நோயாளர்களைப் பார்க்கிறார்; ஒரு நோயாளர் பல மருத்துவர்களைப் பார்க்கலாம்.</div>
+      <p class="task">இந்த M:N தொடர்பை அட்டவணைகளாக மாற்றும்போது என்ன செய்ய வேண்டும்? அட்டவணை அமைப்பைக் காட்டுக.</p>
+      <button class="btn" onclick="toggleAns(this,'p8')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p8"><span class="ans-label">விடை</span>
+        <p>M:N தொடர்பை நேரடியாகக் காட்ட முடியாது — ஒரு <b>புதிய இணைப்பு அட்டவணை</b> உருவாக்க வேண்டும்:</p>
+<pre>doctor(<span class="kw">doctor_id</span>, name)
+patient(<span class="kw">patient_id</span>, name)
+consultation(<span class="kw">doctor_id</span>, <span class="kw">patient_id</span>, date)
+   <span class="cm">↑ doctor_id + patient_id = composite primary key</span>
+   <span class="cm">  இரண்டும் foreign keys</span></pre>
+      </div>
+    </div>
+
+    <!-- P9 -->
+    <div class="pq"><span class="qnum">வினா 09</span>
+      <div class="scen">ஒரு அட்டவணையில் index_no மற்றும் NIC ஆகிய இரண்டுமே ஒவ்வொரு மாணவரையும் தனித்துவமாக அடையாளம் காணக்கூடியவை. index_no primary key ஆகத் தெரிவுசெய்யப்பட்டது.</div>
+      <p class="task">(அ) candidate keys யாவை? (ஆ) NIC இன் சாவி வகை என்ன?</p>
+      <button class="btn" onclick="toggleAns(this,'p9')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p9"><span class="ans-label">விடை</span>
+        <p>(அ) Candidate keys = <b>index_no மற்றும் NIC</b> (இரண்டும் தனித்துவமாக அடையாளம் காணக்கூடியவை).</p>
+        <p>(ஆ) index_no primary key ஆனதால், NIC = <b>alternate key (மாற்றுச் சாவி)</b>.</p>
+      </div>
+    </div>
+
+    <!-- P10 -->
+    <div class="pq"><span class="qnum">வினா 10</span>
+      <div class="scen">பின்வரும் அட்டவணை: <code class="inline">order(order_id, customer_name, customer_phone, item)</code>. ஒரே வாடிக்கையாளர் பல ஆர்டர்களைச் செய்வதால், அவரது தொலைபேசி எண் பல வரிசைகளில் மீண்டும் வருகிறது.</div>
+      <p class="task">இங்கு ஏற்படக்கூடிய புதுப்பிப்பு முரண்பாட்டை (update anomaly) விளக்குக.</p>
+      <button class="btn" onclick="toggleAns(this,'p10')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p10"><span class="ans-label">விடை</span>
+        <p>வாடிக்கையாளரின் தொலைபேசி எண் மாறினால், அது <b>பல வரிசைகளில்</b> உள்ளது. சில வரிசைகளில் மட்டும் மாற்றி, மற்றவற்றில் மறந்தால் — ஒரே வாடிக்கையாளருக்கு வெவ்வேறு எண்கள் தோன்றி <b>தரவு முரண்பாடு</b> ஏற்படும். (தீர்வு: வாடிக்கையாளர் தரவைத் தனி அட்டவணையாகப் பிரித்தல் — normalization.)</p>
+      </div>
+    </div>
+
+    <!-- P11 -->
+    <div class="pq"><span class="qnum">வினா 11</span>
+      <div class="scen">அட்டவணை: <code class="inline">student(index_no, name, subjects)</code> இல் subjects கலத்தில் "ICT, Physics, Maths" எனப் பல மதிப்புகள் உள்ளன.</div>
+      <p class="task">இது எந்த இயல்நிலையில் (NF) உள்ளது? 1NF க்கு மாற்ற என்ன செய்ய வேண்டும்?</p>
+      <button class="btn" onclick="toggleAns(this,'p11')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p11"><span class="ans-label">விடை</span>
+        <p>இது <b>0NF (unnormalized)</b> — ஒரே கலத்தில் பல மதிப்புகள் (மீள்படும் குழு).</p>
+        <p><b>1NF க்கு:</b> ஒவ்வொரு பாடத்துக்கும் தனி வரிசை உருவாக்கி, ஒவ்வொரு கலமும் ஒற்றை அணுமதிப்பு (atomic) கொண்டிருக்க வேண்டும். primary key = index_no + subject.</p>
+      </div>
+    </div>
+
+    <!-- P12 -->
+    <div class="pq"><span class="qnum">வினா 12</span>
+      <div class="scen">அட்டவணை: <code class="inline">enrolment(index_no, course_id, student_name, course_fee)</code> — primary key = (index_no + course_id). student_name index_no ஐ மட்டும் சார்ந்தது; course_fee course_id ஐ மட்டும் சார்ந்தது.</div>
+      <p class="task">இங்குள்ள பகுதிச் சார்பை (partial dependency) விளக்கி, 2NF க்கு மாற்றுக.</p>
+      <button class="btn" onclick="toggleAns(this,'p12')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p12"><span class="ans-label">விடை</span>
+        <p><b>பகுதிச் சார்பு:</b> student_name முழுக் கூட்டுச் சாவியை (index_no+course_id) அல்ல, index_no ஐ மட்டும் சார்ந்தது; course_fee course_id ஐ மட்டும் சார்ந்தது. இவை பகுதிச் சார்புகள்.</p>
+        <p><b>2NF — பிரிக்க:</b></p>
+<pre>student(<span class="kw">index_no</span>, student_name)
+course(<span class="kw">course_id</span>, course_fee)
+enrolment(<span class="kw">index_no</span>, <span class="kw">course_id</span>)</pre>
+      </div>
+    </div>
+
+    <!-- P13 -->
+    <div class="pq"><span class="qnum">வினா 13</span>
+      <div class="scen">அட்டவணை: <code class="inline">employee(emp_id, name, dept_id, dept_name)</code>. emp_id → dept_id, dept_id → dept_name.</div>
+      <p class="task">இங்குள்ள கடத்துச் சார்பை (transitive dependency) விளக்கி, 3NF க்கு மாற்றுக.</p>
+      <button class="btn" onclick="toggleAns(this,'p13')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p13"><span class="ans-label">விடை</span>
+        <p><b>கடத்துச் சார்பு:</b> emp_id → dept_id → dept_name. எனவே dept_name emp_id ஐ <b>மறைமுகமாக (transitively)</b> சார்ந்துள்ளது.</p>
+        <p><b>3NF — பிரிக்க:</b></p>
+<pre>employee(<span class="kw">emp_id</span>, name, dept_id)
+department(<span class="kw">dept_id</span>, dept_name)</pre>
+      </div>
+    </div>
+
+    <!-- P14 -->
+    <div class="pq"><span class="qnum">வினா 14</span>
+      <div class="scen">ஒரு நூலகத்தில் இன்னும் யாரும் கடன் வாங்காத ஒரு புதிய நூலைச் சேர்க்க வேண்டும். ஆனால் அட்டவணை அமைப்பு loan & book தகவலை ஒரே அட்டவணையில் வைத்துள்ளது.</div>
+      <p class="task">இங்கு ஏற்படும் முரண்பாட்டின் பெயர் என்ன? விளக்குக.</p>
+      <button class="btn" onclick="toggleAns(this,'p14')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p14"><span class="ans-label">விடை</span>
+        <p><b>சேர்க்கை முரண்பாடு (Insert anomaly)</b> — கடன் தகவல் (member_id, loan_date) இல்லாமல் புதிய நூலைச் சேர்க்க முடியாது, ஏனெனில் அவை ஒரே அட்டவணையில் உள்ளன. (தீர்வு: book மற்றும் loan ஐத் தனி அட்டவணைகளாகப் பிரித்தல்.)</p>
+      </div>
+    </div>
+
+    <!-- P15 -->
+    <div class="pq"><span class="qnum">வினா 15</span>
+      <div class="scen">book அட்டவணையில் "out of print" ஆன நூல்களை நீக்க வேண்டும். book_id 110 ஐ நீக்கவும்.</div>
+      <p class="task">SQL கட்டளையை எழுதுக. DELETE க்கும் DROP க்கும் உள்ள வேறுபாடு என்ன?</p>
+      <button class="btn" onclick="toggleAns(this,'p15')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p15"><span class="ans-label">விடை</span>
+<pre>DELETE FROM book WHERE book_id = 110;</pre>
+        <p><b>DELETE:</b> அட்டவணையிலிருந்து குறிப்பிட்ட <b>வரிசைகளை மட்டும்</b> நீக்கும்; அட்டவணை அமைப்பு எஞ்சும்.</p>
+        <p><b>DROP TABLE:</b> அட்டவணையையும் அதன் <b>முழுத் தரவையும் அமைப்பையும்</b> நிரந்தரமாக நீக்கும்.</p>
+      </div>
+    </div>
+
+    <!-- P16 -->
+    <div class="pq"><span class="qnum">வினா 16</span>
+      <div class="scen">ஒரு கடையில் ஒவ்வொரு நகரத்துக்கும் (city) ஒரே அஞ்சல் குறியீடு (postcode) உள்ளது. அட்டவணை: <code class="inline">customer(cust_id, name, city, postcode)</code>.</div>
+      <p class="task">(அ) இங்குள்ள சார்பு வகை என்ன? (ஆ) 3NF க்கு மாற்றிய அட்டவணைகளைக் காட்டுக.</p>
+      <button class="btn" onclick="toggleAns(this,'p16')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p16"><span class="ans-label">விடை</span>
+        <p>(அ) cust_id → city → postcode = <b>கடத்துச் சார்பு (transitive)</b>.</p>
+        <p>(ஆ) 3NF:</p>
+<pre>customer(<span class="kw">cust_id</span>, name, city)
+city(<span class="kw">city</span>, postcode)</pre>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+</main>
+
+<footer>
+  க.பொ.த (உயர்தர) தகவல் மற்றும் தொடர்பாடல் தொழினுட்பம் — அலகு 8: தரவுத்தள முகாமை குறிப்புகள்
+</footer>
+
+<script>
+function toggleAns(btn,id){
+  var ans=document.getElementById(id);
+  var open=ans.classList.toggle('show');
+  btn.classList.toggle('open',open);
+  btn.textContent=open?'விடையை மறை ▴':'விடையைக் காட்டு ▾';
+}
+</script>
+
+</body>
+</html>
