@@ -1,3 +1,9 @@
 # OS cruft
 .DS_Store
 Thumbs.db
+
+# Source PDFs (content is published as HTML pages instead)
+*.pdf
+
+# Local test artifacts
+.playwright-mcp/

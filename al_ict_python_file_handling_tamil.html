@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>க.பொ.த (உயர்தரம்) ICT — Python கோப்புக் கையாளுகை (File Handling) குறிப்புகள்</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Catamaran:wght@600;800&family=Hind+Madurai:wght@400;500;600&family=Noto+Sans+Tamil:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F6F4EE; --card:#FFFFFF; --ink:#22303A;
+    --maroon:#8B1E3F; --teal:#1F4E5F; --gold:#C9912B;
+    --line:#E2DDD2; --code-bg:#102A33; --code-ink:#D9EEF2;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--paper);color:var(--ink);
+    font-family:'Hind Madurai','Noto Sans Tamil',sans-serif;
+    line-height:1.8;font-size:17px;}
+  header{background:linear-gradient(135deg,var(--teal) 0%,#143946 100%);
+    color:#F2EFE6;padding:42px 20px 36px;text-align:center;
+    border-bottom:5px solid var(--gold);}
+  header .eyebrow{letter-spacing:.18em;font-size:.8rem;text-transform:uppercase;
+    color:#D8C58A;margin-bottom:10px;}
+  header h1{font-family:'Catamaran','Noto Sans Tamil',sans-serif;font-weight:800;
+    font-size:clamp(1.4rem,4vw,2.15rem);line-height:1.5;}
+  header p{margin-top:10px;font-size:.95rem;color:#BFD4DA}
+  main{max-width:900px;margin:0 auto;padding:36px 18px 70px}
+
+  .toc{background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:16px 24px;margin-bottom:34px;font-size:.92rem;}
+  .toc b{color:var(--teal);font-family:'Catamaran','Noto Sans Tamil',sans-serif}
+  .toc a{color:var(--maroon);text-decoration:none;white-space:nowrap}
+  .toc a:hover{text-decoration:underline}
+  .toc .links{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:6px}
+  .home{display:inline-block;margin-bottom:18px;color:var(--maroon);
+    text-decoration:none;font-weight:600;font-size:.9rem}
+  .home:hover{text-decoration:underline}
+
+  .ncard{background:var(--card);border:1px solid var(--line);border-radius:16px;
+    margin-bottom:32px;overflow:hidden;box-shadow:0 2px 10px rgba(34,48,58,.05);}
+  .nhead{display:flex;align-items:center;gap:14px;padding:16px 24px;
+    border-bottom:1px solid var(--line);
+    background:linear-gradient(to right,#FBFAF6,#fff);}
+  .nnum{font-family:'Catamaran',sans-serif;font-weight:800;font-size:1rem;
+    color:#fff;background:var(--teal);border-radius:10px;padding:5px 14px;
+    white-space:nowrap;}
+  .ntitle{font-family:'Catamaran','Noto Sans Tamil',sans-serif;font-weight:600;
+    font-size:1.12rem;color:var(--teal);}
+  .nbody{padding:22px 26px 26px}
+  .nbody p{margin-bottom:12px}
+  .nbody ul,.nbody ol{margin:6px 26px 14px}
+  .nbody li{margin-bottom:6px}
+  h4.sub{font-family:'Catamaran','Noto Sans Tamil',sans-serif;color:var(--maroon);
+    font-size:1.0rem;margin:18px 0 8px;}
+
+  .key{background:#FBF7EC;border-right:4px solid var(--gold);
+    border-radius:10px;padding:14px 20px;margin:14px 0;}
+  .key .tag{font-size:.78rem;font-weight:700;color:var(--gold);
+    letter-spacing:.1em;display:block;margin-bottom:4px;}
+  .warn{background:#FAEFF1;border-right:4px solid var(--maroon);
+    border-radius:10px;padding:14px 20px;margin:14px 0;}
+  .warn .tag{font-size:.78rem;font-weight:700;color:var(--maroon);
+    letter-spacing:.1em;display:block;margin-bottom:4px;}
+
+  pre{background:var(--code-bg);color:var(--code-ink);border-radius:12px;
+    padding:18px 20px;margin:12px 0;overflow-x:auto;
+    font-family:'JetBrains Mono',monospace;font-size:.88rem;line-height:1.7;
+    direction:ltr;text-align:left;}
+  pre .cm{color:#7FB6A4} pre .kw{color:#F2B36B} pre .st{color:#A8D8B9}
+  code.inline{background:#EDF2F1;color:var(--teal);border-radius:6px;
+    padding:1px 8px;font-family:'JetBrains Mono',monospace;font-size:.85em;
+    direction:ltr;display:inline-block;}
+
+  table.dt{border-collapse:collapse;margin:12px auto;font-size:.9rem;direction:ltr;}
+  table.dt th{background:var(--teal);color:#fff;padding:7px 14px;
+    font-weight:600;border:1px solid #16404f;}
+  table.dt td{border:1px solid var(--line);padding:6px 14px;text-align:center;
+    background:#FDFCF9;}
+  table.dt td.l{text-align:left}
+  table.dt caption{caption-side:top;font-weight:600;color:var(--teal);
+    margin-bottom:6px;font-size:.95rem;}
+  table.dt code{font-family:'JetBrains Mono',monospace;font-size:.85em;color:var(--maroon)}
+
+  .btn{display:inline-flex;align-items:center;gap:9px;
+    font-family:'Hind Madurai','Noto Sans Tamil',sans-serif;font-weight:600;
+    font-size:1rem;color:#fff;background:var(--teal);border:none;
+    border-radius:999px;padding:11px 26px;margin-top:14px;cursor:pointer;
+    transition:background .2s,transform .15s;}
+  .btn:hover{background:#16404f;transform:translateY(-1px)}
+  .btn:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+  .btn.open{background:var(--maroon)}
+  .answer{display:none;margin-top:20px;border-top:2px dashed var(--line);
+    padding-top:18px;animation:fade .35s ease;}
+  .answer.show{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  .ans-label{display:inline-block;font-weight:700;color:#fff;background:var(--gold);
+    border-radius:8px;padding:3px 14px;font-size:.85rem;margin-bottom:12px;}
+  .qnum{font-family:'Catamaran',sans-serif;font-weight:800;font-size:1rem;
+    color:#fff;background:var(--maroon);border-radius:10px;padding:5px 14px;
+    white-space:nowrap;}
+  .task{font-weight:600;color:var(--maroon)}
+  .pq{border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin-bottom:18px}
+  .note{margin-top:12px;font-size:.9rem;color:#5A6B74;background:#EFF4F2;
+    border-radius:10px;padding:10px 16px;}
+
+  footer{text-align:center;padding:26px 16px 40px;font-size:.85rem;color:#7A8790;}
+  @media (max-width:560px){
+    .nhead{flex-direction:column;align-items:flex-start;gap:8px}
+    body{font-size:16px}
+  }
+  @media (prefers-reduced-motion:reduce){.answer{animation:none}.btn{transition:none}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">G.C.E. Advanced Level &middot; Sri Lanka &middot; ICT (20)</div>
+  <h1>Python கோப்புக் கையாளுகை<br>(File Handling) குறிப்புகள்</h1>
+  <p>open() / close() அணுகுமுறை &middot; 20 வினா–விடை விளக்கங்களுடன்</p>
+</header>
+
+<main>
+
+<a class="home" href="index.html">← முகப்புப் பக்கம்</a>
+
+<div class="toc"><b>உள்ளடக்கம்</b>
+  <div class="links">
+    <a href="#s1">பகுதி A — கருத்துகளும் முறைகளும் (வினா 01–06)</a>
+    <a href="#s2">பகுதி B — வாசித்தல் (வினா 07–10)</a>
+    <a href="#s3">பகுதி C — எழுதுதலும் சேர்த்தலும் (வினா 11–14)</a>
+    <a href="#s4">பகுதி D — மூடுதலும் பிழை கையாளுகையும் (வினா 15–20)</a>
+  </div>
+</div>
+
+<div class="key" style="margin-bottom:30px"><span class="tag">விரைவு நினைவு</span>
+  <b>open(filename, mode)</b> → file object ஐத் தரும். முக்கிய முறைகள்:
+  <code class="inline">"r"</code> வாசி &middot; <code class="inline">"w"</code> மேலெழுது &middot;
+  <code class="inline">"a"</code> இறுதியில் சேர் &middot; <code class="inline">"x"</code> பாதுகாப்பாக உருவாக்கு &middot;
+  <code class="inline">"b"</code> binary &middot; <code class="inline">"+"</code> வாசி+எழுது.
+  முடிந்ததும் <code class="inline">f.close()</code> கட்டாயம்.
+</div>
+
+<!-- ===================== Part A ===================== -->
+<section class="ncard" id="s1">
+  <div class="nhead"><span class="nnum">பகுதி A</span><span class="ntitle">கருத்துகளும் முறைகளும் (Concepts &amp; modes)</span></div>
+  <div class="nbody">
+
+    <!-- Q1 -->
+    <div class="pq">
+      <span class="qnum">வினா 01</span>
+      <p class="task" style="margin-top:10px"><code class="inline">open()</code> எதைத் திருப்பித் தருகிறது? அதற்கு எந்த இரு விடயங்களைக் கட்டாயம் கொடுக்க வேண்டும்?</p>
+      <button class="btn" onclick="toggleAns(this,'a1')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="a1"><span class="ans-label">விடை</span>
+        <p>இது ஒரு <b>file object</b> (கோப்பு கைப்பிடி / file handle) ஐத் திருப்பித் தரும். அதற்கு ஒரு <b>கோப்புப்பெயரும் (filename)</b> ஒரு <b>முறையும் (mode)</b> கொடுக்க வேண்டும்.</p>
+<pre>f = open("data.txt", "r")</pre>
+        <div class="note"><b>ஏன்:</b> file object என்பது வட்டில் (disk) உள்ள கோப்புடனான உங்கள் இணைப்பு. அதை ஒரு மாறியில் சேமித்தால் <code class="inline">read()</code>, <code class="inline">close()</code> போன்ற முறைகளை அழைக்கலாம். mode தரப்படாவிட்டால் கொடாநிலையாக <code class="inline">"r"</code> ஆகும்.</div>
+      </div>
+    </div>
+
+    <!-- Q2 -->
+    <div class="pq">
+      <span class="qnum">வினா 02</span>
+      <p class="task" style="margin-top:10px"><code class="inline">"w"</code> மற்றும் <code class="inline">"a"</code> முறைகளுக்கிடையிலான வேறுபாடு என்ன?</p>
+      <button class="btn" onclick="toggleAns(this,'a2')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="a2"><span class="ans-label">விடை</span>
+        <p><code class="inline">"w"</code> கோப்பைத் தொடக்கத்திலிருந்து <b>மேலெழுதும்</b> (பழைய உள்ளடக்கம் அழியும்); <code class="inline">"a"</code> பழைய உள்ளடக்கத்தை வைத்துக்கொண்டு புதிய தரவை <b>இறுதியில் சேர்க்கும்</b>.</p>
+        <div class="note"><b>ஏன்:</b> இரண்டுமே கோப்பு இல்லாவிடின் உருவாக்கும். முக்கிய வேறுபாடு cursor: <code class="inline">"w"</code> தொடக்கத்தில் தொடங்கி truncate செய்யும்; <code class="inline">"a"</code> எப்போதும் இறுதியில் எழுதும். logs க்கு <code class="inline">"a"</code> பயன்படுத்துக — எதுவும் இழக்கப்படாது.</div>
+      </div>
+    </div>
+
+    <!-- Q3 -->
+    <div class="pq">
+      <span class="qnum">வினா 03</span>
+      <p class="task" style="margin-top:10px"><code class="inline">"r"</code> முறையில் இல்லாத கோப்பைத் திறந்தால் என்ன நடக்கும்?</p>
+      <button class="btn" onclick="toggleAns(this,'a3')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="a3"><span class="ans-label">விடை</span>
+        <p>Python <code class="inline">FileNotFoundError</code> ஐ எழுப்பும்.</p>
+        <div class="note"><b>ஏன்:</b> read முறை ஏற்கனவே உள்ள கோப்பை எதிர்பார்க்கும்; புதிதாக உருவாக்காது. <code class="inline">"w"</code>, <code class="inline">"a"</code>, <code class="inline">"x"</code> மட்டுமே புதிய கோப்புகளை உருவாக்கும். crash ஐத் தவிர்க்க அழைப்பை <code class="inline">try / except</code> இல் சுற்றுக.</div>
+      </div>
+    </div>
+
+    <!-- Q4 -->
+    <div class="pq">
+      <span class="qnum">வினா 04</span>
+      <p class="task" style="margin-top:10px">ஏற்கனவே உள்ள கோப்பை மேலெழுதாமல், பாதுகாப்பாக ஒரு புதிய கோப்பை உருவாக்கும் முறை எது? கோப்பு ஏற்கனவே இருந்தால் என்ன பிழை?</p>
+      <button class="btn" onclick="toggleAns(this,'a4')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="a4"><span class="ans-label">விடை</span>
+        <p><code class="inline">"x"</code> முறை (exclusive create). கோப்பு ஏற்கனவே இருந்தால் <code class="inline">FileExistsError</code> எழும்.</p>
+        <div class="note"><b>ஏன்:</b> <code class="inline">"w"</code> ஏற்கனவே உள்ள கோப்பை அமைதியாக அழித்துவிடும். <code class="inline">"x"</code> உரக்கத் தோல்வியடைந்து உங்களைப் பாதுகாக்கும் — தரவை இழக்கக் கூடாதபோது இது பாதுகாப்பானது.</div>
+      </div>
+    </div>
+
+    <!-- Q5 -->
+    <div class="pq">
+      <span class="qnum">வினா 05</span>
+      <p class="task" style="margin-top:10px">text mode மற்றும் binary mode இடையிலான வேறுபாடு என்ன?</p>
+      <button class="btn" onclick="toggleAns(this,'a5')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="a5"><span class="ans-label">விடை</span>
+        <p>text mode (கொடாநிலை) <b>strings</b> உடன் வேலை செய்யும்; binary mode (<code class="inline">b</code> சேர்க்க, எ.கா <code class="inline">"rb"</code>) <b>raw bytes</b> உடன் வேலை செய்யும்.</p>
+<pre># text mode — strings
+f = open("notes.txt", "r")
+
+# binary mode — bytes, for images / audio
+f = open("photo.jpg", "rb")</pre>
+        <div class="note"><b>ஏன்:</b> text கோப்புகள் வாசிக்கத்தக்க எழுத்துகளாக வாசிக்கப்படும். படங்கள் / ஒலி போன்ற text அல்லாத கோப்புகள் binary mode பயன்படுத்த வேண்டும்; இல்லாவிடின் bytes சிதைந்துவிடும்.</div>
+      </div>
+    </div>
+
+    <!-- Q6 -->
+    <div class="pq">
+      <span class="qnum">வினா 06</span>
+      <p class="task" style="margin-top:10px"><code class="inline">"r+"</code> போன்றவற்றில் <code class="inline">+</code> மாற்றி (modifier) என்ன செய்கிறது?</p>
+      <button class="btn" onclick="toggleAns(this,'a6')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="a6"><span class="ans-label">விடை</span>
+        <p>அது <b>எதிர் ஆற்றலைச்</b> சேர்க்கிறது. <code class="inline">"r+"</code> = வாசிப்பும் எழுதுதலும்; <code class="inline">"w+"</code> = எழுதுதலும் வாசிப்பும்.</p>
+        <div class="note"><b>ஏன்:</b> வெறும் <code class="inline">"r"</code> வாசிப்பு மட்டும், வெறும் <code class="inline">"w"</code> எழுதுதல் மட்டும். <code class="inline">+</code> சேர்ப்பது கோப்பை இரண்டுக்கும் திறக்கும். அடிப்படை எழுத்தே (r/w) கோப்பு truncate செய்யப்படுமா அல்லது ஏற்கனவே இருக்க வேண்டுமா என்பதைக் கட்டுப்படுத்தும்.</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===================== Part B ===================== -->
+<section class="ncard" id="s2">
+  <div class="nhead"><span class="nnum">பகுதி B</span><span class="ntitle">வாசித்தல் (Reading)</span></div>
+  <div class="nbody">
+
+    <!-- Q7 -->
+    <div class="pq">
+      <span class="qnum">வினா 07</span>
+      <p class="task" style="margin-top:10px"><code class="inline">read()</code>, <code class="inline">readline()</code>, <code class="inline">readlines()</code> இடையிலான வேறுபாடு என்ன?</p>
+      <button class="btn" onclick="toggleAns(this,'a7')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="a7"><span class="ans-label">விடை</span>
+        <p><code class="inline">read()</code> முழுக் கோப்பையும் ஒரே string ஆகத் தரும்; <code class="inline">readline()</code> ஒரு வரியைத் தரும்; <code class="inline">readlines()</code> எல்லா வரிகளையும் பட்டியலாகத் தரும்.</p>
+        <table class="dt">
+          <tr><th>முறை</th><th>தருவது</th></tr>
+          <tr><td><code>read()</code></td><td class="l">முழுக் கோப்பும் ஒரே string ஆக</td></tr>
+          <tr><td><code>readline()</code></td><td class="l">அடுத்த ஒற்றை வரி (அதன் \n உடன்)</td></tr>
+          <tr><td><code>readlines()</code></td><td class="l"><code>["a\n", "b\n"]</code> போன்ற பட்டியல்</td></tr>
+        </table>
+        <div class="note"><b>ஏன்:</b> தேவைக்கேற்பத் தெரிவு செய்க — முழு உள்ளடக்கம், ஒரு நேரத்தில் ஒரு வரி, அல்லது index/loop செய்யக்கூடிய பட்டியல். <code class="inline">read(n)</code> முதல் n எழுத்துகளை மட்டும் வாசிக்கும்.</div>
+      </div>
+    </div>
+
+    <!-- Q8 -->
+    <div class="pq">
+      <span class="qnum">வினா 08</span>
+      <p class="task" style="margin-top:10px"><code class="inline">read()</code> ஐ இருமுறை அழைத்தால், இரண்டாம் முறை வெற்று string தருவது ஏன்?</p>
+      <button class="btn" onclick="toggleAns(this,'a8')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="a8"><span class="ans-label">விடை</span>
+        <p>முதல் <code class="inline">read()</code> cursor ஐ கோப்பின் இறுதிக்கு நகர்த்துகிறது; எனவே வாசிக்க எதுவும் மிஞ்சவில்லை.</p>
+<pre>a = f.read()   # full content — cursor now at END
+b = f.read()   # "" — nothing after the cursor
+f.seek(0)      # rewind to fix it
+c = f.read()   # full content again</pre>
+        <div class="note"><b>ஏன்:</b> ஒவ்வொரு கோப்பும் ஒரு position marker ஐ வைத்திருக்கும்; வாசிப்பு அதை முன்நகர்த்தும். மீண்டும் வாசிக்க முன் <code class="inline">seek(0)</code> மூலம் தொடக்கத்திற்குத் திரும்புக.</div>
+      </div>
+    </div>
+
+    <!-- Q9 -->
+    <div class="pq">
+      <span class="qnum">வினா 09</span>
+      <p class="task" style="margin-top:10px">மிகப் பெரிய கோப்பை memory தீர்ந்துவிடாமல் எவ்வாறு வாசிப்பது?</p>
+      <button class="btn" onclick="toggleAns(this,'a9')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="a9"><span class="ans-label">விடை</span>
+        <p>file object ஐ நேரடியாக மடக்குக (loop) — அது ஒரு நேரத்தில் ஒரு வரியைத் தரும்.</p>
+<pre>f = open("huge.log", "r")
+for line in f:
+    print(line.strip())
+f.close()</pre>
+        <div class="note"><b>ஏன்:</b> <code class="inline">read()</code> மற்றும் <code class="inline">readlines()</code> முழுக் கோப்பையும் memory இல் ஏற்றும். மடக்கல் சோம்பேறித்தனமாக (lazily) stream செய்யும்; கோப்பின் அளவு எதுவாயினும் memory பயன்பாடு குறைவாகவே இருக்கும்.</div>
+      </div>
+    </div>
+
+    <!-- Q10 -->
+    <div class="pq">
+      <span class="qnum">வினா 10</span>
+      <p class="task" style="margin-top:10px">வரிகளை வாசிக்கும்போது <code class="inline">line.strip()</code> என்ன செய்கிறது?</p>
+      <button class="btn" onclick="toggleAns(this,'a10')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="a10"><span class="ans-label">விடை</span>
+        <p>முன்/பின் வெற்றிடங்களை (whitespace) நீக்கும் — இறுதி newline <code class="inline">\n</code> உட்பட.</p>
+        <div class="note"><b>ஏன்:</b> கோப்பிலிருந்து வாசிக்கப்படும் வரிகள் இறுதியில் <code class="inline">\n</code> ஐ வைத்திருக்கும். <code class="inline">strip()</code> அதை நீக்கி வெறும் text ஐத் தரும்; அச்சிடும்போது கூடுதல் வெற்று வரிகளைத் தவிர்க்கும்.</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===================== Part C ===================== -->
+<section class="ncard" id="s3">
+  <div class="nhead"><span class="nnum">பகுதி C</span><span class="ntitle">எழுதுதலும் சேர்த்தலும் (Writing &amp; appending)</span></div>
+  <div class="nbody">
+
+    <!-- Q11 -->
+    <div class="pq">
+      <span class="qnum">வினா 11</span>
+      <p class="task" style="margin-top:10px"><code class="inline">write()</code> தானாக newline சேர்க்குமா?</p>
+      <button class="btn" onclick="toggleAns(this,'a11')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="a11"><span class="ans-label">விடை</span>
+        <p>இல்லை. <code class="inline">\n</code> ஐ நீங்களே சேர்க்க வேண்டும்.</p>
+<pre>f.write("Hello")
+f.write("World")   # file: "HelloWorld" (no break)
+f.write("Hi\n")    # add \n for a new line</pre>
+        <div class="note"><b>ஏன்:</b> <code class="inline">print()</code> newline சேர்க்கும்; ஆனால் <code class="inline">write()</code> நீங்கள் கொடுத்த சரியான string ஐயே வெளியிடும். இது layout மீது முழுக் கட்டுப்பாட்டைத் தரும்.</div>
+      </div>
+    </div>
+
+    <!-- Q12 -->
+    <div class="pq">
+      <span class="qnum">வினா 12</span>
+      <p class="task" style="margin-top:10px"><code class="inline">writelines(["a", "b", "c"])</code> இன் வெளியீடு என்ன?</p>
+      <button class="btn" onclick="toggleAns(this,'a12')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="a12"><span class="ans-label">விடை</span>
+        <p><code class="inline">"abc"</code> — அனைத்தும் ஒன்றாக ஒட்டிக்கொள்ளும்; ஏனெனில் <code class="inline">writelines()</code> newlines சேர்க்காது.</p>
+<pre># add \n yourself to separate lines
+items = ["a", "b", "c"]
+f.writelines(x + "\n" for x in items)</pre>
+        <div class="note"><b>ஏன்:</b> பெயர் அப்படி இருந்தாலும், <code class="inline">writelines()</code> பட்டியலின் ஒவ்வொரு string ஐயும் தொடர்ச்சியாக (back-to-back) எழுதும். தனி வரிகள் வேண்டுமெனில் ஒவ்வொரு உறுப்பிலும் <code class="inline">\n</code> சேர்க்க வேண்டும்.</div>
+      </div>
+    </div>
+
+    <!-- Q13 -->
+    <div class="pq">
+      <span class="qnum">வினா 13</span>
+      <p class="task" style="margin-top:10px"><code class="inline">42</code> போன்ற ஓர் எண்ணை எவ்வாறு கோப்பில் எழுதுவது?</p>
+      <button class="btn" onclick="toggleAns(this,'a13')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="a13"><span class="ans-label">விடை</span>
+        <p>முதலில் <code class="inline">str()</code> அல்லது f-string மூலம் string ஆக மாற்றுக.</p>
+<pre>f.write(42)               # TypeError!
+f.write(str(42))          # works
+f.write(f"score: {42}\n") # f-string</pre>
+        <div class="note"><b>ஏன்:</b> <code class="inline">write()</code> strings ஐ மட்டுமே (அல்லது binary mode இல் bytes) ஏற்கும். raw integer கொடுத்தால் <code class="inline">TypeError</code> எழும்; எனவே எண்களைக் கட்டாயம் மாற்ற வேண்டும்.</div>
+      </div>
+    </div>
+
+    <!-- Q14 -->
+    <div class="pq">
+      <span class="qnum">வினா 14</span>
+      <p class="task" style="margin-top:10px"><code class="inline">"a"</code> முறையில் <code class="inline">seek(0)</code> அழைத்து, பின் <code class="inline">write()</code> செய்தால் text எங்கே செல்லும்?</p>
+      <button class="btn" onclick="toggleAns(this,'a14')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="a14"><span class="ans-label">விடை</span>
+        <p>இன்னும் கோப்பின் <b>இறுதியிலேயே</b>. append முறையில் ஒவ்வொரு எழுத்தும் முதலில் இறுதிக்குத் தாவும்.</p>
+        <div class="note"><b>ஏன்:</b> append முறையில் <code class="inline">seek()</code> வாசிப்பை மட்டுமே பாதிக்கும்; எழுத்துகள் எப்போதும் இறுதிக்கே வலியுறுத்தப்படும். அதுவே <code class="inline">"a"</code> ஐப் பாதுகாப்பாக்குகிறது — அது ஒருபோதும் இருக்கும் தரவை மேலெழுதாது.</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===================== Part D ===================== -->
+<section class="ncard" id="s4">
+  <div class="nhead"><span class="nnum">பகுதி D</span><span class="ntitle">மூடுதலும் பிழை கையாளுகையும் (Closing &amp; error handling)</span></div>
+  <div class="nbody">
+
+    <!-- Q15 -->
+    <div class="pq">
+      <span class="qnum">வினா 15</span>
+      <p class="task" style="margin-top:10px"><code class="inline">close()</code> செய்யும் மூன்று விடயங்கள் என்ன?</p>
+      <button class="btn" onclick="toggleAns(this,'a15')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="a15"><span class="ans-label">விடை</span>
+        <ol>
+          <li>buffer ஐ disk க்கு <b>flush</b> செய்யும்,</li>
+          <li>இயக்க முறைமையின் <b>file handle</b> ஐ விடுவிக்கும்,</li>
+          <li>object ஐ <b>closed</b> எனக் குறிக்கும் — மேலதிக I/O பிழையை எழுப்பும்.</li>
+        </ol>
+        <div class="note"><b>ஏன்:</b> எழுத்துகள் flush செய்யப்படும் வரை memory buffer இல் இருக்கும். <code class="inline">close()</code> இல்லாவிடின் buffered தரவு இழக்கப்படலாம், OS handle கசியும். மூடிய பின் <code class="inline">f.closed</code> → <code class="inline">True</code> ஆகும்.</div>
+      </div>
+    </div>
+
+    <!-- Q16 -->
+    <div class="pq">
+      <span class="qnum">வினா 16</span>
+      <p class="task" style="margin-top:10px"><code class="inline">with</code> இல்லாமல் கோப்புகளைக் கையாளும்போது ஏன் <code class="inline">try / finally</code> பயன்படுத்த வேண்டும்?</p>
+      <button class="btn" onclick="toggleAns(this,'a16')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="a16"><span class="ans-label">விடை</span>
+        <p>செயற்பாட்டின் நடுவே பிழை ஏற்பட்டாலும் கோப்பு மூடப்படுவதை உறுதிசெய்ய.</p>
+<pre>f = open("data.txt", "r")
+try:
+    content = f.read()
+finally:
+    f.close()   # always runs</pre>
+        <div class="note"><b>ஏன்:</b> <code class="inline">open()</code> க்கும் <code class="inline">close()</code> க்கும் இடையில் ஒரு exception எழுந்தால், வெறும் <code class="inline">close()</code> தவிர்க்கப்பட்டுக் கோப்பு கசியும். <code class="inline">finally</code> அது வெற்றி/தோல்வி இரண்டிலும் இயங்குவதை உறுதிசெய்யும்.</div>
+      </div>
+    </div>
+
+    <!-- Q17 -->
+    <div class="pq">
+      <span class="qnum">வினா 17</span>
+      <p class="task" style="margin-top:10px">அந்த அமைப்பில் <code class="inline">open()</code> ஏன் <code class="inline">try</code> block க்கு வெளியே இருக்க வேண்டும்?</p>
+      <button class="btn" onclick="toggleAns(this,'a17')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="a17"><span class="ans-label">விடை</span>
+        <p><code class="inline">open()</code> தானே தோல்வியடைந்தால், மாறி <code class="inline">f</code> உருவாக்கப்படாது; எனவே <code class="inline">finally</code> இல் <code class="inline">f.close()</code> அழைத்தால் அது தனக்கான <code class="inline">NameError</code> ஐ எழுப்பும்.</p>
+        <div class="note"><b>ஏன்:</b> உண்மையில் திறக்கப்பட்ட கோப்பை மட்டுமே மூட விரும்புகிறீர்கள். <code class="inline">open()</code> ஐ வெளியே வைப்பது (அல்லது அதன் தோல்வியைத் தனியே கையாள்வது) <code class="inline">finally</code> எப்போதும் உண்மையான handle ஐ மட்டுமே மூடுவதை உறுதிசெய்யும்.</div>
+      </div>
+    </div>
+
+    <!-- Q18 -->
+    <div class="pq">
+      <span class="qnum">வினா 18</span>
+      <p class="task" style="margin-top:10px"><code class="inline">flush()</code> மற்றும் <code class="inline">close()</code> இடையிலான வேறுபாடு என்ன?</p>
+      <button class="btn" onclick="toggleAns(this,'a18')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="a18"><span class="ans-label">விடை</span>
+        <p><code class="inline">flush()</code> buffer ஐ disk க்கு எழுதும் ஆனால் கோப்பைத் <b>திறந்தே</b> வைக்கும்; <code class="inline">close()</code> flush செய்து கோப்பை <b>விடுவிக்கும்</b>.</p>
+        <div class="note"><b>ஏன்:</b> நீண்ட நேரம் இயங்கும் வேலையின்போது தரவை உடனடியாகச் சேமிக்க (crash ஐத் தாங்க) — ஆனால் தொடர்ந்து எழுத வேண்டுமெனில் — <code class="inline">flush()</code> பயன்படுத்துக. வேலை முடிந்த இறுதிப் படியே <code class="inline">close()</code>.</div>
+      </div>
+    </div>
+
+    <!-- Q19 -->
+    <div class="pq">
+      <span class="qnum">வினா 19</span>
+      <p class="task" style="margin-top:10px"><code class="inline">f.closed</code> எதைத் தருகிறது? மூடிய கோப்பை வாசித்தால் என்ன நடக்கும்?</p>
+      <button class="btn" onclick="toggleAns(this,'a19')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="a19"><span class="ans-label">விடை</span>
+        <p>மூடிய பின் <code class="inline">f.closed</code> → <code class="inline">True</code>, திறந்திருக்கும்போது <code class="inline">False</code>. மூடிய கோப்பை வாசித்தால் <code class="inline">ValueError</code> எழும்.</p>
+<pre>f.close()
+print(f.closed)   # True
+f.read()          # ValueError: I/O operation on closed file</pre>
+        <div class="note"><b>ஏன்:</b> மூடிய பின் handle போய்விட்டது; எனவே மேலதிக read/write செல்லாது. <code class="inline">f.closed</code> ஐச் சோதிப்பது செயற்படும் முன் நிலையை உறுதிசெய்ய உதவும்.</div>
+      </div>
+    </div>
+
+    <!-- Q20 -->
+    <div class="pq">
+      <span class="qnum">வினா 20</span>
+      <p class="task" style="margin-top:10px">ஒவ்வொரு exception ஐயும் அதன் காரணத்துடன் பொருத்துக.</p>
+      <button class="btn" onclick="toggleAns(this,'a20')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="a20"><span class="ans-label">விடை</span>
+        <table class="dt">
+          <tr><th>Exception</th><th>காரணம்</th></tr>
+          <tr><td><code>FileNotFoundError</code></td><td class="l"><code>"r"</code> முறையில் இல்லாத கோப்பைத் திறத்தல்</td></tr>
+          <tr><td><code>FileExistsError</code></td><td class="l">கோப்பு ஏற்கனவே இருக்கும்போது <code>"x"</code> பயன்படுத்தல்</td></tr>
+          <tr><td><code>PermissionError</code></td><td class="l">அனுமதி இல்லை, அல்லது path ஒரு folder</td></tr>
+          <tr><td><code>ValueError</code></td><td class="l">ஏற்கனவே மூடிய கோப்பில் I/O செய்தல்</td></tr>
+          <tr><td><code>UnsupportedOperation</code></td><td class="l"><code>"r"</code> இல் எழுதுதல் அல்லது <code>"w"/"a"</code> இல் வாசித்தல்</td></tr>
+        </table>
+        <div class="note"><b>ஏன்:</b> ஒவ்வொரு பிழையும் என்ன தவறு என்று துல்லியமாகச் சொல்லும். குறிப்பிட்ட exception ஐப் பிடிப்பது (வெறும் <code class="inline">except</code> அல்ல) பொருத்தமாகப் பதிலளிக்க உதவும் — எ.கா config கோப்பு இல்லாதபோது கொடாநிலைகளை உருவாக்க.</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+</main>
+
+<footer>
+  க.பொ.த (உயர்தர) தகவல் மற்றும் தொடர்பாடல் தொழினுட்பம் — Python கோப்புக் கையாளுகை (File Handling) குறிப்புகள்
+</footer>
+
+<script>
+function hl(code){
+  return code.split('\n').map(function(line){
+    line=line.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    var ci=line.indexOf('#'), cp=line, cm='';
+    if(ci>-1){ cp=line.slice(0,ci); cm='<span class="cm">'+line.slice(ci)+'</span>'; }
+    cp=cp.replace(/("[^"]*"|'[^']*')/g,'<span class="st">$1</span>');
+    cp=cp.replace(/\b(import|if|elif|else|while|for|in|and|or|not|break|def|return|del|try|except|finally|with|as|raise|True|False|None)\b/g,'<span class="kw">$1</span>');
+    cp=cp.replace(/\b(input|int|float|print|range|str|len|max|min|sum|sorted|open|list|tuple|type|bytes)\b/g,'<span class="kw">$1</span>');
+    return cp+cm;
+  }).join('\n');
+}
+document.querySelectorAll('pre').forEach(function(p){
+  p.innerHTML = hl(p.textContent);
+});
+function toggleAns(btn,id){
+  var ans=document.getElementById(id);
+  var open=ans.classList.toggle('show');
+  btn.classList.toggle('open',open);
+  btn.textContent=open?'விடையை மறை ▴':'விடையைக் காட்டு ▾';
+}
+</script>
+
+</body>
+</html>
