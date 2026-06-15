@@ -33,9 +33,16 @@
   .toc a{color:var(--maroon);text-decoration:none;white-space:nowrap}
   .toc a:hover{text-decoration:underline}
   .toc .links{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:6px}
+  .toc .grp{margin-top:12px}
+  .toc .grp:first-of-type{margin-top:6px}
   .home{display:inline-block;margin-bottom:18px;color:var(--maroon);
     text-decoration:none;font-weight:600;font-size:.9rem}
   .home:hover{text-decoration:underline}
+
+  .secband{display:flex;align-items:center;gap:14px;margin:42px 0 22px}
+  .secband h2{font-family:'Catamaran','Noto Sans Tamil',sans-serif;font-weight:800;
+    font-size:1.3rem;color:var(--maroon);white-space:nowrap}
+  .secband .line{flex:1;height:2px;background:linear-gradient(to right,var(--gold),transparent)}
 
   .ncard{background:var(--card);border:1px solid var(--line);border-radius:16px;
     margin-bottom:32px;overflow:hidden;box-shadow:0 2px 10px rgba(34,48,58,.05);}
@@ -72,9 +79,10 @@
     padding:1px 8px;font-family:'JetBrains Mono',monospace;font-size:.85em;
     direction:ltr;display:inline-block;}
 
-  table.dt{border-collapse:collapse;margin:12px auto;font-size:.9rem;direction:ltr;}
+  table.dt{border-collapse:collapse;margin:12px auto;font-size:.9rem;direction:ltr;
+    display:block;overflow-x:auto;}
   table.dt th{background:var(--teal);color:#fff;padding:7px 14px;
-    font-weight:600;border:1px solid #16404f;}
+    font-weight:600;border:1px solid #16404f;white-space:nowrap;}
   table.dt td{border:1px solid var(--line);padding:6px 14px;text-align:center;
     background:#FDFCF9;}
   table.dt td.l{text-align:left}
@@ -117,7 +125,7 @@
 <header>
   <div class="eyebrow">G.C.E. Advanced Level &middot; Sri Lanka &middot; ICT (20)</div>
   <h1>Python கோப்புக் கையாளுகை<br>(File Handling) குறிப்புகள்</h1>
-  <p>open() / close() அணுகுமுறை &middot; 20 வினா–விடை விளக்கங்களுடன்</p>
+  <p>Open &middot; Read &middot; Write &middot; Append &middot; Close — open() / close() அணுகுமுறை</p>
 </header>
 
 <main>
@@ -125,21 +133,332 @@
 <a class="home" href="index.html">← முகப்புப் பக்கம்</a>
 
 <div class="toc"><b>உள்ளடக்கம்</b>
-  <div class="links">
-    <a href="#s1">பகுதி A — கருத்துகளும் முறைகளும் (வினா 01–06)</a>
-    <a href="#s2">பகுதி B — வாசித்தல் (வினா 07–10)</a>
-    <a href="#s3">பகுதி C — எழுதுதலும் சேர்த்தலும் (வினா 11–14)</a>
-    <a href="#s4">பகுதி D — மூடுதலும் பிழை கையாளுகையும் (வினா 15–20)</a>
+  <div class="grp"><b style="font-size:.85rem">📘 குறிப்புகள் (Notes)</b>
+    <div class="links">
+      <a href="#n1">01. கோப்பு கைப்பிடியின் வாழ்க்கைச் சுழற்சி</a>
+      <a href="#n2">02. கோப்பு முறைகள் (File modes)</a>
+      <a href="#n3">03. கோப்புகளை வாசித்தல்</a>
+      <a href="#n4">04. Cursor — tell() &amp; seek()</a>
+      <a href="#n5">05. கோப்புகளை எழுதுதல்</a>
+      <a href="#n6">06. கோப்புகளில் சேர்த்தல் (Append)</a>
+      <a href="#n7">07. கோப்புகளை மூடுதல்</a>
+      <a href="#n8">08. பிழை கையாளுகை (Error handling)</a>
+    </div>
+  </div>
+  <div class="grp"><b style="font-size:.85rem">📝 பயிற்சி வினா–விடைகள் (20)</b>
+    <div class="links">
+      <a href="#s1">பகுதி A — கருத்துகளும் முறைகளும் (01–06)</a>
+      <a href="#s2">பகுதி B — வாசித்தல் (07–10)</a>
+      <a href="#s3">பகுதி C — எழுதுதலும் சேர்த்தலும் (11–14)</a>
+      <a href="#s4">பகுதி D — மூடுதலும் பிழை கையாளுகையும் (15–20)</a>
+    </div>
   </div>
 </div>
 
-<div class="key" style="margin-bottom:30px"><span class="tag">விரைவு நினைவு</span>
-  <b>open(filename, mode)</b> → file object ஐத் தரும். முக்கிய முறைகள்:
-  <code class="inline">"r"</code> வாசி &middot; <code class="inline">"w"</code> மேலெழுது &middot;
-  <code class="inline">"a"</code> இறுதியில் சேர் &middot; <code class="inline">"x"</code> பாதுகாப்பாக உருவாக்கு &middot;
-  <code class="inline">"b"</code> binary &middot; <code class="inline">"+"</code> வாசி+எழுது.
-  முடிந்ததும் <code class="inline">f.close()</code> கட்டாயம்.
-</div>
+<div class="secband"><h2>📘 குறிப்புகள் (Notes)</h2><div class="line"></div></div>
+
+<!-- ===================== Note 01 ===================== -->
+<section class="ncard" id="n1">
+  <div class="nhead"><span class="nnum">01</span><span class="ntitle">கோப்பு கைப்பிடியின் வாழ்க்கைச் சுழற்சி</span></div>
+  <div class="nbody">
+    <p><code class="inline">open()</code> ஐ அழைப்பது இயக்க முறைமையிடம் ஒரு <b>file handle</b> ஐக் கேட்கிறது — உங்கள் நிரலுக்கும் வட்டில் (disk) உள்ள கோப்புக்கும் இடையிலான <b>நேரடி இணைப்பு</b>. தரவு ஒரு <b>memory buffer</b> ஊடாகச் செல்கிறது; எனவே கோப்பு <b>flush</b> அல்லது <b>close</b> செய்யப்படும் வரை எழுத்துகள் வட்டில் இருக்காது.</p>
+    <h4 class="sub">1.1 அடிப்படைத் தொடரியல்</h4>
+<pre># open() ஒரு file object ஐத் தரும் — அதை மாறியில் சேமி
+f = open("filename.txt", "mode")
+
+# ... கோப்புச் செயற்பாடுகள் ...
+
+f.close()   # முடிந்ததும் கட்டாயம் மூடு</pre>
+    <h4 class="sub">1.2 file object ஐ ஆராய்தல் (file attributes)</h4>
+<pre>f = open("data.txt", "r")
+print(f.name)     # "data.txt" — கோப்புப் பெயர்
+print(f.mode)     # "r"        — திறந்த முறை
+print(f.closed)   # False      — handle இயக்கத்தில்
+
+f.close()
+print(f.closed)   # True       — handle விடுவிக்கப்பட்டது
+f.read()          # ValueError: I/O operation on closed file</pre>
+    <div class="key"><span class="tag">முக்கியம்</span>
+      ஒவ்வொரு <code class="inline">open()</code> ஐயும் ஒரு <code class="inline">close()</code> உடன் கட்டாயம் இணைக்கவும். மூடாத கோப்பு buffered தரவை இழக்கலாம், ஒரு கணினி வளத்தையும் (system resource) கசியவிடும்.
+    </div>
+  </div>
+</section>
+
+<!-- ===================== Note 02 ===================== -->
+<section class="ncard" id="n2">
+  <div class="nhead"><span class="nnum">02</span><span class="ntitle">கோப்பு முறைகள் (File modes)</span></div>
+  <div class="nbody">
+    <p>mode string நீங்கள் <b>என்ன செய்யலாம்</b>, ஏற்கனவே உள்ள கோப்புக்கு <b>என்ன நடக்கும்</b> என்பதை நிர்ணயிக்கிறது. செயற்பாட்டு எழுத்து (<code class="inline">r</code>, <code class="inline">w</code>, <code class="inline">a</code>, <code class="inline">x</code>) ஐ — எதிர் ஆற்றலுக்கு <code class="inline">+</code> உடனும், binary க்கு <code class="inline">b</code> உடனும் இணைக்கலாம்.</p>
+    <ul>
+      <li><code class="inline">"r"</code> — வாசி. கொடாநிலை முறை. கோப்பு இல்லாவிடின் பிழை.</li>
+      <li><code class="inline">"w"</code> — எழுது. கோப்பை உருவாக்கும். இருக்கும் உள்ளடக்கத்தை மேலெழுதும்.</li>
+      <li><code class="inline">"a"</code> — சேர் (append). கோப்பை உருவாக்கும். இறுதியில் சேர்க்கும்.</li>
+      <li><code class="inline">"x"</code> — உருவாக்கு. கோப்பு ஏற்கனவே இருந்தால் பிழை.</li>
+      <li><code class="inline">"r+"</code> — வாசி &amp; எழுது. கோப்பு ஏற்கனவே இருக்க வேண்டும்.</li>
+      <li><code class="inline">"w+"</code> — எழுது &amp; வாசி. கோப்பை உருவாக்கும் / மேலெழுதும்.</li>
+    </ul>
+    <h4 class="sub">2.1 ஒவ்வொரு முறையும் என்ன செய்கிறது</h4>
+    <table class="dt">
+      <tr><th>Mode</th><th>Read</th><th>Write</th><th>கோப்பு இல்லை</th><th>கோப்பு உள்ளது</th><th>Cursor</th></tr>
+      <tr><td><code>"r"</code></td><td>ஆம்</td><td>இல்லை</td><td>பிழை</td><td>திறக்கும்</td><td>தொடக்கம்</td></tr>
+      <tr><td><code>"w"</code></td><td>இல்லை</td><td>ஆம்</td><td>உருவாக்கும்</td><td>அழிக்கும்</td><td>தொடக்கம்</td></tr>
+      <tr><td><code>"a"</code></td><td>இல்லை</td><td>ஆம்</td><td>உருவாக்கும்</td><td>தக்கவைக்கும்</td><td>இறுதி</td></tr>
+      <tr><td><code>"x"</code></td><td>இல்லை</td><td>ஆம்</td><td>உருவாக்கும்</td><td>பிழை</td><td>தொடக்கம்</td></tr>
+      <tr><td><code>"r+"</code></td><td>ஆம்</td><td>ஆம்</td><td>பிழை</td><td>தக்கவைக்கும்</td><td>தொடக்கம்</td></tr>
+      <tr><td><code>"w+"</code></td><td>ஆம்</td><td>ஆம்</td><td>உருவாக்கும்</td><td>அழிக்கும்</td><td>தொடக்கம்</td></tr>
+      <tr><td><code>"a+"</code></td><td>ஆம்</td><td>ஆம்</td><td>உருவாக்கும்</td><td>தக்கவைக்கும்</td><td>இறுதி</td></tr>
+    </table>
+    <h4 class="sub">2.2 Text vs binary mode</h4>
+<pre># Text mode (கொடாநிலை) — strings உடன் வேலை செய்யும்
+f = open("notes.txt", "r")
+
+# Binary mode — "b" சேர், bytes உடன் (படங்கள், ஒலி)
+f = open("photo.jpg", "rb")
+data = f.read()    # b'\xff\xd8\xff\xe0...' (bytes object)
+f.close()
+
+f = open("copy.jpg", "wb")
+f.write(data)      # படத்தை நகலெடு
+f.close()</pre>
+    <div class="key"><span class="tag">பாதுகாப்பான உருவாக்கம்</span>
+      தரவை ஒருபோதும் அழிக்கக் கூடாதபோது <code class="inline">"x"</code> பயன்படுத்துக — <code class="inline">"w"</code> போல் அமைதியாக மேலெழுதாமல், <code class="inline">FileExistsError</code> ஐ எழுப்பும்.
+    </div>
+  </div>
+</section>
+
+<!-- ===================== Note 03 ===================== -->
+<section class="ncard" id="n3">
+  <div class="nhead"><span class="nnum">03</span><span class="ntitle">கோப்புகளை வாசித்தல் (Reading)</span></div>
+  <div class="nbody">
+    <p>மூன்று வாசிப்பு முறைகள் உள்ளன. கோப்பின் அளவையும், முழு உள்ளடக்கம் / ஒரு வரி / வரிப் பட்டியல் — எது வேண்டும் என்பதையும் பொறுத்தே சரியானதைத் தேர்க.</p>
+    <h4 class="sub">3.1 read() — முழுக் கோப்பு அல்லது n எழுத்துகள்</h4>
+<pre>f = open("notes.txt", "r")
+chunk = f.read(5)   # முதல் 5 எழுத்துகள், cursor இப்போ 5 இல்
+rest  = f.read()    # நிலை 5 க்குப் பிந்தைய அனைத்தும்
+again = f.read()    # "" — cursor இறுதியில், மிச்சமில்லை
+f.close()</pre>
+    <div class="note"><code class="inline">read()</code> argument இல்லாமல் முழுக் கோப்பையும் memory இல் ஏற்றும். சிறு கோப்புகளுக்குச் சரி; ஆனால் பல-gigabyte log உங்கள் கணினியை முடக்கலாம்.</div>
+    <h4 class="sub">3.2 readline() — அழைப்புக்கு ஒரு வரி</h4>
+<pre>f = open("notes.txt", "r")
+line1 = f.readline()   # "first line\n"  — \n ஐ வைத்திருக்கும்
+line2 = f.readline()   # "second line\n"
+# கோப்பு முடிவில், readline() "" (வெற்று string) தரும்
+f.close()</pre>
+    <h4 class="sub">3.3 readlines() vs கோப்பை மடக்குதல்</h4>
+<pre># readlines(): எல்லா வரிகளும் ஒரே நேரத்தில் memory இல் — சிறு கோப்பு மட்டும்
+f = open("notes.txt", "r")
+lines = f.readlines()         # ["a\n", "b\n", "c\n"]
+print(len(lines), lines[-1])  # எண்ணிக்கை + கடைசி வரி
+f.close()
+
+# கோப்பை மடக்குதல்: ஒரு நேரத்தில் ஒரு வரியே memory இல்
+# — எந்த அளவு கோப்புக்கும் வேலை செய்யும் (lazy streaming)
+f = open("huge.log", "r")
+count = 0
+for line in f:
+    if "ERROR" in line:
+        count += 1
+f.close()
+print(count, "errors found")</pre>
+    <div class="key"><span class="tag">கட்டை விரல் விதி</span>
+      சிறு கோப்பு → <code class="inline">read()</code> அல்லது <code class="inline">readlines()</code>. பெரிய கோப்பு → <code class="inline">for line in f</code> — memory ஐ நிரப்பாமல் வரி வரியாக stream செய்யும். இறுதி <code class="inline">\n</code> ஐ நீக்க <code class="inline">line.strip()</code> பயன்படுத்துக.
+    </div>
+  </div>
+</section>
+
+<!-- ===================== Note 04 ===================== -->
+<section class="ncard" id="n4">
+  <div class="nhead"><span class="nnum">04</span><span class="ntitle">Cursor — tell() &amp; seek()</span></div>
+  <div class="nbody">
+    <p>ஒவ்வொரு திறந்த கோப்புக்கும் ஒரு கண்ணுக்குத் தெரியாத <b>நிலைக்குறி (position marker)</b> உண்டு. வாசிப்பு அதை முன்நகர்த்தும்; அதனால்தான் நீங்கள் மீள (rewind) செய்யும் வரை இரண்டாவது <code class="inline">read()</code> எதையும் தராது.</p>
+    <h4 class="sub">4.1 நிலையைக் கண்காணித்தல் &amp; நகர்த்துதல்</h4>
+<pre>f = open("notes.txt", "r")
+print(f.tell())   # 0  — தொடக்கத்தில்
+f.read(10)
+print(f.tell())   # 10 — வாசிப்பால் நகர்ந்தது
+
+f.seek(0)         # தொடக்கத்திற்குத் திரும்பு (rewind)
+f.seek(4)         # நிலை 4 க்குத் தாவு
+print(f.read(3))  # நிலை 4 இலிருந்து 3 எழுத்துகள்
+f.close()</pre>
+    <h4 class="sub">4.2 read() இருமுறை ஏன் எதையும் தராது</h4>
+<pre>f = open("notes.txt", "r")
+a = f.read()   # முழு உள்ளடக்கம் — cursor இப்போ இறுதியில்
+b = f.read()   # "" — cursor க்குப் பின் எதுவுமில்லை
+
+f.seek(0)      # சரிசெய்: முதலில் rewind செய்
+c = f.read()   # மீண்டும் முழு உள்ளடக்கம்
+f.close()</pre>
+    <div class="note"><code class="inline">tell()</code> தற்போதைய byte நிலையைத் தரும்; <code class="inline">seek(0)</code> தொடக்கத்திற்கும், <code class="inline">seek(0, 2)</code> இறுதிக்கும் தாவும். வாசிப்பும் எழுதுதலும் எப்போதும் cursor இல்தான் நடைபெறும்.</div>
+  </div>
+</section>
+
+<!-- ===================== Note 05 ===================== -->
+<section class="ncard" id="n5">
+  <div class="nhead"><span class="nnum">05</span><span class="ntitle">கோப்புகளை எழுதுதல் (Writing)</span></div>
+  <div class="nbody">
+    <p><code class="inline">"w"</code> முறை தேவைப்பட்டால் கோப்பை உருவாக்கும், ஏற்கனவே இருந்தால் மேலெழுதும். எதுவும் தானாகச் சேர்க்கப்படாது — ஒவ்வொரு newline ஐயும் <b>நீங்களே</b> கட்டுப்படுத்துகிறீர்கள்.</p>
+    <h4 class="sub">5.1 write() — எழுதிய எழுத்துகளின் எண்ணிக்கையைத் தரும்</h4>
+<pre>f = open("out.txt", "w")
+n = f.write("Hello")       # 5 ஐத் தரும் — எழுதிய எழுத்துகள்
+f.write("World")           # கோப்பு: "HelloWorld" — newline இல்லை
+f.write("\n")              # \n ஐ நீயே சேர்க்க வேண்டும்
+
+f.write(str(42))           # எண்களை முதலில் str ஆக மாற்று
+f.write(f"score: {42}\n")  # அல்லது f-string பயன்படுத்து
+f.close()</pre>
+    <h4 class="sub">5.2 writelines() — பெயர் இருந்தாலும் newline சேர்க்காது</h4>
+<pre>items = ["apple", "banana", "cherry"]
+
+f = open("fruits.txt", "w")
+f.writelines(items)   # "applebananacherry" — ஒட்டிக்கொள்ளும்!
+f.close()
+
+# சரிசெய்: ஒவ்வொன்றிலும் \n ஐ நீயே சேர்
+f = open("fruits.txt", "w")
+f.writelines(item + "\n" for item in items)
+f.close()
+
+# மாற்று: print() தானாக \n சேர்க்கும்
+f = open("fruits.txt", "w")
+for item in items:
+    print(item, file=f)
+f.close()</pre>
+    <div class="warn"><span class="tag">"w" இன் ஆபத்து</span>
+      <code class="inline">open()</code> இயங்கும் கணமே கோப்பு பூஜ்ஜிய bytes ஆக truncate ஆகும் — நீங்கள் எதுவும் எழுதாவிட்டாலும். தவறான கோப்பை <code class="inline">"w"</code> இல் திறந்தால் அது உடனே அழியும். இருக்கும் உள்ளடக்கத்தைத் தக்கவைக்க <code class="inline">"a"</code> பயன்படுத்துக.
+    </div>
+  </div>
+</section>
+
+<!-- ===================== Note 06 ===================== -->
+<section class="ncard" id="n6">
+  <div class="nhead"><span class="nnum">06</span><span class="ntitle">கோப்புகளில் சேர்த்தல் (Appending)</span></div>
+  <div class="nbody">
+    <p><code class="inline">"a"</code> முறை எப்போதும் கோப்பின் <b>இறுதியில்</b> எழுதும், இருக்கும் தரவை ஒருபோதும் அழிக்காது — இதுவே மிகப் பாதுகாப்பான எழுதும் முறை; <b>logs</b> க்கு ஏற்றது.</p>
+    <h4 class="sub">6.1 ஒரு வரியைச் சேர்த்தல்</h4>
+<pre>f = open("log.txt", "a")
+f.write("New log entry.\n")   # இறுதியில் சேர்க்கப்பட்டது
+f.close()</pre>
+    <h4 class="sub">6.2 பல வரிகளைச் சேர்த்தல்</h4>
+<pre>entries = ["Entry A\n", "Entry B\n", "Entry C\n"]
+f = open("log.txt", "a")
+f.writelines(entries)
+f.close()</pre>
+    <h4 class="sub">6.3 எழுது vs சேர் — ஒரே பார்வையில்</h4>
+    <table class="dt">
+      <tr><th>Mode</th><th>கோப்பு உள்ளது</th><th>கோப்பு இல்லை</th><th>எழுதும் நிலை</th></tr>
+      <tr><td><code>"w"</code></td><td>மேலெழுதும்</td><td>புதிதாக உருவாக்கும்</td><td>கோப்பின் தொடக்கம்</td></tr>
+      <tr><td><code>"a"</code></td><td>தக்கவைக்கும்</td><td>புதிதாக உருவாக்கும்</td><td>கோப்பின் இறுதி</td></tr>
+    </table>
+    <h4 class="sub">6.4 நடைமுறை அமைப்பு — logging சார்பு</h4>
+<pre>import datetime
+
+def log(message):
+    f = open("app.log", "a")
+    now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    f.write(f"[{now}] {message}\n")
+    f.close()   # ஒவ்வொரு அழைப்பிலும் open/close — கோப்பு பாதுகாப்பாக
+
+log("app started")
+log("user logged in")</pre>
+    <div class="key"><span class="tag">Crash பாதுகாப்பு</span>
+      உங்கள் நிரலில் பிழை இருந்தாலும், append முறை இருக்கும் தரவை ஒருபோதும் அழிக்காது. அதனால்தான் logs எப்போதும் <code class="inline">"a"</code> ஐப் பயன்படுத்துகின்றன.
+    </div>
+  </div>
+</section>
+
+<!-- ===================== Note 07 ===================== -->
+<section class="ncard" id="n7">
+  <div class="nhead"><span class="nnum">07</span><span class="ntitle">கோப்புகளை மூடுதல் (Closing)</span></div>
+  <div class="nbody">
+    <p><code class="inline">close()</code> மூன்று செயல்களைச் செய்யும்: buffer ஐ disk க்கு <b>flush</b> செய்யும், OS file handle ஐ <b>விடுவிக்கும்</b>, object ஐ <b>closed</b> எனக் குறிக்கும் — மேலதிக I/O பிழையை எழுப்பும்.</p>
+    <h4 class="sub">7.1 மூடுதலும் மீள்சோதனையும்</h4>
+<pre>f = open("file.txt", "w")
+f.write("data")
+f.close()
+
+print(f.closed)   # True
+f.close()          # close() ஐ இருமுறை அழைப்பது தீங்கற்றது
+f.write("more")    # ValueError: I/O operation on closed file</pre>
+    <h4 class="sub">7.2 கசிவுச் சிக்கல் (the leak problem)</h4>
+<pre># மோசம்: ஆயிரக்கணக்கான handles திறக்கும், எதையும் மூடாது
+for i in range(100000):
+    f = open(f"tmp_{i}.txt", "w")
+    f.write("x")
+# OSError: [Errno 24] Too many open files
+
+# நல்லது: மடக்கினுள்ளேயே மூடு
+for i in range(100000):
+    f = open(f"tmp_{i}.txt", "w")
+    f.write("x")
+    f.close()</pre>
+    <h4 class="sub">7.3 try / finally — உறுதிசெய்யப்பட்ட close</h4>
+<pre>f = open("numbers.txt", "r")
+try:
+    total = 0
+    for line in f:
+        total += int(line)   # தவறான தரவில் ValueError எழலாம்
+    print("sum:", total)
+finally:
+    f.close()   # வெற்றியிலும் crash இலும் இயங்கும்</pre>
+    <div class="note"><code class="inline">open()</code> ஐ <code class="inline">try</code> block க்கு வெளியே வைக்கவும். <code class="inline">open()</code> தானே தோல்வியடைந்தால் <code class="inline">f</code> உருவாகாது; <code class="inline">finally</code> இல் <code class="inline">f.close()</code> அழைத்தால் அது தனக்கான பிழையை எழுப்பும்.</div>
+    <h4 class="sub">7.4 flush() — மூடாமல் disk க்கு sync செய்</h4>
+<pre>f = open("progress.txt", "w")
+for step in range(10):
+    f.write(f"step {step} done\n")
+    f.flush()   # உடனே disk இல் தெரியும் — crash ஐத் தாங்கும்
+f.close()</pre>
+  </div>
+</section>
+
+<!-- ===================== Note 08 ===================== -->
+<section class="ncard" id="n8">
+  <div class="nhead"><span class="nnum">08</span><span class="ntitle">பிழை கையாளுகை (Error handling)</span></div>
+  <div class="nbody">
+    <p>கோப்புச் செயற்பாடுகள் பல காரணங்களால் தோல்வியடையலாம். பொதுவான exceptions ஐ அறிந்தால், crash ஆகாமல் அவற்றைச் சுத்தமாகக் கையாளலாம்.</p>
+    <h4 class="sub">8.1 பொதுவான exceptions</h4>
+    <table class="dt">
+      <tr><th>Exception</th><th>எப்போது நிகழும்</th></tr>
+      <tr><td><code>FileNotFoundError</code></td><td class="l">இல்லாத கோப்பில் <code>"r"</code> அல்லது <code>"r+"</code></td></tr>
+      <tr><td><code>FileExistsError</code></td><td class="l">கோப்பு ஏற்கனவே இருக்கும்போது <code>"x"</code> முறை</td></tr>
+      <tr><td><code>PermissionError</code></td><td class="l">OS அனுமதி இல்லை, அல்லது path ஒரு directory</td></tr>
+      <tr><td><code>IsADirectoryError</code></td><td class="l">ஒரு folder ஐக் கோப்பாகத் திறக்க முயன்றது</td></tr>
+      <tr><td><code>ValueError</code></td><td class="l">ஏற்கனவே மூடிய கோப்பில் I/O செய்தல்</td></tr>
+      <tr><td><code>UnsupportedOperation</code></td><td class="l"><code>"r"</code> இல் எழுதுதல் அல்லது <code>"w"/"a"</code> இல் வாசித்தல்</td></tr>
+    </table>
+    <h4 class="sub">8.2 முழுமையான பிழை-கையாளப்பட்ட அமைப்பு</h4>
+<pre>try:
+    f = open("config.txt", "r")
+except FileNotFoundError:
+    print("config.txt not found — using defaults")
+except PermissionError:
+    print("no permission to read config.txt")
+else:
+    try:
+        content = f.read()
+        print(content)
+    finally:
+        f.close()   # open() வெற்றியடைந்தால் மட்டுமே இயங்கும்</pre>
+    <div class="note"><b>அமைப்பு:</b> <code class="inline">except</code> — <code class="inline">open()</code> தோல்விகளைக் கையாளும்; <code class="inline">else</code> — <code class="inline">open()</code> வேலை செய்தால் மட்டுமே இயங்கும்; <code class="inline">finally</code> — அந்நிலையில் <code class="inline">close()</code> ஐ உறுதிசெய்யும்.</div>
+    <h4 class="sub">8.3 திறப்பதற்கு முன் சரிபார்த்தல்</h4>
+<pre>import os
+
+if os.path.exists("data.txt"):
+    f = open("data.txt", "r")
+    print(f.read())
+    f.close()
+else:
+    print("file does not exist")
+
+os.path.getsize("data.txt")   # bytes இல் அளவு
+os.path.isfile("data.txt")    # folder அல்ல, கோப்பு எனில் True</pre>
+    <div class="key"><span class="tag">விரைவுக் குறிப்பு (Quick reference)</span>
+      <code class="inline">read()</code> முழு கோப்பு &middot; <code class="inline">readline()</code> ஒரு வரி &middot; <code class="inline">readlines()</code> வரிப் பட்டியல் &middot; <code class="inline">write()</code> ஒரு string &middot; <code class="inline">writelines()</code> ஒரு பட்டியல் &middot; <code class="inline">seek()</code> cursor நகர்த்து &middot; <code class="inline">tell()</code> நிலை &middot; <code class="inline">flush()</code> கட்டாயச் சேமி &middot; <code class="inline">close()</code> முடி.
+    </div>
+  </div>
+</section>
+
+<div class="secband"><h2>📝 பயிற்சி வினா–விடைகள் (20)</h2><div class="line"></div></div>
 
 <!-- ===================== Part A ===================== -->
 <section class="ncard" id="s1">
