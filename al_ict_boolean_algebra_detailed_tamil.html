@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>க.பொ.த (உயர்தரம்) ICT — பூலியன் இயற்கணிதம் & இலக்கமுறை சுற்றுகள் (விரிவான குறிப்பு)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Catamaran:wght@600;800&family=Hind+Madurai:wght@400;500;600&family=Noto+Sans+Tamil:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F6F4EE; --card:#FFFFFF; --ink:#22303A;
+    --maroon:#8B1E3F; --teal:#1F4E5F; --gold:#C9912B;
+    --line:#E2DDD2; --code-bg:#102A33; --code-ink:#D9EEF2;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--paper);color:var(--ink);
+    font-family:'Hind Madurai','Noto Sans Tamil',sans-serif;
+    line-height:1.8;font-size:17px;}
+  header{background:linear-gradient(135deg,var(--teal) 0%,#143946 100%);
+    color:#F2EFE6;padding:42px 20px 36px;text-align:center;
+    border-bottom:5px solid var(--gold);}
+  header .eyebrow{letter-spacing:.18em;font-size:.8rem;text-transform:uppercase;
+    color:#D8C58A;margin-bottom:10px;}
+  header h1{font-family:'Catamaran','Noto Sans Tamil',sans-serif;font-weight:800;
+    font-size:clamp(1.4rem,4vw,2.0rem);line-height:1.5;}
+  header p{margin-top:10px;font-size:.95rem;color:#BFD4DA}
+  main{max-width:920px;margin:0 auto;padding:36px 18px 70px}
+
+  .toc{background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:16px 24px;margin-bottom:34px;font-size:.9rem;}
+  .toc b{color:var(--teal);font-family:'Catamaran','Noto Sans Tamil',sans-serif}
+  .toc a{color:var(--maroon);text-decoration:none}
+  .toc a:hover{text-decoration:underline}
+  .toc .links{display:flex;flex-wrap:wrap;gap:6px 16px;margin-top:6px}
+
+  .ncard{background:var(--card);border:1px solid var(--line);border-radius:16px;
+    margin-bottom:30px;overflow:hidden;box-shadow:0 2px 10px rgba(34,48,58,.05);}
+  .nhead{display:flex;align-items:center;gap:14px;padding:16px 24px;
+    border-bottom:1px solid var(--line);
+    background:linear-gradient(to right,#FBFAF6,#fff);}
+  .nnum{font-family:'Catamaran',sans-serif;font-weight:800;font-size:.92rem;
+    color:#fff;background:var(--teal);border-radius:10px;padding:5px 12px;
+    white-space:nowrap;}
+  .ntitle{font-family:'Catamaran','Noto Sans Tamil',sans-serif;font-weight:600;
+    font-size:1.02rem;color:var(--teal);}
+  .nbody{padding:22px 26px 26px}
+  .nbody p{margin-bottom:12px}
+  .nbody ul,.nbody ol{margin:6px 26px 14px}
+  .nbody li{margin-bottom:6px}
+  h4.sub{font-family:'Catamaran','Noto Sans Tamil',sans-serif;color:var(--maroon);
+    font-size:1.0rem;margin:20px 0 8px;}
+  .exlabel{display:inline-block;font-weight:700;color:#fff;background:var(--teal);
+    border-radius:7px;padding:2px 12px;font-size:.82rem;margin:16px 0 6px;}
+
+  .key{background:#FBF7EC;border-right:4px solid var(--gold);
+    border-radius:10px;padding:14px 20px;margin:14px 0;}
+  .key .tag{font-size:.78rem;font-weight:700;color:var(--gold);
+    letter-spacing:.1em;display:block;margin-bottom:4px;}
+  .warn{background:#FAEFF1;border-right:4px solid var(--maroon);
+    border-radius:10px;padding:14px 20px;margin:14px 0;}
+  .warn .tag{font-size:.78rem;font-weight:700;color:var(--maroon);
+    letter-spacing:.1em;display:block;margin-bottom:4px;}
+  .good{background:#EDF6EE;border-right:4px solid #2E8B57;
+    border-radius:10px;padding:14px 20px;margin:14px 0;}
+  .good .tag{font-size:.78rem;font-weight:700;color:#2E8B57;
+    letter-spacing:.1em;display:block;margin-bottom:4px;}
+
+  .work{background:#F4F8F7;border:1px solid #D6E4E0;border-radius:10px;
+    padding:14px 18px;margin:12px 0;font-family:'JetBrains Mono',monospace;
+    font-size:.85rem;line-height:1.95;direction:ltr;overflow-x:auto;}
+  .work .hl{color:var(--maroon);font-weight:700}
+  .work .gd{color:#1F7A55;font-weight:700}
+  .work .lbl{font-family:'Hind Madurai','Noto Sans Tamil',sans-serif;color:#5A6B74}
+
+  code.inline{background:#EDF2F1;color:var(--teal);border-radius:6px;
+    padding:1px 8px;font-family:'JetBrains Mono',monospace;font-size:.85em;}
+
+  table.dt{border-collapse:collapse;margin:12px auto;font-size:.86rem;}
+  table.dt th{background:var(--teal);color:#fff;padding:7px 13px;
+    font-weight:600;border:1px solid #16404f;text-align:center;}
+  table.dt td{border:1px solid var(--line);padding:6px 13px;
+    background:#FDFCF9;text-align:center;}
+  table.dt td.l{text-align:left}
+  table.dt caption{caption-side:top;font-weight:600;color:var(--teal);
+    margin-bottom:6px;font-size:.92rem;text-align:left}
+  table.dt.mono td{font-family:'JetBrains Mono',monospace}
+  table.dt .out{background:#EAF3F5;font-weight:700;color:#1F4E5F}
+  table.dt code{font-family:'JetBrains Mono',monospace;font-size:.9em;color:var(--maroon)}
+  table.full{width:100%}
+  table.full td.l,table.full th{text-align:left}
+
+  /* K-map styling */
+  table.km{border-collapse:collapse;margin:10px auto;font-family:'JetBrains Mono',monospace;}
+  table.km th{background:#8B1E3F;color:#fff;padding:6px 10px;border:1px solid #5e132b;
+    font-size:.9rem;font-weight:700}
+  table.km td{width:52px;height:46px;border:1px solid #B9C7CC;text-align:center;
+    font-size:1.05rem;background:#FDFCF9;position:relative}
+  table.km .corner{background:#143946;color:#D8C58A;font-size:.74rem}
+  table.km .g1{background:#DDEFD9;font-weight:700;color:#1F7A55}
+  table.km .g0{background:#FBE4E8;font-weight:700;color:#8B1E3F}
+  table.km .gx{background:#FBF1D8;font-weight:700;color:#8a6313}
+
+  .gaterow{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin:14px 0}
+  .gatecard{background:#FBFAF6;border:1px solid var(--line);border-radius:12px;
+    padding:12px;text-align:center;width:205px}
+  .gatecard .gname{font-weight:700;color:var(--teal);
+    font-family:'Catamaran','Noto Sans Tamil',sans-serif;margin-bottom:4px}
+  .gatecard .gexpr{font-family:'JetBrains Mono',monospace;font-size:.82rem;
+    color:var(--maroon);margin-top:4px}
+
+  .diagram{background:#FBFAF6;border:1px solid var(--line);border-radius:12px;
+    padding:16px;margin:14px 0;overflow-x:auto;text-align:center;}
+  .diagram svg{max-width:100%;height:auto}
+  .diagram .cap{font-size:.85rem;color:#5A6B74;margin-top:8px}
+  svg text{font-family:'Noto Sans Tamil','Hind Madurai',sans-serif;}
+
+  .btn{display:inline-flex;align-items:center;gap:9px;
+    font-family:'Hind Madurai','Noto Sans Tamil',sans-serif;font-weight:600;
+    font-size:1rem;color:#fff;background:var(--teal);border:none;
+    border-radius:999px;padding:11px 26px;margin-top:14px;cursor:pointer;
+    transition:background .2s,transform .15s;}
+  .btn:hover{background:#16404f;transform:translateY(-1px)}
+  .btn:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+  .btn.open{background:var(--maroon)}
+  .answer{display:none;margin-top:20px;border-top:2px dashed var(--line);
+    padding-top:18px;animation:fade .35s ease;}
+  .answer.show{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  .ans-label{display:inline-block;font-weight:700;color:#fff;background:var(--gold);
+    border-radius:8px;padding:3px 14px;font-size:.85rem;margin-bottom:12px;}
+  .qnum{font-family:'Catamaran',sans-serif;font-weight:800;font-size:1rem;
+    color:#fff;background:var(--maroon);border-radius:10px;padding:5px 14px;
+    white-space:nowrap;}
+  .task{font-weight:600;color:var(--maroon)}
+  .pq{border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin-bottom:18px}
+  .note{margin-top:12px;font-size:.9rem;color:#5A6B74;background:#EFF4F2;
+    border-radius:10px;padding:10px 16px;}
+
+  footer{text-align:center;padding:26px 16px 40px;font-size:.85rem;color:#7A8790;}
+  @media (max-width:560px){
+    .nhead{flex-direction:column;align-items:flex-start;gap:8px}
+    body{font-size:16px}
+  }
+  @media (prefers-reduced-motion:reduce){.answer{animation:none}.btn{transition:none}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">G.C.E. Advanced Level &middot; Sri Lanka &middot; ICT (20) &middot; Unit 4 (8%)</div>
+  <h1>பூலியன் இயற்கணிதம் &amp; இலக்கமுறை சுற்றுகள்<br>(விரிவான ஆழ்ந்த குறிப்பு)</h1>
+  <p>தர்க்க வாயில்கள் &middot; பூலியன் விதிகள் & நிறுவல் &middot; SOP/POS &middot; K-Map (2,3,4 மாறி) &middot; NAND/NOR-only &middot; Adders & Flip-flops</p>
+</header>
+
+<main>
+
+<div class="toc"><b>உள்ளடக்கம்</b>
+  <div class="links">
+    <a href="#s1">4.1 அடிப்படை தர்க்க வாயில்கள்</a>
+    <a href="#s2">4.2 பூலியன் இயற்கணிதம்</a>
+    <a href="#s2b">பூலியன் கோவை நிறுவல் & எளிமையாக்கல்</a>
+    <a href="#s3">4.3 இணைப்புச் சுற்றுகள் (SOP/POS)</a>
+    <a href="#s4">4.4 Karnaugh Map (K-Map)</a>
+    <a href="#s5">4.5 நடைமுறைப் பயன்பாடுகள்</a>
+    <a href="#sp">பயிற்சி வினாக்கள்</a>
+  </div>
+</div>
+
+<!-- ===================== 4.1 ===================== -->
+<section class="ncard" id="s1">
+  <div class="nhead"><span class="nnum">4.1</span><span class="ntitle">அடிப்படை தர்க்க வாயில்கள் (Basic Logic Gates)</span></div>
+  <div class="nbody">
+    <h4 class="sub">இரு-நிலை தர்க்கம் (Two-State / Binary Logic)</h4>
+    <p>இலக்கமுறை எலெக்ட்ரோனிக்ஸில் ஒவ்வொரு சமிக்ஞைக்கும் <b>இரண்டே நிலைகள்</b> மட்டுமே: <b>0 (தாழ் / LOW / False)</b> அல்லது <b>1 (உயர் / HIGH / True)</b>. இவ்விரு நிலை அமைப்பே (binary) கணினியின் அடிப்படை.</p>
+    <p><b>தர்க்க வாயில் (Logic Gate)</b> = ஒன்று அல்லது அதற்கு மேற்பட்ட இரும உள்ளீடுகளைப் பெற்று, ஒரு தர்க்க விதிப்படி ஒரு வெளியீட்டை (0/1) தரும் அடிப்படை எலெக்ட்ரோனிக் அலகு. இவையே சுற்றுகளின் கட்டுமானத் தொகுதிகள்.</p>
+
+    <h4 class="sub">அடிப்படை வாயில்கள் — சின்னம், கோவை</h4>
+    <div class="gaterow">
+      <div class="gatecard">
+        <div class="gname">NOT (புரட்டி / Inverter)</div>
+        <svg viewBox="0 0 150 70" width="150"><line x1="6" y1="35" x2="40" y2="35" stroke="#22303A" stroke-width="2"/><polygon points="40,15 40,55 80,35" fill="#EAF3F5" stroke="#1F4E5F" stroke-width="2"/><circle cx="86" cy="35" r="6" fill="#fff" stroke="#1F4E5F" stroke-width="2"/><line x1="92" y1="35" x2="130" y2="35" stroke="#22303A" stroke-width="2"/><text x="20" y="30" font-size="11" fill="#1F4E5F">A</text><text x="112" y="30" font-size="11" fill="#8B1E3F">Q</text></svg>
+        <div class="gexpr">Q = A̅</div>
+      </div>
+      <div class="gatecard">
+        <div class="gname">AND</div>
+        <svg viewBox="0 0 150 70" width="150"><line x1="6" y1="22" x2="42" y2="22" stroke="#22303A" stroke-width="2"/><line x1="6" y1="48" x2="42" y2="48" stroke="#22303A" stroke-width="2"/><path d="M42 10 L42 60 L70 60 A25 25 0 0 0 70 10 Z" fill="#EAF3F5" stroke="#1F4E5F" stroke-width="2"/><line x1="95" y1="35" x2="130" y2="35" stroke="#22303A" stroke-width="2"/><text x="20" y="17" font-size="11" fill="#1F4E5F">A</text><text x="20" y="60" font-size="11" fill="#1F4E5F">B</text><text x="112" y="30" font-size="11" fill="#8B1E3F">Q</text></svg>
+        <div class="gexpr">Q = A · B</div>
+      </div>
+      <div class="gatecard">
+        <div class="gname">OR</div>
+        <svg viewBox="0 0 150 70" width="150"><line x1="6" y1="22" x2="40" y2="22" stroke="#22303A" stroke-width="2"/><line x1="6" y1="48" x2="40" y2="48" stroke="#22303A" stroke-width="2"/><path d="M36 10 Q56 35 36 60 Q70 60 92 35 Q70 10 36 10 Z" fill="#EAF3F5" stroke="#1F4E5F" stroke-width="2"/><line x1="92" y1="35" x2="130" y2="35" stroke="#22303A" stroke-width="2"/><text x="20" y="17" font-size="11" fill="#1F4E5F">A</text><text x="20" y="60" font-size="11" fill="#1F4E5F">B</text><text x="112" y="30" font-size="11" fill="#8B1E3F">Q</text></svg>
+        <div class="gexpr">Q = A + B</div>
+      </div>
+      <div class="gatecard">
+        <div class="gname">XOR (வேற்றுமை)</div>
+        <svg viewBox="0 0 150 70" width="150"><line x1="6" y1="22" x2="36" y2="22" stroke="#22303A" stroke-width="2"/><line x1="6" y1="48" x2="36" y2="48" stroke="#22303A" stroke-width="2"/><path d="M30 10 Q50 35 30 60" fill="none" stroke="#1F4E5F" stroke-width="2"/><path d="M40 10 Q60 35 40 60 Q74 60 96 35 Q74 10 40 10 Z" fill="#EAF3F5" stroke="#1F4E5F" stroke-width="2"/><line x1="96" y1="35" x2="130" y2="35" stroke="#22303A" stroke-width="2"/><text x="16" y="17" font-size="11" fill="#1F4E5F">A</text><text x="16" y="60" font-size="11" fill="#1F4E5F">B</text><text x="112" y="30" font-size="11" fill="#8B1E3F">Q</text></svg>
+        <div class="gexpr">Q = A ⊕ B</div>
+      </div>
+    </div>
+    <table class="dt mono">
+      <caption>அடிப்படை வாயில்களின் சத்திய அட்டவணை</caption>
+      <tr><th>A</th><th>B</th><th class="out">A·B<br>(AND)</th><th class="out">A+B<br>(OR)</th><th class="out">A⊕B<br>(XOR)</th><th class="out">A̅<br>(NOT A)</th></tr>
+      <tr><td>0</td><td>0</td><td class="out">0</td><td class="out">0</td><td class="out">0</td><td class="out">1</td></tr>
+      <tr><td>0</td><td>1</td><td class="out">0</td><td class="out">1</td><td class="out">1</td><td class="out">1</td></tr>
+      <tr><td>1</td><td>0</td><td class="out">0</td><td class="out">1</td><td class="out">1</td><td class="out">0</td></tr>
+      <tr><td>1</td><td>1</td><td class="out">1</td><td class="out">1</td><td class="out">0</td><td class="out">0</td></tr>
+    </table>
+    <ul>
+      <li><b>AND:</b> இரண்டும் 1 எனில் மட்டுமே 1 (பெருக்கல் போல்).</li>
+      <li><b>OR:</b> ஏதேனும் ஒன்று 1 எனில் 1 (கூட்டல் போல்).</li>
+      <li><b>XOR:</b> இரண்டும் <b>வேறுபட்டால்</b> மட்டுமே 1.</li>
+      <li><b>NOT:</b> பிட்டைப் புரட்டும் (1 உள்ளீடு மட்டும்).</li>
+    </ul>
+
+    <h4 class="sub">உலகளாவிய வாயில்கள் (Universal Gates) — NAND, NOR</h4>
+    <p>NAND, NOR ஐ "உலகளாவியன" எனலாம் — ஏனெனில் <b>இவற்றில் ஒன்றை மட்டும் வைத்து எல்லா வாயில்களையும்</b> (NOT, AND, OR) உருவாக்கலாம். வெளியீட்டில் சிறிய <b>வட்டம் (bubble)</b> = புரட்டல்.</p>
+    <div class="gaterow">
+      <div class="gatecard">
+        <div class="gname">NAND</div>
+        <svg viewBox="0 0 150 70" width="150"><line x1="6" y1="22" x2="42" y2="22" stroke="#22303A" stroke-width="2"/><line x1="6" y1="48" x2="42" y2="48" stroke="#22303A" stroke-width="2"/><path d="M42 10 L42 60 L70 60 A25 25 0 0 0 70 10 Z" fill="#F3E8EC" stroke="#8B1E3F" stroke-width="2"/><circle cx="101" cy="35" r="6" fill="#fff" stroke="#8B1E3F" stroke-width="2"/><line x1="107" y1="35" x2="135" y2="35" stroke="#22303A" stroke-width="2"/><text x="20" y="17" font-size="11" fill="#1F4E5F">A</text><text x="20" y="60" font-size="11" fill="#1F4E5F">B</text></svg>
+        <div class="gexpr">Q = (A·B)‾</div>
+      </div>
+      <div class="gatecard">
+        <div class="gname">NOR</div>
+        <svg viewBox="0 0 150 70" width="150"><line x1="6" y1="22" x2="40" y2="22" stroke="#22303A" stroke-width="2"/><line x1="6" y1="48" x2="40" y2="48" stroke="#22303A" stroke-width="2"/><path d="M36 10 Q56 35 36 60 Q70 60 92 35 Q70 10 36 10 Z" fill="#F3E8EC" stroke="#8B1E3F" stroke-width="2"/><circle cx="98" cy="35" r="6" fill="#fff" stroke="#8B1E3F" stroke-width="2"/><line x1="104" y1="35" x2="135" y2="35" stroke="#22303A" stroke-width="2"/><text x="20" y="17" font-size="11" fill="#1F4E5F">A</text><text x="20" y="60" font-size="11" fill="#1F4E5F">B</text></svg>
+        <div class="gexpr">Q = (A+B)‾</div>
+      </div>
+      <div class="gatecard">
+        <div class="gname">XNOR (சமத்துவம்) — derived</div>
+        <svg viewBox="0 0 150 70" width="150"><line x1="6" y1="22" x2="36" y2="22" stroke="#22303A" stroke-width="2"/><line x1="6" y1="48" x2="36" y2="48" stroke="#22303A" stroke-width="2"/><path d="M30 10 Q50 35 30 60" fill="none" stroke="#8B1E3F" stroke-width="2"/><path d="M40 10 Q60 35 40 60 Q74 60 96 35 Q74 10 40 10 Z" fill="#F3E8EC" stroke="#8B1E3F" stroke-width="2"/><circle cx="102" cy="35" r="6" fill="#fff" stroke="#8B1E3F" stroke-width="2"/><line x1="108" y1="35" x2="135" y2="35" stroke="#22303A" stroke-width="2"/><text x="16" y="17" font-size="11" fill="#1F4E5F">A</text><text x="16" y="60" font-size="11" fill="#1F4E5F">B</text></svg>
+        <div class="gexpr">Q = (A⊕B)‾</div>
+      </div>
+    </div>
+    <table class="dt mono">
+      <caption>NAND · NOR · XNOR சத்திய அட்டவணை</caption>
+      <tr><th>A</th><th>B</th><th class="out">NAND</th><th class="out">NOR</th><th class="out">XNOR</th></tr>
+      <tr><td>0</td><td>0</td><td class="out">1</td><td class="out">1</td><td class="out">1</td></tr>
+      <tr><td>0</td><td>1</td><td class="out">1</td><td class="out">0</td><td class="out">0</td></tr>
+      <tr><td>1</td><td>0</td><td class="out">1</td><td class="out">0</td><td class="out">0</td></tr>
+      <tr><td>1</td><td>1</td><td class="out">0</td><td class="out">0</td><td class="out">1</td></tr>
+    </table>
+    <div class="key"><span class="tag">தருவிக்கப்பட்ட வாயில் (Derived) — XNOR</span>
+      <b>XNOR = XOR இன் புரட்டு.</b> A, B <b>சமமாக</b> இருந்தால் (0,0 அல்லது 1,1) வெளியீடு 1 — எனவே "சமத்துவ வாயில்" (equality gate). NAND = AND புரட்டு; NOR = OR புரட்டு.
+    </div>
+
+    <h4 class="sub">தனிப்பட்ட வாயிலுக்கு சத்திய அட்டவணை அமைத்தல்</h4>
+    <p>n உள்ளீடுகளுக்கு <b>2ⁿ வரிசைகள்</b>: 2 உள்ளீடு → 4 வரிசை; 3 உள்ளீடு → 8 வரிசை. உள்ளீட்டுக் கலன்களை இரும எண்வரிசையில் (00, 01, 10, 11…) நிரப்பி, ஒவ்வொரு வரிசைக்கும் வாயில் விதியின்படி வெளியீட்டை எழுதுக.</p>
+    <div class="warn"><span class="tag">எளிய சுற்று பகுப்பாய்வு</span>
+      ஒரு சுற்றில் பல வாயில்கள் இணைந்தால் — <b>உள்ளீட்டிலிருந்து வெளியீட்டை நோக்கி</b> படிப்படியாக ஒவ்வொரு வாயிலின் வெளியீட்டையும் கணித்து இறுதி வெளியீட்டை அடைக. சத்திய அட்டவணையில் இடைநிலை நெடுவரிசைகளைச் சேர்த்து எழுதுவது எளிது.
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 4.2 ===================== -->
+<section class="ncard" id="s2">
+  <div class="nhead"><span class="nnum">4.2</span><span class="ntitle">பூலியன் இயற்கணிதம் — விதிகளும் தேற்றங்களும்</span></div>
+  <div class="nbody">
+    <p><b>பூலியன் இயற்கணிதம்</b> (George Boole) = இரு-நிலை (0,1) மாறிகள் மீதான தர்க்கச் செயற்பாடுகளைக் குறிக்கும் கணிதம். குறியீடுகள்: <b>· = AND, + = OR, ‾ = NOT.</b> சுற்றுகளை எளிமையாக்கவும் நிறுவவும் (prove) இது பயன்படுகிறது.</p>
+
+    <h4 class="sub">முற்கோள்கள் / அடிப்படை விதிகள் (Postulates / Axioms)</h4>
+    <table class="dt full">
+      <tr><th>விதி</th><th>AND வடிவம்</th><th>OR வடிவம்</th></tr>
+      <tr><td class="l"><b>முற்கோள் (Identity)</b></td><td><code>A · 1 = A</code></td><td><code>A + 0 = A</code></td></tr>
+      <tr><td class="l"><b>பூஜ்ஜிய/ஒன்று (Null / Dominance)</b></td><td><code>A · 0 = 0</code></td><td><code>A + 1 = 1</code></td></tr>
+      <tr><td class="l"><b>தற்சம (Idempotent)</b></td><td><code>A · A = A</code></td><td><code>A + A = A</code></td></tr>
+      <tr><td class="l"><b>நிரப்பி (Complement)</b></td><td><code>A · A̅ = 0</code></td><td><code>A + A̅ = 1</code></td></tr>
+      <tr><td class="l"><b>இரட்டை மறுப்பு (Involution)</b></td><td colspan="2"><code>(A̅)‾ = A</code></td></tr>
+    </table>
+
+    <h4 class="sub">தேற்றங்கள் (Theorems)</h4>
+    <table class="dt full">
+      <tr><th>தேற்றம்</th><th>AND வடிவம்</th><th>OR வடிவம்</th></tr>
+      <tr><td class="l"><b>பரிமாற்று (Commutative)</b></td><td><code>A · B = B · A</code></td><td><code>A + B = B + A</code></td></tr>
+      <tr><td class="l"><b>சேர்ப்பு (Associative)</b></td><td><code>(A·B)·C = A·(B·C)</code></td><td><code>(A+B)+C = A+(B+C)</code></td></tr>
+      <tr><td class="l"><b>பங்கீட்டு (Distributive)</b></td><td><code>A·(B+C) = A·B + A·C</code></td><td><code>A+(B·C) = (A+B)·(A+C)</code></td></tr>
+      <tr><td class="l"><b>உள்ளீர்ப்பு (Absorption)</b></td><td><code>A·(A+B) = A</code></td><td><code>A + A·B = A</code></td></tr>
+    </table>
+
+    <h4 class="sub">டி மோர்கனின் தேற்றங்கள் (De Morgan's Theorems) — மிக முக்கியம்</h4>
+    <div class="work">
+1) (A · B)‾  =  A̅ + B̅    <span class="lbl">AND இன் புரட்டு = புரட்டுகளின் OR</span>
+2) (A + B)‾  =  A̅ · B̅    <span class="lbl">OR இன் புரட்டு = புரட்டுகளின் AND</span>
+    </div>
+    <p><b>சத்திய அட்டவணையால் சரிபார்ப்பு</b> — தேற்றம் (1):</p>
+    <table class="dt mono">
+      <tr><th>A</th><th>B</th><th class="out">(A·B)‾</th><th class="out">A̅+B̅</th></tr>
+      <tr><td>0</td><td>0</td><td class="out">1</td><td class="out">1</td></tr>
+      <tr><td>0</td><td>1</td><td class="out">1</td><td class="out">1</td></tr>
+      <tr><td>1</td><td>0</td><td class="out">1</td><td class="out">1</td></tr>
+      <tr><td>1</td><td>1</td><td class="out">0</td><td class="out">0</td></tr>
+    </table>
+    <p>இரு நெடுவரிசைகளும் சமம் → தேற்றம் நிரூபிக்கப்பட்டது. ✓</p>
+    <div class="key"><span class="tag">De Morgan — எளிதில்</span>
+      "<b>கோட்டை உடைத்து, செயலியை மாற்று</b>": பெரிய மேற்கோட்டைப் பிரிக்கும்போது <b>· ↔ +</b> மாறும், ஒவ்வொரு மாறியும் தனித்தனியே புரட்டப்படும். NAND/NOR ஐ அடிப்படை வாயில்களாக மாற்ற இது அடிப்படை.
+    </div>
+  </div>
+</section>
+
+<!-- ===================== Proving & Simplifying ===================== -->
+<section class="ncard" id="s2b">
+  <div class="nhead"><span class="nnum">4.2+</span><span class="ntitle">கோவைகளை நிறுவுதலும் (Proving) எளிமையாக்குதலும் (Simplifying)</span></div>
+  <div class="nbody">
+    <h4 class="sub">இரண்டு முறைகள்</h4>
+    <ul>
+      <li><b>இயற்கணித முறை:</b> பூலியன் விதிகள்/தேற்றங்களைப் படிப்படியாகப் பயன்படுத்தி இரு பக்கங்களையும் சமமாக்குதல்.</li>
+      <li><b>சத்திய அட்டவணை முறை:</b> இரு பக்கங்களின் வெளியீடுகளும் எல்லா உள்ளீடுகளுக்கும் சமமா எனச் சரிபார்த்தல்.</li>
+    </ul>
+
+    <span class="exlabel">நிறுவல் 1 — உள்ளீர்ப்பு: A + A·B = A</span>
+    <div class="work">
+A + A·B
+= A·1 + A·B      <span class="lbl">முற்கோள்: A = A·1</span>
+= A·(1 + B)      <span class="lbl">பங்கீட்டு (A பொது)</span>
+= A·(1)          <span class="lbl">Null: 1 + B = 1</span>
+= <span class="gd">A</span>             <span class="lbl">முற்கோள்: A·1 = A</span>
+    </div>
+
+    <span class="exlabel">நிறுவல் 2 — A + A̅·B = A + B</span>
+    <div class="work">
+A + A̅·B
+= (A + A̅)·(A + B)   <span class="lbl">பங்கீட்டு விதி (OR வடிவம்)</span>
+= 1·(A + B)         <span class="lbl">நிரப்பி: A + A̅ = 1</span>
+= <span class="gd">A + B</span>
+    </div>
+
+    <span class="exlabel">எளிமையாக்கல் 1 — A·B + A·B̅</span>
+    <div class="work">
+A·B + A·B̅
+= A·(B + B̅)     <span class="lbl">பங்கீட்டு (A பொது)</span>
+= A·(1)         <span class="lbl">நிரப்பி: B + B̅ = 1</span>
+= <span class="gd">A</span>
+    </div>
+
+    <span class="exlabel">எளிமையாக்கல் 2 — (A + B)·(A + B̅)</span>
+    <div class="work">
+(A + B)·(A + B̅)
+= A + (B·B̅)     <span class="lbl">பங்கீட்டு (OR வடிவம், A பொது)</span>
+= A + 0         <span class="lbl">நிரப்பி: B·B̅ = 0</span>
+= <span class="gd">A</span>
+    </div>
+
+    <span class="exlabel">எளிமையாக்கல் 3 — De Morgan உடன்: (A̅ + B)‾ · A</span>
+    <div class="work">
+(A̅ + B)‾ · A
+= (A · B̅) · A       <span class="lbl">De Morgan: (A̅+B)‾ = A·B̅</span>
+= (A · A) · B̅       <span class="lbl">சேர்ப்பு/பரிமாற்று</span>
+= A · B̅             <span class="lbl">தற்சம: A·A = A</span>
+பதில் = <span class="gd">A · B̅</span>
+    </div>
+    <div class="good"><span class="tag">ஏன் எளிமையாக்கல்?</span>
+      எளிமைப்படுத்தப்பட்ட கோவை = <b>குறைவான வாயில்கள்</b> → குறைந்த செலவு, குறைந்த மின் நுகர்வு, வேகமான சுற்று, குறைவான இடம். எனவே எளிமையாக்கல் வடிவமைப்பின் முக்கியப் பகுதி.
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 4.3 ===================== -->
+<section class="ncard" id="s3">
+  <div class="nhead"><span class="nnum">4.3</span><span class="ntitle">இணைப்புச் சுற்றுகள் — SOP & POS</span></div>
+  <div class="nbody">
+    <p><b>இணைப்புச் சுற்று (Combinational circuit)</b> = வெளியீடு தற்போதைய உள்ளீட்டை மட்டுமே சார்ந்தது (நினைவகம் இல்லை). சத்திய அட்டவணையிலிருந்து கோவையை இரு நியம (canonical) வடிவங்களில் எழுதலாம்.</p>
+
+    <h4 class="sub">SOP — பெருக்குத்தொகை (Sum of Products)</h4>
+    <p><b>minterms</b> (AND சொற்கள்) இன் OR. வெளியீடு <b>1</b> ஆகும் <b>ஒவ்வொரு வரிசைக்கும்</b> — மாறி 1 எனில் அப்படியே, 0 எனில் புரட்டி (̅) — அவற்றை AND செய்து, வரிசைகளை OR செய்க.</p>
+
+    <h4 class="sub">POS — கூட்டுப்பெருக்கு (Product of Sums)</h4>
+    <p><b>maxterms</b> (OR சொற்கள்) இன் AND. வெளியீடு <b>0</b> ஆகும் <b>ஒவ்வொரு வரிசைக்கும்</b> — மாறி 0 எனில் அப்படியே, 1 எனில் புரட்டி — அவற்றை OR செய்து, வரிசைகளை AND செய்க.</p>
+
+    <span class="exlabel">உதாரணம் — ஒரே சத்திய அட்டவணையிலிருந்து SOP & POS</span>
+    <table class="dt mono">
+      <tr><th>A</th><th>B</th><th class="out">Q</th><th>minterm (Q=1)</th><th>maxterm (Q=0)</th></tr>
+      <tr><td>0</td><td>0</td><td class="out">1</td><td>A̅·B̅</td><td>—</td></tr>
+      <tr><td>0</td><td>1</td><td class="out">0</td><td>—</td><td>A + B̅</td></tr>
+      <tr><td>1</td><td>0</td><td class="out">0</td><td>—</td><td>A̅ + B</td></tr>
+      <tr><td>1</td><td>1</td><td class="out">1</td><td>A·B</td><td>—</td></tr>
+    </table>
+    <div class="work">
+SOP (Q=1 வரிசைகள்): Q = <span class="gd">A̅·B̅ + A·B</span>      <span class="lbl">(= XNOR!)</span>
+POS (Q=0 வரிசைகள்): Q = <span class="gd">(A + B̅)·(A̅ + B)</span>
+    </div>
+    <p>இரண்டும் ஒரே செயற்பாட்டையே (XNOR) குறிக்கின்றன — வெவ்வேறு வடிவங்களில்.</p>
+
+    <h4 class="sub">SOP கோவையிலிருந்து சுற்று வரைதல்</h4>
+    <p>SOP = AND வாயில்கள் (ஒவ்வொரு product term) → பின் ஒரு OR வாயில். உதாரணம்: <code class="inline">Q = A̅·B + A·B̅</code> (= XOR):</p>
+    <div class="diagram">
+      <svg viewBox="0 0 460 220" width="440" xmlns="http://www.w3.org/2000/svg">
+        <text x="14" y="44" font-size="13" fill="#1F4E5F" font-weight="600">A</text>
+        <text x="14" y="180" font-size="13" fill="#1F4E5F" font-weight="600">B</text>
+        <line x1="24" y1="40" x2="120" y2="40" stroke="#22303A" stroke-width="1.6"/>
+        <line x1="24" y1="176" x2="120" y2="176" stroke="#22303A" stroke-width="1.6"/>
+        <polygon points="70,60 70,96 100,78" fill="#EAF3F5" stroke="#1F4E5F" stroke-width="1.6"/><circle cx="105" cy="78" r="4" fill="#fff" stroke="#1F4E5F" stroke-width="1.6"/>
+        <line x1="40" y1="40" x2="40" y2="78" stroke="#22303A" stroke-width="1.6"/><line x1="40" y1="78" x2="70" y2="78" stroke="#22303A" stroke-width="1.6"/>
+        <text x="50" y="74" font-size="9" fill="#5A6B74">A̅</text>
+        <polygon points="70,138 70,174 100,156" fill="#EAF3F5" stroke="#1F4E5F" stroke-width="1.6"/><circle cx="105" cy="156" r="4" fill="#fff" stroke="#1F4E5F" stroke-width="1.6"/>
+        <line x1="56" y1="176" x2="56" y2="156" stroke="#22303A" stroke-width="1.6"/><line x1="56" y1="156" x2="70" y2="156" stroke="#22303A" stroke-width="1.6"/>
+        <path d="M150 56 L150 92 L168 92 A18 18 0 0 0 168 56 Z" fill="#F3E8EC" stroke="#8B1E3F" stroke-width="1.6"/>
+        <line x1="109" y1="78" x2="150" y2="64" stroke="#22303A" stroke-width="1.6"/>
+        <line x1="120" y1="176" x2="120" y2="84" stroke="#22303A" stroke-width="1.6"/><line x1="120" y1="84" x2="150" y2="84" stroke="#22303A" stroke-width="1.6"/>
+        <line x1="186" y1="74" x2="250" y2="74" stroke="#22303A" stroke-width="1.6"/>
+        <path d="M150 140 L150 176 L168 176 A18 18 0 0 0 168 140 Z" fill="#F3E8EC" stroke="#8B1E3F" stroke-width="1.6"/>
+        <line x1="120" y1="40" x2="135" y2="40" stroke="#22303A" stroke-width="1.6"/><line x1="135" y1="40" x2="135" y2="148" stroke="#22303A" stroke-width="1.6"/><line x1="135" y1="148" x2="150" y2="148" stroke="#22303A" stroke-width="1.6"/>
+        <line x1="109" y1="156" x2="150" y2="168" stroke="#22303A" stroke-width="1.6"/>
+        <line x1="186" y1="158" x2="250" y2="158" stroke="#22303A" stroke-width="1.6"/>
+        <path d="M250 60 Q272 116 250 172 Q300 172 332 116 Q300 60 250 60 Z" fill="#EAF3F5" stroke="#1F4E5F" stroke-width="1.8"/>
+        <line x1="332" y1="116" x2="400" y2="116" stroke="#22303A" stroke-width="1.6"/>
+        <text x="385" y="108" font-size="13" fill="#8B1E3F" font-weight="600">Q</text>
+        <text x="195" y="68" font-size="9" fill="#5A6B74">A̅·B</text>
+        <text x="195" y="152" font-size="9" fill="#5A6B74">A·B̅</text>
+      </svg>
+      <div class="cap">SOP சுற்று: 2 NOT + 2 AND + 1 OR</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 4.4 K-MAP ===================== -->
+<section class="ncard" id="s4">
+  <div class="nhead"><span class="nnum">4.4</span><span class="ntitle">Karnaugh Map (K-Map) — விரிவாக</span></div>
+  <div class="nbody">
+    <p><b>K-Map</b> = பூலியன் கோவையை விரைவாக, பிழையின்றி எளிமையாக்கும் வரைபட முறை. சத்திய அட்டவணையை ஒரு கட்டப் படமாக (grid) மாற்றி, அண்டை 1 களைக் (அல்லது 0 களை) குழுவாக்கி குறைந்த கோவையைப் பெறுகிறோம்.</p>
+    <div class="key"><span class="tag">அடிப்படை — Gray Code வரிசை</span>
+      அண்டை கட்டங்கள் <b>ஒரே ஒரு மாறியில் மட்டுமே</b> வேறுபடும்படி, வரிசை/நெடுவரிசைகள் <b>Gray code</b> இல் (00, 01, <b>11, 10</b>) அமைக்கப்படுகின்றன — 11 க்குப் பின் 10 (10 க்குப் பின் அல்ல!). இதனால் அண்டை குழுக்களில் ஒரு மாறி நீங்கி கோவை எளிமையாகிறது.
+    </div>
+
+    <h4 class="sub">குழுவாக்கல் விதிகள் (Grouping Rules)</h4>
+    <ul>
+      <li>1 களை (SOP க்கு) <b>2, 4, 8, 16…</b> எனும் அளவுள்ள செவ்வகக் குழுக்களாக்குக (2 இன் அடுக்கு; மூலைவிட்டம் கூடாது).</li>
+      <li>குழு <b>முடிந்தவரை பெரிதாக</b> இருக்க வேண்டும் (பெரிய குழு = குறைவான மாறிகள்).</li>
+      <li>குழுக்கள் <b>ஒன்றுடன் ஒன்று இடைவெட்டலாம்</b> (overlap); ஒவ்வொரு 1 உம் ஏதேனும் ஒரு குழுவில் இருக்க வேண்டும்.</li>
+      <li>K-map <b>சுற்றிவளையும்</b> (wrap-around) — மேல்↔கீழ் விளிம்புகளும், இடது↔வலது விளிம்புகளும் அண்டையானவை.</li>
+      <li>ஒரு குழுவில் <b>மாறாமல் இருக்கும் மாறிகளே</b> அக்குழுவின் சொல்; மாறும் மாறி நீங்கும்.</li>
+    </ul>
+
+    <h4 class="sub">2-மாறி K-Map</h4>
+    <p>எளிமையாக்குக: <code class="inline">Q = A̅·B + A·B + A·B̅</code></p>
+    <table class="km">
+      <tr><td class="corner">A\B</td><th>0</th><th>1</th></tr>
+      <tr><th>0</th><td>0</td><td class="g1">1</td></tr>
+      <tr><th>1</th><td class="g1">1</td><td class="g1">1</td></tr>
+    </table>
+    <div class="work">
+குழுக்கள்:
+• கீழ் வரி முழுவதும் (A=1): <span class="hl">A</span>
+• வலது நெடுவரிசை (B=1): <span class="hl">B</span>
+Q = <span class="gd">A + B</span>
+    </div>
+
+    <h4 class="sub">3-மாறி K-Map (2×4 அமைப்பு)</h4>
+    <p>எளிமையாக்குக: <code class="inline">Q = Σm(0,1,2,3,6)</code> (minterms 0,1,2,3,6 இல் Q=1). நெடுவரிசைகள் BC = 00,01,11,10:</p>
+    <table class="km">
+      <tr><td class="corner">A\BC</td><th>00</th><th>01</th><th>11</th><th>10</th></tr>
+      <tr><th>0</th><td class="g1">1</td><td class="g1">1</td><td class="g1">1</td><td class="g1">1</td></tr>
+      <tr><th>1</th><td>0</td><td>0</td><td>0</td><td class="g1">1</td></tr>
+    </table>
+    <div class="work">
+குழுக்கள்:
+• மேல் வரி முழுவதும் (4 கட்டம், A=0): <span class="hl">A̅</span>
+• வலது நெடுவரிசை (m2,m6 → B·C̅, இரண்டும் A வேறுபடும்): <span class="hl">B·C̅</span>
+Q = <span class="gd">A̅ + B·C̅</span>
+    </div>
+    <div class="note">minterm எண்: A இன் இடமதிப்பு 4, B → 2, C → 1. எ.கா: m6 = 110 = A·B·C̅.</div>
+
+    <h4 class="sub">4-மாறி K-Map (4×4 அமைப்பு)</h4>
+    <p>எளிமையாக்குக: <code class="inline">Q = Σm(0,2,5,7,8,10,13,15)</code>. வரிசைகள் AB, நெடுவரிசைகள் CD — இரண்டும் Gray code (00,01,11,10):</p>
+    <table class="km">
+      <tr><td class="corner">AB\CD</td><th>00</th><th>01</th><th>11</th><th>10</th></tr>
+      <tr><th>00</th><td class="g1">1</td><td>0</td><td>0</td><td class="g1">1</td></tr>
+      <tr><th>01</th><td>0</td><td class="g1">1</td><td class="g1">1</td><td>0</td></tr>
+      <tr><th>11</th><td>0</td><td class="g1">1</td><td class="g1">1</td><td>0</td></tr>
+      <tr><th>10</th><td class="g1">1</td><td>0</td><td>0</td><td class="g1">1</td></tr>
+    </table>
+    <div class="work">
+குழுக்கள் (ஒவ்வொன்றும் 4 கட்டம்):
+• 4 மூலைகள் (wrap-around: m0,m2,m8,m10): B,D மாறா → <span class="hl">B̅·D̅</span>
+• நடு 4 கட்டம் (m5,m7,m13,m15): B,D மாறா → <span class="hl">B·D</span>
+Q = <span class="gd">B̅·D̅ + B·D</span>      <span class="lbl">(= B XNOR D)</span>
+    </div>
+    <div class="warn"><span class="tag">Wrap-around — மறக்காதே</span>
+      மேலுள்ள 4 மூலைக் கட்டங்களும் ஒரே குழு! K-map இன் விளிம்புகள் சுற்றி இணைவதால் (மேல்↔கீழ், இடது↔வலது) நான்கு மூலைகளும் அண்டையானவை.
+    </div>
+
+    <h4 class="sub">0 களைக் குழுவாக்கல் — POS எளிமையாக்கல்</h4>
+    <p>1 களுக்குப் பதிலாக <b>0 களைக்</b> குழுவாக்கினால் POS வடிவம் கிடைக்கும். ஒவ்வொரு 0-குழுவுக்கும் — மாறி 0 எனில் அப்படியே, 1 எனில் புரட்டி, OR செய்து, குழுக்களை AND செய்க.</p>
+    <table class="km">
+      <tr><td class="corner">A\B</td><th>0</th><th>1</th></tr>
+      <tr><th>0</th><td class="g0">0</td><td class="g1">1</td></tr>
+      <tr><th>1</th><td class="g0">0</td><td class="g1">1</td></tr>
+    </table>
+    <div class="work">
+0 குழு: இடது நெடுவரிசை (B=0) → சொல் = <span class="hl">B</span>
+POS: Q = <span class="gd">B</span>   <span class="lbl">(இங்கு ஒரே சொல்)</span>
+    </div>
+
+    <h4 class="sub">முதன்மை உட்படிகள் & கவலையற்ற நிலைகள்</h4>
+    <ul>
+      <li><b>உட்படி (Prime Implicant):</b> மேலும் பெரிதாக்க முடியாத அதிகபட்ச 1-குழு.</li>
+      <li><b>இன்றியமையா முதன்மை உட்படி (Essential Prime Implicant):</b> ஒரு குறிப்பிட்ட 1 ஐ <b>வேறு எந்தக் குழுவும் மூடாத</b>போது — அந்த 1 ஐ மூடும் உட்படி இன்றியமையாதது; இறுதிக் கோவையில் கட்டாயம் சேர்க்கப்பட வேண்டும்.</li>
+      <li><b>கவலையற்ற நிலை (Don't-care, X):</b> நிகழவே முடியாத / பொருட்படுத்தத் தேவையற்ற உள்ளீட்டுச் சேர்க்கைகள். குழுவைப் <b>பெரிதாக்க உதவுமானால் X ஐ 1 ஆகவும்</b>, இல்லையேல் 0 ஆகவும் கருதலாம் — மேலும் எளிய கோவை கிடைக்கும்.</li>
+    </ul>
+    <p>உதாரணம் — don't-care உடன்: <code class="inline">Q = Σm(1,3,7) + d(5)</code></p>
+    <table class="km">
+      <tr><td class="corner">A\BC</td><th>00</th><th>01</th><th>11</th><th>10</th></tr>
+      <tr><th>0</th><td>0</td><td class="g1">1</td><td class="g1">1</td><td>0</td></tr>
+      <tr><th>1</th><td>0</td><td class="gx">X</td><td class="g1">1</td><td>0</td></tr>
+    </table>
+    <div class="work">
+X(m5) ஐ 1 ஆகக் கருதினால் — நடு 4 கட்டம் ஒரே குழு:
+m1,m3,m5,m7 → C மட்டும் மாறா → <span class="hl">C</span>
+Q = <span class="gd">C</span>   <span class="lbl">(X உதவியால் மிக எளிய கோவை)</span>
+    </div>
+    <div class="good"><span class="tag">K-Map → சுற்று</span>
+      எளிமைப்படுத்திய கோவையை வழக்கம் போல் வாயில்களாக வரைக (SOP → AND கள் பின் OR). குறைந்த சொற்கள் = குறைந்த வாயில்கள் = சிறந்த சுற்று.
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 4.5 ===================== -->
+<section class="ncard" id="s5">
+  <div class="nhead"><span class="nnum">4.5</span><span class="ntitle">நடைமுறைப் பயன்பாடுகள் — NAND/NOR-only, Adders, Flip-flops</span></div>
+  <div class="nbody">
+    <h4 class="sub">NAND-only மூலம் அடிப்படை வாயில்கள்</h4>
+    <table class="dt full">
+      <tr><th>வாயில்</th><th>NAND கொண்டு உருவாக்கல்</th></tr>
+      <tr><td class="l"><b>NOT</b></td><td class="l">இரு உள்ளீடுகளையும் இணைத்தல்: <code>(A·A)‾ = A̅</code></td></tr>
+      <tr><td class="l"><b>AND</b></td><td class="l">NAND பின் NAND(=NOT): <code>((A·B)‾)‾ = A·B</code></td></tr>
+      <tr><td class="l"><b>OR</b></td><td class="l">முதலில் A, B ஐ NOT செய்து NAND: <code>(A̅·B̅)‾ = A + B</code> (De Morgan)</td></tr>
+    </table>
+    <h4 class="sub">NOR-only மூலம் அடிப்படை வாயில்கள்</h4>
+    <table class="dt full">
+      <tr><th>வாயில்</th><th>NOR கொண்டு உருவாக்கல்</th></tr>
+      <tr><td class="l"><b>NOT</b></td><td class="l"><code>(A+A)‾ = A̅</code></td></tr>
+      <tr><td class="l"><b>OR</b></td><td class="l">NOR பின் NOR(=NOT): <code>((A+B)‾)‾ = A + B</code></td></tr>
+      <tr><td class="l"><b>AND</b></td><td class="l">முதலில் A, B ஐ NOT செய்து NOR: <code>(A̅+B̅)‾ = A·B</code> (De Morgan)</td></tr>
+    </table>
+    <div class="key"><span class="tag">ஏன் ஒரே வகை வாயில்?</span>
+      ஒரே வகை வாயிலை (NAND அல்லது NOR) மட்டும் வைத்து முழுச் சுற்றையும் கட்டலாம் என்பதால் — <b>உற்பத்திச் செலவு குறைகிறது, வடிவமைப்பு/சேமிப்பு எளிமையாகிறது</b>. IC களில் இது மிக முக்கியம்.
+    </div>
+
+    <h4 class="sub">அரைக் கூட்டி (Half Adder)</h4>
+    <p>இரு ஒற்றைப் பிட்களை (A, B) கூட்டி, <b>தொகை (Sum)</b> & <b>எடுபு (Carry)</b> தரும்.</p>
+    <table class="dt mono">
+      <tr><th>A</th><th>B</th><th class="out">Sum</th><th class="out">Carry</th></tr>
+      <tr><td>0</td><td>0</td><td class="out">0</td><td class="out">0</td></tr>
+      <tr><td>0</td><td>1</td><td class="out">1</td><td class="out">0</td></tr>
+      <tr><td>1</td><td>0</td><td class="out">1</td><td class="out">0</td></tr>
+      <tr><td>1</td><td>1</td><td class="out">0</td><td class="out">1</td></tr>
+    </table>
+    <div class="work">
+Sum   = A ⊕ B   <span class="lbl">(XOR வாயில்)</span>
+Carry = A · B   <span class="lbl">(AND வாயில்)</span>
+    </div>
+
+    <h4 class="sub">முழுக் கூட்டி (Full Adder)</h4>
+    <p>மூன்று பிட்களை (A, B, Cin) கூட்டும் — பல-பிட் கூட்டலுக்கு. இரு அரைக் கூட்டி + ஒரு OR ஆல் அமைக்கலாம்.</p>
+    <table class="dt mono">
+      <tr><th>A</th><th>B</th><th>Cin</th><th class="out">Sum</th><th class="out">Cout</th></tr>
+      <tr><td>0</td><td>0</td><td>0</td><td class="out">0</td><td class="out">0</td></tr>
+      <tr><td>0</td><td>0</td><td>1</td><td class="out">1</td><td class="out">0</td></tr>
+      <tr><td>0</td><td>1</td><td>0</td><td class="out">1</td><td class="out">0</td></tr>
+      <tr><td>0</td><td>1</td><td>1</td><td class="out">0</td><td class="out">1</td></tr>
+      <tr><td>1</td><td>0</td><td>0</td><td class="out">1</td><td class="out">0</td></tr>
+      <tr><td>1</td><td>0</td><td>1</td><td class="out">0</td><td class="out">1</td></tr>
+      <tr><td>1</td><td>1</td><td>0</td><td class="out">0</td><td class="out">1</td></tr>
+      <tr><td>1</td><td>1</td><td>1</td><td class="out">1</td><td class="out">1</td></tr>
+    </table>
+    <div class="work">
+Sum  = A ⊕ B ⊕ Cin
+Cout = A·B + Cin·(A ⊕ B)
+    </div>
+
+    <h4 class="sub">நிலைமாற்றிகள் (Flip-flops) — வரிசைத் தர்க்க அறிமுகம்</h4>
+    <p><b>வரிசைச் சுற்று (Sequential)</b> = வெளியீடு உள்ளீடு + <b>முந்தைய நிலையைச்</b> சார்ந்தது (பின்னூட்டம்/feedback ஆல் நினைவகம்). <b>Flip-flop</b> = ஒரு பிட் (0/1) ஐச் சேமிக்கும் அடிப்படை வரிசைச் சுற்று; பதிவேடுகளின் (registers) கட்டுமான அலகு.</p>
+    <table class="dt full">
+      <tr><th>வகை</th><th>பண்பு</th></tr>
+      <tr><td class="l"><b>SR</b></td><td class="l">Set/Reset; S=1→1 சேமி, R=1→0 சேமி, S=R=1 → தடைசெய்யப்பட்ட நிலை</td></tr>
+      <tr><td class="l"><b>D</b></td><td class="l">ஒரே உள்ளீடு D; கடிகார விளிம்பில் D ஐச் சேமிக்கும் (தரவுச் சேமிப்புக்கு சிறந்தது)</td></tr>
+      <tr><td class="l"><b>JK</b></td><td class="l">SR இன் மேம்பாடு; J=K=1 → நிலை மாறும் (toggle); தடைநிலை இல்லை</td></tr>
+      <tr><td class="l"><b>T</b></td><td class="l">Toggle; T=1 ஆகும்போதெல்லாம் நிலை மாறும் (எண்ணிகளில்)</td></tr>
+    </table>
+    <div class="key"><span class="tag">இணைப்பு vs வரிசை</span>
+      <b>Combinational</b> (adder) = நினைவகம் இல்லை, வெளியீடு உள்ளீட்டை மட்டும் சார்ந்தது. <b>Sequential</b> (flip-flop) = நினைவகம் உண்டு, முந்தைய நிலையையும் சார்ந்தது. n-பிட் தரவுக்கு n flip-flops தேவை.
+    </div>
+  </div>
+</section>
+
+<!-- ===================== Practice ===================== -->
+<section class="ncard" id="sp">
+  <div class="nhead"><span class="nnum">?</span><span class="ntitle">பயிற்சி வினாக்கள் (விடைகளுடன்)</span></div>
+  <div class="nbody">
+
+    <!-- P1 -->
+    <div class="pq"><span class="qnum">வினா 01</span>
+      <p class="task" style="margin-top:10px">XOR வாயிலுக்கும் XNOR வாயிலுக்கும் இடையேயான வேறுபாட்டை, சத்திய அட்டவணையுடன் கூறுக.</p>
+      <button class="btn" onclick="toggleAns(this,'p1')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p1"><span class="ans-label">விடை</span>
+        <p>XOR — உள்ளீடுகள் <b>வேறுபட்டால்</b> 1; XNOR — உள்ளீடுகள் <b>சமமாக</b> இருந்தால் 1 (XOR இன் புரட்டு).</p>
+        <table class="dt mono"><tr><th>A</th><th>B</th><th class="out">XOR</th><th class="out">XNOR</th></tr>
+          <tr><td>0</td><td>0</td><td class="out">0</td><td class="out">1</td></tr>
+          <tr><td>0</td><td>1</td><td class="out">1</td><td class="out">0</td></tr>
+          <tr><td>1</td><td>0</td><td class="out">1</td><td class="out">0</td></tr>
+          <tr><td>1</td><td>1</td><td class="out">0</td><td class="out">1</td></tr></table>
+      </div>
+    </div>
+
+    <!-- P2 -->
+    <div class="pq"><span class="qnum">வினா 02</span>
+      <p class="task" style="margin-top:10px">பூலியன் விதிகளைப் பயன்படுத்தி எளிமையாக்குக: <code class="inline">A·B + A·B̅ + A̅·B</code></p>
+      <button class="btn" onclick="toggleAns(this,'p2')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p2"><span class="ans-label">விடை</span>
+        <div class="work">
+A·B + A·B̅ + A̅·B
+= A·(B + B̅) + A̅·B     <span class="lbl">A பொது (முதல் இரண்டில்)</span>
+= A·1 + A̅·B           <span class="lbl">B + B̅ = 1</span>
+= A + A̅·B             <span class="lbl">A·1 = A</span>
+= A + B               <span class="lbl">A + A̅·B = A + B</span>
+பதில் = <span class="gd">A + B</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- P3 -->
+    <div class="pq"><span class="qnum">வினா 03</span>
+      <p class="task" style="margin-top:10px">De Morgan இன் தேற்றத்தைப் பயன்படுத்தி <code class="inline">(A·B + C)‾</code> ஐ விரிவுபடுத்துக.</p>
+      <button class="btn" onclick="toggleAns(this,'p3')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p3"><span class="ans-label">விடை</span>
+        <div class="work">
+(A·B + C)‾
+= (A·B)‾ · C̅       <span class="lbl">De Morgan: (X+Y)‾ = X̅·Y̅</span>
+= (A̅ + B̅) · C̅     <span class="lbl">De Morgan: (A·B)‾ = A̅+B̅</span>
+பதில் = <span class="gd">(A̅ + B̅) · C̅</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- P4 -->
+    <div class="pq"><span class="qnum">வினா 04</span>
+      <p class="task" style="margin-top:10px">பின்வரும் சத்திய அட்டவணைக்கு SOP மற்றும் POS கோவைகளை எழுதுக:<br>(0,0→1), (0,1→0), (1,0→1), (1,1→1)</p>
+      <button class="btn" onclick="toggleAns(this,'p4')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p4"><span class="ans-label">விடை</span>
+        <div class="work">
+SOP (Q=1: வரிசைகள் 0,2,3):
+  Q = A̅·B̅ + A·B̅ + A·B
+POS (Q=0: வரிசை 1 → A+B̅):
+  Q = (A + B̅)
+எளிமை: A̅·B̅ + A·B̅ + A·B = B̅ + A
+  Q = <span class="gd">A + B̅</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- P5 -->
+    <div class="pq"><span class="qnum">வினா 05</span>
+      <p class="task" style="margin-top:10px">பின்வரும் 3-மாறி K-map ஐ எளிமையாக்குக: <code class="inline">Q = Σm(0,1,4,5)</code></p>
+      <button class="btn" onclick="toggleAns(this,'p5')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p5"><span class="ans-label">விடை</span>
+        <table class="km">
+          <tr><td class="corner">A\BC</td><th>00</th><th>01</th><th>11</th><th>10</th></tr>
+          <tr><th>0</th><td class="g1">1</td><td class="g1">1</td><td>0</td><td>0</td></tr>
+          <tr><th>1</th><td class="g1">1</td><td class="g1">1</td><td>0</td><td>0</td></tr>
+        </table>
+        <div class="work">
+நான்கு 1 களும் ஒரே குழு (இடது 2 நெடுவரிசை):
+A மாறும், C மாறும், ஆனால் B=0 மாறா → <span class="gd">Q = B̅</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- P6 -->
+    <div class="pq"><span class="qnum">வினா 06</span>
+      <p class="task" style="margin-top:10px">K-map இல் "கவலையற்ற நிலை" (don't-care) என்றால் என்ன? அது ஏன் பயனுள்ளது?</p>
+      <button class="btn" onclick="toggleAns(this,'p6')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p6"><span class="ans-label">விடை</span>
+        <p>நிகழவே முடியாத / பொருட்படுத்தத் தேவையற்ற உள்ளீட்டுச் சேர்க்கைகள் (X எனக் குறிக்கப்படும்).</p>
+        <p><b>பயன்:</b> குழுவைப் பெரிதாக்க உதவுமானால் X ஐ 1 ஆகவும், இல்லையேல் 0 ஆகவும் கருதலாம் — இதனால் <b>மேலும் எளிமையான கோவை</b> கிடைக்கும் (குறைவான வாயில்கள்).</p>
+      </div>
+    </div>
+
+    <!-- P7 -->
+    <div class="pq"><span class="qnum">வினா 07</span>
+      <p class="task" style="margin-top:10px">NAND வாயிலைப் பயன்படுத்தி மட்டும் NOT, AND, OR ஆகியவற்றை எவ்வாறு உருவாக்குவாய்?</p>
+      <button class="btn" onclick="toggleAns(this,'p7')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p7"><span class="ans-label">விடை</span>
+        <ul>
+          <li><b>NOT:</b> இரு உள்ளீடுகளையும் இணைத்தல் → <code class="inline">(A·A)‾ = A̅</code></li>
+          <li><b>AND:</b> NAND பின் NAND(NOT) → <code class="inline">((A·B)‾)‾ = A·B</code></li>
+          <li><b>OR:</b> A, B ஐ முதலில் NOT செய்து NAND → <code class="inline">(A̅·B̅)‾ = A + B</code> (De Morgan)</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- P8 -->
+    <div class="pq"><span class="qnum">வினா 08</span>
+      <p class="task" style="margin-top:10px">அரைக் கூட்டிக்கும் முழுக் கூட்டிக்கும் உள்ள வேறுபாடு என்ன? அரைக் கூட்டியின் Sum & Carry கோவைகளை எழுதுக.</p>
+      <button class="btn" onclick="toggleAns(this,'p8')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p8"><span class="ans-label">விடை</span>
+        <p><b>அரைக் கூட்டி:</b> இரு பிட்களை (A,B) மட்டும் கூட்டும்; carry-in எடுக்காது.</p>
+        <p><b>முழுக் கூட்டி:</b> மூன்று பிட்களை (A,B,Cin) கூட்டும் — பல-பிட் கூட்டலுக்கு ஏற்றது.</p>
+        <p>அரைக் கூட்டி: <b>Sum = A ⊕ B</b> (XOR), <b>Carry = A · B</b> (AND).</p>
+      </div>
+    </div>
+
+    <!-- P9 -->
+    <div class="pq"><span class="qnum">வினா 09</span>
+      <p class="task" style="margin-top:10px">இன்றியமையா முதன்மை உட்படி (essential prime implicant) என்றால் என்ன?</p>
+      <button class="btn" onclick="toggleAns(this,'p9')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p9"><span class="ans-label">விடை</span>
+        <p>ஒரு குறிப்பிட்ட 1 ஐ <b>வேறு எந்த உட்படி (குழு) வும் மூடாதபோது</b> — அந்த 1 ஐ மூடும் உட்படி இன்றியமையாதது. அது இறுதி எளிமைப்படுத்தப்பட்ட கோவையில் <b>கட்டாயம் சேர்க்கப்பட</b> வேண்டும்.</p>
+      </div>
+    </div>
+
+    <!-- P10 -->
+    <div class="pq"><span class="qnum">வினா 10</span>
+      <p class="task" style="margin-top:10px">4-மாறி K-map இல் "wrap-around" (சுற்றிவளைதல்) என்றால் என்ன? நான்கு மூலைக் கட்டங்கள் ஏன் ஒரே குழுவாக இருக்கலாம்?</p>
+      <button class="btn" onclick="toggleAns(this,'p10')">விடையைக் காட்டு ▾</button>
+      <div class="answer" id="p10"><span class="ans-label">விடை</span>
+        <p>K-map இன் <b>விளிம்புகள் சுற்றி இணைகின்றன</b> — மேல் வரி↔கீழ் வரி, இடது நெடுவரிசை↔வலது நெடுவரிசை அண்டையானவை (Gray code தொடர்ச்சி).</p>
+        <p>எனவே நான்கு மூலைக் கட்டங்களும் ஒன்றுக்கொன்று அண்டையாகி, ஒரே 4-கட்டக் குழுவாக அமையலாம் (எ.கா: B̅·D̅).</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+</main>
+
+<footer>
+  க.பொ.த (உயர்தர) தகவல் மற்றும் தொடர்பாடல் தொழினுட்பம் — பூலியன் இயற்கணிதம் & இலக்கமுறை சுற்றுகள் (விரிவான குறிப்பு)
+</footer>
+
+<script>
+function toggleAns(btn,id){
+  var ans=document.getElementById(id);
+  var open=ans.classList.toggle('show');
+  btn.classList.toggle('open',open);
+  btn.textContent=open?'விடையை மறை ▴':'விடையைக் காட்டு ▾';
+}
+</script>
+
+</body>
+</html>
